@@ -1,0 +1,288 @@
+﻿body {
+    padding-top: 10px;
+    padding-bottom: 0px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.hideDiv{
+    display: none;
+}
+
+.rowPadding{
+    padding-top: 3px;
+    padding-bottom: 3px;
+}
+
+.headerSection{
+    padding-bottom: 0px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: #ffffff;
+    position: inherit;
+    display: block;
+    vertical-align: middle;
+}
+
+.bodySection{
+    padding-top: 10px;
+    padding-bottom: 50px;
+    padding-left: 0px;
+    padding-right: 0px;
+    background-color: #ffffff;
+    min-height: 420px;
+}
+
+.partialBodySection{
+    padding-top: 0px;
+    padding-bottom: 50px;
+    padding-left: 100px;
+    padding-right: 100px;
+    background-color: #ffffff;
+}
+
+.footerSection{
+    padding-top: 20px;
+    padding-bottom: 20px;
+    padding-left: 180px;
+    padding-right: 180px;
+    background-color: #333;
+    color: #ffffff;
+    width: 100%;
+    height: auto;
+}
+
+.footerTextNormal{
+    font-family: Verdana;
+    font-size: 12px;
+    font-weight: normal;
+    color: #fff;
+}
+
+.footerTextBold{
+    font-family: Verdana;
+    font-size: 12px;
+    font-weight: bold;
+    color: #fff;
+}
+
+.footerImagePadding{
+    padding: 5px 5px 5px 5px;
+}
+
+.menuitem{
+    font-family: Verdana;
+    font-size: 13px;
+    font-weight: bold;
+    color: #000000;
+    text-decoration: none;
+    padding: 15px;
+    vertical-align: bottom;
+}
+
+    .menuitem:hover {
+        border-bottom: 3px solid red;
+    }
+
+.menuitemSelected{
+    border-bottom: 3px solid red;
+}
+
+
+/* LABELS, TEXTBOX, DROPDOWN AND TEXTAREA */
+
+.formlabelFontRight{
+    font-family: Verdana;
+    font-size: 13px;
+    color: #333;
+    left: 0;
+    padding: 5px 10px 5px 15px;
+    font-weight: bold;
+    text-align: right;
+}
+
+.formlabelFontLeft{
+    font-family: Verdana;
+    font-size: 13px;
+    color: #333;
+    left: 0;
+    padding: 5px 5px 5px 15px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.headerText{
+    font-family: Verdana;
+    font-size: 20px;
+    color: #333;
+    left: 0;
+    padding: 5px 5px 10px 15px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.headerTextGreen{
+    font-family: 'Agency FB';
+    font-size: 40px;
+    color: #077e06;
+    left: 0;
+    padding: 5px 5px 10px 15px;
+    font-weight: bold;
+    text-align: left;
+}
+
+.scrollingImageText{
+    font-family: Verdana;
+    font-size: 24px;
+    color: #000;
+    background: rgba(255, 255, 255, 0.5);
+    padding: 15px;
+    font-weight: normal;
+    border-radius: 10px;
+}
+
+.aboutUsHeaderLinks{
+    font-family: Verdana;
+    font-size: 16px;
+    color: #000;
+    background: #eae5e5;
+    padding: 15px;
+    font-weight: normal;
+    border-radius: 10px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.aboutUsHeaderLinks:hover{
+    color: #fff;
+    background: #000;
+    padding: 15px;
+    font-weight: normal;
+    border-radius: 10px;
+    text-decoration: none;
+    width: 100%;
+}
+
+.dropdownstyle {
+  display: inline;
+  width: auto;
+  height: 34px;
+  padding: 6px 12px;
+  font-size: 14px;
+  line-height: 1.42857143;
+  color: #555;
+  background-color: white;
+  background-image: none;
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  cursor: pointer;
+  -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+          box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+  -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+       -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+          transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+
+
+/* LONG TEXT BOX STYLE */
+.longtextbox {
+    display: block;
+    max-width: 100%;
+    width: 100%;
+    height: 34px;
+    padding: 6px 12px;
+    font-size: 14px;
+    line-height: 1.428571429;
+    color: #555555;
+    vertical-align: middle;
+    background-color: #ffffff;
+    border: 1px solid #cccccc;
+    border-left: 5px solid #cccccc;
+    border-radius: 4px;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    box-shadow: inset 0 1px 1px rgba(0, 0, 0, .075);
+    -webkit-transition: border-color ease-in-out .15s, -webkit-box-shadow ease-in-out .15s;
+    -o-transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+    transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
+}
+    .longtextbox:focus {
+        border-color: #66afe9;
+        outline: 0;
+        -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+        box-shadow: inset 0 1px 1px rgba(0,0,0,.075), 0 0 8px rgba(102, 175, 233, .6);
+    }
+    .longtextbox::-moz-placeholder {
+        color: #999;
+        opacity: 1;
+    }
+    .longtextbox:-ms-input-placeholder {
+        color: #999;
+    }
+    .longtextbox::-webkit-input-placeholder {
+        color: #999;
+    }
+    .longtextbox::-ms-expand {
+        background-color: transparent;
+        border: 0;
+    }
+    .longtextbox[disabled],
+    .longtextbox[readonly],
+    fieldset[disabled] .longtextbox {
+        background-color: #eee;
+        opacity: 1;
+    }
+    .longtextbox[disabled],
+    fieldset[disabled] .longtextbox {
+        cursor: not-allowed;
+    }
+textarea.longtextbox {
+    height: auto;
+}
+
+.textboxerror {
+    font-family: Tahoma;
+    font-size: 13px;
+    color: orangered;
+    padding-top: 10px;
+    padding-bottom: 5px;
+    font-weight: normal;
+}
+
+/* MEMBER LOGIN PAGE STYLES */
+.headerbar{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: white;
+    line-height: 30px;
+    padding: 5px 10px 5px 10px;
+    position: inherit;
+    display: block;
+    vertical-align: top;
+    background-color: #337ab7;
+}
+
+.loginPanel{
+    background: #f5f5f5;
+    background: rgba(255, 255, 255, 0.7);
+    padding: 30px;
+    border-radius: 5px;
+}

@@ -1,0 +1,165 @@
+﻿
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>GCE TN Chapter</title>
+
+    <script src="~/Scripts/jquery-3.1.0.min.js"></script>
+    <script src="~/Scripts/jquery.validate.min.js"></script>
+    <script src="~/Scripts/jquery.validate.unobtrusive.min.js"></script>
+    <script src="~/Scripts/bootstrap.js"></script>
+
+    <link href="~/Content/ScrollingCss.css" rel="stylesheet" />
+
+    @Styles.Render("~/Content/css")
+    @Scripts.Render("~/bundles/modernizr")
+</head>
+<body>
+    <div>
+        <div class="row headerSection">
+            <!-- HEADER SECTION-->
+            <div class="col-md-3">
+                <img src="~/Images/logo_home.png" height="100" />
+            </div>
+            <div class="col-md-7 navbar-collapse collapse" style="vertical-align: bottom;">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="LnkHome" class="menuitem">
+                        <a href="~/Home/">HOME</a>
+                    </li>
+                    <li id="LnkAboutUs" class="menuitem">
+                        <a href="~/AboutUs/AboutUs">ABOUT US</a>
+                    </li>
+                    <li id="LnkGallery" class="menuitem">
+                        <a href="~/Home/">GALLERY</a>
+                    </li>
+                    <li id="LnkEvents" class="menuitem">
+                        <a href="~/Home/">EVENTS</a>
+                    </li>
+                    <li id="LnkNews" class="menuitem">
+                        <a href="~/Home/">NEWS</a>
+                    </li>
+                    <li id="LnkContactUs" class="menuitem">
+                        <a href="~/ContactUs/ContactForm/">CONTACT US</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2 text-right" style="padding-top: 15px;">
+                <p id="LblWelcomeUserMsg">Welcome Guest <span class="glyphicon glyphicon-user" /></p>
+                <a href="~/MemberRegistration/Login/" id="LnkMemberLogin">Register/Member Login <span class="glyphicon glyphicon-log-in" /></a>
+            </div>
+        </div>
+        <hr />
+
+        <div class="bodySection">
+            @RenderBody()
+        </div>
+
+        <div class="row footerSection col-md-12" style="margin-left: 0; margin-right: 0;">
+            <!-- FOOTER SECTION-->
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="~/Images/FooterIcons/Visit.png" width="50" />
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="footerTextBold">Visit</span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="footerTextNormal">No. 1, Chennai Street,</span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="footerTextNormal">Chennai. India</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="~/Images/FooterIcons/Call.png" width="50" />
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="footerTextBold">Call</span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="footerTextNormal">+91 123 456 7890</span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="footerTextNormal">+ 1 888 123 4567</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="~/Images/FooterIcons/Contact.png" width="50" />
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span class="footerTextBold">Contact</span>
+                            </div>
+                            <div class="col-md-12">
+                                <span class="footerTextNormal">abc@hotmail.com</span>
+                            </div>
+                            <div class="col-md-12">
+                                <img src="~/Images/FooterIcons/facebook.png" height="20" style="cursor: pointer;" title="Like us in Facebook" />
+                                <img src="~/Images/FooterIcons/twitter.png" height="20" style="cursor: pointer;" title="Follow us on Twitter" />
+                                <img src="~/Images/FooterIcons/googleplus.png" height="20" style="cursor: pointer;" title="Follow us in Google+" />
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col-md-3 footerTextNormal">
+                <div class="row">
+                    <div class="col-md-2">
+                        <img src="~/Images/FooterIcons/Copyright.png" width="45" />
+                    </div>
+                    <div class="col-md-10">
+                        <div class="row">
+                            <div class="col-md-12">
+                                <span>Copyright © 2017.</span>
+                            </div>
+                            <div class="col-md-12">
+                                <span>All rights reserved.</span>
+                            </div>
+                            <div class="col-md-12">
+                                <span>Created by <text class="text-primary">MR Solutions</text></span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+
+    @Scripts.Render("~/bundles/jquery")
+    @Scripts.Render("~/bundles/bootstrap")
+    @RenderSection("scripts", required: false)
+
+
+    <script>
+        var myIndex = 0;
+        carousel();
+    </script>
+</body>
+</html>

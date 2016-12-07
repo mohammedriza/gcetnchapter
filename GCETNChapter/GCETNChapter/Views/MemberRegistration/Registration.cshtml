@@ -1,0 +1,295 @@
+﻿@model GCETNChapter.Models.ViewModels.MemberRegistrationVO
+<script src="~/JQueryScripts/RegistrationPage.js"></script>
+
+@{
+    ViewBag.Title = "Member Registration";
+}
+
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+    
+    <div id="divRegistrationBody" class="partialBodySection hideDiv">
+        <span class="headerText">Member Registration</span>
+        <br /><br />
+
+        <!-- Personal and Login Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading formlabelFontLeft">Personal and Login Information</div>
+            <div class="panel-body">
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.FullName)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Gender)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Gender, new SelectList(ViewBag.GenderList), new { @class = "form-control" } )
+                            @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.DateOfBirth)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Email)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Password)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.ConfirmPassword)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.ProfileImage)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.ProfileImage, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.ProfileImage, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Contact Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading formlabelFontLeft">Contact Information</div>
+            <div class="panel-body">
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.MobileNo)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.MobileNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.MobileNo, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.SkypeID)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.SkypeID, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.SkypeID, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.WhatsappNumber)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.WhatsappNumber, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.WhatsappNumber, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Workplace Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading formlabelFontLeft">Workplace Information</div>
+            <div class="panel-body">
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Occupation)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Occupation, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Occupation, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Company)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Company, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Activities)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Activities, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Activities, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Interests)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Interests, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Interests, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- Address Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading formlabelFontLeft">Address Information</div>
+            <div class="panel-body">
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.CurrentAddress)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.CurrentAddress, new { htmlAttributes = new { @class = "longtextbox" } })
+                            @Html.ValidationMessageFor(model => model.CurrentAddress, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.CurrentCountry, new SelectList(ViewBag.CountryList), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.CurrentCountry, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.PermanentAddress)
+                        </div>
+                        <div class="col-md-6">
+                            @Html.EditorFor(model => model.PermanentAddress, new { htmlAttributes = new { @class = "longtextbox" } })
+                            @Html.ValidationMessageFor(model => model.PermanentAddress, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.PermanentCountry, new SelectList(ViewBag.CountryList), new { @class = "form-control" } )
+                            @Html.ValidationMessageFor(model => model.PermanentCountry, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.NativePlace)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.NativePlace, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.NativePlace, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+        <!-- College Information -->
+        <div class="panel panel-default">
+            <div class="panel-heading formlabelFontLeft">College Information</div>
+            <div class="panel-body">
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.CollegeRegistrationNo)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.CollegeRegistrationNo, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Batch)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.EditorFor(model => model.Batch, new { htmlAttributes = new { @class = "form-control" } })
+                            @Html.ValidationMessageFor(model => model.Batch, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+                <div class="row rowPadding">
+                    <div>
+                        <div class="col-md-2 formlabelFontRight">
+                            @Html.LabelFor(model => model.Branch)
+                        </div>
+                        <div class="col-md-4">
+                            @Html.DropDownListFor(model => model.Branch, new SelectList(ViewBag.BranchList), new { @class = "form-control" })
+                            @Html.ValidationMessageFor(model => model.Branch, "", new { @class = "textboxerror" })
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+        
+
+        <div class="form-group">
+            <div class="col-md-12 text-right">
+                <a href="~/MemberRegistration/Login/" class="btn btn-lg btn-default">Back to Login</a> &nbsp; &nbsp;
+                <input type="submit" value="Complete Registration" class="btn btn-lg btn-primary" />
+            </div>
+        </div>
+    </div>
+}

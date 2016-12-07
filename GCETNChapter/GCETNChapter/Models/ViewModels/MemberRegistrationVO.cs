@@ -9,9 +9,6 @@ namespace GCETNChapter.Models.ViewModels
     public class MemberRegistrationVO
     {
         //-- PERSONAL AND LOGIN INFO --//
-        [Display(Name = "Member ID")]
-        public int MemberID { get; set; }
-        
         [Display(Name = "Full Name")]
         [StringLength(50, ErrorMessage = "Full Name cannot exceed 50 characters", MinimumLength = 1)]
         [Required(ErrorMessage = "Full Name cannot be blank.")]
@@ -32,6 +29,11 @@ namespace GCETNChapter.Models.ViewModels
         [Required(ErrorMessage = "Email cannot be blank.")]
         public string Email { get; set; }
 
+        [Display(Name = "Username")]
+        [StringLength(50, ErrorMessage = "Username should exceed 50 characters", MinimumLength = 1)]
+        [Required(ErrorMessage = "Username cannot be blank.")]
+        public string Username { get; set; }
+
         [Display(Name = "Password")]
         [DataType(DataType.Password)]
         [StringLength(50, ErrorMessage = "Password cannot exceed 50 characters", MinimumLength = 1)]
@@ -47,6 +49,7 @@ namespace GCETNChapter.Models.ViewModels
 
         [Display(Name = "Profile Image")]
         [DataType(DataType.ImageUrl)]
+        [StringLength(50, ErrorMessage = "Image Filename should exceed 12 characters", MinimumLength = 0)]
         public string ProfileImage { get; set; }
 
         //-- CONTACT NUMBERS --//
@@ -99,11 +102,12 @@ namespace GCETNChapter.Models.ViewModels
 
         //-- COLLEGE DETAILS --//
         [Display(Name = "College Registration No")]
-        [StringLength(50, ErrorMessage = "College Registration No cannot exceed 50 characters", MinimumLength = 0)]
+        [StringLength(12, ErrorMessage = "College Registration No. should exceed 12 characters", MinimumLength = 1)]
+        [Required(ErrorMessage = "College Registration No. cannot be blank.")]
         public string CollegeRegistrationNo { get; set; }
 
         [Display(Name = "Batch")]
-        [StringLength(50, ErrorMessage = "Batch cannot exceed 50 characters", MinimumLength = 1)]
+        [StringLength(4, ErrorMessage = "Batch cannot exceed 4 characters", MinimumLength = 1)]
         [Required(ErrorMessage = "Batch cannot be blank.")]
         public string Batch { get; set; }
 

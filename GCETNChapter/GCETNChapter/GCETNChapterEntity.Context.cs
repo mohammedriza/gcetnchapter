@@ -42,5 +42,124 @@ namespace GCETNChapter
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetBranchList_Result>("prcGetBranchList");
         }
+    
+        public virtual int prcInsertContactUsInfo(string name, string email, string summary, string message)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var summaryParameter = summary != null ?
+                new ObjectParameter("Summary", summary) :
+                new ObjectParameter("Summary", typeof(string));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcInsertContactUsInfo", nameParameter, emailParameter, summaryParameter, messageParameter);
+        }
+    
+        public virtual int prcRegisterNewOrUpdateMember(string username, string password, string collegeRegistrationNo, string fullName, string gender, Nullable<System.DateTime> dateOfBirth, string branch, string engineeringDiscipline, Nullable<System.DateTime> memberJoinedDate, string batch, string primaryContactNo, string contactNoIndia, string whatsappNo, string email, string permanentAddress, string permanentCountry, string currentAddress, string currentCountry, string profileImage, string lastModifiedBy, Nullable<System.DateTime> lastModifiedDate)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var collegeRegistrationNoParameter = collegeRegistrationNo != null ?
+                new ObjectParameter("CollegeRegistrationNo", collegeRegistrationNo) :
+                new ObjectParameter("CollegeRegistrationNo", typeof(string));
+    
+            var fullNameParameter = fullName != null ?
+                new ObjectParameter("FullName", fullName) :
+                new ObjectParameter("FullName", typeof(string));
+    
+            var genderParameter = gender != null ?
+                new ObjectParameter("Gender", gender) :
+                new ObjectParameter("Gender", typeof(string));
+    
+            var dateOfBirthParameter = dateOfBirth.HasValue ?
+                new ObjectParameter("DateOfBirth", dateOfBirth) :
+                new ObjectParameter("DateOfBirth", typeof(System.DateTime));
+    
+            var branchParameter = branch != null ?
+                new ObjectParameter("Branch", branch) :
+                new ObjectParameter("Branch", typeof(string));
+    
+            var engineeringDisciplineParameter = engineeringDiscipline != null ?
+                new ObjectParameter("EngineeringDiscipline", engineeringDiscipline) :
+                new ObjectParameter("EngineeringDiscipline", typeof(string));
+    
+            var memberJoinedDateParameter = memberJoinedDate.HasValue ?
+                new ObjectParameter("MemberJoinedDate", memberJoinedDate) :
+                new ObjectParameter("MemberJoinedDate", typeof(System.DateTime));
+    
+            var batchParameter = batch != null ?
+                new ObjectParameter("Batch", batch) :
+                new ObjectParameter("Batch", typeof(string));
+    
+            var primaryContactNoParameter = primaryContactNo != null ?
+                new ObjectParameter("PrimaryContactNo", primaryContactNo) :
+                new ObjectParameter("PrimaryContactNo", typeof(string));
+    
+            var contactNoIndiaParameter = contactNoIndia != null ?
+                new ObjectParameter("ContactNoIndia", contactNoIndia) :
+                new ObjectParameter("ContactNoIndia", typeof(string));
+    
+            var whatsappNoParameter = whatsappNo != null ?
+                new ObjectParameter("WhatsappNo", whatsappNo) :
+                new ObjectParameter("WhatsappNo", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var permanentAddressParameter = permanentAddress != null ?
+                new ObjectParameter("PermanentAddress", permanentAddress) :
+                new ObjectParameter("PermanentAddress", typeof(string));
+    
+            var permanentCountryParameter = permanentCountry != null ?
+                new ObjectParameter("PermanentCountry", permanentCountry) :
+                new ObjectParameter("PermanentCountry", typeof(string));
+    
+            var currentAddressParameter = currentAddress != null ?
+                new ObjectParameter("CurrentAddress", currentAddress) :
+                new ObjectParameter("CurrentAddress", typeof(string));
+    
+            var currentCountryParameter = currentCountry != null ?
+                new ObjectParameter("CurrentCountry", currentCountry) :
+                new ObjectParameter("CurrentCountry", typeof(string));
+    
+            var profileImageParameter = profileImage != null ?
+                new ObjectParameter("ProfileImage", profileImage) :
+                new ObjectParameter("ProfileImage", typeof(string));
+    
+            var lastModifiedByParameter = lastModifiedBy != null ?
+                new ObjectParameter("LastModifiedBy", lastModifiedBy) :
+                new ObjectParameter("LastModifiedBy", typeof(string));
+    
+            var lastModifiedDateParameter = lastModifiedDate.HasValue ?
+                new ObjectParameter("LastModifiedDate", lastModifiedDate) :
+                new ObjectParameter("LastModifiedDate", typeof(System.DateTime));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcRegisterNewOrUpdateMember", usernameParameter, passwordParameter, collegeRegistrationNoParameter, fullNameParameter, genderParameter, dateOfBirthParameter, branchParameter, engineeringDisciplineParameter, memberJoinedDateParameter, batchParameter, primaryContactNoParameter, contactNoIndiaParameter, whatsappNoParameter, emailParameter, permanentAddressParameter, permanentCountryParameter, currentAddressParameter, currentCountryParameter, profileImageParameter, lastModifiedByParameter, lastModifiedDateParameter);
+        }
+    
+        public virtual ObjectResult<string> prcCheckIfCollegeRegNoExist(string collegeRegistrationNo)
+        {
+            var collegeRegistrationNoParameter = collegeRegistrationNo != null ?
+                new ObjectParameter("CollegeRegistrationNo", collegeRegistrationNo) :
+                new ObjectParameter("CollegeRegistrationNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prcCheckIfCollegeRegNoExist", collegeRegistrationNoParameter);
+        }
     }
 }

@@ -1,0 +1,15 @@
+﻿
+<div class="col-md-12" style="display: block">
+    @if (!string.IsNullOrEmpty(ViewBag.Success))
+    {
+        <div class="alert alert-success">
+            <span>@ViewBag.Success</span>
+        </div>
+    }
+    else if (!string.IsNullOrEmpty(ViewBag.Failure))
+    {
+        <div class="alert alert-danger">
+            <span>@ViewBag.Failure</span>
+        </div>
+    }
+</div>

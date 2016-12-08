@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GCETNChapter.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -64,6 +65,51 @@ namespace GCETNChapter.Models.DataAccess
                 }
             }
             return branchList;
+        }
+
+
+        public static List<string> GetBatchList()
+        {
+            var startYear = 1980;
+            var endYear = DateTime.Now.Year;
+            var yearsCount = endYear - startYear;
+
+            var BatchList = new List<string>();
+            BatchList.Add("-- Select Batch --");
+
+            for (int x = 0; x <= yearsCount; x++)
+            {
+                BatchList.Add((startYear + x).ToString());
+            }
+
+            return BatchList;
+        }
+
+
+        public int RegisterNewMemberInRegistrationPage(MemberRegistrationVO RegDetails)
+        {
+            int rowsEffected = 0;
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                rowsEffected = db.prcRegisterNewOrUpdateMember(RegDetails.Username, RegDetails.Password, RegDetails.CollegeRegistrationNo, RegDetails.FullName, RegDetails.Gender, RegDetails.DateOfBirth, RegDetails.Branch,
+                                                                RegDetails.EngineeringDescipline, RegDetails.MemberJoinedDate, RegDetails.Batch, RegDetails.PrimaryContactNo,
+                                                                RegDetails.ContactNoIndia, RegDetails.WhatsappNumber, RegDetails.Email, RegDetails.PermanentAddress, RegDetails.PermanentCountry,
+                                                                RegDetails.CurrentAddress, RegDetails.CurrentCountry, RegDetails.ProfileImage, HttpContext.Current.Session["username"].ToString(),
+                                                                DateTime.Now);
+            }
+
+            return rowsEffected;
+        }
+
+
+        public static string CheckIfUserAlreadyRegistered(string CollegeRegistrationNo)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var result= db.prcCheckIfCollegeRegNoExist(CollegeRegistrationNo).FirstOrDefault();
+
+                return result;
+            }            
         }
     }
 }

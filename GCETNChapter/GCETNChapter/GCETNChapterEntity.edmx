@@ -5,9 +5,41 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GCE_TN_ChapterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="prcCheckIfCollegeRegNoExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcGetBranchList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetCountryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetGenderList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prcInsertContactUsInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Name" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="Summary" Type="varchar" Mode="In" />
+          <Parameter Name="Message" Type="varchar(max)" Mode="In" />
+        </Function>
+        <Function Name="prcRegisterNewOrUpdateMember" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+          <Parameter Name="Gender" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfBirth" Type="date" Mode="In" />
+          <Parameter Name="Branch" Type="varchar" Mode="In" />
+          <Parameter Name="EngineeringDiscipline" Type="varchar" Mode="In" />
+          <Parameter Name="MemberJoinedDate" Type="date" Mode="In" />
+          <Parameter Name="Batch" Type="varchar" Mode="In" />
+          <Parameter Name="PrimaryContactNo" Type="varchar" Mode="In" />
+          <Parameter Name="ContactNoIndia" Type="varchar" Mode="In" />
+          <Parameter Name="WhatsappNo" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="PermanentAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PermanentCountry" Type="varchar" Mode="In" />
+          <Parameter Name="CurrentAddress" Type="varchar" Mode="In" />
+          <Parameter Name="CurrentCountry" Type="varchar" Mode="In" />
+          <Parameter Name="ProfileImage" Type="varchar" Mode="In" />
+          <Parameter Name="LastModifiedBy" Type="varchar" Mode="In" />
+          <Parameter Name="LastModifiedDate" Type="datetime" Mode="In" />
+        </Function>
         <EntityContainer Name="GCE_TN_ChapterModelStoreContainer" />
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -17,6 +49,38 @@
           <FunctionImport Name="prcGetCountryList" ReturnType="Collection(GCE_TN_ChapterModel.prcGetCountryList_Result)" />
           <FunctionImport Name="prcGetGenderList" ReturnType="Collection(GCE_TN_ChapterModel.prcGetGenderList_Result)" />
           <FunctionImport Name="prcGetBranchList" ReturnType="Collection(GCE_TN_ChapterModel.prcGetBranchList_Result)" />
+          <FunctionImport Name="prcInsertContactUsInfo">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Summary" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcRegisterNewOrUpdateMember">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="Branch" Mode="In" Type="String" />
+            <Parameter Name="EngineeringDiscipline" Mode="In" Type="String" />
+            <Parameter Name="MemberJoinedDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Batch" Mode="In" Type="String" />
+            <Parameter Name="PrimaryContactNo" Mode="In" Type="String" />
+            <Parameter Name="ContactNoIndia" Mode="In" Type="String" />
+            <Parameter Name="WhatsappNo" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="PermanentAddress" Mode="In" Type="String" />
+            <Parameter Name="PermanentCountry" Mode="In" Type="String" />
+            <Parameter Name="CurrentAddress" Mode="In" Type="String" />
+            <Parameter Name="CurrentCountry" Mode="In" Type="String" />
+            <Parameter Name="ProfileImage" Mode="In" Type="String" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+            <Parameter Name="LastModifiedDate" Mode="In" Type="DateTime" />
+          </FunctionImport>
+          <FunctionImport Name="prcCheckIfCollegeRegNoExist" ReturnType="Collection(String)">
+          <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -60,6 +124,9 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcInsertContactUsInfo" FunctionName="GCE_TN_ChapterModel.Store.prcInsertContactUsInfo" />
+          <FunctionImportMapping FunctionImportName="prcRegisterNewOrUpdateMember" FunctionName="GCE_TN_ChapterModel.Store.prcRegisterNewOrUpdateMember" />
+          <FunctionImportMapping FunctionImportName="prcCheckIfCollegeRegNoExist" FunctionName="GCE_TN_ChapterModel.Store.prcCheckIfCollegeRegNoExist" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

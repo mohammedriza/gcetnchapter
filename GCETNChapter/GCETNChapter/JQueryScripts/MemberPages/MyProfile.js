@@ -11,7 +11,8 @@ function GetProfileLoginAndPersonalInfo() {
                 ShowdivLoginAndPersonalInfo();
             }
             else if (statusTxt == 'error') {
-                alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
@@ -26,7 +27,8 @@ function GetProfileContactInformation() {
                 ShowdivContactInfo();
             }
             else if (statusTxt == 'error') {
-                alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
@@ -41,7 +43,8 @@ function GetProfileAddressInformation() {
                 ShowdivAddressInfo();
             }
             else if (statusTxt == 'error') {
-                alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
@@ -56,7 +59,8 @@ function GetProfileCollegeInformation() {
                 ShowdivCollegeInfo();
             }
             else if (statusTxt == 'error') {
-                alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
@@ -71,7 +75,8 @@ function GetProfileWorkplaceAndExpertiseInfo() {
                 ShowdivWorkplaceAndExpertiseInfo();
             }
             else if (statusTxt == 'error') {
-                alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
@@ -124,12 +129,12 @@ function UpdatePersonalAndLoginInfo() {
             },
             success: function (data, result) {
                 if (data == 'True')
-                    alert('SUCCESS: Changes successfully saved.');
+                    GeneralWarningsAndErrorDialog('SUCCESS', 'Changes successfully saved.');
                 else
-                    alert('ERROR: Failed to save Changes. Please try again later.');
+                    GeneralWarningsAndErrorDialog('ERROR', 'Failed to save Changes. Please try again later.');
             },
             error: function (xhr, status, error) {
-                alert('FAIL: \n' + error + '\n' + xhr.responseText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Error Description: ' + error + '\n' + xhr.responseText);
             }
         })
     }
@@ -160,12 +165,12 @@ function UpdateProfileAddressInformation() {
             },
             success: function (data, result) {
                 if (data == 'True')
-                    alert('SUCCESS: Changes successfully saved.');
+                    GeneralWarningsAndErrorDialog('SUCCESS', 'Changes successfully saved.');
                 else
-                    alert('ERROR: Failed to save Changes. Please try again later.');
+                    GeneralWarningsAndErrorDialog('ERROR', 'Failed to save Changes. Please try again later.');
             },
             error: function (xhr, status, error) {
-                alert('FAIL: \n' + error + '\n' + xhr.responseText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Error Description: ' + error + '\n' + xhr.responseText);
             }
         })
     }
@@ -198,12 +203,12 @@ function UpdateProfileCollegeInformation() {
             },
             success: function (data, result) {
                 if (data == 'True')
-                    alert('SUCCESS: Changes successfully saved.');
+                    GeneralWarningsAndErrorDialog('SUCCESS', 'Changes successfully saved.');
                 else
-                    alert('ERROR: Failed to save Changes. Please try again later.');
+                    GeneralWarningsAndErrorDialog('ERROR', 'Failed to save Changes. Please try again later.');
             },
             error: function (xhr, status, error) {
-                alert('FAIL: \n' + error + '\n' + xhr.responseText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Error Description: ' + error + '\n' + xhr.responseText);
             }
         })
     }
@@ -234,12 +239,12 @@ function UpdateProfileContactInformation() {
             },
             success: function (data, result) {
                 if (data == 'True')
-                    alert('SUCCESS: Changes successfully saved.');
+                    GeneralWarningsAndErrorDialog('SUCCESS', 'Changes successfully saved.');
                 else
-                    alert('ERROR: Failed to save Changes. Please try again later.');
+                    GeneralWarningsAndErrorDialog('ERROR', 'Failed to save Changes. Please try again later.');
             },
             error: function (xhr, status, error) {
-                alert('FAIL: \n' + error + '\n' + xhr.responseText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Error Description: ' + error + '\n' + xhr.responseText);
             }
         })
     }
@@ -274,20 +279,16 @@ function UpdateProfileWorkplaceAndExpertiseInfo() {
                 Expertise5: expertise5,
             },
             success: function (data, result) {
-                if (data == 'True') {
-                    //alert('SUCCESS: Changes successfully saved.');
+                if (data == 'True')
                     GeneralWarningsAndErrorDialog('SUCCESS', 'Changes successfully saved.');
-                }
                 else
-                    alert('ERROR: Failed to save Changes. Please try again later.');
+                    GeneralWarningsAndErrorDialog('ERROR', 'Failed to save Changes. Please try again later.');
             },
             error: function (xhr, status, error) {
-                alert('FAIL: \n' + error + '\n' + xhr.responseText);
+                GeneralWarningsAndErrorDialog('ERROR', 'Error Description: ' + error + '\n' + xhr.responseText);
             }
         })
     }
-
-    $('#testModal').modal();
 }
 
 

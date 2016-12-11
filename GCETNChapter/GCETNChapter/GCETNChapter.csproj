@@ -224,6 +224,10 @@
     <Compile Include="Models\DataAccess\MemberDA.cs" />
     <Compile Include="Models\DataAccess\MemberProfileDA.cs" />
     <Compile Include="Models\ViewModels\DonationDetailsVO.cs" />
+    <Compile Include="Models\ViewModels\Events\EventExpenseDetailsVO.cs" />
+    <Compile Include="Models\ViewModels\Events\EventGalleryVO.cs" />
+    <Compile Include="Models\ViewModels\Events\EventPaymentCollectionVO.cs" />
+    <Compile Include="Models\ViewModels\Events\EventsVO.cs" />
     <Compile Include="Models\ViewModels\MemberProfileVO.cs" />
     <Compile Include="Models\ViewModels\ContactUsVO.cs" />
     <Compile Include="Models\ViewModels\MemberRegistrationVO.cs" />

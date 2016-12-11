@@ -40,6 +40,7 @@ textarea {
     position: inherit;
     display: block;
     vertical-align: middle;
+    top: 0;
 }
 
 .bodySection{
@@ -61,13 +62,14 @@ textarea {
 
 .footerSection{
     padding-top: 20px;
-    padding-bottom: 20px;
+    padding-bottom: 50px;
     padding-left: 180px;
     padding-right: 180px;
     background-color: #333;
     color: #ffffff;
     width: 100%;
     height: auto;
+    bottom: 0;
 }
 
 .footerTextNormal{

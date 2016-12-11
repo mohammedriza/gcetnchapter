@@ -6,7 +6,7 @@ using System.Web;
 
 namespace GCETNChapter.Models.ViewModels
 {
-    public class MemberRegistrationVO
+    public class MemberProfileVO
     {
         //-- PERSONAL AND LOGIN INFO --//
         [Display(Name = "* Full Name")]
@@ -39,7 +39,6 @@ namespace GCETNChapter.Models.ViewModels
         [DataType(DataType.Password)]
         [StringLength(50, ErrorMessage = "Confirm Password cannot exceed 50 characters", MinimumLength = 1)]
         [Required(ErrorMessage = "Confirm Password cannot be blank.")]
-        [Compare("Password", ErrorMessage = "Password and Confirm Password should be the same")]
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Profile Image")]
@@ -50,7 +49,7 @@ namespace GCETNChapter.Models.ViewModels
         [Display(Name = "Member Joined Date")]
         public DateTime? MemberJoinedDate { get; set; }
 
-        
+
         //-- CONTACT NUMBERS --//
         [Display(Name = "* Primary Contact No")]
         [StringLength(15, ErrorMessage = "Primary Contact No should not exceed 15 characters", MinimumLength = 1)]
@@ -106,5 +105,34 @@ namespace GCETNChapter.Models.ViewModels
         [StringLength(150, ErrorMessage = "Engineering Discipline should not exceed 150 characters.", MinimumLength = 0)]
         public string EngineeringDescipline { get; set; }
 
+
+        //-- OCCUPATION DETAILS --//
+        [Display(Name = "Occupation")]
+        [StringLength(50, ErrorMessage = "Occupation should not exceed 50 characters", MinimumLength = 0)]
+        public string Occupation { get; set; }
+
+        [Display(Name = "* Company")]
+        [StringLength(50, ErrorMessage = "Company should not exceed 50 characters", MinimumLength = 0)]
+        public string Company { get; set; }
+
+        [Display(Name = "Expertise Areas")]
+        [StringLength(150, ErrorMessage = "Activities should not exceed 150 characters", MinimumLength = 0)]
+        public string Expertise1 { get; set; }
+
+        [StringLength(150, ErrorMessage = "Activities should not exceed 150 characters", MinimumLength = 0)]
+        public string Expertise2 { get; set; }
+
+        [StringLength(150, ErrorMessage = "Activities should not exceed 150 characters", MinimumLength = 0)]
+        public string Expertise3 { get; set; }
+
+        [StringLength(150, ErrorMessage = "Activities should not exceed 150 characters", MinimumLength = 0)]
+        public string Expertise4 { get; set; }
+
+        [StringLength(150, ErrorMessage = "Activities should not exceed 150 characters", MinimumLength = 0)]
+        public string Expertise5 { get; set; }
+
+        [Display(Name = "Interests")]
+        [StringLength(150, ErrorMessage = "Interests cannot exceed 150 characters", MinimumLength = 0)]
+        public string Interests { get; set; }
     }
 }

@@ -2,14 +2,14 @@
 <script src="~/JQueryScripts/ContactUsPage.js"></script>
 
 @{
-    ViewBag.Title = "ContactForm";
+    ViewBag.Title = "Contact Us";
 }
 
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
 
-    <div id="divContactUsPage" class="partialBodySection hideDiv">
+    <div id="divContactUsPage" class="hideDiv partialBodySection">
         <span class="headerText">Contact Us</span>
         <br /><br />
 
@@ -64,7 +64,7 @@
             <br /><br /><br />
 
             <div class="col-md-6">
-                @Html.Partial("SuccessErrorMessages");
+                @Html.Partial("_SuccessErrorMessages");
             </div>
         </div>
     </div>

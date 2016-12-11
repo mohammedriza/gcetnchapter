@@ -1,5 +1,7 @@
 ﻿<script src="~/JQueryScripts/HomePage.js"></script>
-
+@{
+    ViewBag.Title = "Home";
+}
 <div>
     <div class="w3-content w3-section">
         <div class="w3-display-container mySlides w3-animate-fading">
@@ -44,16 +46,5 @@
 
     </div>
 
-    <script>
-        $(function () {
-            $('#LnkHome').addClass('menuitemSelected');
-            $('#LnkAboutUs').removeClass('menuitemSelected');
-            $('#LnkGallery').removeClass('menuitemSelected');
-            $('#LnkEvents').removeClass('menuitemSelected');
-            $('#LnkNews').removeClass('menuitemSelected');
-            $('#LnkMembers').removeClass('menuitemSelected');
-            $('#LnkContactUs').removeClass('menuitemSelected');
-        });
-    </script>
 </div>
 

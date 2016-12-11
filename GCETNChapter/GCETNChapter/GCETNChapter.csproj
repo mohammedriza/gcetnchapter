@@ -197,7 +197,9 @@
     <Compile Include="App_Start\BundleConfig.cs" />
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
+    <Compile Include="Controllers\DonationsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\MemberProfileController.cs" />
     <Compile Include="Controllers\MemberRegistrationController.cs" />
     <Compile Include="GCETNChapterEntity.Context.cs">
       <AutoGen>True</AutoGen>
@@ -217,9 +219,13 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
+    <Compile Include="Models\DataAccess\DonationDetailsDA.cs" />
     <Compile Include="Models\DataAccess\HomeDA.cs" />
     <Compile Include="Models\DataAccess\MemberDA.cs" />
-    <Compile Include="Views\ContactUs\ContactUsVO.cs" />
+    <Compile Include="Models\DataAccess\MemberProfileDA.cs" />
+    <Compile Include="Models\ViewModels\DonationDetailsVO.cs" />
+    <Compile Include="Models\ViewModels\MemberProfileVO.cs" />
+    <Compile Include="Models\ViewModels\ContactUsVO.cs" />
     <Compile Include="Models\ViewModels\MemberRegistrationVO.cs" />
     <Compile Include="prcGetBranchList_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
@@ -230,9 +236,26 @@
     <Compile Include="prcGetGenderList_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="prcGetProfileAddressInformation_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetProfileCollegeInformation_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetProfileContactInformation_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetProfileLoginAndPersonalInfo_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetProfileWorkplaceAndExpertiseInformation_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
+    <Content Include="Content\bootstrap-theme.css" />
+    <Content Include="Content\bootstrap-theme.min.css" />
     <Content Include="Content\bootstrap.css" />
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\DataTables\css\autoFill.bootstrap.css" />
@@ -452,8 +475,11 @@
     <Content Include="Images\Scrolling\Image4.jpg" />
     <Content Include="JQueryScripts\AboutUsPage.js" />
     <Content Include="JQueryScripts\ContactUsPage.js" />
+    <Content Include="JQueryScripts\GeneralScripts.js" />
     <Content Include="JQueryScripts\HomePage.js" />
     <Content Include="JQueryScripts\LoginPage.js" />
+    <Content Include="JQueryScripts\MemberPages\AddDonations.js" />
+    <Content Include="JQueryScripts\MemberPages\MyProfile.js" />
     <Content Include="JQueryScripts\RegistrationPage.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -544,6 +570,14 @@
     <Content Include="GCETNChapterEntity.edmx.diagram">
       <DependentUpon>GCETNChapterEntity.edmx</DependentUpon>
     </Content>
+    <Content Include="fonts\glyphicons-halflings-regular.woff2" />
+    <Content Include="fonts\glyphicons-halflings-regular.woff" />
+    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
+    <Content Include="fonts\glyphicons-halflings-regular.eot" />
+    <Content Include="Content\bootstrap.min.css.map" />
+    <Content Include="Content\bootstrap.css.map" />
+    <Content Include="Content\bootstrap-theme.min.css.map" />
+    <Content Include="Content\bootstrap-theme.css.map" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
@@ -578,15 +612,24 @@
     <Content Include="Views\Home\AboutUs.cshtml" />
     <Content Include="Views\MemberRegistration\Registration.cshtml" />
     <Content Include="Views\MemberRegistration\Login.cshtml" />
-    <Content Include="Views\Shared\SuccessErrorMessages.cshtml" />
+    <Content Include="Views\Shared\_SuccessErrorMessages.cshtml" />
+    <Content Include="Views\MemberProfile\MyProfile.cshtml" />
+    <Content Include="Views\Shared\_FooterSection.cshtml" />
+    <Content Include="Views\Shared\_PublicHeaderSection.cshtml" />
+    <Content Include="Views\Shared\_MemberHeaderSection.cshtml" />
+    <Content Include="Views\MemberProfile\Logout.cshtml" />
+    <Content Include="Views\Shared\MemberProfile\_LoginAndPersonalInfo.cshtml" />
+    <Content Include="Views\Shared\MemberProfile\_ContactInformation.cshtml" />
+    <Content Include="Views\Shared\MemberProfile\_CollegeInformation.cshtml" />
+    <Content Include="Views\Shared\MemberProfile\_AddressInformation.cshtml" />
+    <Content Include="Views\Shared\MemberProfile\_WorkplaceAndExpertiseInformation.cshtml" />
+    <Content Include="Views\Shared\_ReusableModalPopup.cshtml" />
+    <Content Include="Views\Donations\AddDonations.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
   </ItemGroup>
   <ItemGroup>
-    <Content Include="fonts\glyphicons-halflings-regular.woff" />
-    <Content Include="fonts\glyphicons-halflings-regular.ttf" />
-    <Content Include="fonts\glyphicons-halflings-regular.eot" />
     <Content Include="packages.config" />
     <None Include="Project_Readme.html" />
   </ItemGroup>

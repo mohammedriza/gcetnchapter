@@ -1,0 +1,48 @@
+﻿@model GCETNChapter.Models.ViewModels.MemberProfileVO
+
+<div class="panel panel-default">
+    <div class="panel-heading formlabelFontLeft">Address Information</div>
+    <div class="panel-body">
+
+        <div class="row rowPadding">
+            <div>
+                <div class="col-md-2 formlabelFontRight">
+                    @Html.LabelFor(model => model.CurrentAddress)
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.CurrentAddress, new { htmlAttributes = new { @class = "longtextbox", id="TxtCurrentAddress" } })
+                    @Html.ValidationMessageFor(model => model.CurrentAddress, "", new { @class = "textboxerror" })
+                </div>
+            </div>
+            <div>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.CurrentCountry, new SelectList(ViewBag.CountryList), new { @class = "form-control", id = "DDLCurrentCountry" })
+                    @Html.ValidationMessageFor(model => model.CurrentCountry, "", new { @class = "textboxerror" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row rowPadding">
+            <div>
+                <div class="col-md-2 formlabelFontRight">
+                    @Html.LabelFor(model => model.PermanentAddress)
+                </div>
+                <div class="col-md-6">
+                    @Html.EditorFor(model => model.PermanentAddress, new { htmlAttributes = new { @class = "longtextbox", id = "TxtPermanentAddress" } })
+                    @Html.ValidationMessageFor(model => model.PermanentAddress, "", new { @class = "textboxerror" })
+                </div>
+            </div>
+            <div>
+                <div class="col-md-4">
+                    @Html.DropDownListFor(model => model.PermanentCountry, new SelectList(ViewBag.CountryList), new { @class = "form-control", id = "DDLPermanentCountry" })
+                    @Html.ValidationMessageFor(model => model.PermanentCountry, "", new { @class = "textboxerror" })
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="col-md-12 text-center">
+            <input type="button" value="Save Changes" class="btn btn-primary" onclick="UpdateProfileAddressInformation();" />
+        </div>
+    </div>
+</div>

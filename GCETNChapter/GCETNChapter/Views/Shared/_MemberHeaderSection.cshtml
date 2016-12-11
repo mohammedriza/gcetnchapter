@@ -1,0 +1,36 @@
+﻿
+<!-- HEADER SECTION THAT WILL BE VISIBLE ONLY FOR MEMBERS ONCE LOGGED IN USING THEIR CREDENTIALS -->
+
+<div class="row headerSection">
+    <div class="col-md-3">
+        <a href="~/Home/">
+            <img src="~/Images/logo_home.png" height="100" />
+        </a>
+    </div>
+    <div class="col-md-7 navbar-collapse collapse" style="vertical-align: bottom;">
+        <ul class="nav navbar-nav navbar-right">
+            <li id="LnkHome" class="menuitem">
+                <a href="~/Home/">EVENTS</a>
+            </li>
+            <li id="LnkAboutUs" class="menuitem">
+                <a href="~/Donations/AddDonations">DONATIONS</a>
+            </li>
+            <li id="LnkGallery" class="menuitem">
+                <a href="~/Home/">MANAGE ACCESS</a>
+            </li>
+            <li id="LnkEvents" class="menuitem">
+                <a href="~/Home/">ADVERTISEMENTS</a>
+            </li>
+            <li id="LnkNews" class="menuitem">
+                <a href="~/Home/">HISTORY</a>
+            </li>
+            <li id="LnkContactUs" class="menuitem">
+                <a href="~/MemberProfile/MyProfile/">MY PROFILE</a>
+            </li>
+        </ul>
+    </div>
+    <div class="col-md-2 text-right" style="padding-top: 15px;">
+        <p id="LblWelcomeUserMsg">Welcome @Session["fullname"].ToString() <span class="glyphicon glyphicon-user" /></p>
+        <a href="~/MemberProfile/Logout/" id="LnkMemberLogout">Logout <span class="glyphicon glyphicon-log-out" /></a>
+    </div>
+</div>

@@ -91,18 +91,17 @@ namespace GCETNChapter.Models.DataAccess
             int rowsEffected = 0;
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
-                rowsEffected = db.prcRegisterNewOrUpdateMember(RegDetails.Username, RegDetails.Password, RegDetails.CollegeRegistrationNo, RegDetails.FullName, RegDetails.Gender, RegDetails.DateOfBirth, RegDetails.Branch,
-                                                                RegDetails.EngineeringDescipline, RegDetails.MemberJoinedDate, RegDetails.Batch, RegDetails.PrimaryContactNo,
+                rowsEffected = db.prcRegisterNewOrUpdateMember(RegDetails.Username, RegDetails.Password, RegDetails.CollegeRegistrationNo, RegDetails.FullName, RegDetails.Gender, RegDetails.DateOfBirth, 
+                                                                RegDetails.Branch, RegDetails.EngineeringDescipline, RegDetails.MemberJoinedDate, RegDetails.Batch, RegDetails.PrimaryContactNo,
                                                                 RegDetails.ContactNoIndia, RegDetails.WhatsappNumber, RegDetails.Email, RegDetails.PermanentAddress, RegDetails.PermanentCountry,
-                                                                RegDetails.CurrentAddress, RegDetails.CurrentCountry, RegDetails.ProfileImage, HttpContext.Current.Session["username"].ToString(),
-                                                                DateTime.Now);
+                                                                RegDetails.CurrentAddress, RegDetails.CurrentCountry, RegDetails.ProfileImage, HttpContext.Current.Session["username"].ToString());
             }
 
             return rowsEffected;
         }
 
 
-        public static string CheckIfUserAlreadyRegistered(string CollegeRegistrationNo)
+        public static string CheckIfCollegeRegNoExist(string CollegeRegistrationNo)
         {
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
@@ -110,6 +109,17 @@ namespace GCETNChapter.Models.DataAccess
 
                 return result;
             }            
+        }
+
+
+        public static string CheckIfUsernameExist(string Username)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var result = db.prcCheckIfUsernameExist(Username).FirstOrDefault();
+
+                return result;
+            }
         }
     }
 }

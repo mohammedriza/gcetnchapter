@@ -5,12 +5,39 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GCE_TN_ChapterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="prcAddUpdateDonationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
+          <Parameter Name="Amount" Type="numeric" Mode="In" />
+          <Parameter Name="PaymentReason" Type="varchar" Mode="In" />
+          <Parameter Name="PaymentDate" Type="date" Mode="In" />
+          <Parameter Name="PaymentStartDate" Type="date" Mode="In" />
+          <Parameter Name="PaymentEndDate" Type="date" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcCheckIfCollegeRegNoExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcCheckIfUsernameExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prcGetBranchList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetCountryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetGenderList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prcGetProfileAddressInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcGetProfileCollegeInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcGetProfileContactInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcGetProfileLoginAndPersonalInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcGetProfileWorkplaceAndExpertiseInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcInsertContactUsInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Name" Type="varchar" Mode="In" />
           <Parameter Name="Email" Type="varchar" Mode="In" />
@@ -38,7 +65,51 @@
           <Parameter Name="CurrentCountry" Type="varchar" Mode="In" />
           <Parameter Name="ProfileImage" Type="varchar" Mode="In" />
           <Parameter Name="LastModifiedBy" Type="varchar" Mode="In" />
-          <Parameter Name="LastModifiedDate" Type="datetime" Mode="In" />
+        </Function>
+        <Function Name="prcUpdatePersonalAndLoginInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="FullName" Type="varchar" Mode="In" />
+          <Parameter Name="Gender" Type="varchar" Mode="In" />
+          <Parameter Name="DateOfBirth" Type="date" Mode="In" />
+          <Parameter Name="ProfileImage" Type="varchar" Mode="In" />
+          <Parameter Name="LastModifiedBy" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcUpdateProfileAddressInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="CurrentAddress" Type="varchar" Mode="In" />
+          <Parameter Name="CurrentCountry" Type="varchar" Mode="In" />
+          <Parameter Name="PermanentAddress" Type="varchar" Mode="In" />
+          <Parameter Name="PermanentCountry" Type="varchar" Mode="In" />
+          <Parameter Name="LastModifiedBy" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcUpdateProfileCollegeInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
+          <Parameter Name="Branch" Type="varchar" Mode="In" />
+          <Parameter Name="EngineeringDiscipline" Type="varchar" Mode="In" />
+          <Parameter Name="Batch" Type="varchar" Mode="In" />
+          <Parameter Name="LastModifiedBy" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcUpdateProfileContactInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="PrimaryContactNo" Type="varchar" Mode="In" />
+          <Parameter Name="ContactNoIndia" Type="varchar" Mode="In" />
+          <Parameter Name="WhatsappNo" Type="varchar" Mode="In" />
+          <Parameter Name="Email" Type="varchar" Mode="In" />
+          <Parameter Name="LastModifiedBy" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcUpdateProfileWorkplaceAndExpertiseInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="CompanyName" Type="varchar" Mode="In" />
+          <Parameter Name="Occupation" Type="varchar" Mode="In" />
+          <Parameter Name="Interests" Type="varchar" Mode="In" />
+          <Parameter Name="Expertise1" Type="varchar" Mode="In" />
+          <Parameter Name="Expertise2" Type="varchar" Mode="In" />
+          <Parameter Name="Expertise3" Type="varchar" Mode="In" />
+          <Parameter Name="Expertise4" Type="varchar" Mode="In" />
+          <Parameter Name="Expertise5" Type="varchar" Mode="In" />
+          <Parameter Name="LastModifiedBy" Type="varchar" Mode="In" />
         </Function>
         <EntityContainer Name="GCE_TN_ChapterModelStoreContainer" />
       </Schema></edmx:StorageModels>
@@ -76,10 +147,81 @@
             <Parameter Name="CurrentCountry" Mode="In" Type="String" />
             <Parameter Name="ProfileImage" Mode="In" Type="String" />
             <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
-            <Parameter Name="LastModifiedDate" Mode="In" Type="DateTime" />
           </FunctionImport>
           <FunctionImport Name="prcCheckIfCollegeRegNoExist" ReturnType="Collection(String)">
           <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcUpdatePersonalAndLoginInfo">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="FullName" Mode="In" Type="String" />
+            <Parameter Name="Gender" Mode="In" Type="String" />
+            <Parameter Name="DateOfBirth" Mode="In" Type="DateTime" />
+            <Parameter Name="ProfileImage" Mode="In" Type="String" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetProfileLoginAndPersonalInfo" ReturnType="Collection(GCE_TN_ChapterModel.prcGetProfileLoginAndPersonalInfo_Result)" >
+          <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetProfileAddressInformation" ReturnType="Collection(GCE_TN_ChapterModel.prcGetProfileAddressInformation_Result)">
+          <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetProfileCollegeInformation" ReturnType="Collection(GCE_TN_ChapterModel.prcGetProfileCollegeInformation_Result)">
+          <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetProfileContactInformation" ReturnType="Collection(GCE_TN_ChapterModel.prcGetProfileContactInformation_Result)">
+          <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetProfileWorkplaceAndExpertiseInformation" ReturnType="Collection(GCE_TN_ChapterModel.prcGetProfileWorkplaceAndExpertiseInformation_Result)">
+          <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcCheckIfUsernameExist" ReturnType="Collection(String)">
+          <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcUpdateProfileAddressInformation">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="CurrentAddress" Mode="In" Type="String" />
+            <Parameter Name="CurrentCountry" Mode="In" Type="String" />
+            <Parameter Name="PermanentAddress" Mode="In" Type="String" />
+            <Parameter Name="PermanentCountry" Mode="In" Type="String" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcUpdateProfileCollegeInformation">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+            <Parameter Name="Branch" Mode="In" Type="String" />
+            <Parameter Name="EngineeringDiscipline" Mode="In" Type="String" />
+            <Parameter Name="Batch" Mode="In" Type="String" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcUpdateProfileContactInformation">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="PrimaryContactNo" Mode="In" Type="String" />
+            <Parameter Name="ContactNoIndia" Mode="In" Type="String" />
+            <Parameter Name="WhatsappNo" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcUpdateProfileWorkplaceAndExpertiseInfo">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="CompanyName" Mode="In" Type="String" />
+            <Parameter Name="Occupation" Mode="In" Type="String" />
+            <Parameter Name="Interests" Mode="In" Type="String" />
+            <Parameter Name="Expertise1" Mode="In" Type="String" />
+            <Parameter Name="Expertise2" Mode="In" Type="String" />
+            <Parameter Name="Expertise3" Mode="In" Type="String" />
+            <Parameter Name="Expertise4" Mode="In" Type="String" />
+            <Parameter Name="Expertise5" Mode="In" Type="String" />
+            <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcAddUpdateDonationDetails">
+            <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="PaymentReason" Mode="In" Type="String" />
+            <Parameter Name="PaymentDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PaymentStartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="PaymentEndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Username" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
@@ -93,6 +235,41 @@
         <ComplexType Name="prcGetBranchList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
           <Property Type="String" Name="Branch" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="prcGetProfileLoginAndPersonalInfo_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="Gender" Nullable="true" MaxLength="6" />
+          <Property Type="DateTime" Name="DateOfBirth" Nullable="true" />
+        </ComplexType>
+        <ComplexType Name="prcGetProfileAddressInformation_Result">
+          <Property Type="String" Name="CurrentAddress" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CurrentCountry" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="PermanentAddress" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="PermanentCountry" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="prcGetProfileCollegeInformation_Result">
+          <Property Type="String" Name="CollegeRegistrationNo" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="Batch" Nullable="true" MaxLength="4" />
+          <Property Type="String" Name="Branch" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="EngineeringDiscipline" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="prcGetProfileContactInformation_Result">
+          <Property Type="String" Name="PrimaryContactNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="ContactNoIndia" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="WhatsappNo" Nullable="true" MaxLength="15" />
+          <Property Type="String" Name="Email" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="prcGetProfileWorkplaceAndExpertiseInformation_Result">
+          <Property Type="String" Name="CompanyName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Occupation" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Interests" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Expertise1" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Expertise2" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Expertise3" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Expertise4" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="Expertise5" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -127,6 +304,68 @@
           <FunctionImportMapping FunctionImportName="prcInsertContactUsInfo" FunctionName="GCE_TN_ChapterModel.Store.prcInsertContactUsInfo" />
           <FunctionImportMapping FunctionImportName="prcRegisterNewOrUpdateMember" FunctionName="GCE_TN_ChapterModel.Store.prcRegisterNewOrUpdateMember" />
           <FunctionImportMapping FunctionImportName="prcCheckIfCollegeRegNoExist" FunctionName="GCE_TN_ChapterModel.Store.prcCheckIfCollegeRegNoExist" />
+          <FunctionImportMapping FunctionImportName="prcUpdatePersonalAndLoginInfo" FunctionName="GCE_TN_ChapterModel.Store.prcUpdatePersonalAndLoginInfo" />
+          <FunctionImportMapping FunctionImportName="prcGetProfileLoginAndPersonalInfo" FunctionName="GCE_TN_ChapterModel.Store.prcGetProfileLoginAndPersonalInfo">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetProfileLoginAndPersonalInfo_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="Gender" ColumnName="Gender" />
+                <ScalarProperty Name="DateOfBirth" ColumnName="DateOfBirth" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcGetProfileAddressInformation" FunctionName="GCE_TN_ChapterModel.Store.prcGetProfileAddressInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetProfileAddressInformation_Result">
+                <ScalarProperty Name="CurrentAddress" ColumnName="CurrentAddress" />
+                <ScalarProperty Name="CurrentCountry" ColumnName="CurrentCountry" />
+                <ScalarProperty Name="PermanentAddress" ColumnName="PermanentAddress" />
+                <ScalarProperty Name="PermanentCountry" ColumnName="PermanentCountry" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcGetProfileCollegeInformation" FunctionName="GCE_TN_ChapterModel.Store.prcGetProfileCollegeInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetProfileCollegeInformation_Result">
+                <ScalarProperty Name="CollegeRegistrationNo" ColumnName="CollegeRegistrationNo" />
+                <ScalarProperty Name="Batch" ColumnName="Batch" />
+                <ScalarProperty Name="Branch" ColumnName="Branch" />
+                <ScalarProperty Name="EngineeringDiscipline" ColumnName="EngineeringDiscipline" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcGetProfileContactInformation" FunctionName="GCE_TN_ChapterModel.Store.prcGetProfileContactInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetProfileContactInformation_Result">
+                <ScalarProperty Name="PrimaryContactNo" ColumnName="PrimaryContactNo" />
+                <ScalarProperty Name="ContactNoIndia" ColumnName="ContactNoIndia" />
+                <ScalarProperty Name="WhatsappNo" ColumnName="WhatsappNo" />
+                <ScalarProperty Name="Email" ColumnName="Email" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcGetProfileWorkplaceAndExpertiseInformation" FunctionName="GCE_TN_ChapterModel.Store.prcGetProfileWorkplaceAndExpertiseInformation">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetProfileWorkplaceAndExpertiseInformation_Result">
+                <ScalarProperty Name="CompanyName" ColumnName="CompanyName" />
+                <ScalarProperty Name="Occupation" ColumnName="Occupation" />
+                <ScalarProperty Name="Interests" ColumnName="Interests" />
+                <ScalarProperty Name="Expertise1" ColumnName="Expertise1" />
+                <ScalarProperty Name="Expertise2" ColumnName="Expertise2" />
+                <ScalarProperty Name="Expertise3" ColumnName="Expertise3" />
+                <ScalarProperty Name="Expertise4" ColumnName="Expertise4" />
+                <ScalarProperty Name="Expertise5" ColumnName="Expertise5" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcCheckIfUsernameExist" FunctionName="GCE_TN_ChapterModel.Store.prcCheckIfUsernameExist" />
+          <FunctionImportMapping FunctionImportName="prcUpdateProfileAddressInformation" FunctionName="GCE_TN_ChapterModel.Store.prcUpdateProfileAddressInformation" />
+          <FunctionImportMapping FunctionImportName="prcUpdateProfileCollegeInformation" FunctionName="GCE_TN_ChapterModel.Store.prcUpdateProfileCollegeInformation" />
+          <FunctionImportMapping FunctionImportName="prcUpdateProfileContactInformation" FunctionName="GCE_TN_ChapterModel.Store.prcUpdateProfileContactInformation" />
+          <FunctionImportMapping FunctionImportName="prcUpdateProfileWorkplaceAndExpertiseInfo" FunctionName="GCE_TN_ChapterModel.Store.prcUpdateProfileWorkplaceAndExpertiseInfo" />
+          <FunctionImportMapping FunctionImportName="prcAddUpdateDonationDetails" FunctionName="GCE_TN_ChapterModel.Store.prcAddUpdateDonationDetails" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

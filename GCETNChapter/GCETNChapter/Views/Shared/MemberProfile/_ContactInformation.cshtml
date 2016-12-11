@@ -1,0 +1,54 @@
+﻿@model GCETNChapter.Models.ViewModels.MemberProfileVO
+
+<div class="panel panel-default">
+    <div class="panel-heading formlabelFontLeft">Contact Information</div>
+    <div class="panel-body">
+
+        <div class="row rowPadding">
+            <div>
+                <div class="col-md-2 formlabelFontRight">
+                    @Html.LabelFor(model => model.PrimaryContactNo)
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.PrimaryContactNo, new { htmlAttributes = new { @class = "form-control", id = "TxtPrimaryContactNo" } })
+                    @Html.ValidationMessageFor(model => model.PrimaryContactNo, "", new { @class = "textboxerror" })
+                </div>
+            </div>
+            <div>
+                <div class="col-md-2 formlabelFontRight">
+                    @Html.LabelFor(model => model.ContactNoIndia)
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.ContactNoIndia, new { htmlAttributes = new { @class = "form-control", id = "TxtContactNoIndia" } })
+                    @Html.ValidationMessageFor(model => model.ContactNoIndia, "", new { @class = "textboxerror" })
+                </div>
+            </div>
+        </div>
+
+        <div class="row rowPadding">
+            <div>
+                <div class="col-md-2 formlabelFontRight">
+                    @Html.LabelFor(model => model.WhatsappNumber)
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.WhatsappNumber, new { htmlAttributes = new { @class = "form-control", id = "TxtWhatsappNumber" } })
+                    @Html.ValidationMessageFor(model => model.WhatsappNumber, "", new { @class = "textboxerror" })
+                </div>
+            </div>
+            <div>
+                <div class="col-md-2 formlabelFontRight">
+                    @Html.LabelFor(model => model.Email)
+                </div>
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", id = "TxtEmail" } })
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "textboxerror" })
+                </div>
+            </div>
+        </div>
+
+        <br />
+        <div class="col-md-12 text-center">
+            <input type="button" value="Save Changes" class="btn btn-primary" onclick="UpdateProfileContactInformation();" />
+        </div>
+    </div>
+</div>

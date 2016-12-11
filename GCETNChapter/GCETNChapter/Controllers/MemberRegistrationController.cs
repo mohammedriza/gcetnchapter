@@ -10,8 +10,6 @@ namespace GCETNChapter.Controllers
 {
     public class MemberRegistrationController : Controller
     {
-        // GET: MemberRegistration
-
         private void GetDropdownListDataForRegistrationPage()
         {
             ViewBag.GenderList = MemberDA.GetGenderList();
@@ -20,6 +18,7 @@ namespace GCETNChapter.Controllers
             ViewBag.BatchList = MemberDA.GetBatchList();
         }
 
+        // GET: MemberRegistration
         public ActionResult Registration()
         {
             GetDropdownListDataForRegistrationPage();
@@ -58,12 +57,15 @@ namespace GCETNChapter.Controllers
                 }
                 else
                 {
-                    var alreadyRegistered = MemberDA.CheckIfUserAlreadyRegistered(MemberVO.CollegeRegistrationNo);
+                    var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(MemberVO.CollegeRegistrationNo);
+                    var usernameExist = MemberDA.CheckIfUsernameExist(MemberVO.Username);
 
                     //--- Check if the user's College Registration Number already exist in the MemberInfo table. If so show the below message, else continue registration.
-                    if (!string.IsNullOrEmpty(alreadyRegistered))
+                    if (!string.IsNullOrEmpty(CollegeRegNoExist))
                         ViewBag.Failure = string.Format("It seems like you have already registered using this College Registration No '{0}'. " +
                             "If it wasn't you, please contact the administrator for assistance.", MemberVO.CollegeRegistrationNo);
+                    else if (!string.IsNullOrEmpty(usernameExist))
+                        ViewBag.Failure = string.Format("The username ({0}) you used already exist. Please use a different Username to complete registration.", MemberVO.Username);
                     else
                     {
                         var result = new MemberDA().RegisterNewMemberInRegistrationPage(MemberVO);
@@ -76,10 +78,8 @@ namespace GCETNChapter.Controllers
                     }
                 }
             }
-            ViewBag.GenderList = MemberDA.GetGenderList();
-            ViewBag.CountryList = MemberDA.GetCountryList();
-            ViewBag.BranchList = MemberDA.GetBranchList();
-            ViewBag.BatchList = MemberDA.GetBatchList();
+
+            GetDropdownListDataForRegistrationPage();
 
             return View(MemberVO);
         }
@@ -87,7 +87,6 @@ namespace GCETNChapter.Controllers
 
         public ActionResult Login()
         {
-
             return View();
         }
 
@@ -98,5 +97,7 @@ namespace GCETNChapter.Controllers
 
             return View();
         }
+
+
     }
 }

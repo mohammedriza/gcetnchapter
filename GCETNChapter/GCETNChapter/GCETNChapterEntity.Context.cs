@@ -409,5 +409,39 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddUpdateDonationDetails", collegeRegistrationNoParameter, amountParameter, paymentReasonParameter, paymentDateParameter, paymentStartDateParameter, paymentEndDateParameter, usernameParameter);
         }
+    
+        public virtual int prcAddContactUsDetails(string name, string email, string summary, string message)
+        {
+            var nameParameter = name != null ?
+                new ObjectParameter("Name", name) :
+                new ObjectParameter("Name", typeof(string));
+    
+            var emailParameter = email != null ?
+                new ObjectParameter("Email", email) :
+                new ObjectParameter("Email", typeof(string));
+    
+            var summaryParameter = summary != null ?
+                new ObjectParameter("Summary", summary) :
+                new ObjectParameter("Summary", typeof(string));
+    
+            var messageParameter = message != null ?
+                new ObjectParameter("Message", message) :
+                new ObjectParameter("Message", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddContactUsDetails", nameParameter, emailParameter, summaryParameter, messageParameter);
+        }
+    
+        public virtual ObjectResult<prcGetAuthenticationDetails_Result> prcGetAuthenticationDetails(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetAuthenticationDetails_Result>("prcGetAuthenticationDetails", usernameParameter, passwordParameter);
+        }
     }
 }

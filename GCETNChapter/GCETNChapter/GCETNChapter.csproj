@@ -228,9 +228,13 @@
     <Compile Include="Models\ViewModels\Events\EventGalleryVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventPaymentCollectionVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventsVO.cs" />
+    <Compile Include="Models\ViewModels\LoginDetailsVO.cs" />
     <Compile Include="Models\ViewModels\MemberProfileVO.cs" />
     <Compile Include="Models\ViewModels\ContactUsVO.cs" />
     <Compile Include="Models\ViewModels\MemberRegistrationVO.cs" />
+    <Compile Include="prcGetAuthenticationDetails_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="prcGetBranchList_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
@@ -473,6 +477,7 @@
     <Content Include="Images\LoginBackground.jpg" />
     <Content Include="Images\logo_home.png" />
     <Content Include="Images\logo_mini.png" />
+    <Content Include="Images\MessageSent.png" />
     <Content Include="Images\Scrolling\Image1.jpg" />
     <Content Include="Images\Scrolling\Image2.jpg" />
     <Content Include="Images\Scrolling\Image3.jpg" />
@@ -483,6 +488,7 @@
     <Content Include="JQueryScripts\HomePage.js" />
     <Content Include="JQueryScripts\LoginPage.js" />
     <Content Include="JQueryScripts\MemberPages\AddDonations.js" />
+    <Content Include="JQueryScripts\MemberPages\Login.js" />
     <Content Include="JQueryScripts\MemberPages\MyProfile.js" />
     <Content Include="JQueryScripts\RegistrationPage.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -629,6 +635,7 @@
     <Content Include="Views\Shared\MemberProfile\_WorkplaceAndExpertiseInformation.cshtml" />
     <Content Include="Views\Shared\_ReusableModalPopup.cshtml" />
     <Content Include="Views\Donations\AddDonations.cshtml" />
+    <Content Include="Views\Home\MessageSent.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

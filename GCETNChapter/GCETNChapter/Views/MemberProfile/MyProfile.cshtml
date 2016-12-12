@@ -12,7 +12,15 @@
     @Html.AntiForgeryToken()
 
     <div id="divMyProfilePage" class="partialBodySection hideDiv" style="min-height: 600px">
-        <span class="headerText">My Profile</span>
+        <span class="headerText">
+            Member Profile
+            @{
+                if (!string.IsNullOrEmpty(ViewBag.RequestUser))
+                {
+                    <span> ( </span><span id="LblProfileOwnerUsername">@ViewBag.RequestUser</span> <span> ) </span>
+                }
+            }
+        </span>
         <br /><br />
 
         <!-- Right Side Menu Section -->

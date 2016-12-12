@@ -19,76 +19,91 @@ namespace GCETNChapter.Controllers
         }
 
         // GET: MemberProfile
-        public ActionResult MyProfile()
+        public ActionResult MyProfile(string RequestUser)
         {
-            Session.Add("username", "mohammedrizarazik");
-            Session.Add("fullname", "Mohamed Riza");
+            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
+            if (!string.IsNullOrEmpty(RequestUser))
+                ViewBag.RequestUser = RequestUser;
+            
             GetDropdownListDataForRegistrationPage();
 
-            var profile = new MemberProfileVO()
-            {
-                Username = Session["username"].ToString()
-            };                
-            return View(profile);
+            return View();
         }
 
 
-        public PartialViewResult GetProfileLoginAndPersonalInfo()
+        public PartialViewResult GetProfileLoginAndPersonalInfo(string RequestUser)
         {
-            GetDropdownListDataForRegistrationPage();
-
+            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
             var username = Session["username"].ToString();
+            if (!string.IsNullOrEmpty(RequestUser))
+                username = RequestUser;
+
+            ViewBag.GenderList = MemberDA.GetGenderList();
             var response = new MemberProfileDA().GetProfileLoginAndPersonalInfo(username);
 
             return PartialView("MemberProfile/_LoginAndPersonalInfo", response);
         }
 
-        public PartialViewResult GetProfileContactInformation()
+        public PartialViewResult GetProfileContactInformation(string RequestUser)
         {
-            GetDropdownListDataForRegistrationPage();
-
+            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
             var username = Session["username"].ToString();
+            if (!string.IsNullOrEmpty(RequestUser))
+                username = RequestUser;
+
             var response = new MemberProfileDA().GetProfileContactInformation(username);
 
             return PartialView("MemberProfile/_ContactInformation", response);
         }
 
-        public PartialViewResult GetProfileAddressInformation()
+        public PartialViewResult GetProfileAddressInformation(string RequestUser)
         {
-            GetDropdownListDataForRegistrationPage();
+            ViewBag.CountryList = MemberDA.GetCountryList();
 
+            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
             var username = Session["username"].ToString();
+            if (!string.IsNullOrEmpty(RequestUser))
+                username = RequestUser;
+
             var response = new MemberProfileDA().GetProfileAddressInformation(username);
 
             return PartialView("MemberProfile/_AddressInformation", response);
         }
 
-        public PartialViewResult GetProfileCollegeInformation()
+        public PartialViewResult GetProfileCollegeInformation(string RequestUser)
         {
-            GetDropdownListDataForRegistrationPage();
+            ViewBag.BranchList = MemberDA.GetBranchList();
+            ViewBag.BatchList = MemberDA.GetBatchList();
 
+            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
             var username = Session["username"].ToString();
+            if (!string.IsNullOrEmpty(RequestUser))
+                username = RequestUser;
+
             var response = new MemberProfileDA().GetProfileCollegeInformation(username);
 
             return PartialView("MemberProfile/_CollegeInformation", response);
         }
 
-        public PartialViewResult GetProfileWorkplaceAndExpertiseInfo()
+        public PartialViewResult GetProfileWorkplaceAndExpertiseInfo(string RequestUser)
         {
-            GetDropdownListDataForRegistrationPage();
-
+            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
             var username = Session["username"].ToString();
+            if (!string.IsNullOrEmpty(RequestUser))
+                username = RequestUser;
+
             var response = new MemberProfileDA().GetProfileWorkplaceAndExpertiseInfo(username);
 
             return PartialView("MemberProfile/_WorkplaceAndExpertiseInformation", response);
         }
 
 
-
         [HttpPost]
         public bool UpdatePersonalAndLoginInfo(MemberProfileVO profileVo)
         {
-            var response = new MemberProfileDA().UpdatePersonalAndLoginInfo(profileVo, Session["username"].ToString());
+            //-- Username is always picked from the Username Tetxbox for login and personal info updates as the username field is already pulled from database --//
+            profileVo.ActionUser = Session["username"].ToString();
+            var response = new MemberProfileDA().UpdatePersonalAndLoginInfo(profileVo);
 
             if (response >= 1)
                 return true;
@@ -99,7 +114,12 @@ namespace GCETNChapter.Controllers
         [HttpPost]
         public bool UpdateProfileAddressInformation(MemberProfileVO profileVo)
         {
-            var response = new MemberProfileDA().UpdateProfileAddressInformation(profileVo, Session["username"].ToString());
+            //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
+            if (string.IsNullOrEmpty(profileVo.Username))
+                profileVo.Username = Session["username"].ToString();
+
+            profileVo.ActionUser = Session["username"].ToString();
+            var response = new MemberProfileDA().UpdateProfileAddressInformation(profileVo);
 
             if (response >= 1)
                 return true;
@@ -110,7 +130,12 @@ namespace GCETNChapter.Controllers
         [HttpPost]
         public bool UpdateProfileCollegeInformation(MemberProfileVO profileVo)
         {
-            var response = new MemberProfileDA().UpdateProfileCollegeInformation(profileVo, Session["username"].ToString());
+            //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
+            if (string.IsNullOrEmpty(profileVo.Username))
+                profileVo.Username = Session["username"].ToString();
+
+            profileVo.ActionUser = Session["username"].ToString();
+            var response = new MemberProfileDA().UpdateProfileCollegeInformation(profileVo);
 
             if (response >= 1)
                 return true;
@@ -121,7 +146,12 @@ namespace GCETNChapter.Controllers
         [HttpPost]
         public bool UpdateProfileContactInformation(MemberProfileVO profileVo)
         {
-            var response = new MemberProfileDA().UpdateProfileContactInformation(profileVo, Session["username"].ToString());
+            //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
+            if (string.IsNullOrEmpty(profileVo.Username))
+                profileVo.Username = Session["username"].ToString();
+
+            profileVo.ActionUser = Session["username"].ToString();
+            var response = new MemberProfileDA().UpdateProfileContactInformation(profileVo);
 
             if (response >= 1)
                 return true;
@@ -132,7 +162,12 @@ namespace GCETNChapter.Controllers
         [HttpPost]
         public bool UpdateProfileWorkplaceAndExpertiseInfo(MemberProfileVO profileVo)
         {
-            var response = new MemberProfileDA().UpdateProfileWorkplaceAndExpertiseInfo(profileVo, Session["username"].ToString());
+            //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
+            if (string.IsNullOrEmpty(profileVo.Username))
+                profileVo.Username = Session["username"].ToString();
+
+            profileVo.ActionUser = Session["username"].ToString();
+            var response = new MemberProfileDA().UpdateProfileWorkplaceAndExpertiseInfo(profileVo);
 
             if (response >= 1)
                 return true;

@@ -41,7 +41,7 @@ namespace GCETNChapter.Controllers
                 }
                 else
                 {
-                    donationsVo.LastModifiedBy = Session["username"].ToString();
+                    donationsVo.ActionUser = Session["username"].ToString();
                     var result = new DonationDetailsDA().AddUpdateDonationDetails(donationsVo);
 
                     if (result >= 1)

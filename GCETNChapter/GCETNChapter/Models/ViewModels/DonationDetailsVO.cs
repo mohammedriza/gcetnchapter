@@ -39,7 +39,7 @@ namespace GCETNChapter.Models.ViewModels
         public decimal AmountPaid { get; set; }
 
         [Display(Name = "* Last Modified By")]
-        public string LastModifiedBy { get; set; }
+        public string ActionUser { get; set; }
 
     }
 }

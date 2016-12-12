@@ -8,6 +8,27 @@ namespace GCETNChapter.Models.DataAccess
 {
     public class MemberDA
     {
+        public LoginDetailsVO AuthenticateMember(string Username, string Password)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var loginDtls = new LoginDetailsVO();
+                var response = db.prcGetAuthenticationDetails(Username, Password).ToList();
+
+                if (response.Count >= 1)
+                {
+                    loginDtls.AccessRole = response.ElementAt(0).AccessRole;
+                    loginDtls.AccountStatus = response.ElementAt(0).AccountStatus;
+                    loginDtls.CollegeRegistrationNo = response.ElementAt(0).CollegeRegistrationNo;
+                    loginDtls.FullName = response.ElementAt(0).FullName;
+
+                    return loginDtls;
+                }
+                return null;
+            }
+        }
+
+
         public static List<string> GetCountryList()
         {
             var countryList = new List<string>();

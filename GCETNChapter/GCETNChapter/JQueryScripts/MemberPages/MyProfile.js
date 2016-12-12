@@ -2,80 +2,95 @@
     $('#divMyProfilePage').fadeIn(1000);
 })
 
-//-- Ajax Load Method to pull data from the controller, using the session["username"], to load the partial view --//
+//-- Ajax Load Method to pull data from the controller, using the username parsed to the controller, to load the partial view --//
 function GetProfileLoginAndPersonalInfo() {
+    var requestUser = $('#LblProfileOwnerUsername').text();
+
     $('#divLoginAndPersonalInfo').load('/MemberProfile/GetProfileLoginAndPersonalInfo/',
+        { RequestUser: requestUser },
         function (responseTxt, statusTxt, xhr) {
             if (statusTxt == 'success') {
                 //-- Call method to show Login and Personal Info panel and hide the others --//
                 ShowdivLoginAndPersonalInfo();
             }
             else if (statusTxt == 'error') {
-                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.');
                 //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
 
 
-//-- Ajax Load Method to pull data from the controller, using the session["username"], to load the partial view --//
+//-- Ajax Load Method to pull data from the controller, using the username parsed to the controller, to load the partial view --//
 function GetProfileContactInformation() {
+    var requestUser = $('#LblProfileOwnerUsername').text();
+
     $('#divContactInfo').load('/MemberProfile/GetProfileContactInformation/',
+        { RequestUser: requestUser },
         function (responseTxt, statusTxt, xhr) {
             if (statusTxt == 'success') {
                 //-- Call method to show Contact Information panel and hide the others --//
                 ShowdivContactInfo();
             }
             else if (statusTxt == 'error') {
-                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.');
                 //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
 
 
-//-- Ajax Load Method to pull data from the controller, using the session["username"], to load the partial view --//
+//-- Ajax Load Method to pull data from the controller, using the username parsed to the controller, to load the partial view --//
 function GetProfileAddressInformation() {
+    var requestUser = $('#LblProfileOwnerUsername').text();
+
     $('#divAddressInfo').load('/MemberProfile/GetProfileAddressInformation/',
+        { RequestUser: requestUser },
         function (responseTxt, statusTxt, xhr) {
             if (statusTxt == 'success') {
                 //-- Call method to show Contact Information panel and hide the others --//
                 ShowdivAddressInfo();
             }
             else if (statusTxt == 'error') {
-                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.');
                 //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
 
 
-//-- Ajax Load Method to pull data from the controller, using the session["username"], to load the partial view --//
+//-- Ajax Load Method to pull data from the controller, using the username parsed to the controller, to load the partial view --//
 function GetProfileCollegeInformation() {
+    var requestUser = $('#LblProfileOwnerUsername').text();
+
     $('#divCollegeInfo').load('/MemberProfile/GetProfileCollegeInformation/',
+        { RequestUser: requestUser },
         function (responseTxt, statusTxt, xhr) {
             if (statusTxt == 'success') {
                 //-- Call method to show Contact Information panel and hide the others --//
                 ShowdivCollegeInfo();
             }
             else if (statusTxt == 'error') {
-                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.');
                 //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
 }
 
 
-//-- Ajax Load Method to pull data from the controller, using the session["username"], to load the partial view --//
+//-- Ajax Load Method to pull data from the controller, using the username parsed to the controller, to load the partial view --//
 function GetProfileWorkplaceAndExpertiseInfo() {
+    var requestUser = $('#LblProfileOwnerUsername').text();
+
     $('#divWorkplaceAndExpertiseInfo').load('/MemberProfile/GetProfileWorkplaceAndExpertiseInfo/',
+        { RequestUser: requestUser },
         function (responseTxt, statusTxt, xhr) {
             if (statusTxt == 'success') {
                 //-- Call method to show Contact Information panel and hide the others --//
                 ShowdivWorkplaceAndExpertiseInfo();
             }
             else if (statusTxt == 'error') {
-                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf The issue still continues, please contact your systems administrator for assistance.');
+                GeneralWarningsAndErrorDialog('ERROR', 'Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.');
                 //alert('Failed to load data. Please try again later. \n\n Error Description : ' + xhr.status + ': ' + xhr.statusText);
             }
         });
@@ -100,11 +115,11 @@ function GetProfileWorkplaceAndExpertiseInfo() {
 
 
 function UpdatePersonalAndLoginInfo() {
+    var username = $('#TxtUsername').val();
     var fullName = $('#TxtFullName').val();
     var gender = $('#DDLGender').val();
     var dOB = $('#TxtDOB').val();
     var profileImg = $('#TxtProfileImage').val();
-    var username = $('#TxtUsername').val();
     var password = $('#TxtPassword').val();
     var confirmPassword = $('#TxtConfirmPassword').val();    
 
@@ -124,8 +139,7 @@ function UpdatePersonalAndLoginInfo() {
                 FullName: fullName,
                 Gender: gender,
                 DateOfBirth: dOB,
-                ProfileImage: profileImg,
-                LastModifiedBy: username
+                ProfileImage: profileImg
             },
             success: function (data, result) {
                 if (data == 'True')
@@ -142,7 +156,7 @@ function UpdatePersonalAndLoginInfo() {
 
 
 function UpdateProfileAddressInformation() {
-    var username = $('#TxtUsername').val();
+    var requestUser = $('#LblProfileOwnerUsername').text();
     var currentAddress = $('#TxtCurrentAddress').val();
     var currentCountry = $('#DDLCurrentCountry').val();
     var permanentAddress = $('#TxtPermanentAddress').val();
@@ -157,7 +171,7 @@ function UpdateProfileAddressInformation() {
             url: '/MemberProfile/UpdateProfileAddressInformation/',
             type: 'POST',
             data: {
-                Username: username,
+                Username: requestUser,
                 CurrentAddress: currentAddress,
                 CurrentCountry: currentCountry,
                 PermanentAddress: permanentAddress,
@@ -178,7 +192,7 @@ function UpdateProfileAddressInformation() {
 
 
 function UpdateProfileCollegeInformation() {
-    var username = $('#TxtUsername').val();
+    var requestUser = $('#LblProfileOwnerUsername').text();
     var collegeRegNo = $('#TxtCollegeRegNo').val();
     var batch = $('#DDLBatch').val();
     var branch = $('#DDLBranch').val();
@@ -195,7 +209,7 @@ function UpdateProfileCollegeInformation() {
             url: '/MemberProfile/UpdateProfileCollegeInformation/',
             type: 'POST',
             data: {
-                Username: username,
+                Username: requestUser,
                 CollegeRegistrationNo: collegeRegNo,
                 Batch: batch,
                 Branch: branch,
@@ -216,7 +230,7 @@ function UpdateProfileCollegeInformation() {
 
 
 function UpdateProfileContactInformation() {
-    var username = $('#TxtUsername').val();
+    var requestUser = $('#LblProfileOwnerUsername').text();
     var primaryContactNo = $('#TxtPrimaryContactNo').val();
     var contactNoIndia = $('#TxtContactNoIndia').val();
     var whatsappNumber = $('#TxtWhatsappNumber').val();
@@ -231,7 +245,7 @@ function UpdateProfileContactInformation() {
             url: '/MemberProfile/UpdateProfileContactInformation/',
             type: 'POST',
             data: {
-                Username: username,
+                Username: requestUser,
                 PrimaryContactNo: primaryContactNo,
                 ContactNoIndia: contactNoIndia,
                 WhatsappNumber: whatsappNumber,
@@ -251,7 +265,7 @@ function UpdateProfileContactInformation() {
 }
 
 function UpdateProfileWorkplaceAndExpertiseInfo() {
-    var username = $('#TxtUsername').val();
+    var requestUser = $('#LblProfileOwnerUsername').text();
     var company = $('#TxtCompany').val();
     var occupation = $('#TxtOccupation').val();
     var interests = $('#TxtInterests').val();
@@ -268,7 +282,7 @@ function UpdateProfileWorkplaceAndExpertiseInfo() {
             url: '/MemberProfile/UpdateProfileWorkplaceAndExpertiseInfo/',
             type: 'POST',
             data: {
-                Username: username,
+                Username: requestUser,
                 Company: company,
                 Occupation: occupation,
                 Interests: interests,

@@ -15,7 +15,7 @@ namespace GCETNChapter.Models.DataAccess
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
                 rowsEffected = db.prcAddUpdateDonationDetails(donationsVo.CollegeRegistrationNo, donationsVo.AmountPaid, donationsVo.PaymentReason, donationsVo.PaymentDate, 
-                                                                donationsVo.PaymentStartDate, donationsVo.PaymentEndDate, donationsVo.LastModifiedBy);
+                                                                donationsVo.PaymentStartDate, donationsVo.PaymentEndDate, donationsVo.ActionUser);
             }
             return rowsEffected;
         }

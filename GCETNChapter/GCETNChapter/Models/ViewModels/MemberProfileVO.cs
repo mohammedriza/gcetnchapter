@@ -134,5 +134,7 @@ namespace GCETNChapter.Models.ViewModels
         [Display(Name = "Interests")]
         [StringLength(150, ErrorMessage = "Interests cannot exceed 150 characters", MinimumLength = 0)]
         public string Interests { get; set; }
+
+        public string ActionUser { get; set; }
     }
 }

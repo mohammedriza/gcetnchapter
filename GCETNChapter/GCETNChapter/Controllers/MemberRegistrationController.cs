@@ -31,7 +31,7 @@ namespace GCETNChapter.Controllers
         public ActionResult Registration(MemberRegistrationVO MemberVO)
         {
             //Session Created for testing purpose
-            Session.Add("username", "SYSTEM");
+            //Session.Add("username", "SYSTEM");
 
             if (ModelState.IsValid)
             {
@@ -92,10 +92,29 @@ namespace GCETNChapter.Controllers
 
 
         [HttpPost]
-        public ActionResult Login(string Username, string Password)
+        public string Login(string Username, string Password)
         {
+            var result = new MemberDA().AuthenticateMember(Username, Password);
 
-            return View();
+            if (result == null)
+            {
+                return "Fail";
+            }
+            else
+            {
+                if (result.AccountStatus == "PENDING")
+                    return "Pending";
+                else if (result.AccountStatus == "INACTIVE")
+                    return "Inactive";
+                else if (result.AccountStatus == "ACTIVE")
+                {
+                    Session.Add("logininfo", result);
+                    Session.Add("username", Username);
+                    Session.Add("fullname", result.FullName);
+                    return "Pass";
+                }
+            }
+            return null;
         }
 
 

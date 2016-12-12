@@ -10,3 +10,32 @@
     $('#LnkMembers').removeClass('menuitemSelected');
     $('#LnkContactUs').removeClass('menuitemSelected');
 })
+
+
+function AuthenticateMember() {
+    var username = $('#txtUsername').val();
+    var password = $('#txtPassword').val();
+
+    if (username == '' || password == '')
+        alert('Username or Password cannot be blank.');
+    else {
+        $.post('/MemberRegistration/Login/',
+        {
+            Username: username,
+            Password: password
+        },
+        function (data, status) {
+            if (data == 'Pass' && status == 'success')
+                window.location.replace('/MemberProfile/MyProfile');
+            else if (data == 'Pending')
+                alert('Your account is still in pending status. You will be able to login once your account has been approved by the Trust group. Please contact the Trust for assistance.');
+            else if (data == 'Inactive')
+                alert('Your account has been deactivated. Please contact the Trust for assistance.');
+            else if (data == 'Fail' || status == 'error')
+                alert('Failed to authenticate. Please try make sure your username and password are correct.');
+            else
+                alert('An unexpected error had occured. Please try again later or contact the Trust for assistance.');
+
+        });
+    }
+}

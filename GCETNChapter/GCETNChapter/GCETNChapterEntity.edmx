@@ -20,6 +20,10 @@
         <Function Name="prcCheckIfUsernameExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcGetAuthenticationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcGetBranchList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetCountryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetGenderList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
@@ -223,6 +227,16 @@
             <Parameter Name="PaymentEndDate" Mode="In" Type="DateTime" />
             <Parameter Name="Username" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="prcAddContactUsDetails">
+            <Parameter Name="Name" Mode="In" Type="String" />
+            <Parameter Name="Email" Mode="In" Type="String" />
+            <Parameter Name="Summary" Mode="In" Type="String" />
+            <Parameter Name="Message" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetAuthenticationDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetAuthenticationDetails_Result)">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -270,6 +284,12 @@
           <Property Type="String" Name="Expertise3" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Expertise4" Nullable="true" MaxLength="50" />
           <Property Type="String" Name="Expertise5" Nullable="true" MaxLength="50" />
+        </ComplexType>
+        <ComplexType Name="prcGetAuthenticationDetails_Result">
+          <Property Type="String" Name="CollegeRegistrationNo" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="AccessRole" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="AccountStatus" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -366,6 +386,16 @@
           <FunctionImportMapping FunctionImportName="prcUpdateProfileContactInformation" FunctionName="GCE_TN_ChapterModel.Store.prcUpdateProfileContactInformation" />
           <FunctionImportMapping FunctionImportName="prcUpdateProfileWorkplaceAndExpertiseInfo" FunctionName="GCE_TN_ChapterModel.Store.prcUpdateProfileWorkplaceAndExpertiseInfo" />
           <FunctionImportMapping FunctionImportName="prcAddUpdateDonationDetails" FunctionName="GCE_TN_ChapterModel.Store.prcAddUpdateDonationDetails" />
+          <FunctionImportMapping FunctionImportName="prcGetAuthenticationDetails" FunctionName="GCE_TN_ChapterModel.Store.prcGetAuthenticationDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetAuthenticationDetails_Result">
+                <ScalarProperty Name="CollegeRegistrationNo" ColumnName="CollegeRegistrationNo" />
+                <ScalarProperty Name="AccessRole" ColumnName="AccessRole" />
+                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

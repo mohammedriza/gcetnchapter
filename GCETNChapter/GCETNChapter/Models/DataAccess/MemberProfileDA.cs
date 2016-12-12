@@ -8,57 +8,57 @@ namespace GCETNChapter.Models.DataAccess
 {
     public class MemberProfileDA
     {
-        public int UpdatePersonalAndLoginInfo(MemberProfileVO profileVo, string ModifiedBy)
+        public int UpdatePersonalAndLoginInfo(MemberProfileVO profileVo)
         {
             int rowsEffected = 0;
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
                 rowsEffected = db.prcUpdatePersonalAndLoginInfo(profileVo.Username, profileVo.Password, profileVo.FullName, 
-                                                                profileVo.Gender, profileVo.DateOfBirth, profileVo.ProfileImage, ModifiedBy);
+                                                                profileVo.Gender, profileVo.DateOfBirth, profileVo.ProfileImage, profileVo.ActionUser);
             }
             return rowsEffected;
         }
 
-        public int UpdateProfileCollegeInformation(MemberProfileVO profileVo, string ModifiedBy)
+        public int UpdateProfileCollegeInformation(MemberProfileVO profileVo)
         {
             int rowsEffected = 0;
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
                 rowsEffected = db.prcUpdateProfileCollegeInformation(profileVo.Username, profileVo.CollegeRegistrationNo, profileVo.Branch,
-                                                                profileVo.EngineeringDescipline, profileVo.Batch, ModifiedBy);
+                                                                profileVo.EngineeringDescipline, profileVo.Batch, profileVo.ActionUser);
             }
             return rowsEffected;
         }
 
-        public int UpdateProfileContactInformation(MemberProfileVO profileVo, string ModifiedBy)
+        public int UpdateProfileContactInformation(MemberProfileVO profileVo)
         {
             int rowsEffected = 0;
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
                 rowsEffected = db.prcUpdateProfileContactInformation(profileVo.Username, profileVo.PrimaryContactNo, profileVo.ContactNoIndia,
-                                                                profileVo.WhatsappNumber, profileVo.Email, ModifiedBy);
+                                                                profileVo.WhatsappNumber, profileVo.Email, profileVo.ActionUser);
             }
             return rowsEffected;
         }
 
-        public int UpdateProfileAddressInformation(MemberProfileVO profileVo, string ModifiedBy)
+        public int UpdateProfileAddressInformation(MemberProfileVO profileVo)
         {
             int rowsEffected = 0;
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
                 rowsEffected = db.prcUpdateProfileAddressInformation(profileVo.Username, profileVo.CurrentAddress, profileVo.CurrentCountry,
-                                                                profileVo.PermanentAddress, profileVo.PermanentCountry, ModifiedBy);
+                                                                profileVo.PermanentAddress, profileVo.PermanentCountry, profileVo.ActionUser);
             }
             return rowsEffected;
         }
 
-        public int UpdateProfileWorkplaceAndExpertiseInfo(MemberProfileVO profileVo, string ModifiedBy)
+        public int UpdateProfileWorkplaceAndExpertiseInfo(MemberProfileVO profileVo)
         {
             int rowsEffected = 0;
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
                 rowsEffected = db.prcUpdateProfileWorkplaceAndExpertiseInfo(profileVo.Username, profileVo.Company, profileVo.Occupation, profileVo.Interests, profileVo.Expertise1,
-                                                                profileVo.Expertise2, profileVo.Expertise3, profileVo.Expertise4, profileVo.Expertise5, ModifiedBy);
+                                                                profileVo.Expertise2, profileVo.Expertise3, profileVo.Expertise4, profileVo.Expertise5, profileVo.ActionUser);
             }
             return rowsEffected;
         }

@@ -115,7 +115,7 @@ namespace GCETNChapter.Models.DataAccess
                 rowsEffected = db.prcRegisterNewOrUpdateMember(RegDetails.Username, RegDetails.Password, RegDetails.CollegeRegistrationNo, RegDetails.FullName, RegDetails.Gender, RegDetails.DateOfBirth, 
                                                                 RegDetails.Branch, RegDetails.EngineeringDescipline, RegDetails.MemberJoinedDate, RegDetails.Batch, RegDetails.PrimaryContactNo,
                                                                 RegDetails.ContactNoIndia, RegDetails.WhatsappNumber, RegDetails.Email, RegDetails.PermanentAddress, RegDetails.PermanentCountry,
-                                                                RegDetails.CurrentAddress, RegDetails.CurrentCountry, RegDetails.ProfileImage, HttpContext.Current.Session["username"].ToString());
+                                                                RegDetails.CurrentAddress, RegDetails.CurrentCountry, RegDetails.ProfileImage, "");
             }
 
             return rowsEffected;

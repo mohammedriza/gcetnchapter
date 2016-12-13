@@ -1,13 +1,63 @@
 ﻿
 <!-- HEADER SECTION THAT WILL BE VISIBLE ONLY FOR MEMBERS ONCE LOGGED IN USING THEIR CREDENTIALS -->
 
-<div class="row headerSection">
-    <div class="col-md-3">
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="navbar-header col-md-2">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="~/Home/">
+                    <img src="~/Images/logo_home.png" class="img-responsive" />
+                </a>
+            </div>
+            <div class="collapse navbar-collapse col-md-6" id="myNavbar">
+                <ul class="nav navbar-nav navbar-right">
+                    <li id="LnkHome" class="menuitem">
+                        <a href="~/Home/">Events</a>
+                    </li>
+                    <li id="LnkAboutUs" class="menuitem">
+                        <a href="~/Donations/AddDonations">Donatoins</a>
+                    </li>
+                    <li id="LnkGallery" class="menuitem">
+                        <a href="~/Home/">Manage Access</a>
+                    </li>
+                    <li id="LnkEvents" class="menuitem">
+                        <a href="~/Home/">Advertisements</a>
+                    </li>
+                    <li id="LnkNews" class="menuitem">
+                        <a href="~/Home/">History</a>
+                    </li>
+                    <li id="LnkContactUs" class="menuitem">
+                        <a href="~/MemberProfile/MyProfile/">My Profile</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2 text-right">
+                <div class="col-md-12">
+                    <p id="LblWelcomeUserMsg">Welcome @Session["fullname"].ToString() <span class="glyphicon glyphicon-user" /></p>
+                </div>
+                <div class="col-md-12">
+                    <a href="~/MemberProfile/Logout/" id="LnkMemberLogout">Logout <span class="glyphicon glyphicon-log-out" /></a>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</nav>
+
+
+<div class="row headerSection hidden">
+    <div class="col-md-offset-1 col-md-2">
         <a href="~/Home/">
-            <img src="~/Images/logo_home.png" height="100" />
+            <img src="~/Images/logo_home.png" class="img-responsive" />
         </a>
     </div>
-    <div class="col-md-7 navbar-collapse collapse" style="vertical-align: bottom;">
+    <div class="col-md-6 col-sm-8 navbar-collapse collapse">
         <ul class="nav navbar-nav navbar-right">
             <li id="LnkHome" class="menuitem">
                 <a href="~/Home/">EVENTS</a>
@@ -29,8 +79,14 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-2 text-right" style="padding-top: 15px;">
-        <p id="LblWelcomeUserMsg">Welcome @Session["fullname"].ToString() <span class="glyphicon glyphicon-user" /></p>
-        <a href="~/MemberProfile/Logout/" id="LnkMemberLogout">Logout <span class="glyphicon glyphicon-log-out" /></a>
+    <div class="col-md-2 col-sm-4 text-right">
+        <div class="col-md-12"></div>
+        <div class="col-md-12">
+            <p id="LblWelcomeUserMsg">Welcome @Session["fullname"].ToString() <span class="glyphicon glyphicon-user" /></p>
+        </div>
+        <div class="col-md-12">
+            <a href="~/MemberProfile/Logout/" id="LnkMemberLogout">Logout <span class="glyphicon glyphicon-log-out" /></a>
+        </div>
     </div>
+    <div class="col-md-1"></div>
 </div>

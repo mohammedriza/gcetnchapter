@@ -1,7 +1,57 @@
 ﻿
 <!-- HEADER SECTION THAT WILL BE VISIBLE FOR GENERAL USERS -->
+<nav class="navbar navbar-default">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-1"></div>
+            <div class="navbar-header col-md-2">
+                <button type="button" class="navbar-toggle" data-toggle="collapse" data-target="#myNavbar">
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                    <span class="icon-bar"></span>
+                </button>
+                <a href="~/Home/">
+                    <img src="~/Images/logo_home.png" class="img-responsive" />
+                </a>
+            </div>
+            <div class="collapse navbar-collapse col-md-6" id="myNavbar">
+                <ul class="nav navbar-nav text-right">
+                    <li id="LnkHome" class="menuitem">
+                        <a href="~/Home/">Home</a>
+                    </li>
+                    <li id="LnkAboutUs" class="menuitem">
+                        <a href="~/Home/AboutUs">About Us</a>
+                    </li>
+                    <li id="LnkGallery" class="menuitem">
+                        <a href="~/Home/">Gallery</a>
+                    </li>
+                    <li id="LnkEvents" class="menuitem">
+                        <a href="~/Home/">Events</a>
+                    </li>
+                    <li id="LnkNews" class="menuitem">
+                        <a href="~/Home/">News</a>
+                    </li>
+                    <li id="LnkContactUs" class="menuitem">
+                        <a href="~/Home/ContactForm/">Contact Us</a>
+                    </li>
+                </ul>
+            </div>
+            <div class="col-md-2 text-right">
+                <div class="col-md-12"></div>
+                <div class="col-md-12">
+                    <p id="LblWelcomeUserMsg">Welcome Guest <span class="glyphicon glyphicon-user" /></p>
+                </div>
+                <div class="col-md-12">
+                    <a href="~/MemberRegistration/Login/" id="LnkMemberLogin">Register / Member Login <span class="glyphicon glyphicon-log-in" /></a>
+                </div>
+            </div>
+            <div class="col-md-1"></div>
+        </div>
+    </div>
+</nav>
 
-<div class="row headerSection">
+
+<div class="row headerSection hidden">
 
     <div class="col-md-3">
         <a href="~/Home/">
@@ -30,9 +80,13 @@
             </li>
         </ul>
     </div>
-    <div class="col-md-2 text-right" style="padding-top: 15px;">
-        <p id="LblWelcomeUserMsg">Welcome Guest <span class="glyphicon glyphicon-user" /></p>
-        <a href="~/MemberRegistration/Login/" id="LnkMemberLogin">Register / Member Login <span class="glyphicon glyphicon-log-in" /></a> <br />
-        <a href="~/MemberProfile/MyProfile/" id="LnkMyProfile">My Profile</a>
+    <div class="col-md-2 text-right">
+        <div class="col-md-12"></div>
+        <div class="col-md-12">
+            <p id="LblWelcomeUserMsg">Welcome Guest <span class="glyphicon glyphicon-user" /></p>
+        </div>
+        <div class="col-md-12">
+            <a href="~/MemberRegistration/Login/" id="LnkMemberLogin">Register / Member Login <span class="glyphicon glyphicon-log-in" /></a>
+        </div>
     </div>
 </div>

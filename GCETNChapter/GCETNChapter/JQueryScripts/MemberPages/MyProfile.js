@@ -124,11 +124,11 @@ function UpdatePersonalAndLoginInfo() {
     var confirmPassword = $('#TxtConfirmPassword').val();    
 
     if (password != confirmPassword)
-        alert('Password and Confirm Password should be match.');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Password and Confirm Password should be match.');
     else if (fullName == '' || dOB == '' || password == '' || confirmPassword == '')
-        alert('Please make sure all mandatory fields are filled with data.');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please make sure all mandatory fields are filled with data.');
     else if (gender == '-- Select Gender --')
-        alert('Please select a valid Gender');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please select a valid Gender');
     else {
         $.ajax({
             url: '/MemberProfile/UpdatePersonalAndLoginInfo/',
@@ -163,9 +163,9 @@ function UpdateProfileAddressInformation() {
     var permanentCountry = $('#DDLPermanentCountry').val();
 
     if (currentAddress == '' || permanentAddress == '')
-        alert('Please fill in both Current and Permanent Address fields.');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please fill in both Current and Permanent Address fields.');
     else if (currentCountry == '-- Select Country --' || permanentCountry == '-- Select Country --')
-        alert('Please select a valid Country');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please select a valid Country.');
     else {
         $.ajax({
             url: '/MemberProfile/UpdateProfileAddressInformation/',
@@ -199,11 +199,11 @@ function UpdateProfileCollegeInformation() {
     var engDescipline = $('#TxtEngDescipline').val();
 
     if (collegeRegNo == '')
-        alert('Please enter a valid College Registration Number.');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please enter a valid College Registration Number.');
     else if (batch == '-- Select Batch --')
-        alert('Please select a valid Batch');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please select a valid Batch.');
     else if (branch == '-- Select Branch --')
-        alert('Please select a valid Branch');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please select a valid Branch.');
     else {
         $.ajax({
             url: '/MemberProfile/UpdateProfileCollegeInformation/',
@@ -237,9 +237,9 @@ function UpdateProfileContactInformation() {
     var email = $('#TxtEmail').val();
 
     if (primaryContactNo == '' || email == '')
-        alert('Please make sure all mandatory fields are filled with data.');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please make sure all mandatory fields are filled with data.');
     else if (!isValidEmailAddress(email))
-        alert('Please enter a valid email address.');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please enter a valid email address.');
     else {
         $.ajax({
             url: '/MemberProfile/UpdateProfileContactInformation/',
@@ -276,7 +276,7 @@ function UpdateProfileWorkplaceAndExpertiseInfo() {
     var expertise5 = $('#TxtExpertise5').val();
 
     if (company == '')
-        alert('Please enter your Company Name to continue.');
+        GeneralWarningsAndErrorDialog('ALERT...', 'Please enter your Company Name to continue.');
     else {
         $.ajax({
             url: '/MemberProfile/UpdateProfileWorkplaceAndExpertiseInfo/',

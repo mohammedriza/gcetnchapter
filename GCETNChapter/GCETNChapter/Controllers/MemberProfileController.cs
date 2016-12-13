@@ -179,6 +179,9 @@ namespace GCETNChapter.Controllers
         public ActionResult Logout()
         {
             Session.Remove("username");
+            Session.Remove("fullname");
+            Session.Remove("logininfo");
+
             return View();
         }
 

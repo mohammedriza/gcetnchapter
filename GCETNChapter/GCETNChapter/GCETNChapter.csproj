@@ -471,9 +471,11 @@
     <Content Include="Images\FooterIcons\Contact.png" />
     <Content Include="Images\FooterIcons\Copyright.png" />
     <Content Include="Images\FooterIcons\facebook.png" />
+    <Content Include="Images\FooterIcons\FollowUs.png" />
     <Content Include="Images\FooterIcons\googleplus.png" />
     <Content Include="Images\FooterIcons\twitter.png" />
     <Content Include="Images\FooterIcons\Visit.png" />
+    <Content Include="Images\FooterIcons\Whatsapp.png" />
     <Content Include="Images\LoginBackground.jpg" />
     <Content Include="Images\logo_home.png" />
     <Content Include="Images\logo_mini.png" />
@@ -488,7 +490,6 @@
     <Content Include="JQueryScripts\HomePage.js" />
     <Content Include="JQueryScripts\LoginPage.js" />
     <Content Include="JQueryScripts\MemberPages\AddDonations.js" />
-    <Content Include="JQueryScripts\MemberPages\Login.js" />
     <Content Include="JQueryScripts\MemberPages\MyProfile.js" />
     <Content Include="JQueryScripts\RegistrationPage.js" />
     <Content Include="Scripts\bootstrap.js" />

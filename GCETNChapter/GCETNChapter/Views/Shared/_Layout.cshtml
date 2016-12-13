@@ -28,7 +28,6 @@
                 @Html.Partial("_MemberHeaderSection")
             }            
         </div>
-        <hr />
 
         <div class="bodySection" style="min-height: 600px">
             @RenderBody()
@@ -49,20 +48,20 @@
 
 
     <!-- MODAL POPUP FOR GENERAL WARNINGS AND ERRORS -->
-    <div id="GeneralWarningAndErrorModal" class="modal fade" role="dialog">
+    <div id="GeneralWarningAndErrorModal" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog">
 
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <span id="GeneralModalHeaderText" class="modal-title"> <!-- Dynamic Content Passed via Jquery Code --></span>
+                    <span id="GeneralModalHeaderText" class="modal-title text-info" style="font-weight: bold;"> <!-- Dynamic Content Passed via Jquery Code --></span>
                 </div>
                 <div class="modal-body">
                     <span id="GeneralModalBodyText" class="control-label"> <!-- Dynamic Content Passed via Jquery Code --></span>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-default" data-dismiss="modal">O K</button>
+                    <button type="button" class="btn btn-default" data-dismiss="modal">OK</button>
                 </div>
             </div>
 

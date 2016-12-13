@@ -34,8 +34,8 @@ textarea {
 
 .headerSection{
     padding-bottom: 0px;
-    padding-left: 100px;
-    padding-right: 100px;
+//    padding-left: 100px;
+//    padding-right: 100px;
     background-color: #ffffff;
     position: inherit;
     display: block;
@@ -63,8 +63,8 @@ textarea {
 .footerSection{
     padding-top: 20px;
     padding-bottom: 50px;
-    padding-left: 180px;
-    padding-right: 180px;
+//    padding-left: 180px;
+//    padding-right: 180px;
     background-color: #333;
     color: #ffffff;
     width: 100%;
@@ -96,8 +96,9 @@ textarea {
     font-weight: bold;
     color: #000000;
     text-decoration: none;
-    padding: 15px;
+    padding: 5px;
     vertical-align: bottom;
+    text-align: right;
 }
 
     .menuitem:hover {
@@ -159,28 +160,6 @@ textarea {
     padding: 15px;
     font-weight: normal;
     border-radius: 10px;
-}
-
-.aboutUsHeaderLinks{
-    font-family: Verdana;
-    font-size: 16px;
-    color: #000;
-    background: #eae5e5;
-    padding: 15px;
-    font-weight: normal;
-    border-radius: 10px;
-    text-decoration: none;
-    width: 100%;
-}
-
-.aboutUsHeaderLinks:hover{
-    color: #fff;
-    background: #000;
-    padding: 15px;
-    font-weight: normal;
-    border-radius: 10px;
-    text-decoration: none;
-    width: 100%;
 }
 
 .dropdownstyle {

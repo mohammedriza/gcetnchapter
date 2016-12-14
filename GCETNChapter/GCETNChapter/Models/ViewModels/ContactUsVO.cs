@@ -19,7 +19,7 @@ namespace GCETNChapter.Models.ViewModels
         [StringLength(50, ErrorMessage = "Email should not exceed 50 characters", MinimumLength = 1)]
         public string Email { get; set; }
 
-        [Display(Name = "* A Quick Summary")]
+        [Display(Name = "* Summary")]
         [Required(ErrorMessage = "Please enter quick Summary for your message.")]
         [StringLength(150, ErrorMessage = "Summary should not exceed 150 characters", MinimumLength = 1)]
         public string Summary { get; set; }

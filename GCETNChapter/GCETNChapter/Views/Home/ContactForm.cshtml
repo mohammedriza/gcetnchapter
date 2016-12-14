@@ -11,44 +11,45 @@
 
     <div id="divContactUsPage" class="hideDiv partialBodySection">
         <span class="headerText">Contact Us</span>
-        <br /><br /><br />
+        <hr />
+        <br /><br />
 
         <div class="col-md-8">
             <div class="row form-group">
-                <div class="col-md-3 formlabelFontRight">
+                <div class="col-md-2 formlabelFontRight">
                     @Html.LabelFor(model => model.Name)
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "textboxerror" })
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-md-3 formlabelFontRight">
+                <div class="col-md-2 formlabelFontRight">
                     @Html.LabelFor(model => model.Email)
                 </div>
-                <div class="col-md-9 ">
+                <div class="col-md-10 ">
                     @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "textboxerror" })
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-md-3 formlabelFontRight">
+                <div class="col-md-2 formlabelFontRight">
                     @Html.LabelFor(model => model.Summary)
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control" } })
                     @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "textboxerror" })
                 </div>
             </div>
 
             <div class="row form-group">
-                <div class="col-md-3 formlabelFontRight">
+                <div class="col-md-2 formlabelFontRight">
                     @Html.LabelFor(model => model.Messaage)
                 </div>
-                <div class="col-md-9">
+                <div class="col-md-10">
                     @Html.TextAreaFor(model => model.Messaage, 5, 100, new { htmlAttributes = new { @class = "longtextbox" } }) <br />
                     @Html.ValidationMessageFor(model => model.Messaage, "", new { @class = "textboxerror" })
                 </div>
@@ -56,7 +57,7 @@
 
 
             <div class="form-group">
-                <div class="col-md-offset-3 col-md-9">
+                <div class="col-md-offset-2 col-md-10">
                     <input type="submit" value="Submit Form" class="btn btn-primary" />
                 </div>
             </div>

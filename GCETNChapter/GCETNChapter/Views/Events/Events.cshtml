@@ -1,0 +1,71 @@
+﻿<script src="~/JQueryScripts/Events/EventsPage.js"></script>
+
+@{
+    ViewBag.Title = "Events";
+}
+
+<div id="divEventsPage" class="partialBodySection hideDiv">
+    <div class="row">
+        <div class="col-md-2 text-center">
+            <a href="#" id="LnkViewAllEvents">
+                <p class="well well-sm">
+                    View All Events
+                </p>
+            </a>
+        </div>
+
+        <div class="col-md-2 text-center">
+            <a href="#" id="LnkAddEvent" onclick="GetAddEventPartialView();">
+                <p class="well well-sm">
+                    Add an Event
+                </p>
+            </a>
+        </div>
+
+        <div class="col-md-2 text-center">
+            <a href="#" id="LnkAddEventPaymentCollection">
+                <p class="well well-sm">
+                    Add Event Payment Collections
+                </p>
+            </a>
+        </div>
+
+        <div class="col-md-2 text-center">
+            <a href="#" id="LnkAddEventExpenseDetails">
+                <p class="well well-sm">
+                    Add Event Expense Details
+                </p>
+            </a>
+        </div>
+
+        <div class="col-md-2 text-center">
+            <a href="#" id="LnkManageEventGallery">
+                <p class="well well-sm">
+                    Manage Event Gallery
+                </p>
+            </a>
+        </div>
+    </div>
+
+    <hr />
+    <div id="divViewAllEvents" class="hideDiv">
+        @Html.Partial("Events/_AddEvents")
+    </div>
+
+    <div id="divAddEvent" class="hideDiv">
+        @Html.Partial("Events/_AddEvents")
+    </div>
+
+    <div id="divAddEventPaymentCollection" class="hideDiv">
+        @Html.Partial("Events/_AddEvents")
+    </div>
+
+    <div id="divAddEventExpenseDetails" class="hideDiv">
+        @Html.Partial("Events/_AddEvents")
+    </div>
+
+    <div id="divManageEventGallery" class="hideDiv">
+        @Html.Partial("Events/_AddEvents")
+    </div>
+</div>
+

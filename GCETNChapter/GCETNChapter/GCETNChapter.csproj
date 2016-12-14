@@ -198,6 +198,7 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\DonationsController.cs" />
+    <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberProfileController.cs" />
     <Compile Include="Controllers\MemberRegistrationController.cs" />
@@ -220,6 +221,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataAccess\DonationDetailsDA.cs" />
+    <Compile Include="Models\DataAccess\GeneralFunctionsDA.cs" />
     <Compile Include="Models\DataAccess\HomeDA.cs" />
     <Compile Include="Models\DataAccess\MemberDA.cs" />
     <Compile Include="Models\DataAccess\MemberProfileDA.cs" />
@@ -480,12 +482,16 @@
     <Content Include="Images\logo_home.png" />
     <Content Include="Images\logo_mini.png" />
     <Content Include="Images\MessageSent.png" />
+    <Content Include="Images\OtherPages\AboutUsGroupImg.png" />
+    <Content Include="Images\OtherPages\Founder.png" />
     <Content Include="Images\Scrolling\Image1.jpg" />
     <Content Include="Images\Scrolling\Image2.jpg" />
     <Content Include="Images\Scrolling\Image3.jpg" />
     <Content Include="Images\Scrolling\Image4.jpg" />
     <Content Include="JQueryScripts\AboutUsPage.js" />
     <Content Include="JQueryScripts\ContactUsPage.js" />
+    <Content Include="JQueryScripts\Events\AddEvents.js" />
+    <Content Include="JQueryScripts\Events\EventsPage.js" />
     <Content Include="JQueryScripts\GeneralScripts.js" />
     <Content Include="JQueryScripts\HomePage.js" />
     <Content Include="JQueryScripts\LoginPage.js" />
@@ -637,6 +643,11 @@
     <Content Include="Views\Shared\_ReusableModalPopup.cshtml" />
     <Content Include="Views\Donations\AddDonations.cshtml" />
     <Content Include="Views\Home\MessageSent.cshtml" />
+    <Content Include="Views\Events\AddEvents.cshtml" />
+    <Content Include="Views\Events\AddEventExpenseDetails.cshtml" />
+    <Content Include="Views\Events\AddEventPaymentCollection.cshtml" />
+    <Content Include="Views\Events\Events.cshtml" />
+    <Content Include="Views\Shared\Events\_AddEvents.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

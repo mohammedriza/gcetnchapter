@@ -1,5 +1,6 @@
 ﻿$(function () {
     $('#divAboutUsPage').fadeIn(1000);
+    $('#divGceTnTrust').fadeIn(1000);
 
     //-- Update Selected Link Style to "About Us" link (Underline) --//
     $('#LnkHome').removeClass('menuitemSelected');

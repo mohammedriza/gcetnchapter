@@ -11,7 +11,7 @@ namespace GCETNChapter.Controllers
     public class MemberProfileController : Controller
     {
         private void GetDropdownListDataForRegistrationPage()
-        {
+        {            
             ViewBag.GenderList = MemberDA.GetGenderList();
             ViewBag.CountryList = MemberDA.GetCountryList();
             ViewBag.BranchList = MemberDA.GetBranchList();

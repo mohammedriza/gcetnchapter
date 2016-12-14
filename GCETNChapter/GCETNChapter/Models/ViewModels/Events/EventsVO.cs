@@ -15,10 +15,16 @@ namespace GCETNChapter.Models.ViewModels.Events
         public string EventName { get; set; }
 
         [Display(Name = "* Start Date")]
-        public DateTime StartDate { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Please enter a valid Start Date.")]
+        [Required(ErrorMessage = "Please select the Start Date.")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
+        public DateTime? StartDate { get; set; }
 
         [Display(Name = "* End Date")]
-        public DateTime EndDate { get; set; }
+        [DataType(DataType.Date, ErrorMessage = "Please enter a valid End Date.")]
+        [Required(ErrorMessage = "Please select the End Date.")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
+        public DateTime? EndDate { get; set; }
 
         [Display(Name = "Total Collected Amount")]
         public decimal TotalCollectedAmount { get; set; }

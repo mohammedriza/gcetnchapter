@@ -221,6 +221,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataAccess\DonationDetailsDA.cs" />
+    <Compile Include="Models\DataAccess\EventsDA.cs" />
     <Compile Include="Models\DataAccess\GeneralFunctionsDA.cs" />
     <Compile Include="Models\DataAccess\HomeDA.cs" />
     <Compile Include="Models\DataAccess\MemberDA.cs" />
@@ -241,6 +242,9 @@
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="prcGetCountryList_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetEventDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="prcGetGenderList_Result.cs">
@@ -643,11 +647,12 @@
     <Content Include="Views\Shared\_ReusableModalPopup.cshtml" />
     <Content Include="Views\Donations\AddDonations.cshtml" />
     <Content Include="Views\Home\MessageSent.cshtml" />
-    <Content Include="Views\Events\AddEvents.cshtml" />
-    <Content Include="Views\Events\AddEventExpenseDetails.cshtml" />
-    <Content Include="Views\Events\AddEventPaymentCollection.cshtml" />
     <Content Include="Views\Events\Events.cshtml" />
     <Content Include="Views\Shared\Events\_AddEvents.cshtml" />
+    <Content Include="Views\Shared\Events\_AddEventPaymentCollection.cshtml" />
+    <Content Include="Views\Shared\Events\_AddEventExpenseDetails.cshtml" />
+    <Content Include="Views\Shared\Events\_ViewEvents.cshtml" />
+    <Content Include="Views\Shared\Events\_ViewEventPaymentCollection.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

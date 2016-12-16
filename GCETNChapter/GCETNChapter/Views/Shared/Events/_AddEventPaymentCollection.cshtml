@@ -1,21 +1,16 @@
 ﻿@model GCETNChapter.Models.ViewModels.Events.EventPaymentCollectionVO
 
-@{
-    ViewBag.Title = "AddEventPaymentCollection";
-}
-
-<h2>AddEventPaymentCollection</h2>
-
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
-    
+
+    <span id="LblDonatoinsHeaderText" class="headerText">Add Event Payment Collections</span>
+        <br /><br /><br />
+
     <div class="form-horizontal">
-        <h4>EventPaymentCollectionVO</h4>
-        <hr />
-        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
         <div class="form-group">
-            @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.EventID, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.EventID, "", new { @class = "text-danger" })
@@ -23,7 +18,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CollegeRegistrationNo, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CollegeRegistrationNo, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.CollegeRegistrationNo, "", new { @class = "text-danger" })
@@ -31,7 +26,7 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
                 @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "form-control" } })
                 @Html.ValidationMessageFor(model => model.PaymentDate, "", new { @class = "text-danger" })
@@ -39,18 +34,18 @@
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.AomuntReceived, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.AmountReceived, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AomuntReceived, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AomuntReceived, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.AmountReceived, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.AmountReceived, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ActionUser, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ActionUser, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ActionUser, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
             </div>
         </div>
 

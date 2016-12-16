@@ -1,72 +1,76 @@
 ﻿@model GCETNChapter.Models.ViewModels.Events.EventsVO
 
-@using (Html.BeginForm()) 
+@using (Html.BeginForm("AddEvents", "Events", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
 
-    <span id="LblDonatoinsHeaderText" class="headerText">Add an Event</span>
-        <br /><br /><br />
-
-
     <div class="form-horizontal">
+        <span id="LblDonatoinsHeaderText_AE" class="headerText">Add New Event</span>
+        <br /><br />
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10 normalFontLeft">
-                @Html.DisplayFor(model => model.EventID, new { htmlAttributes = new { @class = "normalFontLeft", id = "LblEventID" } })
-            </div>
+        <div>
+            <a href="#" id="LnkBackToALlEvents_AE"><span class="glyphicon glyphicon-list"></span> Back to All Events</a>
         </div>
 
+        @if (Model != null)
+        {
+            if (Model.EventID >= 1)
+            {
+            <div class="form-group">
+                @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                <div id="LblEventID" class="col-md-10 normalFontLeft">
+                    @Html.DisplayFor(model => model.EventID)
+                </div>
+            </div>
+            }
+        }
+
         <div class="form-group">
-            @Html.LabelFor(model => model.EventName, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EventName, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control" } })
+                @Html.EditorFor(model => model.EventName, new { htmlAttributes = new { @class = "form-control", id = "TxtEventName" } })
                 @Html.ValidationMessageFor(model => model.EventName, "", new { @class = "text-danger" })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.StartDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", id = "TxtStartDate" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EndDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", id = "TxtEndDate" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TotalCollectedAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TotalCollectedAmount, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalCollectedAmount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalCollectedAmount, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TotalCollectedAmount, new { htmlAttributes = new { @class = "form-control", id = "TxtTotalCollectedAmount" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.TotalExpenseAmount, htmlAttributes: new { @class = "control-label col-md-2" })
+            @Html.LabelFor(model => model.TotalExpenseAmount, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.TotalExpenseAmount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.TotalExpenseAmount, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.TotalExpenseAmount, new { htmlAttributes = new { @class = "form-control", id = "TxtTotalExpenseAmount" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "control-label col-md-2" })
-            <div class="col-md-10 normalFontLeft">
-                @Html.DisplayFor(model => model.CreatedBy, new { htmlAttributes = new { id = "LblEventCreatedBy" } })
+            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+            <div id = "LblEventCreatedBy" class="col-md-10 normalFontLeft">
+                @Html.DisplayTextFor(model => model.CreatedBy)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-primary" />
+                <input id="btnSaveAddEvent_AE" type="button" value="Create Event" class="btn btn-primary" />
             </div>
         </div>
     </div>

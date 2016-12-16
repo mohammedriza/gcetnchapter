@@ -7,39 +7,31 @@
 <div id="divEventsPage" class="partialBodySection hideDiv">
     <div class="row">
         <div class="col-md-2 text-center">
-            <a href="#" id="LnkViewAllEvents">
+            <a href="#" id="LnkManageEvents_E">
                 <p class="well well-sm">
-                    View All Events
+                    Manage Events
                 </p>
             </a>
         </div>
 
         <div class="col-md-2 text-center">
-            <a href="#" id="LnkAddEvent" onclick="GetAddEventPartialView();">
+            <a href="#" id="LnkManageEventPaymentCollection_E">
                 <p class="well well-sm">
-                    Add an Event
+                    Manage Event Payment Collections
                 </p>
             </a>
         </div>
 
         <div class="col-md-2 text-center">
-            <a href="#" id="LnkAddEventPaymentCollection">
+            <a href="#" id="LnkManageEventExpenseDetails_E">
                 <p class="well well-sm">
-                    Add Event Payment Collections
+                    Manage Event Expense Details
                 </p>
             </a>
         </div>
 
         <div class="col-md-2 text-center">
-            <a href="#" id="LnkAddEventExpenseDetails">
-                <p class="well well-sm">
-                    Add Event Expense Details
-                </p>
-            </a>
-        </div>
-
-        <div class="col-md-2 text-center">
-            <a href="#" id="LnkManageEventGallery">
+            <a href="#" id="LnkManageEventGallery_E">
                 <p class="well well-sm">
                     Manage Event Gallery
                 </p>
@@ -48,24 +40,28 @@
     </div>
 
     <hr />
-    <div id="divViewAllEvents" class="hideDiv">
-        @Html.Partial("Events/_AddEvents")
-    </div>
 
+
+    <div id="divTableViewEvents" class="hideDiv">
+        @Html.Partial("Events/_ViewEvents")
+    </div>
     <div id="divAddEvent" class="hideDiv">
         @Html.Partial("Events/_AddEvents")
     </div>
 
+    <div id="divTableEventPaymentCollection" class="hideDiv">
+        @Html.Partial("Events/_AddEventPaymentCollection")
+    </div>
     <div id="divAddEventPaymentCollection" class="hideDiv">
-        @Html.Partial("Events/_AddEvents")
+        @Html.Partial("Events/_AddEventPaymentCollection")
     </div>
 
     <div id="divAddEventExpenseDetails" class="hideDiv">
-        @Html.Partial("Events/_AddEvents")
+        @Html.Partial("Events/_AddEventExpenseDetails")
     </div>
 
     <div id="divManageEventGallery" class="hideDiv">
-        @Html.Partial("Events/_AddEvents")
+        @*@Html.Partial("Events/_AddEvents")*@
     </div>
 </div>
 

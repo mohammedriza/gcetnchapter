@@ -311,49 +311,49 @@ function UpdateProfileWorkplaceAndExpertiseInfo() {
 
 function ShowdivLoginAndPersonalInfo()
 {
-    $('#divLoginAndPersonalInfo').show('clip');
-    $('#divWelcomeMessage').hide('clip');
-    $('#divContactInfo').hide('clip');
-    $('#divCollegeInfo').hide('clip');
-    $('#divAddressInfo').hide('clip');
-    $('#divWorkplaceAndExpertiseInfo').hide('clip');
+    $('#divLoginAndPersonalInfo').fadeIn(1000);
+    $('#divWelcomeMessage').hide();
+    $('#divContactInfo').hide();
+    $('#divCollegeInfo').hide();
+    $('#divAddressInfo').hide();
+    $('#divWorkplaceAndExpertiseInfo').hide();
 }
 
 function ShowdivContactInfo()
 {
-    $('#divContactInfo').show('clip');
-    $('#divWelcomeMessage').hide('clip');
-    $('#divLoginAndPersonalInfo').hide('clip');
-    $('#divCollegeInfo').hide('clip');
-    $('#divAddressInfo').hide('clip');
-    $('#divWorkplaceAndExpertiseInfo').hide('clip');
+    $('#divContactInfo').fadeIn(1000);
+    $('#divWelcomeMessage').hide();
+    $('#divLoginAndPersonalInfo').hide();
+    $('#divCollegeInfo').hide();
+    $('#divAddressInfo').hide();
+    $('#divWorkplaceAndExpertiseInfo').hide();
 }
 
 function ShowdivCollegeInfo() {
-    $('#divCollegeInfo').show('clip');
-    $('#divWelcomeMessage').hide('clip');
-    $('#divLoginAndPersonalInfo').hide('clip');
-    $('#divContactInfo').hide('clip');
-    $('#divAddressInfo').hide('clip');
-    $('#divWorkplaceAndExpertiseInfo').hide('clip');
+    $('#divCollegeInfo').fadeIn(1000);
+    $('#divWelcomeMessage').hide();
+    $('#divLoginAndPersonalInfo').hide();
+    $('#divContactInfo').hide();
+    $('#divAddressInfo').hide();
+    $('#divWorkplaceAndExpertiseInfo').hide();
 }
 
 function ShowdivAddressInfo() {
-    $('#divAddressInfo').show('clip');
-    $('#divWelcomeMessage').hide('clip');
-    $('#divLoginAndPersonalInfo').hide('clip');
-    $('#divContactInfo').hide('clip');
-    $('#divCollegeInfo').hide('clip');
-    $('#divWorkplaceAndExpertiseInfo').hide('clip');
+    $('#divAddressInfo').fadeIn(1000);
+    $('#divWelcomeMessage').hide();
+    $('#divLoginAndPersonalInfo').hide();
+    $('#divContactInfo').hide();
+    $('#divCollegeInfo').hide();
+    $('#divWorkplaceAndExpertiseInfo').hide();
 }
 
 function ShowdivWorkplaceAndExpertiseInfo() {
-    $('#divWorkplaceAndExpertiseInfo').show('clip');
-    $('#divContactInfo').hide('clip');
-    $('#divWelcomeMessage').hide('clip');
-    $('#divLoginAndPersonalInfo').hide('clip');
-    $('#divCollegeInfo').hide('clip');
-    $('#divAddressInfo').hide('clip');
+    $('#divWorkplaceAndExpertiseInfo').fadeIn(1000);
+    $('#divContactInfo').hide();
+    $('#divWelcomeMessage').hide();
+    $('#divLoginAndPersonalInfo').hide();
+    $('#divCollegeInfo').hide();
+    $('#divAddressInfo').hide();
 }
 
 

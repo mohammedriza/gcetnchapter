@@ -443,5 +443,52 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetAuthenticationDetails_Result>("prcGetAuthenticationDetails", usernameParameter, passwordParameter);
         }
+    
+        public virtual int prcAddNewEvent(Nullable<int> eventID, string eventName, Nullable<System.DateTime> startDate, Nullable<System.DateTime> endDate, Nullable<decimal> totalCollectedAmount, Nullable<decimal> totalExpenseAmount, string username)
+        {
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            var eventNameParameter = eventName != null ?
+                new ObjectParameter("EventName", eventName) :
+                new ObjectParameter("EventName", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var endDateParameter = endDate.HasValue ?
+                new ObjectParameter("EndDate", endDate) :
+                new ObjectParameter("EndDate", typeof(System.DateTime));
+    
+            var totalCollectedAmountParameter = totalCollectedAmount.HasValue ?
+                new ObjectParameter("TotalCollectedAmount", totalCollectedAmount) :
+                new ObjectParameter("TotalCollectedAmount", typeof(decimal));
+    
+            var totalExpenseAmountParameter = totalExpenseAmount.HasValue ?
+                new ObjectParameter("TotalExpenseAmount", totalExpenseAmount) :
+                new ObjectParameter("TotalExpenseAmount", typeof(decimal));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddNewEvent", eventIDParameter, eventNameParameter, startDateParameter, endDateParameter, totalCollectedAmountParameter, totalExpenseAmountParameter, usernameParameter);
+        }
+    
+        public virtual ObjectResult<prcGetEventDetails_Result> prcGetEventDetails(Nullable<int> eventID)
+        {
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetEventDetails_Result>("prcGetEventDetails", eventIDParameter);
+        }
+    
+        public virtual ObjectResult<Nullable<int>> prcGetNewEventID()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("prcGetNewEventID");
+        }
     }
 }

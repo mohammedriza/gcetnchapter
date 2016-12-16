@@ -8,6 +8,9 @@ namespace GCETNChapter.Models.ViewModels.Events
 {
     public class EventPaymentCollectionVO
     {
+        [Display(Name = "Payment ID")]
+        public int PaymentCollectionID { get; set; }
+
         [Display(Name = "Event ID")]
         public int EventID { get; set; }
 
@@ -18,9 +21,16 @@ namespace GCETNChapter.Models.ViewModels.Events
         public DateTime PaymentDate { get; set; }
 
         [Display(Name = "* Aomunt Received")]
-        public decimal AomuntReceived { get; set; }
+        public decimal AmountReceived { get; set; }
 
-        [Display(Name = "ActionUser")]
-        public string ActionUser { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ModifiedDate { get; set; }
     }
 }

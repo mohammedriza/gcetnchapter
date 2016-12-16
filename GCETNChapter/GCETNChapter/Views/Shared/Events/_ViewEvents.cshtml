@@ -1,0 +1,56 @@
+﻿@model List<GCETNChapter.Models.ViewModels.Events.EventsVO>
+
+<span id="LblHeaderText_VE" class="headerText">Manage Events</span>
+<br /><br />
+
+<div>
+    <a href="#" id="LnkAddNewEvent_VE"><span class="glyphicon glyphicon-plus"></span> New Event</a>
+</div>
+<br />
+
+<div class="row">
+    <table id="TblViewEvents" class="table table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Event ID</th>
+                <th>Event Name</th>
+                <th>Start Date</th>
+                <th>End Date</th>
+                <th>Total Collected (Rs.)</th>
+                <th>Total Expenses (Rs.)</th>
+                <th>Created By</th>
+                <th>Created Date</th>
+                <th>Modified By</th>
+                <th>Modified Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                <tr>
+                    <td>
+                        <a href="#" onclick="GetAddEventPartialView(@item.EventID)"><span class="glyphicon glyphicon-pencil"></span></a>
+                        <a href="#" onclick="DeleteEvent(@item.EventID)"><span class="glyphicon glyphicon-trash"></span></a>
+                    </td>
+                    <td>@item.EventID</td>
+                    <td>@item.EventName</td>
+                    <td>@item.StartDate.Value.ToShortDateString()</td>
+                    <td>@item.EndDate.Value.ToShortDateString()</td>
+                    <td>@item.TotalCollectedAmount</td>
+                    <td>@item.TotalExpenseAmount</td>
+                    <td>@item.CreatedBy</td>
+                    <td>@item.CreatedDate</td>
+                    <td>@item.ModifiedBy</td>
+                    <td>@item.ModifiedDate</td>
+                </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+

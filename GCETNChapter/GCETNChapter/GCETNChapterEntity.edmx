@@ -5,6 +5,15 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GCE_TN_ChapterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="prcAddNewEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="int" Mode="In" />
+          <Parameter Name="EventName" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="EndDate" Type="date" Mode="In" />
+          <Parameter Name="TotalCollectedAmount" Type="decimal" Mode="In" />
+          <Parameter Name="TotalExpenseAmount" Type="decimal" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcAddUpdateDonationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
           <Parameter Name="Amount" Type="numeric" Mode="In" />
@@ -26,6 +35,9 @@
         </Function>
         <Function Name="prcGetBranchList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetCountryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prcGetEventDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="int" Mode="In" />
+        </Function>
         <Function Name="prcGetGenderList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetProfileAddressInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
@@ -237,6 +249,19 @@
             <Parameter Name="Username" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="prcAddNewEvent">
+            <Parameter Name="EventID" Mode="In" Type="Int32" />
+            <Parameter Name="EventName" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="EndDate" Mode="In" Type="DateTime" />
+            <Parameter Name="TotalCollectedAmount" Mode="In" Type="Decimal" />
+            <Parameter Name="TotalExpenseAmount" Mode="In" Type="Decimal" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetEventDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetEventDetails_Result)">
+          <Parameter Name="EventID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetNewEventID" ReturnType="Collection(Int32)" />
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -290,6 +315,18 @@
           <Property Type="String" Name="AccessRole" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="AccountStatus" Nullable="false" MaxLength="10" />
           <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+        </ComplexType>
+        <ComplexType Name="prcGetEventDetails_Result">
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="String" Name="EventName" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="EndDate" Nullable="true" />
+          <Property Type="Decimal" Name="TotalCollectedAmount" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="Decimal" Name="TotalExpenseAmount" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -393,6 +430,23 @@
                 <ScalarProperty Name="AccessRole" ColumnName="AccessRole" />
                 <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
                 <ScalarProperty Name="FullName" ColumnName="FullName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcAddNewEvent" FunctionName="GCE_TN_ChapterModel.Store.prcAddNewEvent" />
+          <FunctionImportMapping FunctionImportName="prcGetEventDetails" FunctionName="GCE_TN_ChapterModel.Store.prcGetEventDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetEventDetails_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="EndDate" ColumnName="EndDate" />
+                <ScalarProperty Name="TotalCollectedAmount" ColumnName="TotalCollectedAmount" />
+                <ScalarProperty Name="TotalExpenseAmount" ColumnName="TotalExpenseAmount" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>

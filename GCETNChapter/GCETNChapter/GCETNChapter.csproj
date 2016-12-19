@@ -247,6 +247,9 @@
     <Compile Include="prcGetEventDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="prcGetEventPaymentCollectionDetails_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="prcGetGenderList_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
@@ -494,7 +497,10 @@
     <Content Include="Images\Scrolling\Image4.jpg" />
     <Content Include="JQueryScripts\AboutUsPage.js" />
     <Content Include="JQueryScripts\ContactUsPage.js" />
-    <Content Include="JQueryScripts\Events\AddEvents.js" />
+    <Content Include="JQueryScripts\Events\ManageEventExpenseDetails.js" />
+    <Content Include="JQueryScripts\Events\ManageEventGallery.js" />
+    <Content Include="JQueryScripts\Events\ManageEventPaymentCollection.js" />
+    <Content Include="JQueryScripts\Events\ManageEvents.js" />
     <Content Include="JQueryScripts\Events\EventsPage.js" />
     <Content Include="JQueryScripts\GeneralScripts.js" />
     <Content Include="JQueryScripts\HomePage.js" />

@@ -1,4 +1,8 @@
 ﻿<script src="~/JQueryScripts/Events/EventsPage.js"></script>
+<script src="~/JQueryScripts/Events/ManageEvents.js"></script>
+<script src="~/JQueryScripts/Events/ManageEventPaymentCollection.js"></script>
+<script src="~/JQueryScripts/Events/ManageEventGallery.js"></script>
+<script src="~/JQueryScripts/Events/ManageEventExpenseDetails.js"></script>
 
 @{
     ViewBag.Title = "Events";
@@ -42,26 +46,40 @@
     <hr />
 
 
-    <div id="divTableViewEvents" class="hideDiv">
-        @Html.Partial("Events/_ViewEvents")
-    </div>
-    <div id="divAddEvent" class="hideDiv">
-        @Html.Partial("Events/_AddEvents")
-    </div>
-
-    <div id="divTableEventPaymentCollection" class="hideDiv">
-        @Html.Partial("Events/_AddEventPaymentCollection")
-    </div>
-    <div id="divAddEventPaymentCollection" class="hideDiv">
-        @Html.Partial("Events/_AddEventPaymentCollection")
+    <div id="divManageEvents">
+        <div id="divViewEvents" class="hideDiv">
+            @Html.Partial("Events/_ViewEvents")
+        </div>
+        <div id="divAddEvent" class="hideDiv">
+            @Html.Partial("Events/_AddEvents")
+        </div>
     </div>
 
-    <div id="divAddEventExpenseDetails" class="hideDiv">
-        @Html.Partial("Events/_AddEventExpenseDetails")
+    <div id="divManageEventPaymentCollection">
+        <div id="divViewEventPaymentCollection" class="hideDiv">
+            @Html.Partial("Events/_ViewEventPaymentCollection")
+        </div>
+        <div id="divAddEventPaymentCollection" class="hideDiv">
+            @Html.Partial("Events/_AddEventPaymentCollection")
+        </div>
     </div>
 
-    <div id="divManageEventGallery" class="hideDiv">
-        @*@Html.Partial("Events/_AddEvents")*@
+    <div id="divManageEventExpenseDetails">
+        <div id="divViewEventExpenseDetails" class="hideDiv">
+            @* @Html.Partial("Events/_AddEventExpenseDetails") *@
+        </div>
+        <div id="divAddEventExpenseDetails" class="hideDiv">
+            @Html.Partial("Events/_AddEventExpenseDetails")
+        </div>
+    </div>
+
+    <div id="divManageEventGallery">
+        <div id="divViewEventGallery" class="hideDiv">
+            @*@Html.Partial("Events/_AddEvents")*@
+        </div>
+        <div id="divAddEventGallery" class="hideDiv">
+            @*@Html.Partial("Events/_AddEvents")*@
+        </div>
     </div>
 </div>
 

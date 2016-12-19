@@ -1,16 +1,13 @@
 ﻿@model GCETNChapter.Models.ViewModels.Events.EventsVO
 
+
 @using (Html.BeginForm("AddEvents", "Events", FormMethod.Post)) 
 {
     @Html.AntiForgeryToken()
 
     <div class="form-horizontal">
-        <span id="LblDonatoinsHeaderText_AE" class="headerText">Add New Event</span>
+        <span id="LblManageEventsHeader_AE" class="headerText">Add New Event</span>
         <br /><br />
-
-        <div>
-            <a href="#" id="LnkBackToALlEvents_AE"><span class="glyphicon glyphicon-list"></span> Back to All Events</a>
-        </div>
 
         @if (Model != null)
         {
@@ -63,14 +60,15 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-            <div id = "LblEventCreatedBy" class="col-md-10 normalFontLeft">
+            <div id = "LblCreatedBy_AE" class="col-md-10 normalFontLeft">
                 @Html.DisplayTextFor(model => model.CreatedBy)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input id="btnSaveAddEvent_AE" type="button" value="Create Event" class="btn btn-primary" />
+                <input id="BtnCancelAddEvent_AE" type="button" value="Cancel" class="btn btn-default" />
+                <input id="BtnSaveAddEvent_AE" type="button" value="Create Event" class="btn btn-primary" />
             </div>
         </div>
     </div>

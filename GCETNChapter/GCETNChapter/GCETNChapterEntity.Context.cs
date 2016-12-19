@@ -490,5 +490,61 @@ namespace GCETNChapter
         {
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("prcGetNewEventID");
         }
+    
+        public virtual int prcDeleteEvent(Nullable<int> eventID)
+        {
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteEvent", eventIDParameter);
+        }
+    
+        public virtual int prcAddUpdateEventPaymentCollection(Nullable<int> paymentCollectionID, Nullable<int> eventID, string collegeRegistrationNo, Nullable<System.DateTime> paymentDate, Nullable<decimal> amountReceived, string username)
+        {
+            var paymentCollectionIDParameter = paymentCollectionID.HasValue ?
+                new ObjectParameter("PaymentCollectionID", paymentCollectionID) :
+                new ObjectParameter("PaymentCollectionID", typeof(int));
+    
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            var collegeRegistrationNoParameter = collegeRegistrationNo != null ?
+                new ObjectParameter("CollegeRegistrationNo", collegeRegistrationNo) :
+                new ObjectParameter("CollegeRegistrationNo", typeof(string));
+    
+            var paymentDateParameter = paymentDate.HasValue ?
+                new ObjectParameter("PaymentDate", paymentDate) :
+                new ObjectParameter("PaymentDate", typeof(System.DateTime));
+    
+            var amountReceivedParameter = amountReceived.HasValue ?
+                new ObjectParameter("AmountReceived", amountReceived) :
+                new ObjectParameter("AmountReceived", typeof(decimal));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddUpdateEventPaymentCollection", paymentCollectionIDParameter, eventIDParameter, collegeRegistrationNoParameter, paymentDateParameter, amountReceivedParameter, usernameParameter);
+        }
+    
+        public virtual int prcDeleteEventPaymentCollection(Nullable<int> paymentCollectionID)
+        {
+            var paymentCollectionIDParameter = paymentCollectionID.HasValue ?
+                new ObjectParameter("PaymentCollectionID", paymentCollectionID) :
+                new ObjectParameter("PaymentCollectionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteEventPaymentCollection", paymentCollectionIDParameter);
+        }
+    
+        public virtual ObjectResult<prcGetEventPaymentCollectionDetails_Result> prcGetEventPaymentCollectionDetails(Nullable<int> paymentCollectionID)
+        {
+            var paymentCollectionIDParameter = paymentCollectionID.HasValue ?
+                new ObjectParameter("PaymentCollectionID", paymentCollectionID) :
+                new ObjectParameter("PaymentCollectionID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetEventPaymentCollectionDetails_Result>("prcGetEventPaymentCollectionDetails", paymentCollectionIDParameter);
+        }
     }
 }

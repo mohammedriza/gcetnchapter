@@ -18,10 +18,13 @@ namespace GCETNChapter.Models.ViewModels.Events
         public string CollegeRegistrationNo { get; set; }
 
         [Display(Name = "* Expense Date")]
-        public DateTime PaymentDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
+        public DateTime? PaymentDate { get; set; }
 
         [Display(Name = "* Aomunt Received")]
-        public decimal AmountReceived { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal? AmountReceived { get; set; }
 
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }

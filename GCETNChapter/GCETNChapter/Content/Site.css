@@ -190,6 +190,18 @@ textarea {
     text-align: left;
 }
 
+.editIcon{
+    cursor: pointer;
+    text-decoration: none;
+    text-align: center;
+    padding: 5px;
+    margin-right: 3px;
+}
+    .editIcon:hover {
+        background-color: #f5f5f5;
+        color: red;
+    }
+
 /*
 .subMenuFont{
     font-family: Verdana;

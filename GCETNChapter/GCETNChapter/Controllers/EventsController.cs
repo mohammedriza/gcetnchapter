@@ -16,6 +16,18 @@ namespace GCETNChapter.Controllers
             return View();
         }
 
+        public bool CheckIfValidCollegeRegNo(string CollegeRegNo)
+        {
+            var result = MemberDA.CheckIfCollegeRegNoExist(CollegeRegNo);
+
+            if (string.IsNullOrEmpty(result))
+                return false;
+            else
+                return true;
+        }
+
+        //%%%%%%%%%%%%%%%%%%% MANAGE EVENTS %%%%%%%%%%%%%%%%%%%//
+
         // GET: View All Events
         public PartialViewResult ViewEvents()
         {
@@ -25,45 +37,29 @@ namespace GCETNChapter.Controllers
         }
 
         // GET: Events
-        public PartialViewResult AddEvent(int EventID = 0)
+        public PartialViewResult GetEventDetailsByEventID(int EventID = 0)
         {
             if (EventID <=0)
             {
                 var eventsVo = new EventsVO()
                 {
-                    EventID = 0,
-                    CreatedBy = Session["username"].ToString(),
-                    StartDate = Convert.ToDateTime(DateTime.Now.ToShortDateString()),
-                    EndDate = Convert.ToDateTime(DateTime.Now.ToShortDateString())
+                    CreatedBy = Session["username"].ToString()
                 };
                 return PartialView("Events/_AddEvents", eventsVo);
             }
             else
             {
-                var response = new EventsDA().GetAllEvents(EventID);
-                var Event = new EventsVO()
-                {
-                    EventID = response.ElementAt(0).EventID,
-                    EventName = response.ElementAt(0).EventName,
-                    StartDate = response.ElementAt(0).StartDate,
-                    EndDate = response.ElementAt(0).EndDate,
-                    TotalCollectedAmount = Convert.ToDecimal(response.ElementAt(0).TotalCollectedAmount),
-                    TotalExpenseAmount = Convert.ToDecimal(response.ElementAt(0).TotalExpenseAmount),
-                    CreatedBy = response.ElementAt(0).CreatedBy,
-                    CreatedDate = response.ElementAt(0).CreatedDate,
-                    ModifiedBy = response.ElementAt(0).ModifiedBy,
-                    ModifiedDate = response.ElementAt(0).ModifiedDate
-                };
-                return PartialView("Events/_AddEvents", Event);
+                var response = new EventsDA().GetEventByEventID(EventID);
+                return PartialView("Events/_AddEvents", response);
             }
         }
 
         [HttpPost]  // POST: Add Events
-        public bool AddEvents(EventsVO eventVo)
+        public bool AddNewEvent(EventsVO eventVo)
         {
             eventVo.CreatedBy = Session["username"].ToString();
 
-            var result = new EventsDA().AddNewEventDetail(eventVo);
+            var result = new EventsDA().AddUpdateEventDetail(eventVo);
 
             if (result >= 1)
                 return true;
@@ -71,6 +67,94 @@ namespace GCETNChapter.Controllers
                 return false;
         }
 
+        [HttpPost]
+        public bool DeleteEvent(int EventID)
+        {
+            try
+            {
+                var result = new EventsDA().DeleteEvent(EventID);
+
+                if (result >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch(Exception)
+            {
+                return false;
+            }
+        }
+
+
+        //%%%%%%%%%%%%%%%%%%% MANAGE EVENT PAYMENT COLLECTIONS %%%%%%%%%%%%%%%%%%%//
+        
+        // GET: View All Events
+        public PartialViewResult GetAllEventPaymentCollections(int PaymentCollectionID)
+        {
+            var response = new EventsDA().GetAllEventPaymentCollections(PaymentCollectionID);
+            return PartialView("Events/_ViewEventPaymentCollection", response);
+        }
+
+
+        // GET: Events
+        public PartialViewResult GetEventPaymentCollectionByID(int PaymentCollectionID = 0, int EventID = 0)
+        {
+            if (PaymentCollectionID <= 0)
+            {
+                var paymentsVo = new EventPaymentCollectionVO()
+                {
+                    CreatedBy = Session["username"].ToString(),
+                    EventID = EventID
+                };
+                return PartialView("Events/_AddEventPaymentCollection", paymentsVo);
+            }
+            else
+            {
+                var response = new EventsDA().GetEventPaymentCollectionByID(PaymentCollectionID);
+                return PartialView("Events/_AddEventPaymentCollection", response);
+            }
+        }
+
+
+        [HttpPost]  // POST: Event Expense Details
+        public bool AddEventPaymentCollection(EventPaymentCollectionVO eventPaymentVo)
+        {
+            eventPaymentVo.CreatedBy = Session["username"].ToString();
+            var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(eventPaymentVo.CollegeRegistrationNo);
+
+            if (string.IsNullOrEmpty(CollegeRegNoExist))
+                return false;
+            else
+            {
+                var result = new EventsDA().AddUpdateEventPaymentCollection(eventPaymentVo);
+
+                if (result >= 1)
+                    return true;
+                else
+                    return false;
+            }
+        }
+
+        [HttpPost]
+        public bool DeleteEventPaymentCollection(int PaymentCollectionID)
+        {
+            try
+            {
+                var result = new EventsDA().DeleteEventPaymentCollection(PaymentCollectionID);
+
+                if (result >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+
+        //%%%%%%%%%%%%%%%%%%% MANAGE EVENT EXPENSE DETAILS %%%%%%%%%%%%%%%%%%%//
 
         // GET: Event Expense Details
         public PartialViewResult AddEventExpenseDetails()
@@ -86,19 +170,7 @@ namespace GCETNChapter.Controllers
         }
 
 
-        // GET: Event Expense Details
-        public PartialViewResult AddEventPaymentCollection()
-        {
-            var eventPaymentVo = new EventPaymentCollectionVO();
-            return PartialView("Events/_AddEventPaymentCollection", eventPaymentVo);
-        }
-
-        [HttpPost]  // POST: Event Expense Details
-        public ActionResult AddEventPaymentCollection(EventPaymentCollectionVO eventPaymentVo)
-        {
-            return View();
-        }
-
+        //%%%%%%%%%%%%%%%%%%% MANAGE EVENT GALLERY %%%%%%%%%%%%%%%%%%%//
 
         // GET: Event Expense Details
         public ActionResult EventGallery()

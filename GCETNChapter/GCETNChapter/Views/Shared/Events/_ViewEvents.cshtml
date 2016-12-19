@@ -32,8 +32,15 @@
                 {
                 <tr>
                     <td>
-                        <a href="#" onclick="GetAddEventPartialView(@item.EventID)"><span class="glyphicon glyphicon-pencil"></span></a>
-                        <a href="#" onclick="DeleteEvent(@item.EventID)"><span class="glyphicon glyphicon-trash"></span></a>
+                        <a href="#" class="editIcon" title="Edit Event" onclick="GetEventDetailsByEventID(@item.EventID)">
+                            <span class="glyphicon glyphicon-pencil"></span>
+                        </a>
+                        <a href="#" class="editIcon" title="Delete Event" onclick="DeleteEvent(@item.EventID)">
+                            <span class="glyphicon glyphicon-trash"></span>
+                        </a>
+                        <a href="#" class="editIcon" title="Event Settings" onclick="EventSettings(@item.EventID)">
+                            <span class="glyphicon glyphicon-cog"></span>
+                        </a>
                     </td>
                     <td>@item.EventID</td>
                     <td>@item.EventName</td>
@@ -52,5 +59,32 @@
     </table>
 </div>
 
+
+<!-- MODAL POPUP FOR EVENT SETTINGS (PAYMENT COLLECTION, EXPENSE & GALLERY) -->
+<div id="EventSettingsModal" class="modal fade" role="dialog" tabindex="-1">
+    <div class="modal-dialog">
+
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <span class="modal-title text-info" style="font-weight: bold;"> Select an Event Action </span>
+            </div>
+            <div class="modal-body">
+                <span class="control-label"> Please select an action from the list below, to perform for the selected Event <br /> (Event ID: <span id="LblEventIDSettings"></span>)</span>
+                <br /><br />
+                <div class="text-center">
+                    <a href="#" id="LnkAddEventPaymentCollectionSettings" class="btn btn-default">Add Event Payment Collection</a> <br /><br />
+                    <a href="#" id="LnkAddEventExpenseDetailsSettings" class="btn btn-default">Add Event Expense Details</a> <br /><br />
+                    <a href="#" id="LnkAddEventGallerySettings" class="btn btn-default">Add Photos to Event Gallery</a>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-default" data-dismiss="modal">Cancel</button>
+            </div>
+        </div>
+
+    </div>
+</div>
 
 

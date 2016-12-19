@@ -1,12 +1,7 @@
 ﻿@model List<GCETNChapter.Models.ViewModels.Events.EventPaymentCollectionVO>
 
 <span id="LblHeaderText_EPC" class="headerText">Manage Event Payment Collection</span>
-<br /><br />
-
-<div>
-    <a href="#" id="LnkAddNewEventPayment_EPC"><span class="glyphicon glyphicon-plus"></span> New Event Payment</a>
-</div>
-<br />
+<br /><br /><br />
 
 <div class="row">
     <table id="TblViewEventPatments_EPC" class="table table-responsive">
@@ -31,13 +26,17 @@
                 {
                     <tr>
                         <td>
-                            <a href="#" onclick="GetAddEventPartialView(@item.PaymentCollectionID)"><span class="glyphicon glyphicon-pencil"></span></a>
-                            <a href="#" onclick="DeleteEvent(@item.PaymentCollectionID)"><span class="glyphicon glyphicon-trash"></span></a>
+                            <a href="#" class="editIcon" title="Edit Payment Collection" onclick="GetEventPaymentCollectionByID(@item.PaymentCollectionID, 0)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a href="#" class="editIcon" title="Delete Payment Collection" onclick="DeleteEventPaymentCollection(@item.PaymentCollectionID)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
                         </td>
                         <td>@item.EventID</td>
                         <td>@item.PaymentCollectionID</td>
                         <td>@item.CollegeRegistrationNo</td>
-                        <td>@item.PaymentDate.ToShortDateString()</td>
+                        <td>@item.PaymentDate.Value.ToShortDateString()</td>
                         <td>@item.AmountReceived</td>
                         <td>@item.CreatedBy</td>
                         <td>@item.CreatedDate</td>

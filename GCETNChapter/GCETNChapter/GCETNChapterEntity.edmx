@@ -23,11 +23,25 @@
           <Parameter Name="PaymentEndDate" Type="date" Mode="In" />
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcAddUpdateEventPaymentCollection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
+          <Parameter Name="EventID" Type="int" Mode="In" />
+          <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
+          <Parameter Name="PaymentDate" Type="date" Mode="In" />
+          <Parameter Name="AmountReceived" Type="decimal" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcCheckIfCollegeRegNoExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prcCheckIfUsernameExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcDeleteEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="prcDeleteEventPaymentCollection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
         </Function>
         <Function Name="prcGetAuthenticationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
@@ -37,6 +51,9 @@
         <Function Name="prcGetCountryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetEventDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="prcGetEventPaymentCollectionDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
         </Function>
         <Function Name="prcGetGenderList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetProfileAddressInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -262,6 +279,23 @@
           <Parameter Name="EventID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prcGetNewEventID" ReturnType="Collection(Int32)" />
+          <FunctionImport Name="prcDeleteEvent">
+          <Parameter Name="EventID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcAddUpdateEventPaymentCollection">
+            <Parameter Name="PaymentCollectionID" Mode="In" Type="Int32" />
+            <Parameter Name="EventID" Mode="In" Type="Int32" />
+            <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+            <Parameter Name="PaymentDate" Mode="In" Type="DateTime" />
+            <Parameter Name="AmountReceived" Mode="In" Type="Decimal" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcDeleteEventPaymentCollection">
+          <Parameter Name="PaymentCollectionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetEventPaymentCollectionDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetEventPaymentCollectionDetails_Result)">
+            <Parameter Name="PaymentCollectionID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -323,6 +357,17 @@
           <Property Type="DateTime" Name="EndDate" Nullable="true" />
           <Property Type="Decimal" Name="TotalCollectedAmount" Nullable="true" Precision="10" Scale="2" />
           <Property Type="Decimal" Name="TotalExpenseAmount" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="prcGetEventPaymentCollectionDetails_Result">
+          <Property Type="Int32" Name="PaymentCollectionID" Nullable="false" />
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="String" Name="CollegeRegistrationNo" Nullable="false" MaxLength="12" />
+          <Property Type="DateTime" Name="PaymentDate" Nullable="true" />
+          <Property Type="Decimal" Name="AmountReceived" Nullable="true" Precision="10" Scale="2" />
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
@@ -443,6 +488,24 @@
                 <ScalarProperty Name="EndDate" ColumnName="EndDate" />
                 <ScalarProperty Name="TotalCollectedAmount" ColumnName="TotalCollectedAmount" />
                 <ScalarProperty Name="TotalExpenseAmount" ColumnName="TotalExpenseAmount" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcDeleteEvent" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteEvent" />
+          <FunctionImportMapping FunctionImportName="prcAddUpdateEventPaymentCollection" FunctionName="GCE_TN_ChapterModel.Store.prcAddUpdateEventPaymentCollection" />
+          <FunctionImportMapping FunctionImportName="prcDeleteEventPaymentCollection" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteEventPaymentCollection" />
+          <FunctionImportMapping FunctionImportName="prcGetEventPaymentCollectionDetails" FunctionName="GCE_TN_ChapterModel.Store.prcGetEventPaymentCollectionDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetEventPaymentCollectionDetails_Result">
+                <ScalarProperty Name="PaymentCollectionID" ColumnName="PaymentCollectionID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="CollegeRegistrationNo" ColumnName="CollegeRegistrationNo" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="AmountReceived" ColumnName="AmountReceived" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />

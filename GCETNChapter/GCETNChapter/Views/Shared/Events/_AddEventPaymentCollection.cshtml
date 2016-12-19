@@ -1,62 +1,73 @@
 ﻿@model GCETNChapter.Models.ViewModels.Events.EventPaymentCollectionVO
 
+
 @using (Html.BeginForm()) 
 {
     @Html.AntiForgeryToken()
 
-    <span id="LblDonatoinsHeaderText" class="headerText">Add Event Payment Collections</span>
+    <span id="LblPaymentCollectionHeader" class="headerText">Add Event Payment Collections</span>
         <br /><br /><br />
 
     <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @if (Model != null)
+        {
+            if (Model.EventID >= 1)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                    <div id="LblEventID_EPC" class="col-md-10 normalFontLeft">
+                        @Html.DisplayFor(model => model.EventID)
+                    </div>
+                </div>
+
+                if (Model.PaymentCollectionID > 0)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.PaymentCollectionID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                        <div id="LblPaymentCollectionID_EPC" class="col-md-10 normalFontLeft">
+                            @Html.DisplayFor(model => model.PaymentCollectionID)
+                        </div>
+                    </div>
+                }
+            }
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.CollegeRegistrationNo, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CollegeRegistrationNo, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", id = "TxtCollegeRegNo_EPC" } })
+                <a href="#" class="welcomeUser" onclick="CheckIfValidCollegeRegNo();">Validate College Reg No</a>
+                <span class="text-success" id="LblValidateCollegeRegNo_EPC"></span>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.PaymentDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "form-control", id = "TxtPaymentDate_EPC" } })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.AmountReceived, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.AmountReceived, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.AmountReceived, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.AmountReceived, new { htmlAttributes = new { @class = "form-control", id = "TxtAmountReceived_EPC" } })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.CreatedBy, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.CreatedBy, "", new { @class = "text-danger" })
+            <div id="LblCreatedBy_EPC" class="col-md-10 normalFontLeft">
+                @Html.DisplayTextFor(model => model.CreatedBy)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input id="BtnCancelAddUpdate_EPC" type="button" value="Cancel" class="btn btn-default" />
+                <input id="BtnSaveEventPaymentCollection_EPC" type="button" value="Add Payment Collection" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

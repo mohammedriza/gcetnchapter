@@ -11,6 +11,9 @@ namespace GCETNChapter.Models.ViewModels.Events
         [Display(Name = "Event ID")]
         public int EventID { get; set; }
 
+        [Display(Name = "Expense Detail ID")]
+        public int ExpenseDetailsID { get; set; }
+
         [Display(Name = "* Expense Details")]
         public string ExpenseDetail { get; set; }
 

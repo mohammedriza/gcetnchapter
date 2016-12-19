@@ -78,6 +78,14 @@ $(document).on("click", "#LnkManageEventGallery_E", function () {
 //********************************************************************** SHOW / HIDE DIV ELEMENT PARTIAL PAGES *********************************************************************//
 //**************************************************************************************************************************************************************************//
 
+function HideAllEventTabs()
+{
+    $("#divManageEvents").hide();
+    $("#divManageEventPaymentCollection").hide();
+    $("#divManageEventExpenseDetails").hide();
+    $("#divManageEventGallery").hide();
+}
+
 function ShowDivManageEvents() {
     $("#divManageEvents").fadeIn(1000);
     $("#divManageEventPaymentCollection").hide();

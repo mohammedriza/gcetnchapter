@@ -8,6 +8,14 @@ namespace GCETNChapter.Models.DataAccess
 {
     public class EventsDA
     {
+        public static List<string> GetAllEventNames()
+        {
+            var EventNames = new List<string>();
+
+            return EventNames;
+        }
+
+
         //%%%%%%%%%%%%%%%%%%% MANAGE EVENTS %%%%%%%%%%%%%%%%%%%//
 
         public int AddUpdateEventDetail(EventsVO eventVo)

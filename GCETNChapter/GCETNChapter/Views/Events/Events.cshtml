@@ -10,7 +10,7 @@
 
 <div id="divEventsPage" class="partialBodySection hideDiv">
     <div class="row">
-        <div class="col-md-2 text-center">
+        <div class="col-md-3 text-center">
             <a href="#" id="LnkManageEvents_E">
                 <p class="well well-sm">
                     Manage Events
@@ -18,7 +18,7 @@
             </a>
         </div>
 
-        <div class="col-md-2 text-center">
+        <div class="col-md-3 text-center">
             <a href="#" id="LnkManageEventPaymentCollection_E">
                 <p class="well well-sm">
                     Manage Event Payment Collections
@@ -26,7 +26,7 @@
             </a>
         </div>
 
-        <div class="col-md-2 text-center">
+        <div class="col-md-3 text-center">
             <a href="#" id="LnkManageEventExpenseDetails_E">
                 <p class="well well-sm">
                     Manage Event Expense Details
@@ -34,7 +34,7 @@
             </a>
         </div>
 
-        <div class="col-md-2 text-center">
+        <div class="col-md-3 text-center">
             <a href="#" id="LnkManageEventGallery_E">
                 <p class="well well-sm">
                     Manage Event Gallery
@@ -42,9 +42,6 @@
             </a>
         </div>
     </div>
-
-    <hr />
-
 
     <div id="divManageEvents">
         <div id="divViewEvents" class="hideDiv">
@@ -64,11 +61,11 @@
         </div>
     </div>
 
-    <div id="divManageEventExpenseDetails">
-        <div id="divViewEventExpenseDetails" class="hideDiv">
+    <div id="divManageEventExpenseDetails" class="hideDiv">
+        <div id="divViewEventExpenseDetails">
             @Html.Partial("Events/_ViewEventExpenseDetails")
         </div>
-        <div id="divAddEventExpenseDetails" class="hideDiv">
+        <div id="divAddEventExpenseDetail" class="hideDiv">
             @Html.Partial("Events/_AddEventExpenseDetails")
         </div>
     </div>

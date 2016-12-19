@@ -143,20 +143,11 @@ function showViewEventExpenseDetail() {
 }
 
 function showAddEventExpenseDetail() {
-    $("#divViewEventExpenseDetail").hide();
+    $("#divViewEventExpenseDetails").hide();
     $("#divAddEventExpenseDetail").fadeIn(1000);
     //GetEventPaymentCollectionByID(0);
 }
 
-function ShowDivManageEventExpenseDetails() {
-    $("#divManageEvents").hide();
-    $("#divManageEventPaymentCollection").hide();
-
-    $("#divAddEventExpenseDetails").hide();
-    $("#divViewEventExpenseDetails").fadeIn(1000);
-
-    $("#divManageEventGallery").hide();
-}
 
 
 

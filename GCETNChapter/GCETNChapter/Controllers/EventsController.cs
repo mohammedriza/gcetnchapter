@@ -154,19 +154,66 @@ namespace GCETNChapter.Controllers
         }
 
 
+
         //%%%%%%%%%%%%%%%%%%% MANAGE EVENT EXPENSE DETAILS %%%%%%%%%%%%%%%%%%%//
 
-        // GET: Event Expense Details
-        public PartialViewResult AddEventExpenseDetails()
+        // GET: View All Event Expense Details
+        public PartialViewResult GetAllEventExpenseDetails(int ExpenseDetailID)
         {
-            var eventExpVo = new EventExpenseDetailsVO();
-            return PartialView("Events/_AddEventExpenseDetails", eventExpVo);
+            var response = new EventsDA().GetAllEventExpenseDetails(ExpenseDetailID);
+            return PartialView("Events/_ViewEventExpenseDetails", response);
         }
 
-        [HttpPost]  // POST: Event Expense Details
-        public ActionResult AddEventExpenseDetails(EventExpenseDetailsVO eventExpVo)
+
+        // GET: Expense Details By ID
+        public PartialViewResult GetEventExpenseDetailByID(int ExpenseDetailID = 0, int EventID = 0)
         {
-            return View();
+            if (ExpenseDetailID <= 0)
+            {
+                var expenseVo = new EventExpenseDetailsVO()
+                {
+                    CreatedBy = Session["username"].ToString(),
+                    EventID = EventID
+                };
+                return PartialView("Events/_AddEventExpenseDetails", expenseVo);
+            }
+            else
+            {
+                var response = new EventsDA().GetEventExpenseDetailByID(ExpenseDetailID);
+                return PartialView("Events/_AddEventExpenseDetails", response);
+            }
+        }
+
+
+        [HttpPost]  // POST: Event Expense Details
+        public bool AddEventExpenseDetail(EventExpenseDetailsVO expenseVo)
+        {
+            expenseVo.CreatedBy = Session["username"].ToString();
+
+            var result = new EventsDA().AddUpdateEventExpenseDetail(expenseVo);
+
+            if (result >= 1)
+                return true;
+            else
+                return false;
+        }
+
+        [HttpPost] // DELETE: Expense Details
+        public bool DeleteEventExpenseDetail(int ExpenseDetailID)
+        {
+            try
+            {
+                var result = new EventsDA().DeleteEventExpenseDetail(ExpenseDetailID);
+
+                if (result >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
 
 

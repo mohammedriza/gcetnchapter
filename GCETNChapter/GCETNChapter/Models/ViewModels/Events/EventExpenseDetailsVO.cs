@@ -12,19 +12,29 @@ namespace GCETNChapter.Models.ViewModels.Events
         public int EventID { get; set; }
 
         [Display(Name = "Expense Detail ID")]
-        public int ExpenseDetailsID { get; set; }
+        public int ExpenseDetailID { get; set; }
 
         [Display(Name = "* Expense Details")]
         public string ExpenseDetail { get; set; }
 
         [Display(Name = "* Expense Date")]
-        public DateTime ExpenseDate { get; set; }
+        [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
+        public DateTime? ExpenseDate { get; set; }
 
         [Display(Name = "* Amount")]
-        public decimal Amount { get; set; }
+        [DataType(DataType.Currency)]
+        public decimal? Amount { get; set; }
 
-        [Display(Name = "ActionUser")]
-        public string ActionUser { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ModifiedDate { get; set; }
 
     }
 }

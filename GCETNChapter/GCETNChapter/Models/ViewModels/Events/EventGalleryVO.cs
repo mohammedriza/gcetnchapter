@@ -14,7 +14,14 @@ namespace GCETNChapter.Models.ViewModels.Events
         [Display(Name = "* Image")]
         public string Image { get; set; }
 
-        [Display(Name = "ActionUser")]
-        public string ActionUser { get; set; }
+        [Display(Name = "Created By")]
+        public string CreatedBy { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? CreatedDate { get; set; }
+        public string ModifiedBy { get; set; }
+
+        [DataType(DataType.Date)]
+        public DateTime? ModifiedDate { get; set; }
     }
 }

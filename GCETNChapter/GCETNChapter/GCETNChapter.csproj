@@ -247,6 +247,9 @@
     <Compile Include="prcGetEventDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="prcGetEventExpenseDetails_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="prcGetEventPaymentCollectionDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
@@ -659,6 +662,7 @@
     <Content Include="Views\Shared\Events\_AddEventExpenseDetails.cshtml" />
     <Content Include="Views\Shared\Events\_ViewEvents.cshtml" />
     <Content Include="Views\Shared\Events\_ViewEventPaymentCollection.cshtml" />
+    <Content Include="Views\Shared\Events\_ViewEventExpenseDetails.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

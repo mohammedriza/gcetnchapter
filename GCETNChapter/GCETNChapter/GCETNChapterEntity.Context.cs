@@ -546,5 +546,52 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetEventPaymentCollectionDetails_Result>("prcGetEventPaymentCollectionDetails", paymentCollectionIDParameter);
         }
+    
+        public virtual int prcAddUpdateEventExpenseDetail(Nullable<int> expenseDetailID, Nullable<int> eventID, string expenseDetail, Nullable<System.DateTime> expenseDate, Nullable<decimal> amount, string username)
+        {
+            var expenseDetailIDParameter = expenseDetailID.HasValue ?
+                new ObjectParameter("ExpenseDetailID", expenseDetailID) :
+                new ObjectParameter("ExpenseDetailID", typeof(int));
+    
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            var expenseDetailParameter = expenseDetail != null ?
+                new ObjectParameter("ExpenseDetail", expenseDetail) :
+                new ObjectParameter("ExpenseDetail", typeof(string));
+    
+            var expenseDateParameter = expenseDate.HasValue ?
+                new ObjectParameter("ExpenseDate", expenseDate) :
+                new ObjectParameter("ExpenseDate", typeof(System.DateTime));
+    
+            var amountParameter = amount.HasValue ?
+                new ObjectParameter("Amount", amount) :
+                new ObjectParameter("Amount", typeof(decimal));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddUpdateEventExpenseDetail", expenseDetailIDParameter, eventIDParameter, expenseDetailParameter, expenseDateParameter, amountParameter, usernameParameter);
+        }
+    
+        public virtual int prcDeleteEventExpensedetail(Nullable<int> expenseDetailID)
+        {
+            var expenseDetailIDParameter = expenseDetailID.HasValue ?
+                new ObjectParameter("ExpenseDetailID", expenseDetailID) :
+                new ObjectParameter("ExpenseDetailID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteEventExpensedetail", expenseDetailIDParameter);
+        }
+    
+        public virtual ObjectResult<prcGetEventExpenseDetails_Result> prcGetEventExpenseDetails(Nullable<int> expenseDetailsID)
+        {
+            var expenseDetailsIDParameter = expenseDetailsID.HasValue ?
+                new ObjectParameter("ExpenseDetailsID", expenseDetailsID) :
+                new ObjectParameter("ExpenseDetailsID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetEventExpenseDetails_Result>("prcGetEventExpenseDetails", expenseDetailsIDParameter);
+        }
     }
 }

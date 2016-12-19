@@ -10,54 +10,61 @@
 
     <div class="form-horizontal">
 
-        <div class="form-group">
-            @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.EventID, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.EventID, "", new { @class = "text-danger" })
-            </div>
-        </div>
+        @if (Model != null)
+        {
+            if (Model.EventID >= 1)
+            {
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                    <div id="LblEventID_EED" class="col-md-10 normalFontLeft">
+                        @Html.DisplayFor(model => model.EventID)
+                    </div>
+                </div>
+
+                if (Model.ExpenseDetailID > 0)
+                {
+                    <div class="form-group">
+                        @Html.LabelFor(model => model.ExpenseDetailID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                        <div id="LblExpenseDetailID_EED" class="col-md-10 normalFontLeft">
+                            @Html.DisplayFor(model => model.ExpenseDetailID)
+                        </div>
+                    </div>
+                }
+            }
+        }
 
         <div class="form-group">
             @Html.LabelFor(model => model.ExpenseDetail, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpenseDetail, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExpenseDetail, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ExpenseDetail, new { htmlAttributes = new { @class = "form-control", id = "TxtExpenseDetail_EED" } })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.ExpenseDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpenseDate, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ExpenseDate, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.ExpenseDate, new { htmlAttributes = new { @class = "form-control", id = "TxtExpenseDate_EED" } })
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "text-danger" })
+                @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", id = "TxtAmount_EED" } })
             </div>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(model => model.ActionUser, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-            <div class="col-md-10">
-                @Html.EditorFor(model => model.ActionUser, new { htmlAttributes = new { @class = "form-control" } })
-                @Html.ValidationMessageFor(model => model.ActionUser, "", new { @class = "text-danger" })
+            @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+            <div id = "LblCreatedBy_EED" class="col-md-10">
+                @Html.DisplayFor(model => model.CreatedBy)
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
-                <input type="submit" value="Create" class="btn btn-default" />
+                <input id="BtnSaveEventExpenseDetail_EED" type="button" value="Add Expense Detail" class="btn btn-primary" />
             </div>
         </div>
     </div>
 }
-
-<div>
-    @Html.ActionLink("Back to List", "Index")
-</div>

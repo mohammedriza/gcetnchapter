@@ -158,5 +158,77 @@ namespace GCETNChapter.Models.DataAccess
         }
 
 
+
+        //%%%%%%%%%%%%%%%%%%% MANAGE EVENT EXPENSE DETAILS %%%%%%%%%%%%%%%%%%%//
+
+        public int AddUpdateEventExpenseDetail(EventExpenseDetailsVO expenseVo)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcAddUpdateEventExpenseDetail(expenseVo.ExpenseDetailID, expenseVo.EventID, expenseVo.ExpenseDetail, expenseVo.ExpenseDate, expenseVo.Amount, expenseVo.CreatedBy);
+
+                return response;
+            }
+        }
+
+        public List<EventExpenseDetailsVO> GetAllEventExpenseDetails(int ExpenseDetailID)
+        {
+            var ExpenseDetail = new List<EventExpenseDetailsVO>();
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcGetEventExpenseDetails(ExpenseDetailID).ToList();
+
+                for (int x = 0; x < response.Count; x++)
+                {
+                    ExpenseDetail.Add(new EventExpenseDetailsVO
+                    {
+                        ExpenseDetailID = response.ElementAt(x).ExpenseDetailID,
+                        EventID = response.ElementAt(x).EventID,
+                        ExpenseDetail = response.ElementAt(x).ExpenseDetail,
+                        Amount = response.ElementAt(x).Amount,
+                        ExpenseDate = response.ElementAt(x).ExpenseDate,
+                        CreatedBy = response.ElementAt(x).CreatedBy,
+                        CreatedDate = response.ElementAt(x).CreatedDate,
+                        ModifiedBy = response.ElementAt(x).ModifiedBy,
+                        ModifiedDate = response.ElementAt(x).ModifiedDate
+                    });
+                }
+                return ExpenseDetail;
+            }
+        }
+
+        public EventExpenseDetailsVO GetEventExpenseDetailByID(int ExpenseDetailID)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcGetEventExpenseDetails(ExpenseDetailID).ToList();
+
+                var ExpenseDetail = new EventExpenseDetailsVO()
+                {
+                    ExpenseDetailID = response.ElementAt(0).ExpenseDetailID,
+                    EventID = response.ElementAt(0).EventID,
+                    ExpenseDetail = response.ElementAt(0).ExpenseDetail,
+                    Amount = response.ElementAt(0).Amount,
+                    ExpenseDate = response.ElementAt(0).ExpenseDate,
+                    CreatedBy = response.ElementAt(0).CreatedBy,
+                    CreatedDate = response.ElementAt(0).CreatedDate,
+                    ModifiedBy = response.ElementAt(0).ModifiedBy,
+                    ModifiedDate = response.ElementAt(0).ModifiedDate
+                };
+                return ExpenseDetail;
+            }
+        }
+
+        public int DeleteEventExpenseDetail(int ExpenseDetailID)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var rowsEffected = db.prcDeleteEventExpensedetail(ExpenseDetailID);
+
+                return rowsEffected;
+            }
+        }
+
+
     }
 }

@@ -60,7 +60,7 @@ function DeleteEventPaymentCollection(paymentCollectionID) {
 }
 
 
-//--- Function Add New Event ---//
+//--- Function Add New Event Payment Collection ---//
 function AddEventPaymentCollection() {
     var eventID = $.trim($("#LblEventID_EPC").text());
     var paymentCollectionID = $.trim($("#LblPaymentCollectionID_EPC").text());
@@ -152,13 +152,13 @@ function showAddEventPaymentCollection() {
 }
 
 function ShowDivManagePaymentCollectoin() {
-    $("#divAddEvent").hide();
-    $("#divViewEvents").hide();
+    $("#divManageEvent").hide();
 
     $("#divViewEventPaymentCollection").hide();
     $("#divAddEventPaymentCollection").fadeIn(1000);
 
-    $("#divAddEventExpenseDetails").hide();
+    $("#divManageEventExpenseDetails").hide();
+
     $("#divManageEventGallery").hide();
 }
 

@@ -1,0 +1,54 @@
+﻿@model List<GCETNChapter.Models.ViewModels.Events.EventExpenseDetailsVO>
+
+<span id="LblHeaderText_EED" class="headerText">Manage Event Expense Details</span>
+<br /><br /><br />
+
+<div class="row">
+    <table id="TblViewEventExpenseDetails_EED" class="table table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Event ID</th>
+                <th>Expense ID</th>
+                <th>Details</th>
+                <th>Expense Date</th>
+                <th>Amount (Rs.)</th>
+                <th>Created By</th>
+                <th>Created Date</th>
+                <th>Modified By</th>
+                <th>Modified Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="editIcon" title="Edit Payment Collection" onclick="GetEventPaymentCollectionByID(@item.ExpenseDetailID, 0)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a href="#" class="editIcon" title="Delete Payment Collection" onclick="DeleteEventPaymentCollection(@item.ExpenseDetailID)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                        <td>@item.EventID</td>
+                        <td>@item.ExpenseDetailID</td>
+                        <td>@item.ExpenseDetail</td>
+                        <td>@item.ExpenseDate.Value.ToShortDateString()</td>
+                        <td>@item.Amount</td>
+                        <td>@item.CreatedBy</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.ModifiedBy</td>
+                        <td>@item.ModifiedDate</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+

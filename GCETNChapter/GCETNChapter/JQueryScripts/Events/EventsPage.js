@@ -65,6 +65,7 @@ $(document).on("click", "#LnkManageEventPaymentCollection_E", function () {
 //--- Function triggers when "Manage Event Expense Details" Link in Events Page is clicked ---//
 $(document).on("click", "#LnkManageEventExpenseDetails_E", function () {
     ShowDivManageEventExpenseDetails();
+    GetAllEventExpenseDetails();
 });
 
 //--- Function triggers when "Manage Event Gallery" Link in Events Page is clicked ---//

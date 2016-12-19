@@ -23,6 +23,14 @@
           <Parameter Name="PaymentEndDate" Type="date" Mode="In" />
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcAddUpdateEventExpenseDetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExpenseDetailID" Type="int" Mode="In" />
+          <Parameter Name="EventID" Type="int" Mode="In" />
+          <Parameter Name="ExpenseDetail" Type="varchar" Mode="In" />
+          <Parameter Name="ExpenseDate" Type="date" Mode="In" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcAddUpdateEventPaymentCollection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
           <Parameter Name="EventID" Type="int" Mode="In" />
@@ -40,6 +48,9 @@
         <Function Name="prcDeleteEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
         </Function>
+        <Function Name="prcDeleteEventExpensedetail" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExpenseDetailID" Type="int" Mode="In" />
+        </Function>
         <Function Name="prcDeleteEventPaymentCollection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
         </Function>
@@ -51,6 +62,9 @@
         <Function Name="prcGetCountryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetEventDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="prcGetEventExpenseDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ExpenseDetailsID" Type="int" Mode="In" />
         </Function>
         <Function Name="prcGetEventPaymentCollectionDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
@@ -294,7 +308,21 @@
           <Parameter Name="PaymentCollectionID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prcGetEventPaymentCollectionDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetEventPaymentCollectionDetails_Result)">
-            <Parameter Name="PaymentCollectionID" Mode="In" Type="Int32" />
+          <Parameter Name="PaymentCollectionID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcAddUpdateEventExpenseDetail">
+            <Parameter Name="ExpenseDetailID" Mode="In" Type="Int32" />
+            <Parameter Name="EventID" Mode="In" Type="Int32" />
+            <Parameter Name="ExpenseDetail" Mode="In" Type="String" />
+            <Parameter Name="ExpenseDate" Mode="In" Type="DateTime" />
+            <Parameter Name="Amount" Mode="In" Type="Decimal" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcDeleteEventExpensedetail">
+            <Parameter Name="ExpenseDetailID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetEventExpenseDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetEventExpenseDetails_Result)">
+            <Parameter Name="ExpenseDetailsID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
@@ -368,6 +396,17 @@
           <Property Type="String" Name="CollegeRegistrationNo" Nullable="false" MaxLength="12" />
           <Property Type="DateTime" Name="PaymentDate" Nullable="true" />
           <Property Type="Decimal" Name="AmountReceived" Nullable="true" Precision="10" Scale="2" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="prcGetEventExpenseDetails_Result">
+          <Property Type="Int32" Name="ExpenseDetailID" Nullable="false" />
+          <Property Type="Int32" Name="EventID" Nullable="false" />
+          <Property Type="String" Name="ExpenseDetail" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="ExpenseDate" Nullable="true" />
+          <Property Type="Decimal" Name="Amount" Nullable="true" Precision="10" Scale="2" />
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
@@ -506,6 +545,23 @@
                 <ScalarProperty Name="CollegeRegistrationNo" ColumnName="CollegeRegistrationNo" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
                 <ScalarProperty Name="AmountReceived" ColumnName="AmountReceived" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcAddUpdateEventExpenseDetail" FunctionName="GCE_TN_ChapterModel.Store.prcAddUpdateEventExpenseDetail" />
+          <FunctionImportMapping FunctionImportName="prcDeleteEventExpensedetail" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteEventExpensedetail" />
+          <FunctionImportMapping FunctionImportName="prcGetEventExpenseDetails" FunctionName="GCE_TN_ChapterModel.Store.prcGetEventExpenseDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetEventExpenseDetails_Result">
+                <ScalarProperty Name="ExpenseDetailID" ColumnName="ExpenseDetailID" />
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="ExpenseDetail" ColumnName="ExpenseDetail" />
+                <ScalarProperty Name="ExpenseDate" ColumnName="ExpenseDate" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />

@@ -36,7 +36,7 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ExpenseDetail, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpenseDetail, new { htmlAttributes = new { @class = "form-control", id = "TxtExpenseDetail_EED" } })
+                @Html.EditorFor(model => model.ExpenseDetail, new { htmlAttributes = new { @class = "form-control", id = "TxtExpenseDetail_EED", maxlength = "100" } })
             </div>
         </div>
 

@@ -14,6 +14,9 @@ namespace GCETNChapter.Models.ViewModels.Events
         [Display(Name = "Event ID")]
         public int EventID { get; set; }
 
+        [Display(Name = "* Event")]
+        public List<string> EventNameList { get; set; }
+
         [Display(Name = "* College Registration No")]
         public string CollegeRegistrationNo { get; set; }
 

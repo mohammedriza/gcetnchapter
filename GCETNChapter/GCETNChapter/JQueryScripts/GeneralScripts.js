@@ -17,6 +17,6 @@ function GeneralWarningsAndErrorDialog(headerText, bodyText, headerTextColor) {
 
 
 //--- TOOLTIP FUNCTION ---//
-$(function () {
-    $(document).tooltip();
+$(document).ready(function () {
+    $('[data-toggle="tooltip"]').tooltip();
 });

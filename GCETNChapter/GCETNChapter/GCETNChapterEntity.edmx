@@ -15,6 +15,7 @@
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prcAddUpdateDonationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonationID" Type="int" Mode="In" />
           <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
           <Parameter Name="Amount" Type="numeric" Mode="In" />
           <Parameter Name="PaymentReason" Type="varchar" Mode="In" />
@@ -45,6 +46,9 @@
         <Function Name="prcCheckIfUsernameExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcDeleteDonations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonationID" Type="int" Mode="In" />
+        </Function>
         <Function Name="prcDeleteEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
         </Function>
@@ -60,6 +64,9 @@
         </Function>
         <Function Name="prcGetBranchList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetCountryList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prcGetDonationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="DonationID" Type="int" Mode="In" />
+        </Function>
         <Function Name="prcGetEventDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
         </Function>
@@ -262,6 +269,7 @@
             <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="prcAddUpdateDonationDetails">
+            <Parameter Name="DonationID" Mode="In" Type="Int32" />
             <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
             <Parameter Name="Amount" Mode="In" Type="Decimal" />
             <Parameter Name="PaymentReason" Mode="In" Type="String" />
@@ -319,10 +327,16 @@
             <Parameter Name="Username" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="prcDeleteEventExpensedetail">
-            <Parameter Name="ExpenseDetailID" Mode="In" Type="Int32" />
+          <Parameter Name="ExpenseDetailID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prcGetEventExpenseDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetEventExpenseDetails_Result)">
-            <Parameter Name="ExpenseDetailsID" Mode="In" Type="Int32" />
+          <Parameter Name="ExpenseDetailsID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetDonationDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetDonationDetails_Result)">
+          <Parameter Name="DonationID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcDeleteDonations">
+          <Parameter Name="DonationID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
@@ -409,6 +423,19 @@
           <Property Type="Decimal" Name="Amount" Nullable="true" Precision="10" Scale="2" />
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="prcGetDonationDetails_Result">
+          <Property Type="Int32" Name="DonationID" Nullable="false" />
+          <Property Type="String" Name="CollegeRegistrationNo" Nullable="false" MaxLength="12" />
+          <Property Type="Decimal" Name="Amount" Nullable="false" Precision="10" Scale="2" />
+          <Property Type="String" Name="PaymentReason" Nullable="false" MaxLength="100" />
+          <Property Type="DateTime" Name="PaymentDate" Nullable="false" />
+          <Property Type="DateTime" Name="PaymentStartDate" Nullable="false" />
+          <Property Type="DateTime" Name="PaymentEndDate" Nullable="false" />
+          <Property Type="String" Name="CreatedBy" Nullable="false" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
         </ComplexType>
@@ -569,6 +596,24 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcGetDonationDetails" FunctionName="GCE_TN_ChapterModel.Store.prcGetDonationDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetDonationDetails_Result">
+                <ScalarProperty Name="DonationID" ColumnName="DonationID" />
+                <ScalarProperty Name="CollegeRegistrationNo" ColumnName="CollegeRegistrationNo" />
+                <ScalarProperty Name="Amount" ColumnName="Amount" />
+                <ScalarProperty Name="PaymentReason" ColumnName="PaymentReason" />
+                <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
+                <ScalarProperty Name="PaymentStartDate" ColumnName="PaymentStartDate" />
+                <ScalarProperty Name="PaymentEndDate" ColumnName="PaymentEndDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcDeleteDonations" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteDonations" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

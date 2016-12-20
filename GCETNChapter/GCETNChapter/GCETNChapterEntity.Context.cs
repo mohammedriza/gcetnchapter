@@ -377,8 +377,12 @@ namespace GCETNChapter
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcUpdateProfileWorkplaceAndExpertiseInfo", usernameParameter, companyNameParameter, occupationParameter, interestsParameter, expertise1Parameter, expertise2Parameter, expertise3Parameter, expertise4Parameter, expertise5Parameter, lastModifiedByParameter);
         }
     
-        public virtual int prcAddUpdateDonationDetails(string collegeRegistrationNo, Nullable<decimal> amount, string paymentReason, Nullable<System.DateTime> paymentDate, Nullable<System.DateTime> paymentStartDate, Nullable<System.DateTime> paymentEndDate, string username)
+        public virtual int prcAddUpdateDonationDetails(Nullable<int> donationID, string collegeRegistrationNo, Nullable<decimal> amount, string paymentReason, Nullable<System.DateTime> paymentDate, Nullable<System.DateTime> paymentStartDate, Nullable<System.DateTime> paymentEndDate, string username)
         {
+            var donationIDParameter = donationID.HasValue ?
+                new ObjectParameter("DonationID", donationID) :
+                new ObjectParameter("DonationID", typeof(int));
+    
             var collegeRegistrationNoParameter = collegeRegistrationNo != null ?
                 new ObjectParameter("CollegeRegistrationNo", collegeRegistrationNo) :
                 new ObjectParameter("CollegeRegistrationNo", typeof(string));
@@ -407,7 +411,7 @@ namespace GCETNChapter
                 new ObjectParameter("Username", username) :
                 new ObjectParameter("Username", typeof(string));
     
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddUpdateDonationDetails", collegeRegistrationNoParameter, amountParameter, paymentReasonParameter, paymentDateParameter, paymentStartDateParameter, paymentEndDateParameter, usernameParameter);
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddUpdateDonationDetails", donationIDParameter, collegeRegistrationNoParameter, amountParameter, paymentReasonParameter, paymentDateParameter, paymentStartDateParameter, paymentEndDateParameter, usernameParameter);
         }
     
         public virtual int prcAddContactUsDetails(string name, string email, string summary, string message)
@@ -592,6 +596,24 @@ namespace GCETNChapter
                 new ObjectParameter("ExpenseDetailsID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetEventExpenseDetails_Result>("prcGetEventExpenseDetails", expenseDetailsIDParameter);
+        }
+    
+        public virtual ObjectResult<prcGetDonationDetails_Result> prcGetDonationDetails(Nullable<int> donationID)
+        {
+            var donationIDParameter = donationID.HasValue ?
+                new ObjectParameter("DonationID", donationID) :
+                new ObjectParameter("DonationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetDonationDetails_Result>("prcGetDonationDetails", donationIDParameter);
+        }
+    
+        public virtual int prcDeleteDonations(Nullable<int> donationID)
+        {
+            var donationIDParameter = donationID.HasValue ?
+                new ObjectParameter("DonationID", donationID) :
+                new ObjectParameter("DonationID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteDonations", donationIDParameter);
         }
     }
 }

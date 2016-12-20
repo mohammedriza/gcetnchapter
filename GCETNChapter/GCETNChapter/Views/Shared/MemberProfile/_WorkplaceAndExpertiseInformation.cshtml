@@ -10,7 +10,7 @@
                     @Html.LabelFor(model => model.Company)
                 </div>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control", id = "TxtCompany" } })
+                    @Html.EditorFor(model => model.Company, new { htmlAttributes = new { @class = "form-control", id = "TxtCompany", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Company, "", new { @class = "textboxerror" })
                 </div>
             </div>
@@ -19,7 +19,7 @@
                     @Html.LabelFor(model => model.Occupation)
                 </div>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Occupation, new { htmlAttributes = new { @class = "form-control", id = "TxtOccupation" } })
+                    @Html.EditorFor(model => model.Occupation, new { htmlAttributes = new { @class = "form-control", id = "TxtOccupation", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Occupation, "", new { @class = "textboxerror" })
                 </div>
             </div>
@@ -31,19 +31,19 @@
                     @Html.LabelFor(model => model.Expertise1)
                 </div>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Expertise1, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 1", id = "TxtExpertise1" } })
+                    @Html.EditorFor(model => model.Expertise1, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 1", id = "TxtExpertise1", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Expertise1, "", new { @class = "textboxerror" })
 
-                    @Html.EditorFor(model => model.Expertise2, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 2", id = "TxtExpertise2" } })
+                    @Html.EditorFor(model => model.Expertise2, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 2", id = "TxtExpertise2", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Expertise2, "", new { @class = "textboxerror" })
 
-                    @Html.EditorFor(model => model.Expertise3, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 3", id = "TxtExpertise3" } })
+                    @Html.EditorFor(model => model.Expertise3, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 3", id = "TxtExpertise3", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Expertise3, "", new { @class = "textboxerror" })
 
-                    @Html.EditorFor(model => model.Expertise4, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 4", id = "TxtExpertise4" } })
+                    @Html.EditorFor(model => model.Expertise4, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 4", id = "TxtExpertise4", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Expertise4, "", new { @class = "textboxerror" })
 
-                    @Html.EditorFor(model => model.Expertise5, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 5", id = "TxtExpertise5" } })
+                    @Html.EditorFor(model => model.Expertise5, new { htmlAttributes = new { @class = "form-control", placeholder = "Expertise area 5", id = "TxtExpertise5", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Expertise5, "", new { @class = "textboxerror" })
                 </div>
             </div>
@@ -52,7 +52,7 @@
                     @Html.LabelFor(model => model.Interests)
                 </div>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.Interests, new { htmlAttributes = new { @class = "form-control", id = "TxtInterests" } })
+                    @Html.EditorFor(model => model.Interests, new { htmlAttributes = new { @class = "form-control", id = "TxtInterests", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Interests, "", new { @class = "textboxerror" })
                 </div>
             </div>

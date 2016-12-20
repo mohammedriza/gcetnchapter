@@ -244,6 +244,9 @@
     <Compile Include="prcGetCountryList_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="prcGetDonationDetails_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="prcGetEventDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
@@ -508,7 +511,7 @@
     <Content Include="JQueryScripts\GeneralScripts.js" />
     <Content Include="JQueryScripts\HomePage.js" />
     <Content Include="JQueryScripts\LoginPage.js" />
-    <Content Include="JQueryScripts\MemberPages\AddDonations.js" />
+    <Content Include="JQueryScripts\MemberPages\Donations.js" />
     <Content Include="JQueryScripts\MemberPages\MyProfile.js" />
     <Content Include="JQueryScripts\RegistrationPage.js" />
     <Content Include="Scripts\bootstrap.js" />
@@ -654,7 +657,7 @@
     <Content Include="Views\Shared\MemberProfile\_AddressInformation.cshtml" />
     <Content Include="Views\Shared\MemberProfile\_WorkplaceAndExpertiseInformation.cshtml" />
     <Content Include="Views\Shared\_ReusableModalPopup.cshtml" />
-    <Content Include="Views\Donations\AddDonations.cshtml" />
+    <Content Include="Views\Donations\Donations.cshtml" />
     <Content Include="Views\Home\MessageSent.cshtml" />
     <Content Include="Views\Events\Events.cshtml" />
     <Content Include="Views\Shared\Events\_AddEvents.cshtml" />
@@ -663,6 +666,10 @@
     <Content Include="Views\Shared\Events\_ViewEvents.cshtml" />
     <Content Include="Views\Shared\Events\_ViewEventPaymentCollection.cshtml" />
     <Content Include="Views\Shared\Events\_ViewEventExpenseDetails.cshtml" />
+    <Content Include="Views\Donations\_AddDonations.cshtml" />
+    <Content Include="Views\Donations\_ViewDonations.cshtml" />
+    <Content Include="Views\Events\Gallery\_AddEventGallery.cshtml" />
+    <Content Include="Views\Events\Gallery\_ViewEventGallery.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

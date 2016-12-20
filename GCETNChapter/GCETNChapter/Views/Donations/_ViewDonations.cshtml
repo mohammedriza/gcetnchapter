@@ -1,0 +1,59 @@
+﻿@model List<GCETNChapter.Models.ViewModels.DonationDetailsVO>
+
+<span class="headerText">Manage Donations</span>
+<br /><br />
+
+<div>
+    <a href="#" id="LnkAddNewDonation"><span class="glyphicon glyphicon-plus"></span> Add Donations</a>
+</div>
+<br />
+
+<div class="row">
+    <table id="TblViewDonations" class="table table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>ID</th>
+                <th>Col. Reg. No.</th>
+                <th>Payment Date</th>
+                <th>Amount</th>
+                <th>Payment Reason</th>
+                <th>Pmnt Start date</th>
+                <th>Pmnt End date</th>
+                <th>Created By</th>
+                <th>Created Date</th>
+                <th>Modified By</th>
+                <th>Modified Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="editIcon" data-toggle="tooltip" data-placement="bottom" title="Edit Event" onclick="GetDonatoinDetailsByDonationID(@item.DonationID)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a href="#" class="editIcon" title="Delete Event" onclick="DeleteDonations(@item.DonationID)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                        <td>@item.DonationID</td>
+                        <td>@item.CollegeRegistrationNo</td>
+                        <td>@item.PaymentDate.Value.ToShortDateString()</td>
+                        <td>@item.Amount</td>
+                        <td>@item.PaymentReason</td>
+                        <td>@item.PaymentStartDate.Value.ToShortDateString()</td>
+                        <td>@item.PaymentEndDate.Value.ToShortDateString()</td>
+                        <td>@item.CreatedBy</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.ModifiedBy</td>
+                        <td>@item.ModifiedDate</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

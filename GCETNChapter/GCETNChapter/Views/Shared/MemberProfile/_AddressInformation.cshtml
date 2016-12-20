@@ -10,7 +10,7 @@
                     @Html.LabelFor(model => model.CurrentAddress)
                 </div>
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.CurrentAddress, new { htmlAttributes = new { @class = "longtextbox", id="TxtCurrentAddress" } })
+                    @Html.EditorFor(model => model.CurrentAddress, new { htmlAttributes = new { @class = "longtextbox", id="TxtCurrentAddress", maxlength = "100" } })
                     @Html.ValidationMessageFor(model => model.CurrentAddress, "", new { @class = "textboxerror" })
                 </div>
             </div>
@@ -28,7 +28,7 @@
                     @Html.LabelFor(model => model.PermanentAddress)
                 </div>
                 <div class="col-md-6">
-                    @Html.EditorFor(model => model.PermanentAddress, new { htmlAttributes = new { @class = "longtextbox", id = "TxtPermanentAddress" } })
+                    @Html.EditorFor(model => model.PermanentAddress, new { htmlAttributes = new { @class = "longtextbox", id = "TxtPermanentAddress", maxlength = "100" } })
                     @Html.ValidationMessageFor(model => model.PermanentAddress, "", new { @class = "textboxerror" })
                 </div>
             </div>

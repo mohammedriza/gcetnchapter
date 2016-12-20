@@ -26,8 +26,8 @@ function GetEventPaymentCollectionByID(paymentCollectionID, eventID) {
                 //-- Call method to show divAddEventPaymentCollection and hide the others --//
                 showAddEventPaymentCollection();
                 if (paymentCollectionID > 0) {
-                    $("#BtnSaveEventPaymentCollection_EPC").val("Update Payment Collection");
-                    $("#LblPaymentCollectionHeader").text("Update Payment Collection");
+                    $("#BtnSaveEventPaymentCollection_EPC").val("Edit Payment Collection");
+                    $("#LblPaymentCollectionHeader").text("Edit Payment Collection");
                 }
             }
             else if (statusTxt == "error") {

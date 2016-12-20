@@ -10,7 +10,7 @@
                     @Html.LabelFor(model => model.CollegeRegistrationNo)
                 </div>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", disabled = "true", id = "TxtCollegeRegNo" } })
+                    @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", disabled = "true", id = "TxtCollegeRegNo", maxlength = "12" } })
                     @Html.ValidationMessageFor(model => model.CollegeRegistrationNo, "", new { @class = "textboxerror" })
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     @Html.LabelFor(model => model.EngineeringDescipline)
                 </div>
                 <div class="col-md-4">
-                    @Html.EditorFor(model => model.EngineeringDescipline, new { htmlAttributes = new { @class = "form-control", id = "TxtEngDescipline" } })
+                    @Html.EditorFor(model => model.EngineeringDescipline, new { htmlAttributes = new { @class = "form-control", id = "TxtEngDescipline", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.EngineeringDescipline, "", new { @class = "textboxerror" })
                 </div>
             </div>

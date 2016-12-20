@@ -26,8 +26,8 @@ function GetEventExpenseDetailByID(expenseDetailID, eventID) {
                 //-- Call method to show divAddEventExpenseDetail and hide the others --//
                 showAddEventExpenseDetail();
                 if (paymentCollectionID > 0) {
-                    $("#BtnSaveEventExpenseDetail_EED").val("Update Expense Detail");
-                    $("#LblExpenseDetailHeader").text("Update Expense Detail");
+                    $("#BtnSaveEventExpenseDetail_EED").val("Edit Expense Detail");
+                    $("#LblExpenseDetailHeader").text("Edit Expense Detail");
                 }
             }
             else if (statusTxt == "error") {

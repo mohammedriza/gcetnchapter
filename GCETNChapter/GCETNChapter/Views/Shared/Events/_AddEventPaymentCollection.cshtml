@@ -14,13 +14,6 @@
         {
             if (Model.EventID >= 1)
             {
-                <div class="form-group">
-                    @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                    <div id="LblEventID_EPC" class="col-md-10 normalFontLeft">
-                        @Html.DisplayFor(model => model.EventID)
-                    </div>
-                </div>
-
                 if (Model.PaymentCollectionID > 0)
                 {
                     <div class="form-group">
@@ -30,13 +23,20 @@
                         </div>
                     </div>
                 }
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.EventNameList, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                    <div id="LblEventID_EPC" class="col-md-10 normalFontLeft">
+                        @Html.DropDownListFor(model => model.EventNameList, new SelectList(Model.EventNameList), new { @class = "form-control", id = "DDLEventName" })
+                    </div>
+                </div>
             }
         }
 
         <div class="form-group">
             @Html.LabelFor(model => model.CollegeRegistrationNo, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", id = "TxtCollegeRegNo_EPC" } })
+                @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", id = "TxtCollegeRegNo_EPC", maxlength = "12" } })
                 <a href="#" class="welcomeUser" onclick="CheckIfValidCollegeRegNo();">Validate College Reg No</a>
                 <span class="text-success" id="LblValidateCollegeRegNo_EPC"></span>
             </div>

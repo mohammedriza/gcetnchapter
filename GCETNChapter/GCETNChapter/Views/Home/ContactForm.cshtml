@@ -20,7 +20,7 @@
                     @Html.LabelFor(model => model.Name)
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", maxlength="50" } })
                     @Html.ValidationMessageFor(model => model.Name, "", new { @class = "textboxerror" })
                 </div>
             </div>
@@ -30,7 +30,7 @@
                     @Html.LabelFor(model => model.Email)
                 </div>
                 <div class="col-md-10 ">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
                     @Html.ValidationMessageFor(model => model.Email, "", new { @class = "textboxerror" })
                 </div>
             </div>
@@ -40,7 +40,7 @@
                     @Html.LabelFor(model => model.Summary)
                 </div>
                 <div class="col-md-10">
-                    @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control" } })
+                    @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control", maxlength = "150" } })
                     @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "textboxerror" })
                 </div>
             </div>
@@ -50,7 +50,7 @@
                     @Html.LabelFor(model => model.Messaage)
                 </div>
                 <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Messaage, 5, 100, new { htmlAttributes = new { @class = "longtextbox" } }) <br />
+                    @Html.TextAreaFor(model => model.Messaage, 5, 100, new { htmlAttributes = new { @class = "longtextbox", maxlength = "5000" } }) <br />
                     @Html.ValidationMessageFor(model => model.Messaage, "", new { @class = "textboxerror" })
                 </div>
             </div>

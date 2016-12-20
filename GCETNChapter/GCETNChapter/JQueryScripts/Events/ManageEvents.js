@@ -26,8 +26,8 @@ function GetEventDetailsByEventID(eventID) {
                 //-- Call method to show divAddEvents and hide the others --//
                 showDivAddEvent();
                 if (eventID > 0) {
-                    $("#BtnSaveAddEvent_AE").val("Update Event");
-                    $("#LblManageEventsHeader_AE").text("Update Event Details");
+                    $("#BtnSaveAddEvent_AE").val("Edit Event");
+                    $("#LblManageEventsHeader_AE").text("Edit Event Details");
                 }
             }
             else if (statusTxt == "error") {

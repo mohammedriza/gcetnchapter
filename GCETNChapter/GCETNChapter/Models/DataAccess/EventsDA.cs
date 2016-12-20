@@ -12,7 +12,26 @@ namespace GCETNChapter.Models.DataAccess
         {
             var EventNames = new List<string>();
 
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var result = db.Database.SqlQuery<string>("SELECT EventName FROM GCE_Events").ToList();
+
+                EventNames.Add("-- Select an Event --");
+                for(int x=0;x<result.Count;x++)
+                {
+                    EventNames.Add(result.ElementAt(x).ToString());
+                }
+            }
             return EventNames;
+        }
+
+        public static string CheckIfEventNameExist(string EventName)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var result = db.Database.SqlQuery<string>("SELECT EventName FROM GCE_Events WHERE EventName = @EventName", EventName).ToString();
+                return result;
+            }
         }
 
 

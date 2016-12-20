@@ -16,9 +16,21 @@ namespace GCETNChapter.Controllers
             return View();
         }
 
+        //-- Check if College Reg No exist and return FALSE is College Reg No doesnt exist, else return TRUE
         public bool CheckIfValidCollegeRegNo(string CollegeRegNo)
         {
             var result = MemberDA.CheckIfCollegeRegNoExist(CollegeRegNo);
+
+            if (string.IsNullOrEmpty(result))
+                return false;
+            else
+                return true;
+        }
+
+        //-- Check if Event Name exist and return FALSE is event name doesnt exist, else return TRUE
+        public bool CheckIfEventNameExist(string EventName)
+        {
+            var result = EventsDA.CheckIfEventNameExist(EventName);
 
             if (string.IsNullOrEmpty(result))
                 return false;
@@ -57,14 +69,23 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Add Events
         public bool AddNewEvent(EventsVO eventVo)
         {
-            eventVo.CreatedBy = Session["username"].ToString();
+            var DuplicateEventName = EventsDA.CheckIfEventNameExist(eventVo.EventName);
 
-            var result = new EventsDA().AddUpdateEventDetail(eventVo);
-
-            if (result >= 1)
-                return true;
-            else
+            if (!string.IsNullOrEmpty(DuplicateEventName))
+            {
                 return false;
+            }
+            else
+            {
+                eventVo.CreatedBy = Session["username"].ToString();
+
+                var result = new EventsDA().AddUpdateEventDetail(eventVo);
+
+                if (result >= 1)
+                    return true;
+                else
+                    return false;
+            }
         }
 
         [HttpPost]
@@ -104,7 +125,8 @@ namespace GCETNChapter.Controllers
                 var paymentsVo = new EventPaymentCollectionVO()
                 {
                     CreatedBy = Session["username"].ToString(),
-                    EventID = EventID
+                    EventID = EventID,
+                    EventNameList = EventsDA.GetAllEventNames()
                 };
                 return PartialView("Events/_AddEventPaymentCollection", paymentsVo);
             }
@@ -173,7 +195,8 @@ namespace GCETNChapter.Controllers
                 var expenseVo = new EventExpenseDetailsVO()
                 {
                     CreatedBy = Session["username"].ToString(),
-                    EventID = EventID
+                    EventID = EventID,
+                    EventNameList = EventsDA.GetAllEventNames()
                 };
                 return PartialView("Events/_AddEventExpenseDetails", expenseVo);
             }

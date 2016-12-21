@@ -31,7 +31,7 @@ function GetEventPaymentCollectionByID(paymentCollectionID, eventID) {
                 }
             }
             else if (statusTxt == "error") {
-                GeneralWarningsAndErrorDialog("Error Loading Data...", "Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.");
+                GeneralWarningsAndErrorDialog("Error Loading Data...", "Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.", "red");
             }
         });
 }
@@ -60,6 +60,21 @@ function DeleteEventPaymentCollection(paymentCollectionID) {
 }
 
 
+function GetEventIdByEventName_PaymentCollection(eventName) {
+    $.ajax({
+        url: "/Events/GetEventIdByEventName/",
+        type: "GET",
+        data: { EventName: eventName },
+        success: function (data) {
+            $("#LblEventID_EPC").text(data);
+        },
+        error: function () {
+            $("#LblEventID_EPC").text("Failed to retreive Event ID");
+        }
+    })
+}
+
+
 //--- Function Add New Event Payment Collection ---//
 function AddEventPaymentCollection() {
     var eventID = $.trim($("#LblEventID_EPC").text());
@@ -68,7 +83,11 @@ function AddEventPaymentCollection() {
     var paymentDate = $.trim($("#TxtPaymentDate_EPC").val());
     var amountReceived = $.trim($("#TxtAmountReceived_EPC").val());
 
-    if ((collegeRegNo).length > 12) {
+    if (eventID == 0)
+    {
+        GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
+    }
+    else if ((collegeRegNo).length > 12) {
         GeneralWarningsAndErrorDialog("Invalid College Registration No...", "College Registration No should not be more than 12 characters.", "red");
     }
     else if (paymentDate == "") {
@@ -119,17 +138,23 @@ $(document).on("click", "#BtnSaveEventPaymentCollection_EPC", function () {
 });
 
 //--- Function triggers when "Add New Payment Collection" Link in ViewEventPaymentCollection Page is clicked ---//
-//$(document).on("click", "#LnkAddNewEventPayment_EPC", function () {
-//    showAddEventPaymentCollection();
-//    $("#BtnSaveEventPaymentCollection_EPC").val("Add Payment Collection");
-//    $("#LblPaymentCollectionHeader").text("Add Payment Collection");
-//});
+$(document).on("click", "#LnkAddPaymentCollection_EPC", function () {
+    showAddEventPaymentCollection();
+    GetEventPaymentCollectionByID(0, 0);
+    $("#BtnSaveEventPaymentCollection_EPC").val("Add Payment Collection");
+    $("#LblPaymentCollectionHeader").text("Add Payment Collection");
+});
 
 //--- Function triggers when "Back to All Events" Link in AddEventPaymentCollection Page is clicked ---//
 $(document).on("click", "#BtnCancelAddUpdate_EPC", function () {
     showViewEventPaymentCollection();
 });
 
+//--- When user selects a value from the EventName dropdown list ---//
+$(document).on("change", "#DDLEventName_PaymentCollection", function () {
+    var eventName = $.trim($("#DDLEventName_PaymentCollection").val());
+    GetEventIdByEventName_PaymentCollection(eventName);
+});
 
 
 //**************************************************************************************************************************************************************************//

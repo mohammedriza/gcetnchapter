@@ -104,6 +104,21 @@ function AddEventExpenseDetail() {
 }
 
 
+function GetEventIdByEventName_ExpenseDetails(eventName) {
+    $.ajax({
+        url: "/Events/GetEventIdByEventName/",
+        type: "GET",
+        data: { EventName: eventName },
+        success: function (data) {
+            $("#LblEventID_EED").text(data);
+        },
+        error: function () {
+            $("#LblEventID_EED").text("Failed to retreive Event ID");
+        }
+    })
+}
+
+
 //**************************************************************************************************************************************************************************//
 //************************************************************************ BUTTON/LINK CLICK EVENTS ************************************************************************//
 //**************************************************************************************************************************************************************************//
@@ -115,16 +130,23 @@ $(document).on("click", "#BtnSaveEventExpenseDetail_EED", function () {
     AddEventExpenseDetail();
 });
 
-//--- Function triggers when "Add New Payment Collection" Link in ViewEventPaymentCollection Page is clicked ---//
-//$(document).on("click", "#LnkAddNewEventPayment_EPC", function () {
-//    showAddEventPaymentCollection();
-//    $("#BtnSaveEventPaymentCollection_EPC").val("Add Payment Collection");
-//    $("#LblPaymentCollectionHeader").text("Add Payment Collection");
-//});
+//--- Function triggers when "Add New Expense Detail" Link in ViewEventExpenseDetails Page is clicked ---//
+$(document).on("click", "#LnkAddExpenseDetails_EED", function () {
+    showAddEventExpenseDetail();
+    GetEventExpenseDetailByID(0, 0);
+    $("#BtnSaveEventExpenseDetail_EED").val("Add Expense Details");
+    $("#LblExpenseDetailsHeader").text("Add Expense Details");
+});
 
 //--- Function triggers when "Back to All Events" Link in AddEventExpenseDetail Page is clicked ---//
 $(document).on("click", "#BtnCancelAddUpdate_EED", function () {
     showViewEventExpenseDetail();
+});
+
+//--- When user selects a value from the EventName dropdown list ---//
+$(document).on("change", "#DDLEventName_ExpenseDetails", function () {
+    var eventName = $.trim($("#DDLEventName_ExpenseDetails").val());
+    GetEventIdByEventName_ExpenseDetails(eventName);
 });
 
 
@@ -137,7 +159,7 @@ $(document).on("click", "#BtnCancelAddUpdate_EED", function () {
 
 //--- This function shows and hides each partial view based on the sub menu selected by the user ---//
 function showViewEventExpenseDetail() {
-    $("#divViewEventExpenseDetail").fadeIn(1000);
+    $("#divViewEventExpenseDetails").fadeIn(1000);
     $("#divAddEventExpenseDetail").hide();
     $("#TblViewEventExpenseDetails_EED").DataTable();
 }

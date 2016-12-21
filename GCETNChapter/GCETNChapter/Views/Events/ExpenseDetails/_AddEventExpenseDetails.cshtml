@@ -5,7 +5,7 @@
 {
     @Html.AntiForgeryToken()
 
-    <span id="LblDonatoinsHeaderText" class="headerText">Add Event Expense Details</span>
+    <span id="LblExpenseDetailsHeader" class="headerText">Add Event Expense Details</span>
         <br /><br /><br />
 
     <div class="form-horizontal">
@@ -14,23 +14,38 @@
         {
             if (Model.EventID >= 1)
             {
+
+
+
+            }
+        }
+
+
+        @if (Model != null)
+        {
+            if (Model.ExpenseDetailID > 0)
+            {
                 <div class="form-group">
-                    @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                    <div id="LblEventID_EED" class="col-md-10 normalFontLeft">
-                        @Html.DisplayFor(model => model.EventID)
+                    @Html.LabelFor(model => model.ExpenseDetailID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                    <div id="LblExpenseDetailID_EED" class="col-md-10 normalFontLeft">
+                        @Html.DisplayFor(model => model.ExpenseDetailID)
                     </div>
                 </div>
-
-                if (Model.ExpenseDetailID > 0)
-                {
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ExpenseDetailID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                        <div id="LblExpenseDetailID_EED" class="col-md-10 normalFontLeft">
-                            @Html.DisplayFor(model => model.ExpenseDetailID)
-                        </div>
-                    </div>
-                }
             }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EventNameList, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                <div class="col-md-10 normalFontLeft">
+                    @Html.DropDownListFor(model => model.EventName, new SelectList(Model.EventNameList, Model.EventName), new { @class = "form-control", id = "DDLEventName_ExpenseDetails" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                <div id="LblEventID_EED" class="col-md-10 normalFontLeft">
+                    @Html.DisplayFor(model => model.EventID)
+                </div>
+            </div>
         }
 
         <div class="form-group">

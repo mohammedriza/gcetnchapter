@@ -5,32 +5,36 @@
 {
     @Html.AntiForgeryToken()
 
-    <span id="LblPaymentCollectionHeader" class="headerText">Add Event Payment Collections</span>
+    <span id="LblPaymentCollectionHeader" class="headerText">Add Payment Collections</span>
         <br /><br /><br />
 
     <div class="form-horizontal">
 
         @if (Model != null)
         {
-            if (Model.EventID >= 1)
+            if (Model.PaymentCollectionID > 0)
             {
-                if (Model.PaymentCollectionID > 0)
-                {
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.PaymentCollectionID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                        <div id="LblPaymentCollectionID_EPC" class="col-md-10 normalFontLeft">
-                            @Html.DisplayFor(model => model.PaymentCollectionID)
-                        </div>
-                    </div>
-                }
-
                 <div class="form-group">
-                    @Html.LabelFor(model => model.EventNameList, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                    <div id="LblEventID_EPC" class="col-md-10 normalFontLeft">
-                        @Html.DropDownListFor(model => model.EventNameList, new SelectList(Model.EventNameList), new { @class = "form-control", id = "DDLEventName" })
+                    @Html.LabelFor(model => model.PaymentCollectionID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                    <div id="LblPaymentCollectionID_EPC" class="col-md-10 normalFontLeft">
+                        @Html.DisplayFor(model => model.PaymentCollectionID)
                     </div>
                 </div>
             }
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EventNameList, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                <div class="col-md-10 normalFontLeft">
+                    @Html.DropDownListFor(model => model.EventName, new SelectList(Model.EventNameList, Model.EventName), new { @class = "form-control", id = "DDLEventName_PaymentCollection" })
+                </div>
+            </div>
+
+            <div class="form-group">
+                @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                <div id="LblEventID_EPC" class="col-md-10 normalFontLeft">
+                    @Html.DisplayFor(model => model.EventID)
+                </div>
+            </div>
         }
 
         <div class="form-group">

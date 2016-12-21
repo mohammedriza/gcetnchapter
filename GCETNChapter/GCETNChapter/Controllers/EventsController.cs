@@ -38,6 +38,14 @@ namespace GCETNChapter.Controllers
                 return true;
         }
 
+        //--- Get Event ID when user selects an Event Name from the doprdown list ---//
+        public int GetEventIdByEventName(string EventName)
+        {
+            var result = EventsDA.GetEventIDByEventName(EventName);
+            return result;
+        }
+
+
         //%%%%%%%%%%%%%%%%%%% MANAGE EVENTS %%%%%%%%%%%%%%%%%%%//
 
         // GET: View All Events
@@ -45,7 +53,7 @@ namespace GCETNChapter.Controllers
         {
             var response = new EventsDA().GetAllEvents(0);
 
-            return PartialView("Events/_ViewEvents", response);
+            return PartialView("ManageEvents/_ViewEvents", response);
         }
 
         // GET: Events
@@ -57,12 +65,12 @@ namespace GCETNChapter.Controllers
                 {
                     CreatedBy = Session["username"].ToString()
                 };
-                return PartialView("Events/_AddEvents", eventsVo);
+                return PartialView("ManageEvents/_AddEvents", eventsVo);
             }
             else
             {
                 var response = new EventsDA().GetEventByEventID(EventID);
-                return PartialView("Events/_AddEvents", response);
+                return PartialView("ManageEvents/_AddEvents", response);
             }
         }
 
@@ -113,7 +121,7 @@ namespace GCETNChapter.Controllers
         public PartialViewResult GetAllEventPaymentCollections(int PaymentCollectionID)
         {
             var response = new EventsDA().GetAllEventPaymentCollections(PaymentCollectionID);
-            return PartialView("Events/_ViewEventPaymentCollection", response);
+            return PartialView("PaymentCollections/_ViewEventPaymentCollection", response);
         }
 
 
@@ -128,12 +136,12 @@ namespace GCETNChapter.Controllers
                     EventID = EventID,
                     EventNameList = EventsDA.GetAllEventNames()
                 };
-                return PartialView("Events/_AddEventPaymentCollection", paymentsVo);
+                return PartialView("PaymentCollections/_AddEventPaymentCollection", paymentsVo);
             }
             else
             {
                 var response = new EventsDA().GetEventPaymentCollectionByID(PaymentCollectionID);
-                return PartialView("Events/_AddEventPaymentCollection", response);
+                return PartialView("PaymentCollections/_AddEventPaymentCollection", response);
             }
         }
 
@@ -183,7 +191,7 @@ namespace GCETNChapter.Controllers
         public PartialViewResult GetAllEventExpenseDetails(int ExpenseDetailID)
         {
             var response = new EventsDA().GetAllEventExpenseDetails(ExpenseDetailID);
-            return PartialView("Events/_ViewEventExpenseDetails", response);
+            return PartialView("ExpenseDetails/_ViewEventExpenseDetails", response);
         }
 
 
@@ -198,12 +206,12 @@ namespace GCETNChapter.Controllers
                     EventID = EventID,
                     EventNameList = EventsDA.GetAllEventNames()
                 };
-                return PartialView("Events/_AddEventExpenseDetails", expenseVo);
+                return PartialView("ExpenseDetails/_AddEventExpenseDetails", expenseVo);
             }
             else
             {
                 var response = new EventsDA().GetEventExpenseDetailByID(ExpenseDetailID);
-                return PartialView("Events/_AddEventExpenseDetails", response);
+                return PartialView("ExpenseDetails/_AddEventExpenseDetails", response);
             }
         }
 

@@ -1,0 +1,59 @@
+﻿@model List<GCETNChapter.Models.ViewModels.Events.EventPaymentCollectionVO>
+
+<span id="LblHeaderText_EPC" class="headerText">Manage Event Payment Collection</span>
+<br /><br /><br />
+
+<div>
+    <a href="#" id="LnkAddPaymentCollection_EPC"><span class="glyphicon glyphicon-plus"></span> New Payment Collection</a>
+</div>
+<br />
+
+<div class="row">
+    <table id="TblViewEventPatments_EPC" class="table table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Event ID</th>
+                <th>Payment ID</th>
+                <th>College Reg No</th>
+                <th>Payment Date</th>
+                <th>Amount Received (Rs.)</th>
+                <th>Created By</th>
+                <th>Created Date</th>
+                <th>Modified By</th>
+                <th>Modified Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="editIcon" title="Edit Payment Collection" onclick="GetEventPaymentCollectionByID(@item.PaymentCollectionID, 0)">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a href="#" class="editIcon" title="Delete Payment Collection" onclick="DeleteEventPaymentCollection(@item.PaymentCollectionID)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                        <td>@item.EventID</td>
+                        <td>@item.PaymentCollectionID</td>
+                        <td>@item.CollegeRegistrationNo</td>
+                        <td>@item.PaymentDate.Value.ToShortDateString()</td>
+                        <td>@item.AmountReceived</td>
+                        <td>@item.CreatedBy</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.ModifiedBy</td>
+                        <td>@item.ModifiedDate</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+

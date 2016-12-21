@@ -615,5 +615,14 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteDonations", donationIDParameter);
         }
+    
+        public virtual ObjectResult<Nullable<int>> prcGetEventIdByEventName(string eventName)
+        {
+            var eventNameParameter = eventName != null ?
+                new ObjectParameter("EventName", eventName) :
+                new ObjectParameter("EventName", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("prcGetEventIdByEventName", eventNameParameter);
+        }
     }
 }

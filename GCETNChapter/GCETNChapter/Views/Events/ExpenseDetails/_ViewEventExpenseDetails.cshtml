@@ -1,18 +1,23 @@
-﻿@model List<GCETNChapter.Models.ViewModels.Events.EventPaymentCollectionVO>
+﻿@model List<GCETNChapter.Models.ViewModels.Events.EventExpenseDetailsVO>
 
-<span id="LblHeaderText_EPC" class="headerText">Manage Event Payment Collection</span>
+<span id="LblHeaderText_EED" class="headerText">Manage Event Expense Details</span>
 <br /><br /><br />
 
+<div>
+    <a href="#" id="LnkAddExpenseDetails_EED"><span class="glyphicon glyphicon-plus"></span> New Expense Detail</a>
+</div>
+<br />
+
 <div class="row">
-    <table id="TblViewEventPatments_EPC" class="table table-responsive">
+    <table id="TblViewEventExpenseDetails_EED" class="table table-responsive">
         <thead>
             <tr>
                 <th></th>
                 <th>Event ID</th>
-                <th>Payment ID</th>
-                <th>College Reg No</th>
-                <th>Payment Date</th>
-                <th>Amount Received (Rs.)</th>
+                <th>Expense ID</th>
+                <th>Details</th>
+                <th>Expense Date</th>
+                <th>Amount (Rs.)</th>
                 <th>Created By</th>
                 <th>Created Date</th>
                 <th>Modified By</th>
@@ -26,18 +31,18 @@
                 {
                     <tr>
                         <td>
-                            <a href="#" class="editIcon" title="Edit Payment Collection" onclick="GetEventPaymentCollectionByID(@item.PaymentCollectionID, 0)">
+                            <a href="#" class="editIcon" title="Edit Payment Collection" onclick="GetEventPaymentCollectionByID(@item.ExpenseDetailID, 0)">
                                 <span class="glyphicon glyphicon-pencil"></span>
                             </a>
-                            <a href="#" class="editIcon" title="Delete Payment Collection" onclick="DeleteEventPaymentCollection(@item.PaymentCollectionID)">
+                            <a href="#" class="editIcon" title="Delete Payment Collection" onclick="DeleteEventPaymentCollection(@item.ExpenseDetailID)">
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </td>
                         <td>@item.EventID</td>
-                        <td>@item.PaymentCollectionID</td>
-                        <td>@item.CollegeRegistrationNo</td>
-                        <td>@item.PaymentDate.Value.ToShortDateString()</td>
-                        <td>@item.AmountReceived</td>
+                        <td>@item.ExpenseDetailID</td>
+                        <td>@item.ExpenseDetail</td>
+                        <td>@item.ExpenseDate.Value.ToShortDateString()</td>
+                        <td>@item.Amount</td>
                         <td>@item.CreatedBy</td>
                         <td>@item.CreatedDate</td>
                         <td>@item.ModifiedBy</td>

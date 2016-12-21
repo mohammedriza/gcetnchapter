@@ -73,6 +73,9 @@
         <Function Name="prcGetEventExpenseDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ExpenseDetailsID" Type="int" Mode="In" />
         </Function>
+        <Function Name="prcGetEventIdByEventName" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventName" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcGetEventPaymentCollectionDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
         </Function>
@@ -338,6 +341,9 @@
           <FunctionImport Name="prcDeleteDonations">
           <Parameter Name="DonationID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="prcGetEventIdByEventName" ReturnType="Collection(Int32)">
+            <Parameter Name="EventName" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -414,6 +420,7 @@
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EventName" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="prcGetEventExpenseDetails_Result">
           <Property Type="Int32" Name="ExpenseDetailID" Nullable="false" />
@@ -425,6 +432,7 @@
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EventName" Nullable="false" MaxLength="50" />
         </ComplexType>
         <ComplexType Name="prcGetDonationDetails_Result">
           <Property Type="Int32" Name="DonationID" Nullable="false" />
@@ -576,6 +584,7 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -593,6 +602,7 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -614,6 +624,7 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="prcDeleteDonations" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteDonations" />
+          <FunctionImportMapping FunctionImportName="prcGetEventIdByEventName" FunctionName="GCE_TN_ChapterModel.Store.prcGetEventIdByEventName" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

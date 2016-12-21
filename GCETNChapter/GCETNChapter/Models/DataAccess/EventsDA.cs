@@ -25,12 +25,26 @@ namespace GCETNChapter.Models.DataAccess
             return EventNames;
         }
 
+
+        public static int GetEventIDByEventName(string EventName)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var result = db.prcGetEventIdByEventName(EventName).FirstOrDefault();
+                return Convert.ToInt32(result);
+            }
+        }
+
         public static string CheckIfEventNameExist(string EventName)
         {
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
-                var result = db.Database.SqlQuery<string>("SELECT EventName FROM GCE_Events WHERE EventName = @EventName", EventName).ToString();
-                return result;
+                var result = db.Database.SqlQuery<string>("SELECT EventName FROM GCE_Events WHERE EventName = '"+ EventName+"';").ToList();
+
+                if (result.Count > 0)
+                    return result[0].ToString();
+                else
+                    return null;
             }
         }
 
@@ -162,6 +176,8 @@ namespace GCETNChapter.Models.DataAccess
                 {
                     PaymentCollectionID = response.ElementAt(0).PaymentCollectionID,
                     EventID = response.ElementAt(0).EventID,
+                    EventName = response.ElementAt(0).EventName,
+                    EventNameList = EventsDA.GetAllEventNames(),
                     CollegeRegistrationNo = response.ElementAt(0).CollegeRegistrationNo,
                     AmountReceived = response.ElementAt(0).AmountReceived,
                     PaymentDate = response.ElementAt(0).PaymentDate,
@@ -234,6 +250,7 @@ namespace GCETNChapter.Models.DataAccess
                 {
                     ExpenseDetailID = response.ElementAt(0).ExpenseDetailID,
                     EventID = response.ElementAt(0).EventID,
+                    EventName = response.ElementAt(0).EventName,
                     ExpenseDetail = response.ElementAt(0).ExpenseDetail,
                     Amount = response.ElementAt(0).Amount,
                     ExpenseDate = response.ElementAt(0).ExpenseDate,

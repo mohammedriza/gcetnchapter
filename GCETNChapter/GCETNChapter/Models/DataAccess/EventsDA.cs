@@ -251,6 +251,7 @@ namespace GCETNChapter.Models.DataAccess
                     ExpenseDetailID = response.ElementAt(0).ExpenseDetailID,
                     EventID = response.ElementAt(0).EventID,
                     EventName = response.ElementAt(0).EventName,
+                    EventNameList = EventsDA.GetAllEventNames(),
                     ExpenseDetail = response.ElementAt(0).ExpenseDetail,
                     Amount = response.ElementAt(0).Amount,
                     ExpenseDate = response.ElementAt(0).ExpenseDate,

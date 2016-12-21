@@ -77,7 +77,12 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Add Events
         public bool AddNewEvent(EventsVO eventVo)
         {
-            var DuplicateEventName = EventsDA.CheckIfEventNameExist(eventVo.EventName);
+            var DuplicateEventName = "";
+            if (eventVo.EventID <= 0)
+            {
+                //--- Check this only if the Event ID is 0, which means its a Add Event and not edit event ---//
+                DuplicateEventName = EventsDA.CheckIfEventNameExist(eventVo.EventName);
+            }
 
             if (!string.IsNullOrEmpty(DuplicateEventName))
             {

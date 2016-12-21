@@ -83,7 +83,7 @@ function AddEventPaymentCollection() {
     var paymentDate = $.trim($("#TxtPaymentDate_EPC").val());
     var amountReceived = $.trim($("#TxtAmountReceived_EPC").val());
 
-    if (eventID == 0)
+    if (eventID == 0 || eventID == "")
     {
         GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
     }
@@ -173,7 +173,6 @@ function showViewEventPaymentCollection() {
 function showAddEventPaymentCollection() {
     $("#divViewEventPaymentCollection").hide();
     $("#divAddEventPaymentCollection").fadeIn(1000);
-    //GetEventPaymentCollectionByID(0);
 }
 
 function ShowDivManagePaymentCollectoin() {

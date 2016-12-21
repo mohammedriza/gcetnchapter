@@ -133,29 +133,6 @@ $(document).on("click", "#BtnCancelAddEvent_AE", function () {
     showViewEventsTable();
 });
 
-//*** EVENT SETTINGS LINKS ***//
-//--- Show Add Event Payment Collectoin view ---//
-$(document).on("click", "#LnkAddEventPaymentCollectionSettings", function () {
-    $("#EventSettingsModal").modal("hide");
-    ShowDivManageEventPaymentCollection();
-
-    var eventID = $.trim($("#LblEventIDSettings").text());
-    GetEventPaymentCollectionByID(0, eventID);
-});
-
-//--- Show Add Event Expense Details view ---//
-$(document).on("click", "#LnkAddEventExpenseDetailsSettings", function () {
-    $("#EventSettingsModal").modal("hide");
-    ShowDivManageEventExpenseDetails();
-});
-
-//--- Show Add Event Gasllery view ---//
-$(document).on("click", "#LnkAddEventGallerySettings", function () {
-    $("#EventSettingsModal").modal("hide");
-    ShowDivManageEventGallery();
-});
-
-
 
 
 //**************************************************************************************************************************************************************************//
@@ -177,9 +154,4 @@ function showDivAddEvent() {
     $("#divAddEvent").fadeIn(1000);
 }
 
-function EventSettings(eventID)
-{
-    $("#EventSettingsModal").modal();
-    $("#LblEventIDSettings").text(eventID);
-}
 

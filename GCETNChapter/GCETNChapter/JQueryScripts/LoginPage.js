@@ -13,6 +13,8 @@
 
 
 function AuthenticateMember() {
+    $("#LoginProgressModal").modal();    //--- Showe Loading spinner when user clicks on login button ---//
+
     var username = $("#txtUsername").val();
     var password = $("#txtPassword").val();
 

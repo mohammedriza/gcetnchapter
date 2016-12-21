@@ -19,19 +19,19 @@ function GetAllEventExpenseDetails() {
 
 //-- Call GetAllEventExpenseDetails Partial View Method in Events Controller --//
 function GetEventExpenseDetailByID(expenseDetailID, eventID) {
-    $("#divAddEventExpenseDetails").load("/Events/GetEventExpenseDetailByID/",
+    $("#divAddEventExpenseDetail").load("/Events/GetEventExpenseDetailByID/",
         { ExpenseDetailID: expenseDetailID, EventID: eventID },
         function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success") {
                 //-- Call method to show divAddEventExpenseDetail and hide the others --//
                 showAddEventExpenseDetail();
-                if (paymentCollectionID > 0) {
+                if (expenseDetailID > 0) {
                     $("#BtnSaveEventExpenseDetail_EED").val("Edit Expense Detail");
                     $("#LblExpenseDetailHeader").text("Edit Expense Detail");
                 }
             }
             else if (statusTxt == "error") {
-                GeneralWarningsAndErrorDialog("Error Loading Data...", "Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.");
+                GeneralWarningsAndErrorDialog("Error Loading Data...", "Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.", "red");
             }
         });
 }
@@ -68,7 +68,15 @@ function AddEventExpenseDetail() {
     var expenseDate = $.trim($("#TxtExpenseDate_EED").val());
     var amount = $.trim($("#TxtAmount_EED").val());
 
-    if ((expenseDetail).length > 100) {
+    if (eventID == 0 || eventID == "")
+    {
+        GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
+    }
+    else if ((expenseDetail == ""))
+    {
+        GeneralWarningsAndErrorDialog("Invalid Expense Detail...", "Please enter a valid Expense Detail.", "red");
+    }
+    else if ((expenseDetail).length > 100) {
         GeneralWarningsAndErrorDialog("Expense Details too long...", "Expense Detail should not exceed 100 characters.", "red");
     }
     else if (expenseDate == "") {
@@ -167,7 +175,6 @@ function showViewEventExpenseDetail() {
 function showAddEventExpenseDetail() {
     $("#divViewEventExpenseDetails").hide();
     $("#divAddEventExpenseDetail").fadeIn(1000);
-    //GetEventPaymentCollectionByID(0);
 }
 
 

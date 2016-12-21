@@ -491,6 +491,7 @@
     <Content Include="Images\FooterIcons\twitter.png" />
     <Content Include="Images\FooterIcons\Visit.png" />
     <Content Include="Images\FooterIcons\Whatsapp.png" />
+    <Content Include="Images\loading.gif" />
     <Content Include="Images\LoginBackground.jpg" />
     <Content Include="Images\logo_home.png" />
     <Content Include="Images\logo_mini.png" />

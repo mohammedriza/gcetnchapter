@@ -29,14 +29,22 @@ function AuthenticateMember() {
         function (data, status) {
             if (data == "Pass" && status == "success")
                 window.location.replace("/MemberProfile/MyProfile");
-            else if (data == "Pending")
+            else if (data == "Pending") {
+                $("#LoginProgressModal").modal("hide");
                 GeneralWarningsAndErrorDialog("ALERT...", "Your account is still in pending status. You will be able to login once your account has been approved by the Trust group. Please contact the Trust for assistance.", "red");
-            else if (data == "Inactive")
+            }
+            else if (data == "Inactive") {
+                $("#LoginProgressModal").modal("hide");
                 GeneralWarningsAndErrorDialog("WARNING...", "Your account has been deactivated. Please contact the Trust for assistance.", "red");
-            else if (data == "Fail" || status == "error")
+            }
+            else if (data == "Fail" || status == "error") {
+                $("#LoginProgressModal").modal("hide");
                 GeneralWarningsAndErrorDialog("ERROR...", "Failed to authenticate. Please try make sure your username and password are correct.", "red");
-            else
+            }
+            else {
+                $("#LoginProgressModal").modal("hide");
                 GeneralWarningsAndErrorDialog("ERROR...", "An unexpected error had occured. Please try again later or contact the Trust for assistance.", "red");
+            }
         });
     }
 }

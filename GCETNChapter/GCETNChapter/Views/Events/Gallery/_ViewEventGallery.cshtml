@@ -21,7 +21,85 @@
 <br />
 
 <div class="row">
-    <table id="TblViewEventGallery_EG" class="table table-responsive">
+    <table id="TblViewEventGallery_EG1" class="table table-responsive">
+        <thead></thead>
+        <tbody>
+        @if (Model != null)
+        {
+            if (Model[0].EventID != 0)
+            {
+                for (int x = 0; x < Model.Count; x++)
+                {
+                <tr>
+                    @if (x < Model.Count)
+                    {
+                    <td>
+                        <div class="row smallFont">
+                            <div> @Model[x].Image1 </div>
+                            <div> <img src="~/EventUploads/EventPhotos/"+ @Model[x].Image1 height="150"> </div>
+                            <span>(ID: @Model[x].ImageID )</span>
+                            <span> @Model[x].CreatedDate </span>
+                        </div>
+                    </td>
+                    }
+
+                    @if (x + 1 < Model.Count)
+                    {
+                    <td>
+                        <div class="row smallFont">
+                            <div> @Model[x + 1].Image1 </div>
+                            <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 1].Image1 height="150"> </div>
+                            <span>(ID: @Model[x + 1].ImageID )</span>
+                            <span> @Model[x + 1].CreatedDate </span>
+                        </div>
+                    </td>
+                    }
+
+                    @if (x + 2 < Model.Count)
+                    {
+                    <td>
+                        <div class="row smallFont">
+                            <div> @Model[x + 2].Image1 </div>
+                            <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 2].Image1 height="150"> </div>
+                            <span>(ID: @Model[x + 2].ImageID )</span>
+                            <span> @Model[x + 2].CreatedDate </span>
+                        </div>
+                    </td>
+                    }
+
+                    @if (x + 3 < Model.Count)
+                    {
+                        <td>
+                            <div class="row smallFont">
+                                <div> @Model[x + 3].Image1 </div>
+                                <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 3].Image1 height="150"> </div>
+                                <span>(ID: @Model[x + 3].ImageID )</span>
+                                <span> @Model[x + 3].CreatedDate </span>
+                            </div>
+                        </td>
+                    }
+
+                    @if (x + 4 < Model.Count)
+                    {
+                        <td>
+                            <div class="row smallFont">
+                                <div> @Model[x + 4].Image1 </div>
+                                <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 4].Image1 height="150"> </div>
+                                <span>(ID: @Model[x + 4].ImageID )</span>
+                                <span> @Model[x + 4].CreatedDate </span>
+                            </div>
+                        </td>
+                    }
+                </tr>                    
+                    x = x + 4;
+                }
+            }
+        }
+        </tbody>
+    </table>
+
+
+    <table id="TblViewEventGallery_EG" class="table table-responsive hidden">
         <thead>
             <tr>
                 <th></th>

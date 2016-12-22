@@ -239,6 +239,15 @@ textarea {
           transition: border-color ease-in-out .15s, box-shadow ease-in-out .15s;
 }
 
+.smallFont{
+    font-family: Verdana;
+    font-size: 10px;
+    color: #333;
+    padding: 3px;
+    font-weight: normal;
+    text-align: left;
+}
+
 
 /* LONG TEXT BOX STYLE */
 .longtextbox {

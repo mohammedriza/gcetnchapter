@@ -131,8 +131,6 @@ function GetEventIdByEventName_ExpenseDetails(eventName) {
 //************************************************************************ BUTTON/LINK CLICK EVENTS ************************************************************************//
 //**************************************************************************************************************************************************************************//
 
-//%%%%%%%%%%%%%%%%%%% MANAGE EVENT EXPENSE DETAILS %%%%%%%%%%%%%%%%%%%//
-
 //--- Function triggers when "Save" Button in AddEventExpenseDetail Page is clicked ---//
 $(document).on("click", "#BtnSaveEventExpenseDetail_EED", function () {
     AddEventExpenseDetail();
@@ -162,8 +160,6 @@ $(document).on("change", "#DDLEventName_ExpenseDetails", function () {
 //**************************************************************************************************************************************************************************//
 //********************************************************************** SHOW / HIDE DIV ELEMENT PAGES *********************************************************************//
 //**************************************************************************************************************************************************************************//
-
-//%%%%%%%%%%%%%%%%%%% MANAGE EVENT EXPENSE DETAILS %%%%%%%%%%%%%%%%%%%//
 
 //--- This function shows and hides each partial view based on the sub menu selected by the user ---//
 function showViewEventExpenseDetail() {

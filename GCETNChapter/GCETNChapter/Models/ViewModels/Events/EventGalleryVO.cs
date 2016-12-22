@@ -9,7 +9,7 @@ namespace GCETNChapter.Models.ViewModels.Events
     public class EventGalleryVO
     {
         [Display(Name = "Event ID")]
-        public int EventID { get; set; }
+        public int? EventID { get; set; }
 
         [Display(Name = "* Event Name")]
         public string EventName { get; set; }
@@ -18,10 +18,16 @@ namespace GCETNChapter.Models.ViewModels.Events
         public List<string> EventNameList { get; set; }
 
         [Display(Name = "Image ID")]
-        public int ImageID { get; set; }
+        public int? ImageID { get; set; }
         
         [Display(Name = "* Image")]
-        public string Image { get; set; }
+        public string Image1 { get; set; }
+
+        [Display(Name = "* Image")]
+        public string Image2 { get; set; }
+
+        [Display(Name = "* Image")]
+        public string Image3 { get; set; }
 
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }

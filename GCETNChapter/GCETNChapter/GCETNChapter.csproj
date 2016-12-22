@@ -235,6 +235,9 @@
     <Compile Include="Models\ViewModels\MemberProfileVO.cs" />
     <Compile Include="Models\ViewModels\ContactUsVO.cs" />
     <Compile Include="Models\ViewModels\MemberRegistrationVO.cs" />
+    <Compile Include="prcEventPhotosByEventID_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="prcGetAuthenticationDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
@@ -254,6 +257,9 @@
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="prcGetEventPaymentCollectionDetails_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetEventPhotosByEventID_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="prcGetGenderList_Result.cs">

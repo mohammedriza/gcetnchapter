@@ -1,5 +1,6 @@
 ﻿$(function () {
     $("#divLoginPage").fadeIn(1000);
+    $("#txtUsername").focus();
 
     //-- Remove all Selected Link Style (Underline) --//
     $("#LnkHome").removeClass("menuitemSelected");

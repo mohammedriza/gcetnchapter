@@ -1,1 +1,68 @@
-﻿
+﻿@model List<GCETNChapter.Models.ViewModels.Events.EventGalleryVO>
+
+<span id="LblHeaderText_EED" class="headerText">Manage Event Gallery</span>
+<br /><br /><br />
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <a href="#" id="LnkAddImageGallery_EG"><span class="glyphicon glyphicon-plus"></span> Add Photos </a>
+        </div>
+    </div>
+    <div class="col-md-9 text-left">
+        @if (Model != null)
+        {
+            <span class="formlabelFontLeft"> Select an Event to view the photos </span>
+            @Html.DropDownListFor(model => model[0].EventNameList, new SelectList(Model[0].EventNameList, Model[0].EventName), new { @class = "dropdownstyle", id = "DDLEventName_ViewGallery" })
+        }
+    </div>
+    
+</div>
+<br />
+
+<div class="row">
+    <table id="TblViewEventGallery_EG" class="table table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Event ID</th>
+                <th>Image ID</th>
+                <th>Image Name</th>
+                <th>Created By</th>
+                <th>Created Date</th>
+                <th>Modified By</th>
+                <th>Modified Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                if (Model[0].EventID != 0)
+                {
+                    foreach (var item in Model)
+                    {
+                    <tr>
+                        <td>
+                            <a href="#" class="editIcon" title="Delete Photo" onclick="DeleteEventPhoto(@item.ImageID)">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                        </td>
+                        <td>@item.EventID</td>
+                        <td>@item.ImageID</td>
+                        <td>@item.Image1</td>
+                        <td>@item.CreatedBy</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.ModifiedBy</td>
+                        <td>@item.ModifiedDate</td>
+                    </tr>
+                    }
+                }
+            }
+        </tbody>
+    </table>
+</div>
+
+
+
+
+

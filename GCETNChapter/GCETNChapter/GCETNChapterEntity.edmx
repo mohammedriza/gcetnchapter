@@ -5,6 +5,11 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GCE_TN_ChapterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="prcAddEventPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="int" Mode="In" />
+          <Parameter Name="Image" Type="varchar" Mode="In" />
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcAddNewEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
           <Parameter Name="EventName" Type="varchar" Mode="In" />
@@ -58,6 +63,9 @@
         <Function Name="prcDeleteEventPaymentCollection" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
         </Function>
+        <Function Name="prcDeleteEventPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ImageID" Type="int" Mode="In" />
+        </Function>
         <Function Name="prcGetAuthenticationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -78,6 +86,9 @@
         </Function>
         <Function Name="prcGetEventPaymentCollectionDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="PaymentCollectionID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="prcGetEventPhotosByEventID" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="EventID" Type="int" Mode="In" />
         </Function>
         <Function Name="prcGetGenderList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
         <Function Name="prcGetProfileAddressInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -342,7 +353,21 @@
           <Parameter Name="DonationID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prcGetEventIdByEventName" ReturnType="Collection(Int32)">
-            <Parameter Name="EventName" Mode="In" Type="String" />
+          <Parameter Name="EventName" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcAddEventPhotos">
+            <Parameter Name="EventID" Mode="In" Type="Int32" />
+            <Parameter Name="Image" Mode="In" Type="String" />
+            <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcEventPhotosByEventID" ReturnType="Collection(GCE_TN_ChapterModel.prcEventPhotosByEventID_Result)">
+            <Parameter Name="EventID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetEventPhotosByEventID" ReturnType="Collection(GCE_TN_ChapterModel.prcGetEventPhotosByEventID_Result)">
+          <Parameter Name="EventID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcDeleteEventPhotos">
+            <Parameter Name="ImageID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
@@ -446,6 +471,25 @@
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="prcEventPhotosByEventID_Result">
+          <Property Type="Int32" Name="EventID" Nullable="true" />
+          <Property Type="Int32" Name="ImageID" Nullable="false" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="prcGetEventPhotosByEventID_Result">
+          <Property Type="Int32" Name="EventID" Nullable="true" />
+          <Property Type="Int32" Name="ImageID" Nullable="false" />
+          <Property Type="String" Name="Image" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="EventName" Nullable="false" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -625,6 +669,22 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="prcDeleteDonations" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteDonations" />
           <FunctionImportMapping FunctionImportName="prcGetEventIdByEventName" FunctionName="GCE_TN_ChapterModel.Store.prcGetEventIdByEventName" />
+          <FunctionImportMapping FunctionImportName="prcAddEventPhotos" FunctionName="GCE_TN_ChapterModel.Store.prcAddEventPhotos" />
+          <FunctionImportMapping FunctionImportName="prcGetEventPhotosByEventID" FunctionName="GCE_TN_ChapterModel.Store.prcGetEventPhotosByEventID">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetEventPhotosByEventID_Result">
+                <ScalarProperty Name="EventID" ColumnName="EventID" />
+                <ScalarProperty Name="ImageID" ColumnName="ImageID" />
+                <ScalarProperty Name="Image" ColumnName="Image" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="EventName" ColumnName="EventName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcDeleteEventPhotos" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteEventPhotos" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

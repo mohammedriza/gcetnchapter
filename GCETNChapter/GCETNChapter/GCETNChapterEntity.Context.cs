@@ -624,5 +624,49 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<int>>("prcGetEventIdByEventName", eventNameParameter);
         }
+    
+        public virtual int prcAddEventPhotos(Nullable<int> eventID, string image, string username)
+        {
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            var imageParameter = image != null ?
+                new ObjectParameter("Image", image) :
+                new ObjectParameter("Image", typeof(string));
+    
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddEventPhotos", eventIDParameter, imageParameter, usernameParameter);
+        }
+    
+        public virtual ObjectResult<prcEventPhotosByEventID_Result> prcEventPhotosByEventID(Nullable<int> eventID)
+        {
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcEventPhotosByEventID_Result>("prcEventPhotosByEventID", eventIDParameter);
+        }
+    
+        public virtual ObjectResult<prcGetEventPhotosByEventID_Result> prcGetEventPhotosByEventID(Nullable<int> eventID)
+        {
+            var eventIDParameter = eventID.HasValue ?
+                new ObjectParameter("EventID", eventID) :
+                new ObjectParameter("EventID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetEventPhotosByEventID_Result>("prcGetEventPhotosByEventID", eventIDParameter);
+        }
+    
+        public virtual int prcDeleteEventPhotos(Nullable<int> imageID)
+        {
+            var imageIDParameter = imageID.HasValue ?
+                new ObjectParameter("ImageID", imageID) :
+                new ObjectParameter("ImageID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteEventPhotos", imageIDParameter);
+        }
     }
 }

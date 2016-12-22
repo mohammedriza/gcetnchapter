@@ -17,7 +17,7 @@ namespace GCETNChapter.Models.DataAccess
                 var result = db.Database.SqlQuery<string>("SELECT EventName FROM GCE_Events").ToList();
 
                 EventNames.Add("-- Select an Event --");
-                for(int x=0;x<result.Count;x++)
+                for (int x = 0; x < result.Count; x++)
                 {
                     EventNames.Add(result.ElementAt(x).ToString());
                 }
@@ -275,5 +275,53 @@ namespace GCETNChapter.Models.DataAccess
         }
 
 
+        //%%%%%%%%%%%%%%%%%%% MANAGE EVENT GALLERY %%%%%%%%%%%%%%%%%%%//
+
+        public int AddEventPhotos(EventGalleryVO GalleryVo, string ImageName)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcAddEventPhotos(GalleryVo.EventID, ImageName, GalleryVo.CreatedBy);
+
+                return response;
+            }
+        }
+
+
+        public List<EventGalleryVO> GetEventGalleryPhotosByEventID(int EventID)
+        {
+            var ExpenseDetail = new List<EventGalleryVO>();
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcGetEventPhotosByEventID(EventID).ToList();
+
+                for (int x = 0; x < response.Count; x++)
+                {
+                    ExpenseDetail.Add(new EventGalleryVO
+                    {
+                        EventID = response.ElementAt(x).EventID,
+                        EventNameList = EventsDA.GetAllEventNames(),
+                        EventName = response.ElementAt(x).EventName,
+                        Image1 = response.ElementAt(x).Image,
+                        CreatedBy = response.ElementAt(x).CreatedBy,
+                        CreatedDate = response.ElementAt(x).CreatedDate,
+                        ModifiedBy = response.ElementAt(x).ModifiedBy,
+                        ModifiedDate = response.ElementAt(x).ModifiedDate
+                    });
+                }
+                return ExpenseDetail;
+            }
+        }
+
+
+        public int DeleteEventPhotos(int ImageID)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var rowsEffected = db.prcDeleteEventPhotos(ImageID);
+
+                return rowsEffected;
+            }
+        }
     }
 }

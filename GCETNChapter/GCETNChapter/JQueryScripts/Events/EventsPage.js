@@ -71,6 +71,7 @@ $(document).on("click", "#LnkManageEventExpenseDetails_E", function () {
 //--- Function triggers when "Manage Event Gallery" Link in Events Page is clicked ---//
 $(document).on("click", "#LnkManageEventGallery_E", function () {
     ShowDivManageEventGallery();
+    GetEventGalleryPhotosByEventID();
 });
 
 

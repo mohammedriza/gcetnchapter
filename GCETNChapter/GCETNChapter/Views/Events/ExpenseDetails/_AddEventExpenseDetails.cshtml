@@ -12,17 +12,6 @@
 
         @if (Model != null)
         {
-            if (Model.EventID >= 1)
-            {
-
-
-
-            }
-        }
-
-
-        @if (Model != null)
-        {
             if (Model.ExpenseDetailID > 0)
             {
                 <div class="form-group">
@@ -71,7 +60,7 @@
 
         <div class="form-group">
             @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-            <div id = "LblCreatedBy_EED" class="col-md-10">
+            <div id = "LblCreatedBy_EED" class="col-md-10 normalFontLeft">
                 @Html.DisplayFor(model => model.CreatedBy)
             </div>
         </div>

@@ -255,16 +255,100 @@ namespace GCETNChapter.Controllers
 
         //%%%%%%%%%%%%%%%%%%% MANAGE EVENT GALLERY %%%%%%%%%%%%%%%%%%%//
 
-        // GET: Event Expense Details
-        public ActionResult EventGallery()
+        // GET: View All Events
+        public PartialViewResult GetEventGalleryPhotosByEventID(string EventName)
         {
-            return View();
+            var galleryVo = new List<EventGalleryVO>();
+            var EventID = EventsDA.GetEventIDByEventName(EventName);
+
+            if (EventID <= 0)
+            {
+                galleryVo.Add(new EventGalleryVO()
+                {
+                    EventID = 0,
+                    EventNameList = EventsDA.GetAllEventNames()
+                });
+                return PartialView("Gallery/_ViewEventGallery", galleryVo);
+            }
+            else
+            {
+                var response = new EventsDA().GetEventGalleryPhotosByEventID(EventID);
+
+                if (response.Count <= 0)
+                {
+                    galleryVo.Add(new EventGalleryVO()
+                    {
+                        EventID = 0,
+                        EventNameList = EventsDA.GetAllEventNames(),
+                        EventName = EventName
+                    });
+                    return PartialView("Gallery/_ViewEventGallery", galleryVo);
+                }
+
+                return PartialView("Gallery/_ViewEventGallery", response);
+            }
         }
 
-        [HttpPost]  // POST: Event Expense Details
-        public ActionResult EventGallery(EventGalleryVO eventGalleryVo)
+
+        // GET: Events
+        public PartialViewResult GetAddEventGalleryView()
         {
-            return View();
+            var paymentsVo = new EventGalleryVO()
+            {
+                CreatedBy = Session["username"].ToString(),
+                ImageID = 0,
+                EventID = 0,
+                EventNameList = EventsDA.GetAllEventNames()
+            };
+            return PartialView("Gallery/_AddEventGallery", paymentsVo);
+        }
+
+
+        [HttpPost]  // POST: Event Expense Details
+        public bool AddEventGallery(EventGalleryVO galleryVo)
+        {
+            try
+            {
+                int rowsEffected = 0;
+
+                galleryVo.CreatedBy = Session["username"].ToString();
+
+                if (!string.IsNullOrEmpty(galleryVo.Image1))
+                    rowsEffected = rowsEffected + new EventsDA().AddEventPhotos(galleryVo, galleryVo.Image1);
+
+                if (!string.IsNullOrEmpty(galleryVo.Image2))
+                    rowsEffected = rowsEffected + new EventsDA().AddEventPhotos(galleryVo, galleryVo.Image2);
+
+                if (!string.IsNullOrEmpty(galleryVo.Image3))
+                    rowsEffected = rowsEffected + new EventsDA().AddEventPhotos(galleryVo, galleryVo.Image3);
+
+                if (rowsEffected >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
+        }
+
+        [HttpPost]
+        public bool DeleteEventPhoto(int ImageID)
+        {
+            try
+            {
+                var result = new EventsDA().DeleteEventPhotos(ImageID);
+
+                if (result >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception)
+            {
+                return false;
+            }
         }
     }
 }

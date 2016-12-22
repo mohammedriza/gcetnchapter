@@ -130,8 +130,6 @@ function AddEventPaymentCollection() {
 //************************************************************************ BUTTON/LINK CLICK EVENTS ************************************************************************//
 //**************************************************************************************************************************************************************************//
 
-//%%%%%%%%%%%%%%%%%%% MANAGE EVENT PAYMENT COLLECTIONS %%%%%%%%%%%%%%%%%%%//
-
 //--- Function triggers when "Save" Button in AddEventPaymentCollection Page is clicked ---//
 $(document).on("click", "#BtnSaveEventPaymentCollection_EPC", function () {
     AddEventPaymentCollection();
@@ -161,8 +159,6 @@ $(document).on("change", "#DDLEventName_PaymentCollection", function () {
 //********************************************************************** SHOW / HIDE DIV ELEMENT PAGES *********************************************************************//
 //**************************************************************************************************************************************************************************//
 
-//%%%%%%%%%%%%%%%%%%% MANAGE EVENT PAYMENT COLLECTIONS %%%%%%%%%%%%%%%%%%%//
-
 //--- This function shows and hides each partial view based on the sub menu selected by the user ---//
 function showViewEventPaymentCollection() {
     $("#divViewEventPaymentCollection").fadeIn(1000);
@@ -174,19 +170,6 @@ function showAddEventPaymentCollection() {
     $("#divViewEventPaymentCollection").hide();
     $("#divAddEventPaymentCollection").fadeIn(1000);
 }
-
-function ShowDivManagePaymentCollectoin() {
-    $("#divManageEvent").hide();
-
-    $("#divViewEventPaymentCollection").hide();
-    $("#divAddEventPaymentCollection").fadeIn(1000);
-
-    $("#divManageEventExpenseDetails").hide();
-
-    $("#divManageEventGallery").hide();
-}
-
-
 
 
 

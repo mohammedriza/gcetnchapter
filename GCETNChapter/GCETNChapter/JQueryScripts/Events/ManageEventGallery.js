@@ -9,7 +9,7 @@ function GetEventGalleryPhotosByEventID() {
         { EventName: eventName },
         function (responseTxt, statusTxt, xhr) {
             if (statusTxt == "success") {
-                //-- Call method to show divViewEventExpenseDetail and hide the others --//
+                //-- Call method to show divViewEventGallery and hide the others --//
                 showViewEventGallery();
             }
             else if (statusTxt == "error") {
@@ -22,7 +22,7 @@ function GetEventGalleryPhotosByEventID() {
 
 
 //-- Call GetAddEventGalleryView Method to load AddImage view with initialized data --//
-function GetAddEventGalleryView(expenseDetailID, eventID) {
+function GetAddEventGalleryView() {
     $("#divAddEventGallery").load("/Events/GetAddEventGalleryView/",
         {  },
         function (responseTxt, statusTxt, xhr) {
@@ -93,14 +93,14 @@ function AddEventGallery() {
 
 //--- Delete Event Photos - Calls DeleteEventPhoto method in Event Controller ---//
 function DeleteEventPhoto(imageID) {
-    if (confirm("Are you sure you want to delete the selected photo (ID " + expenseDetailID + ")?. Please confirm.")) {
+    if (confirm("Are you sure you want to delete the selected event photo (ID " + imageID + ")?. Please confirm.")) {
         $.ajax({
             url: "/Events/DeleteEventPhoto",
             type: "POST",
             data: { ImageID: imageID },
             success: function (data, result) {
                 if (data == "True") {
-                    GeneralWarningsAndErrorDialog("SUCCESS", "Select event photo with ID " + imageID + " deleted successfully.", "green");
+                    GeneralWarningsAndErrorDialog("SUCCESS", "Selected event photo with ID " + imageID + " deleted successfully.", "green");
                     GetEventGalleryPhotosByEventID();
                 }
                 else if (data == "False")

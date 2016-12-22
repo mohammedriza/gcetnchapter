@@ -299,6 +299,7 @@ namespace GCETNChapter.Models.DataAccess
                 {
                     ExpenseDetail.Add(new EventGalleryVO
                     {
+                        ImageID = response.ElementAt(x).ImageID,
                         EventID = response.ElementAt(x).EventID,
                         EventNameList = EventsDA.GetAllEventNames(),
                         EventName = response.ElementAt(x).EventName,

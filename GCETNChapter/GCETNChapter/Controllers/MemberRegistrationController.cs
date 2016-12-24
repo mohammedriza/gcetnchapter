@@ -92,6 +92,9 @@ namespace GCETNChapter.Controllers
 
         public ActionResult Login()
         {
+            if (Session["username"] != null)
+                Response.Redirect("~/MemberProfile/ManageProfile/");
+
             return View();
         }
 

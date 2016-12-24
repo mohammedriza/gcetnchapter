@@ -1,0 +1,53 @@
+﻿@model List<GCETNChapter.Models.ViewModels.UserVO>
+
+<div>
+    <a href="#" id="LnkCreateNewUser"><span class="glyphicon glyphicon-plus"></span> Create New User </a>
+</div>
+<br />
+
+<div class="row">
+    <table id="TblViewUserList" class="table table-responsive">
+        <thead>
+            <tr>
+                <th></th>
+                <th>Username</th>
+                <th>College Reg No</th>
+                <th>Access Role</th>
+                <th>Account Status</th>
+                <th>Created By</th>
+                <th>Created Date</th>
+                <th>Modified By</th>
+                <th>Modified Date</th>
+            </tr>
+        </thead>
+        <tbody>
+            @if (Model != null)
+            {
+                foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            <a href="#" class="editIcon" title="Edit User Account" onclick="GetUserAccountDetailsByUsername('@item.Username')">
+                                <span class="glyphicon glyphicon-pencil"></span>
+                            </a>
+                            <a href="#" class="editIcon" title="Delete User Account" onclick="DeleteUserAccount('@item.Username')">
+                                <span class="glyphicon glyphicon-trash"></span>
+                            </a>
+                            <a href="#" class="editIcon" title="Modify User Profile" onclick="ModifyUserProfile('@item.Username')">
+                                <span class="glyphicon glyphicon-user"></span>
+                            </a>
+                        </td>
+                        <td>@item.Username</td>
+                        <td>@item.CollegeRegistrationNo</td>
+                        <td>@item.AccessRole</td>
+                        <td>@item.AccountStatus</td>
+                        <td>@item.CreatedBy</td>
+                        <td>@item.CreatedDate</td>
+                        <td>@item.ModifiedBy</td>
+                        <td>@item.ModifiedDate</td>
+                    </tr>
+                }
+            }
+        </tbody>
+    </table>
+</div>

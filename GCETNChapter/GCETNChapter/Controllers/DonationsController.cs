@@ -10,6 +10,14 @@ namespace GCETNChapter.Controllers
 {
     public class DonationsController : Controller
     {
+        //--- CHECK IF USER'S SESSION EXIST. ELSE REDIRECT TO HOME PAGE ---//
+        public void CheckSessionStatus()
+        {
+            if (Session["username"] == null)
+                Response.Redirect("~/Home/Index/");
+        }
+
+
         // GET: Donations
         public ActionResult Donations()
         {
@@ -19,6 +27,8 @@ namespace GCETNChapter.Controllers
 
         public PartialViewResult GetAllDonatoinDetails()
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             var response = new DonationDetailsDA().GetAllDonationDetails();
 
             return PartialView("_ViewDonations", response);
@@ -26,6 +36,8 @@ namespace GCETNChapter.Controllers
 
         public PartialViewResult GetDonatoinDetailsByDonationID(int DonationID)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             var response = new DonationDetailsVO();
             response = new DonationDetailsDA().GetDonationDetailsByDonationID(DonationID);
 
@@ -35,6 +47,8 @@ namespace GCETNChapter.Controllers
         [HttpPost]
         public ActionResult AddDonations(DonationDetailsVO donationsVo)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             try
             {
                 var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(donationsVo.CollegeRegistrationNo);
@@ -80,6 +94,8 @@ namespace GCETNChapter.Controllers
         {
             try
             {
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
                 var result = new DonationDetailsDA().DeleteDonations(DonationID);
 
                 if (result >= 1)

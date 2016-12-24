@@ -51,6 +51,14 @@
         <Function Name="prcCheckIfUsernameExist" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcCreateUpdateUserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+          <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
+          <Parameter Name="AccessRole" Type="varchar" Mode="In" />
+          <Parameter Name="AccountStatus" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcDeleteDonations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DonationID" Type="int" Mode="In" />
         </Function>
@@ -65,6 +73,9 @@
         </Function>
         <Function Name="prcDeleteEventPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="ImageID" Type="int" Mode="In" />
+        </Function>
+        <Function Name="prcDeleteUserAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prcGetAuthenticationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
@@ -104,6 +115,9 @@
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prcGetProfileWorkplaceAndExpertiseInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcGetUserDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prcInsertContactUsInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
@@ -367,7 +381,21 @@
           <Parameter Name="EventID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prcDeleteEventPhotos">
-            <Parameter Name="ImageID" Mode="In" Type="Int32" />
+          <Parameter Name="ImageID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetUserDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetUserDetails_Result)">
+          <Parameter Name="Username" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcCreateUpdateUserDetails">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
+            <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+            <Parameter Name="AccessRole" Mode="In" Type="String" />
+            <Parameter Name="AccountStatus" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcDeleteUserAccount">
+          <Parameter Name="Username" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
@@ -491,6 +519,17 @@
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="EventName" Nullable="false" MaxLength="50" />
         </ComplexType>
+        <ComplexType Name="prcGetUserDetails_Result">
+          <Property Type="String" Name="Username" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="Password" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="CollegeRegistrationNo" Nullable="false" MaxLength="12" />
+          <Property Type="String" Name="AccessRole" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="AccountStatus" Nullable="false" MaxLength="10" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -685,6 +724,23 @@
             </ResultMapping>
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="prcDeleteEventPhotos" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteEventPhotos" />
+          <FunctionImportMapping FunctionImportName="prcGetUserDetails" FunctionName="GCE_TN_ChapterModel.Store.prcGetUserDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetUserDetails_Result">
+                <ScalarProperty Name="Username" ColumnName="Username" />
+                <ScalarProperty Name="Password" ColumnName="Password" />
+                <ScalarProperty Name="CollegeRegistrationNo" ColumnName="CollegeRegistrationNo" />
+                <ScalarProperty Name="AccessRole" ColumnName="AccessRole" />
+                <ScalarProperty Name="AccountStatus" ColumnName="AccountStatus" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcCreateUpdateUserDetails" FunctionName="GCE_TN_ChapterModel.Store.prcCreateUpdateUserDetails" />
+          <FunctionImportMapping FunctionImportName="prcDeleteUserAccount" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteUserAccount" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

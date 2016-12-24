@@ -31,7 +31,6 @@ function GetEventDetailsByEventID(eventID) {
                 }
             }
             else if (statusTxt == "error") {
-                alert(responseTxt);
                 GeneralWarningsAndErrorDialog("Error Loading Data...", "Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.", "red");
             }
         });

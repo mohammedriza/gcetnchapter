@@ -29,7 +29,7 @@ function AuthenticateMember() {
         },
         function (data, status) {
             if (data == "Pass" && status == "success")
-                window.location.replace("/MemberProfile/MyProfile");
+                window.location.replace("/MemberProfile/ManageProfile");
             else if (data == "Pending") {
                 $("#LoginProgressModal").modal("hide");
                 GeneralWarningsAndErrorDialog("ALERT...", "Your account is still in pending status. You will be able to login once your account has been approved by the Trust group. Please contact the Trust for assistance.", "red");

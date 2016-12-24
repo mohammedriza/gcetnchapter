@@ -162,5 +162,97 @@ namespace GCETNChapter.Models.DataAccess
         }
 
 
+        //************************************************--- MANAGE USER METHODS ---************************************************//
+
+        public List<string> GetUserAccountStatusList()
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.Database.SqlQuery<string>("SELECT AccountStatus FROM TBL_AccountStatus").ToList();
+                response.Insert(0, "-- Select Account Status --");
+                return response;
+            }
+        }
+
+        public List<string> GetUserAccessRoleList()
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.Database.SqlQuery<string>("SELECT AccessRole FROM dbo.TBL_AccessRoles").ToList();
+                response.Insert(0, "-- Select Access Role --");
+                return response;
+            }
+        }
+
+        public List<UserVO> GetUsersDetails(string Username)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var users = new List<UserVO>();
+                var response = db.prcGetUserDetails(Username).ToList();
+
+                for (int x=0;x<response.Count;x++)
+                {
+                    users.Add(new UserVO()
+                    {
+                        Username=response.ElementAt(x).Username,
+                        Password = response.ElementAt(x).Password,
+                        CollegeRegistrationNo = response.ElementAt(x).CollegeRegistrationNo,
+                        AccessRole = response.ElementAt(x).AccessRole,
+                        AccountStatus = response.ElementAt(x).AccountStatus,
+                        CreatedBy = response.ElementAt(x).CreatedBy,
+                        CreatedDate = response.ElementAt(x).CreatedDate,
+                        ModifiedBy = response.ElementAt(x).ModifiedBy,
+                        ModifiedDate = response.ElementAt(x).ModifiedDate
+                    });
+                }
+                return users;
+            }
+        }
+
+
+        public UserVO GetUsersDetailsByUserID(string Username)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcGetUserDetails(Username).ToList();
+
+                var users = new UserVO()
+                {
+                    Username = response.ElementAt(0).Username,
+                    Password = response.ElementAt(0).Password,
+                    ConfirmPassword = response.ElementAt(0).Password,
+                    CollegeRegistrationNo = response.ElementAt(0).CollegeRegistrationNo,
+                    AccessRole = response.ElementAt(0).AccessRole,
+                    AccountStatus = response.ElementAt(0).AccountStatus,
+                    CreatedBy = response.ElementAt(0).CreatedBy,
+                    CreatedDate = response.ElementAt(0).CreatedDate,
+                    ModifiedBy = response.ElementAt(0).ModifiedBy,
+                    ModifiedDate = response.ElementAt(0).ModifiedDate
+                };
+                return users;
+            }
+        }
+
+
+        public int CreateUpdateUserDetails(UserVO Users)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var rowsEffected = db.prcCreateUpdateUserDetails(Users.Username, Users.Password, Users.CollegeRegistrationNo, Users.AccessRole, Users.AccountStatus, Users.CreatedBy);
+                return rowsEffected;
+            }
+        }
+
+
+        public int DeleteUserAccount(string Username)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var rowsEffected = db.prcDeleteUserAccount(Username);
+                return rowsEffected;
+            }
+        }
+
     }
 }

@@ -10,9 +10,19 @@ namespace GCETNChapter.Controllers
 {
     public class EventsController : Controller
     {
+        //--- CHECK IF USER'S SESSION EXIST. ELSE REDIRECT TO HOME PAGE ---//
+        public void CheckSessionStatus()
+        {
+            if (Session["username"] == null)
+                Response.Redirect("~/Home/Index/");
+        }
+
+
         // GET: Events
         public ActionResult Events()
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             return View();
         }
 
@@ -51,6 +61,8 @@ namespace GCETNChapter.Controllers
         // GET: View All Events
         public PartialViewResult ViewEvents()
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             var response = new EventsDA().GetAllEvents(0);
 
             return PartialView("ManageEvents/_ViewEvents", response);
@@ -59,6 +71,8 @@ namespace GCETNChapter.Controllers
         // GET: Events
         public PartialViewResult GetEventDetailsByEventID(int EventID = 0)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             if (EventID <=0)
             {
                 var eventsVo = new EventsVO()
@@ -77,6 +91,8 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Add Events
         public bool AddNewEvent(EventsVO eventVo)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             var DuplicateEventName = "";
             if (eventVo.EventID <= 0)
             {
@@ -106,6 +122,8 @@ namespace GCETNChapter.Controllers
         {
             try
             {
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
                 var result = new EventsDA().DeleteEvent(EventID);
 
                 if (result >= 1)
@@ -125,6 +143,8 @@ namespace GCETNChapter.Controllers
         // GET: View All Events
         public PartialViewResult GetAllEventPaymentCollections(int PaymentCollectionID)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             var response = new EventsDA().GetAllEventPaymentCollections(PaymentCollectionID);
             return PartialView("PaymentCollections/_ViewEventPaymentCollection", response);
         }
@@ -133,6 +153,8 @@ namespace GCETNChapter.Controllers
         // GET: Events
         public PartialViewResult GetEventPaymentCollectionByID(int PaymentCollectionID = 0, int EventID = 0)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             if (PaymentCollectionID <= 0)
             {
                 var paymentsVo = new EventPaymentCollectionVO()
@@ -154,6 +176,8 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Event Expense Details
         public bool AddEventPaymentCollection(EventPaymentCollectionVO eventPaymentVo)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             eventPaymentVo.CreatedBy = Session["username"].ToString();
             var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(eventPaymentVo.CollegeRegistrationNo);
 
@@ -175,6 +199,8 @@ namespace GCETNChapter.Controllers
         {
             try
             {
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
                 var result = new EventsDA().DeleteEventPaymentCollection(PaymentCollectionID);
 
                 if (result >= 1)
@@ -195,6 +221,8 @@ namespace GCETNChapter.Controllers
         // GET: View All Event Expense Details
         public PartialViewResult GetAllEventExpenseDetails(int ExpenseDetailID)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             var response = new EventsDA().GetAllEventExpenseDetails(ExpenseDetailID);
             return PartialView("ExpenseDetails/_ViewEventExpenseDetails", response);
         }
@@ -203,6 +231,8 @@ namespace GCETNChapter.Controllers
         // GET: Expense Details By ID
         public PartialViewResult GetEventExpenseDetailByID(int ExpenseDetailID = 0, int EventID = 0)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             if (ExpenseDetailID <= 0)
             {
                 var expenseVo = new EventExpenseDetailsVO()
@@ -224,6 +254,8 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Event Expense Details
         public bool AddEventExpenseDetail(EventExpenseDetailsVO expenseVo)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             expenseVo.CreatedBy = Session["username"].ToString();
 
             var result = new EventsDA().AddUpdateEventExpenseDetail(expenseVo);
@@ -239,6 +271,8 @@ namespace GCETNChapter.Controllers
         {
             try
             {
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
                 var result = new EventsDA().DeleteEventExpenseDetail(ExpenseDetailID);
 
                 if (result >= 1)
@@ -258,6 +292,8 @@ namespace GCETNChapter.Controllers
         // GET: View All Events
         public PartialViewResult GetEventGalleryPhotosByEventID(string EventName)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             var galleryVo = new List<EventGalleryVO>();
             var EventID = EventsDA.GetEventIDByEventName(EventName);
 
@@ -293,6 +329,8 @@ namespace GCETNChapter.Controllers
         // GET: Events
         public PartialViewResult GetAddEventGalleryView()
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             var paymentsVo = new EventGalleryVO()
             {
                 CreatedBy = Session["username"].ToString(),
@@ -307,6 +345,8 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Event Expense Details
         public bool AddEventGallery(EventGalleryVO galleryVo)
         {
+            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
             try
             {
                 int rowsEffected = 0;
@@ -338,6 +378,8 @@ namespace GCETNChapter.Controllers
         {
             try
             {
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
                 var result = new EventsDA().DeleteEventPhotos(ImageID);
 
                 if (result >= 1)

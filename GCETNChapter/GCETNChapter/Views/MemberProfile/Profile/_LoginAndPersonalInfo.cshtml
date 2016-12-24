@@ -1,0 +1,92 @@
+﻿@model GCETNChapter.Models.ViewModels.MemberProfileVO
+
+    <div class="panel panel-default">
+    <div class="panel-heading formlabelFontLeft">Personal and Login Information</div>
+    <div class="panel-body">
+
+        <div class="form-horizontal">
+            <div class="row rowPadding">
+                <div>
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.FullName)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", id = "TxtFullName", maxlength = "100" } })
+                        @Html.ValidationMessageFor(model => model.FullName, "", new { @class = "textboxerror" })
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.Gender)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.DropDownListFor(model => model.Gender, new SelectList(ViewBag.GenderList), new { @class = "form-control", id = "DDLGender" })
+                        @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "textboxerror" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row rowPadding">
+                <div>
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.DateOfBirth)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", id = "TxtDOB" } })
+                        @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "textboxerror" })
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.ProfileImage)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.ProfileImage, new { htmlAttributes = new { type = "file", id = "TxtProfileImage" } })
+                        @Html.ValidationMessageFor(model => model.ProfileImage, "", new { @class = "textboxerror" })
+                    </div>
+                </div>
+            </div>
+
+            <br />
+
+            <div class="row rowPadding">
+                <div>
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.Username)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", disabled = "true", id = "TxtUsername", maxlength = "50" } })
+                        @Html.ValidationMessageFor(model => model.Username, "", new { @class = "textboxerror" })
+                    </div>
+                </div>
+            </div>
+
+            <div class="row rowPadding">
+                <div>
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.Password)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "TxtPassword", maxlength = "50" } })
+                        @Html.ValidationMessageFor(model => model.Password, "", new { @class = "textboxerror" })
+                    </div>
+                </div>
+                <div>
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.ConfirmPassword)
+                    </div>
+                    <div class="col-md-4">
+                        @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", id = "TxtConfirmPassword", maxlength = "50" } })
+                        @Html.ValidationMessageFor(model => model.ConfirmPassword, "", new { @class = "textboxerror" })
+                    </div>
+                </div>
+            </div>
+
+            <br />
+            <div class="col-md-12 text-center">
+                <input type="button" value="Save Changes" class="btn btn-primary" onclick="UpdatePersonalAndLoginInfo();" />
+            </div>
+        </div>
+
+    </div>
+</div>

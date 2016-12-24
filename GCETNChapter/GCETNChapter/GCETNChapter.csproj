@@ -235,6 +235,7 @@
     <Compile Include="Models\ViewModels\MemberProfileVO.cs" />
     <Compile Include="Models\ViewModels\ContactUsVO.cs" />
     <Compile Include="Models\ViewModels\MemberRegistrationVO.cs" />
+    <Compile Include="Models\ViewModels\UserVO.cs" />
     <Compile Include="prcEventPhotosByEventID_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
@@ -278,6 +279,9 @@
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="prcGetProfileWorkplaceAndExpertiseInformation_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetUserDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -519,7 +523,8 @@
     <Content Include="JQueryScripts\HomePage.js" />
     <Content Include="JQueryScripts\LoginPage.js" />
     <Content Include="JQueryScripts\MemberPages\Donations.js" />
-    <Content Include="JQueryScripts\MemberPages\MyProfile.js" />
+    <Content Include="JQueryScripts\Profile\MyProfile.js" />
+    <Content Include="JQueryScripts\Profile\ManageUsers.js" />
     <Content Include="JQueryScripts\RegistrationPage.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
@@ -653,16 +658,16 @@
     <Content Include="Views\MemberRegistration\Registration.cshtml" />
     <Content Include="Views\MemberRegistration\Login.cshtml" />
     <Content Include="Views\Shared\_SuccessErrorMessages.cshtml" />
-    <Content Include="Views\MemberProfile\MyProfile.cshtml" />
+    <Content Include="Views\MemberProfile\ManageProfile.cshtml" />
     <Content Include="Views\Shared\_FooterSection.cshtml" />
     <Content Include="Views\Shared\_PublicHeaderSection.cshtml" />
     <Content Include="Views\Shared\_MemberHeaderSection.cshtml" />
     <Content Include="Views\MemberProfile\Logout.cshtml" />
-    <Content Include="Views\Shared\MemberProfile\_LoginAndPersonalInfo.cshtml" />
-    <Content Include="Views\Shared\MemberProfile\_ContactInformation.cshtml" />
-    <Content Include="Views\Shared\MemberProfile\_CollegeInformation.cshtml" />
-    <Content Include="Views\Shared\MemberProfile\_AddressInformation.cshtml" />
-    <Content Include="Views\Shared\MemberProfile\_WorkplaceAndExpertiseInformation.cshtml" />
+    <Content Include="Views\MemberProfile\Profile\_LoginAndPersonalInfo.cshtml" />
+    <Content Include="Views\MemberProfile\Profile\_ContactInformation.cshtml" />
+    <Content Include="Views\MemberProfile\Profile\_CollegeInformation.cshtml" />
+    <Content Include="Views\MemberProfile\Profile\_AddressInformation.cshtml" />
+    <Content Include="Views\MemberProfile\Profile\_WorkplaceAndExpertiseInformation.cshtml" />
     <Content Include="Views\Shared\_ReusableModalPopup.cshtml" />
     <Content Include="Views\Donations\Donations.cshtml" />
     <Content Include="Views\Home\MessageSent.cshtml" />
@@ -677,6 +682,8 @@
     <Content Include="Views\Donations\_ViewDonations.cshtml" />
     <Content Include="Views\Events\Gallery\_AddEventGallery.cshtml" />
     <Content Include="Views\Events\Gallery\_ViewEventGallery.cshtml" />
+    <Content Include="Views\MemberProfile\User\_ViewUserList.cshtml" />
+    <Content Include="Views\MemberProfile\User\_AddUpdateUser.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

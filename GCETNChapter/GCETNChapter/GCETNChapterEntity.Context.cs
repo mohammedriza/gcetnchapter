@@ -668,5 +668,52 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteEventPhotos", imageIDParameter);
         }
+    
+        public virtual ObjectResult<prcGetUserDetails_Result> prcGetUserDetails(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetUserDetails_Result>("prcGetUserDetails", usernameParameter);
+        }
+    
+        public virtual int prcCreateUpdateUserDetails(string username, string password, string collegeRegistrationNo, string accessRole, string accountStatus, string createdBy)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            var collegeRegistrationNoParameter = collegeRegistrationNo != null ?
+                new ObjectParameter("CollegeRegistrationNo", collegeRegistrationNo) :
+                new ObjectParameter("CollegeRegistrationNo", typeof(string));
+    
+            var accessRoleParameter = accessRole != null ?
+                new ObjectParameter("AccessRole", accessRole) :
+                new ObjectParameter("AccessRole", typeof(string));
+    
+            var accountStatusParameter = accountStatus != null ?
+                new ObjectParameter("AccountStatus", accountStatus) :
+                new ObjectParameter("AccountStatus", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcCreateUpdateUserDetails", usernameParameter, passwordParameter, collegeRegistrationNoParameter, accessRoleParameter, accountStatusParameter, createdByParameter);
+        }
+    
+        public virtual int prcDeleteUserAccount(string username)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteUserAccount", usernameParameter);
+        }
     }
 }

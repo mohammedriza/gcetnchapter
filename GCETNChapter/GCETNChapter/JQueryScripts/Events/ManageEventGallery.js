@@ -11,7 +11,6 @@ function GetEventGalleryPhotosByEventID() {
             if (statusTxt == "success") {
                 //-- Call method to show divViewEventGallery and hide the others --//
                 showViewEventGallery();
-                defineTable();
             }
             else if (statusTxt == "error") {
                 GeneralWarningsAndErrorDialog("Error Loading Data...", "Failed to load data. Please open the application in a new browser and try again. \n\nIf the issue still continues, please contact your systems administrator for assistance.", "red");
@@ -157,7 +156,7 @@ $(document).on("change", "#DDLEventName_ViewGallery", function () {
 function showViewEventGallery() {
     $("#divViewEventGallery").fadeIn(1000);
     $("#divAddEventGallery").hide();
-    $("#TblViewEventGallery_EG").DataTable();
+    //$("#TblViewEventGallery_EG").DataTable();
 }
 
 function showAddEventGallery() {

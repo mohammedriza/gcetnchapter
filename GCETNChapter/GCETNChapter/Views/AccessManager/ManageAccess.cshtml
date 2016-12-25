@@ -1,0 +1,38 @@
+﻿@model List<GCETNChapter.Models.ViewModels.ManageAccess.AccessLevelsVO>
+<script src="~/JQueryScripts/AccessManager/AccessLevels.js"></script>
+
+@{
+    ViewBag.Title = "ManageAccess";
+}
+
+<div id="divManageAccessPage" class="partialBodySection hideDiv">
+
+    <span class="headerText">Manage Access Rights</span>
+    <br /><br /><br />
+
+    <div id="divManageAccessLevels">
+        @Html.Partial("AccessLevel/_ManageAccessLevel", Model)
+    </div>
+
+
+    <!-- MODAL POPUP FOR "ADD NEW ACCESS ROLE" -->
+    <div id="AddNewAccessRoleModal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <span class="modal-title text-success" style="font-weight: bold;"> Add New Access Role </span>
+                </div>
+                <div class="modal-body">
+                    <span class="control-label">
+                        @Html.Partial("AccessLevel/_CreateAccessRole")
+                    </span>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+</div>

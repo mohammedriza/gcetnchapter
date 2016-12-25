@@ -1,0 +1,85 @@
+﻿@model IEnumerable<GCETNChapter.Models.ViewModels.ManageAccess.AccessLevelsVO>
+
+
+<div class="row">
+    <div class="col-md-3">
+        <div class="form-group">
+            <a href="#" id="LnkAddNewAccessRole"><span class="glyphicon glyphicon-plus"></span> Create New Access Role </a>
+        </div>
+    </div>
+    <div class="col-md-9 text-left">
+        @if (Model != null)
+        {
+            <span class="formlabelFontLeft"> Select an Access Role to View Access Levels </span>
+            @Html.DropDownList("Role", new SelectList(ViewBag.AccessRoles, ViewBag.Role), new { @class = "dropdownstyle", id = "DDLAccessRoleList" })
+        }
+    </div>
+
+</div>
+<br />
+
+<table class="table">
+    <tr class="formlabelFontLeft">
+        <th>
+            @Html.DisplayNameFor(model => model.AccessID)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Page)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccessLevel)
+        </th>
+        <th class="text-center">
+            @Html.DisplayNameFor(model => model.GrantAccess)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.AccessRole)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CreatedDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedBy)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.ModifiedDate)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr class="normalFontLeft">
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessID)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Page)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessLevel)
+        </td>
+        <td class="text-center">
+            @Html.CheckBoxFor(modelItem => item.GrantAccess)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.AccessRole)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CreatedDate)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedBy)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.ModifiedDate)
+        </td>
+    </tr>
+}
+
+</table>

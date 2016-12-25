@@ -19,6 +19,12 @@
           <Parameter Name="TotalExpenseAmount" Type="decimal" Mode="In" />
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcAddUpdateAccessRights" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccessID" Type="int" Mode="In" />
+          <Parameter Name="GrantAccess" Type="bit" Mode="In" />
+          <Parameter Name="AccessRole" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcAddUpdateDonationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DonationID" Type="int" Mode="In" />
           <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
@@ -76,6 +82,9 @@
         </Function>
         <Function Name="prcDeleteUserAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcGetAccessLevelDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccessRole" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prcGetAuthenticationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
@@ -397,6 +406,15 @@
           <FunctionImport Name="prcDeleteUserAccount">
           <Parameter Name="Username" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="prcAddUpdateAccessRights">
+            <Parameter Name="AccessID" Mode="In" Type="Int32" />
+            <Parameter Name="GrantAccess" Mode="In" Type="Boolean" />
+            <Parameter Name="AccessRole" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetAccessLevelDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetAccessLevelDetails_Result)">
+            <Parameter Name="AccessRole" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -530,6 +548,17 @@
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
           </ComplexType>
+        <ComplexType Name="prcGetAccessLevelDetails_Result">
+          <Property Type="Int32" Name="AccessID" Nullable="false" />
+          <Property Type="String" Name="Page" Nullable="true" MaxLength="50" />
+          <Property Type="String" Name="AccessLevel" Nullable="false" MaxLength="50" />
+          <Property Type="Boolean" Name="GrantAccess" Nullable="true" />
+          <Property Type="String" Name="AccessRole" Nullable="true" MaxLength="10" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
@@ -741,6 +770,22 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="prcCreateUpdateUserDetails" FunctionName="GCE_TN_ChapterModel.Store.prcCreateUpdateUserDetails" />
           <FunctionImportMapping FunctionImportName="prcDeleteUserAccount" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteUserAccount" />
+          <FunctionImportMapping FunctionImportName="prcAddUpdateAccessRights" FunctionName="GCE_TN_ChapterModel.Store.prcAddUpdateAccessRights" />
+          <FunctionImportMapping FunctionImportName="prcGetAccessLevelDetails" FunctionName="GCE_TN_ChapterModel.Store.prcGetAccessLevelDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetAccessLevelDetails_Result">
+                <ScalarProperty Name="AccessID" ColumnName="AccessID" />
+                <ScalarProperty Name="Page" ColumnName="Page" />
+                <ScalarProperty Name="AccessLevel" ColumnName="AccessLevel" />
+                <ScalarProperty Name="GrantAccess" ColumnName="GrantAccess" />
+                <ScalarProperty Name="AccessRole" ColumnName="AccessRole" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -715,5 +715,35 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteUserAccount", usernameParameter);
         }
+    
+        public virtual int prcAddUpdateAccessRights(Nullable<int> accessID, Nullable<bool> grantAccess, string accessRole, string createdBy)
+        {
+            var accessIDParameter = accessID.HasValue ?
+                new ObjectParameter("AccessID", accessID) :
+                new ObjectParameter("AccessID", typeof(int));
+    
+            var grantAccessParameter = grantAccess.HasValue ?
+                new ObjectParameter("GrantAccess", grantAccess) :
+                new ObjectParameter("GrantAccess", typeof(bool));
+    
+            var accessRoleParameter = accessRole != null ?
+                new ObjectParameter("AccessRole", accessRole) :
+                new ObjectParameter("AccessRole", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddUpdateAccessRights", accessIDParameter, grantAccessParameter, accessRoleParameter, createdByParameter);
+        }
+    
+        public virtual ObjectResult<prcGetAccessLevelDetails_Result> prcGetAccessLevelDetails(string accessRole)
+        {
+            var accessRoleParameter = accessRole != null ?
+                new ObjectParameter("AccessRole", accessRole) :
+                new ObjectParameter("AccessRole", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetAccessLevelDetails_Result>("prcGetAccessLevelDetails", accessRoleParameter);
+        }
     }
 }

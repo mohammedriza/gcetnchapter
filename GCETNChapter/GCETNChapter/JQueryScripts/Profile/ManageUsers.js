@@ -10,7 +10,7 @@ function GetUserAccountDetailsByUsername(username) {
                 ShowAddUpdateUserView();
                 $("#TxtUsername_Add").prop("disabled", true);       //--- Disable the Username Textbox when Updating user ---//
                 $("#BtnResetPassword_Add").removeClass("hidden");   //--- Hide the Reset Password button when Adding a new User ---//
-                $("#BtnAddNewuser").val("Modify User");
+                $("#BtnAddNewuser").val("Update User");
 
                 $("#TxtCollegeRegNo_Add").prop("disabled", true);   //-- Disable the Username Textbox when Updating user ---//
                 $("#LblTransType").val("UPDATE");                   //--- Set Transcation Type to UPDATE when updating User ---//
@@ -166,7 +166,7 @@ $(document).on("click", "#LnkCreateNewUser", function () {
         ShowAddUpdateUserView();
         $("#TxtUsername_Add").prop("disabled", false);  //--- Enable the Username Textbox when Adding a new user, else disable it ---//
         $("#BtnResetPassword_Add").addClass("hidden");  //--- Hide the Reset Password button when Adding a new User ---//
-        $("#BtnAddNewuser").val("Create User");         //--- Set the button Vlaue to "Create User"
+        $("#BtnAddNewuser").val("Create User");         //--- Set the button Value to "Create User"
         $("#LblTransType").val("ADD");                  //--- Set Transcation Type to ADD when creating new User ---//
     }
     else if (returnVal == "False") {

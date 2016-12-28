@@ -26,7 +26,7 @@ function GetEventPaymentCollectionByID(paymentCollectionID, eventID) {
                 //-- Call method to show divAddEventPaymentCollection and hide the others --//
                 showAddEventPaymentCollection();
                 if (paymentCollectionID > 0) {
-                    $("#BtnSaveEventPaymentCollection_EPC").val("Edit Payment Collection");
+                    //$("#BtnSaveEventPaymentCollection_EPC").val("Edit Payment Collection");
                     $("#LblPaymentCollectionHeader").text("Edit Payment Collection");
                 }
             }
@@ -143,7 +143,7 @@ $(document).on("click", "#BtnSaveEventPaymentCollection_EPC", function () {
 $(document).on("click", "#LnkAddPaymentCollection_EPC", function () {
     showAddEventPaymentCollection();
     GetEventPaymentCollectionByID(0, 0);
-    $("#BtnSaveEventPaymentCollection_EPC").val("Add Payment Collection");
+    //$("#BtnSaveEventPaymentCollection_EPC").val("Add Payment Collection");
     $("#LblPaymentCollectionHeader").text("Add Payment Collection");
 });
 

@@ -10,6 +10,11 @@
           <Parameter Name="Image" Type="varchar" Mode="In" />
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcAddNewAccessRole" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccessRole" Type="varchar" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+          <Parameter Name="Result" Type="int" Mode="InOut" />
+        </Function>
         <Function Name="prcAddNewEvent" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
           <Parameter Name="EventName" Type="varchar" Mode="In" />
@@ -82,6 +87,10 @@
         </Function>
         <Function Name="prcDeleteUserAccount" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcGetAccessLevelAuthorization" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AccessID" Type="int" Mode="In" />
+          <Parameter Name="AccessRole" Type="varchar" Mode="In" />
         </Function>
         <Function Name="prcGetAccessLevelDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AccessRole" Type="varchar" Mode="In" />
@@ -413,6 +422,15 @@
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="prcGetAccessLevelDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetAccessLevelDetails_Result)">
+          <Parameter Name="AccessRole" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcAddNewAccessRole">
+            <Parameter Name="AccessRole" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+            <Parameter Name="Result" Mode="InOut" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetAccessLevelAuthorization" ReturnType="Collection(Boolean)">
+            <Parameter Name="AccessID" Mode="In" Type="Int32" />
             <Parameter Name="AccessRole" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
@@ -786,6 +804,8 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcAddNewAccessRole" FunctionName="GCE_TN_ChapterModel.Store.prcAddNewAccessRole" />
+          <FunctionImportMapping FunctionImportName="prcGetAccessLevelAuthorization" FunctionName="GCE_TN_ChapterModel.Store.prcGetAccessLevelAuthorization" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

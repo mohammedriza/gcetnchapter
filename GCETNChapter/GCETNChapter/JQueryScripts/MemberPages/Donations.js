@@ -54,12 +54,14 @@ function DeleteDonations(donationID) {
             type: "POST",
             data: { DonationID: donationID },
             success: function (data, result) {
-                if (data == "True") {
+                if (data == "success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Donation ID " + donationID + " and all its details are deleted successfully.", "green");
                     GetAllDonatoinDetails();
                 }
-                else if (data == "False")
+                else if (data == "error")
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the selected Donation. Please try again later.", "red");
+                else if (data == "401")
+                    ShowAccessDeniedMessage();
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
@@ -76,8 +78,14 @@ function DeleteDonations(donationID) {
 
 //--- Show AddDontaionts section when "Add Donation" link is clicked ---//
 $(document).on("click", "#LnkAddNewDonation", function () {
-    ShowDivAddDonations();
-    InitializeAdd();
+    var returnVal = CheckForAccessAuthorization(116);
+    if (returnVal == "True") {
+        ShowDivAddDonations();
+        InitializeAdd();
+    }
+    else if (returnVal == "False") {
+        ShowAccessDeniedMessage();
+    }
 });
 
 //-- Show ViewDonations section when user cancels AddDonations view

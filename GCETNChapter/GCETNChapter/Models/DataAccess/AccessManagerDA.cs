@@ -1,6 +1,7 @@
 ﻿using GCETNChapter.Models.ViewModels.ManageAccess;
 using System;
 using System.Collections.Generic;
+using System.Data.Entity.Core.Objects;
 using System.Linq;
 using System.Web;
 
@@ -31,6 +32,28 @@ namespace GCETNChapter.Models.DataAccess
                     });
                 }
                 return accessLevels;
+            }
+        }
+
+
+        public int AddNewAccessRole(string AccessRole, string CreatedBy)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                ObjectParameter ResultValue = new ObjectParameter("Result", typeof(int));
+                var response = db.prcAddNewAccessRole(AccessRole, CreatedBy, ResultValue);
+
+                return Convert.ToInt32(ResultValue.Value);
+            }
+        }
+
+
+        public int prcAddUpdateAccessRights(AccessLevelsVO accessLevel)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcAddUpdateAccessRights(accessLevel.AccessID, accessLevel.GrantAccess, accessLevel.AccessRole, accessLevel.CreatedBy);
+                return response;
             }
         }
     }

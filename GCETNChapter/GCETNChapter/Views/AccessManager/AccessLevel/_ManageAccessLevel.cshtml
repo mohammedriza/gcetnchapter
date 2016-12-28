@@ -1,24 +1,28 @@
 ﻿@model IEnumerable<GCETNChapter.Models.ViewModels.ManageAccess.AccessLevelsVO>
 
 
+
 <div class="row">
+    <div class="form-group col-md-12">
+        <span class="text-danger"><span class="glyphicon glyphicon-warning-sign" style="font-size: 25px;"></span>&nbsp; Making changes to any of the values in the below table (in database) will impact the entire Access Manager functionality throughout the website. Only changes through this page will be accomodated.</span>
+    </div>
+    <br />
     <div class="col-md-3">
         <div class="form-group">
             <a href="#" id="LnkAddNewAccessRole"><span class="glyphicon glyphicon-plus"></span> Create New Access Role </a>
         </div>
     </div>
     <div class="col-md-9 text-left">
-        @if (Model != null)
-        {
             <span class="formlabelFontLeft"> Select an Access Role to View Access Levels </span>
             @Html.DropDownList("Role", new SelectList(ViewBag.AccessRoles, ViewBag.Role), new { @class = "dropdownstyle", id = "DDLAccessRoleList" })
-        }
     </div>
 
 </div>
 <br />
 
-<table class="table">
+@if (Model != null)
+{
+<table id="TblAccessLevels" class="table table-hover table-responsive">
     <tr class="formlabelFontLeft">
         <th>
             @Html.DisplayNameFor(model => model.AccessID)
@@ -31,9 +35,6 @@
         </th>
         <th class="text-center">
             @Html.DisplayNameFor(model => model.GrantAccess)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccessRole)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreatedBy)
@@ -50,9 +51,10 @@
         <th></th>
     </tr>
 
-@foreach (var item in Model) {
+@foreach (var item in Model)
+{
     <tr class="normalFontLeft">
-        <td>
+        <td id="LblAccessID">
             @Html.DisplayFor(modelItem => item.AccessID)
         </td>
         <td>
@@ -62,10 +64,7 @@
             @Html.DisplayFor(modelItem => item.AccessLevel)
         </td>
         <td class="text-center">
-            @Html.CheckBoxFor(modelItem => item.GrantAccess)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessRole)
+            @Html.CheckBoxFor(modelItem => item.GrantAccess, new { id = "ChboxGrantAccess", onclick = "GetSelectedRowAccessLevel();" })
         </td>
         <td>
             @Html.DisplayFor(modelItem => item.CreatedBy)
@@ -83,3 +82,4 @@
 }
 
 </table>
+}

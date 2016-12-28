@@ -99,12 +99,16 @@ function DeleteEventPhoto(imageID) {
             type: "POST",
             data: { ImageID: imageID },
             success: function (data, result) {
-                if (data == "True") {
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Selected event photo with ID " + imageID + " deleted successfully.", "green");
                     GetEventGalleryPhotosByEventID();
                 }
-                else if (data == "False")
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the selected event Photo. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");

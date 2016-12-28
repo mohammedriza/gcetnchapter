@@ -45,12 +45,16 @@ function DeleteEventPaymentCollection(paymentCollectionID) {
             type: "POST",
             data: { PaymentCollectionID: paymentCollectionID },
             success: function (data, result) {
-                if (data == "True") {
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Payment Collection ID " + paymentCollectionID + " and its details are deleted successfully.", "green");
                     GetAllEventPaymentCollections();
                 }
-                else if (data == "False")
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the selected Payment Collection item. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");

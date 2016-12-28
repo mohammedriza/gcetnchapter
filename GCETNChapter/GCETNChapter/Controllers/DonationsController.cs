@@ -11,7 +11,7 @@ namespace GCETNChapter.Controllers
     public class DonationsController : Controller
     {
         //--- CHECK IF USER'S SESSION EXIST. ELSE REDIRECT TO HOME PAGE ---//
-        public void CheckSessionStatus()
+        private void CheckSessionStatus()
         {
             if (Session["username"] == null)
                 Response.Redirect("~/Home/Index/");
@@ -28,20 +28,31 @@ namespace GCETNChapter.Controllers
         public PartialViewResult GetAllDonatoinDetails()
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(115);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-            var response = new DonationDetailsDA().GetAllDonationDetails();
-
-            return PartialView("_ViewDonations", response);
+            if (authorize == false)
+                return PartialView("_UnauthorizedAccess");
+            else
+            {
+                var response = new DonationDetailsDA().GetAllDonationDetails();
+                return PartialView("_ViewDonations", response);
+            }
         }
 
         public PartialViewResult GetDonatoinDetailsByDonationID(int DonationID)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(117);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-            var response = new DonationDetailsVO();
-            response = new DonationDetailsDA().GetDonationDetailsByDonationID(DonationID);
+            if (authorize == false)
+                return PartialView("_UnauthorizedAccess");
+            else
+            {
+                var response = new DonationDetailsVO();
+                response = new DonationDetailsDA().GetDonationDetailsByDonationID(DonationID);
 
-            return PartialView("_AddDonations", response);
+                return PartialView("_AddDonations", response);
+            }
         }
 
         [HttpPost]
@@ -51,33 +62,40 @@ namespace GCETNChapter.Controllers
 
             try
             {
-                var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(donationsVo.CollegeRegistrationNo);
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(116);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                if (string.IsNullOrEmpty(CollegeRegNoExist))
-                {
-                    ViewBag.Failure = "The College Registratoin No you entered does not exist. Please enter a valid College Registratoin No. \n\n NOTE: Please make sure the user is already registered as a member.";
-                }
-                else if (donationsVo.PaymentStartDate > donationsVo.PaymentEndDate)
-                {
-                    ViewBag.Failure = "Payment Start Date should be On or before Payment End Date. Please correct the informatoin and resubmit.";
-                }
-                else if (donationsVo.PaymentDate > DateTime.Now)
-                {
-                    ViewBag.Failure = string.Format("Payment Date should be On or before {0}. Please enter a valid Payment Date.", DateTime.Now.ToShortDateString());
-                }
-                else if (donationsVo.Amount.ToString().Length > 11)
-                {
-                    ViewBag.Failure = string.Format("Amount Paid should not exceed 8 digits and 2 decimals. E.g: 99999999.99 is the max value for this field.");
-                }
+                if (authorize == false)
+                    ViewBag.Failure = "Sorry. You do not have access to perform this action. Please contact the systems administrator to request for access.";
                 else
                 {
-                    donationsVo.CreatedBy = Session["username"].ToString();
-                    var result = new DonationDetailsDA().AddUpdateDonationDetails(donationsVo);
+                    var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(donationsVo.CollegeRegistrationNo);
 
-                    if (result >= 1)
-                        ViewBag.Success = "Donation details saved successfully.";
+                    if (string.IsNullOrEmpty(CollegeRegNoExist))
+                    {
+                        ViewBag.Failure = "The College Registratoin No you entered does not exist. Please enter a valid College Registratoin No. \n\n NOTE: Please make sure the user is already registered as a member.";
+                    }
+                    else if (donationsVo.PaymentStartDate > donationsVo.PaymentEndDate)
+                    {
+                        ViewBag.Failure = "Payment Start Date should be On or before Payment End Date. Please correct the informatoin and resubmit.";
+                    }
+                    else if (donationsVo.PaymentDate > DateTime.Now)
+                    {
+                        ViewBag.Failure = string.Format("Payment Date should be On or before {0}. Please enter a valid Payment Date.", DateTime.Now.ToShortDateString());
+                    }
+                    else if (donationsVo.Amount.ToString().Length > 11)
+                    {
+                        ViewBag.Failure = string.Format("Amount Paid should not exceed 8 digits and 2 decimals. E.g: 99999999.99 is the max value for this field.");
+                    }
                     else
-                        ViewBag.Failure = "Failed to save Donation details. Please try again later or contact your systems administrator for assistance.";
+                    {
+                        donationsVo.CreatedBy = Session["username"].ToString();
+                        var result = new DonationDetailsDA().AddUpdateDonationDetails(donationsVo);
+
+                        if (result >= 1)
+                            ViewBag.Success = "Donation details saved successfully.";
+                        else
+                            ViewBag.Failure = "Failed to save Donation details. Please try again later or contact your systems administrator for assistance.";
+                    }
                 }
             }
             catch(Exception ex)
@@ -90,22 +108,29 @@ namespace GCETNChapter.Controllers
 
 
         [HttpPost]
-        public bool DeleteDonations(int DonationID)
+        public string DeleteDonations(int DonationID)
         {
             try
             {
-                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(118);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                var result = new DonationDetailsDA().DeleteDonations(DonationID);
-
-                if (result >= 1)
-                    return true;
+                if (authorize == false)
+                    return "401";
                 else
-                    return false;
+                {
+                    CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+
+                    var result = new DonationDetailsDA().DeleteDonations(DonationID);
+
+                    if (result >= 1)
+                        return "success";
+                    else
+                        return "error";
+                }
             }
             catch (Exception)
             {
-                return false;
+                return "error";
             }
         }
     }

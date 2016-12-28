@@ -17,15 +17,11 @@ namespace GCETNChapter.Controllers
 
         public ActionResult AboutUs()
         {
-            ViewBag.Message = "Your application description page.";
-
             return View();
         }
 
         public ActionResult ContactForm()
         {
-            ViewBag.Message = "Your contact page.";
-
             return View();
         }
 

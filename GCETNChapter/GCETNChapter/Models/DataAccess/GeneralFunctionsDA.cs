@@ -1,4 +1,5 @@
-﻿using System;
+﻿using GCETNChapter.Models.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
@@ -15,6 +16,19 @@ namespace GCETNChapter.Models.DataAccess
                 value = value.Substring(0, length) + "...";
             }
             return value;
+        }
+
+
+        public bool GetAccessLevelAuthorization(int AccessID)
+        {
+            var LoginInfo = new LoginDetailsVO();
+            LoginInfo = (LoginDetailsVO)HttpContext.Current.Session["logininfo"];
+
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcGetAccessLevelAuthorization(AccessID, LoginInfo.AccessRole).FirstOrDefault();
+                return Convert.ToBoolean(response);
+            }
         }
     }
 }

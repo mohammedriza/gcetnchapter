@@ -46,12 +46,16 @@ function DeleteEvent(eventID)
             type: "POST",
             data: { EventID: eventID },
             success: function (data, result) {
-                if (data == "True") {
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Event ID " + eventID + " and all its details are deleted successfully.", "green");
                     GetViewEventsPartialView();
                 }
-                else if (data == "False")
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the event. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");

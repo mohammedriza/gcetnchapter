@@ -45,12 +45,16 @@ function DeleteEventExpenseDetail(expenseDetailID) {
             type: "POST",
             data: { ExpenseDetailID: expenseDetailID },
             success: function (data, result) {
-                if (data == "True") {
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Expense Detail ID " + expenseDetailID + " and its details are deleted successfully.", "green");
                     GetAllEventExpenseDetails();
                 }
-                else if (data == "False")
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the selected Expense Detail item. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");

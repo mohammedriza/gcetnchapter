@@ -7,6 +7,8 @@
     $("#LnkManageAccess").removeClass("menuitemSelected");
     $("#LnkAdvertisements").removeClass("menuitemSelected");
     $("#LnkMyProfile").addClass("menuitemSelected");
+
+    MyProfileSelectorCss();
 })
 
 //-- Ajax Load Method to pull data from the controller, using the username parsed to the controller, to load the partial view --//
@@ -149,15 +151,20 @@ function UpdatePersonalAndLoginInfo() {
                 ProfileImage: profileImg
             },
             success: function (data, result) {
-                if (data == "True")
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
-                else
+                }
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
             }
-        })
+        });
     }
 }
 
@@ -185,15 +192,20 @@ function UpdateProfileAddressInformation() {
                 PermanentCountry: permanentCountry
             },
             success: function (data, result) {
-                if (data == "True")
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
-                else
+                }
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
             }
-        })
+        });
     }
 }
 
@@ -223,15 +235,20 @@ function UpdateProfileCollegeInformation() {
                 EngineeringDescipline: engDescipline
             },
             success: function (data, result) {
-                if (data == "True")
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
-                else
+                }
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
             }
-        })
+        });
     }
 }
 
@@ -259,15 +276,20 @@ function UpdateProfileContactInformation() {
                 Email: email
             },
             success: function (data, result) {
-                if (data == "True")
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
-                else
+                }
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
             }
-        })
+        });
     }
 }
 
@@ -300,15 +322,20 @@ function UpdateProfileWorkplaceAndExpertiseInfo() {
                 Expertise5: expertise5,
             },
             success: function (data, result) {
-                if (data == "True")
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
-                else
+                }
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
             }
-        })
+        });
     }
 }
 
@@ -379,16 +406,19 @@ $(document).on("click", "#LnkManageMemberProfile", function () {
     $("#LblProfileHeaderText").text("Manage User & Profiles");
     $("#LblProfileOwnerUsername").text("");
     GetAllUserAccountDetails();
+    ManageUsersSelectorCss();
 });
 
 $(document).on("click", "#LnkMyProfile", function () {
     ShowMyProfile();
+    MyProfileSelectorCss();
 });
 
 function ShowMyProfile() {
     $("#divManageProfile").fadeIn(1000);
     $("#divManageUsers").hide();
     $("#LblProfileHeaderText").text("My Profile");
+    $("#LblProfileOwnerUsername").text("");
 
     $("#divWelcomeMessage").fadeIn(1000);
     $("#divLoginAndPersonalInfo").hide();    
@@ -398,4 +428,15 @@ function ShowMyProfile() {
     $("#divWorkplaceAndExpertiseInfo").hide();
 }
 
+
+//--- CHANGE SUB HEADING HIGLIGHT COLOR WHEN A PARTICULAR SUB HEADING IS CLICKED ---//
+function MyProfileSelectorCss() {
+    $("#LnkMyProfile P").addClass("subHeadingSelector");
+    $("#LnkManageMemberProfile P").removeClass("subHeadingSelector");
+}
+
+function ManageUsersSelectorCss() {
+    $("#LnkMyProfile P").removeClass("subHeadingSelector");
+    $("#LnkManageMemberProfile P").addClass("subHeadingSelector");
+}
 

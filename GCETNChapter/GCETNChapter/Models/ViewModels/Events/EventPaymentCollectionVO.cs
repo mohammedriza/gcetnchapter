@@ -26,7 +26,7 @@ namespace GCETNChapter.Models.ViewModels.Events
         [Display(Name = "Member Name")]
         public string MemberName { get; set; }
 
-        [Display(Name = "* Expense Date")]
+        [Display(Name = "* Payment Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? PaymentDate { get; set; }

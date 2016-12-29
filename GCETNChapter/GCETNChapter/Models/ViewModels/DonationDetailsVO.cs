@@ -16,6 +16,9 @@ namespace GCETNChapter.Models.ViewModels
         [Required(ErrorMessage = "Please enter a valid College Registration No.")]
         public string CollegeRegistrationNo { get; set; }
 
+        [Display(Name = "Member Name")]
+        public string MemberName { get; set; }
+
         [Display(Name = "* Amount")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Please enter a valid Amount.")]

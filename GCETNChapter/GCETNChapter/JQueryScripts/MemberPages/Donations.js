@@ -88,6 +88,7 @@ $(document).on("click", "#LnkAddNewDonation", function () {
     }
 });
 
+
 //-- Show ViewDonations section when user cancels AddDonations view
 $(document).on("click", "#LnkCancelAddNewDonation", function () {
     ShowDivViewDonations();

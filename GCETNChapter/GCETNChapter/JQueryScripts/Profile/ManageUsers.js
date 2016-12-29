@@ -165,9 +165,12 @@ $(document).on("click", "#LnkCreateNewUser", function () {
     if (returnVal == "True") {
         ShowAddUpdateUserView();
         $("#TxtUsername_Add").prop("disabled", false);  //--- Enable the Username Textbox when Adding a new user, else disable it ---//
+        $("#TxtCollegeRegNo_Add").prop("disabled", false);  //--- Enable the Username Textbox when Adding a new user, else disable it ---//
         $("#BtnResetPassword_Add").addClass("hidden");  //--- Hide the Reset Password button when Adding a new User ---//
         $("#BtnAddNewuser").val("Create User");         //--- Set the button Value to "Create User"
         $("#LblTransType").val("ADD");                  //--- Set Transcation Type to ADD when creating new User ---//
+
+        InitializeAddUserView();                        //--- Initialize the Add User View and clear all textboxes and set to default ---//
     }
     else if (returnVal == "False") {
         ShowAccessDeniedMessage();
@@ -199,4 +202,14 @@ function ShowViewUserListView()
 function ShowAddUpdateUserView() {
     $("#divAddUpdateUser").fadeIn(1000);
     $("#divViewUserList").hide();
+}
+
+function InitializeAddUserView()
+{
+    $("#TxtUsername_Add").val("");
+    $("#TxtPassword_Add").val("");
+    $("#TxtConfirmPassword_Add").val("");
+    $("#TxtCollegeRegNo_Add").val("");
+    $("#DDLAccessRole_Add").val("-- Select Access Role --");
+    $("#DDAccountStatus_Add").val("-- Select Account Status --");
 }

@@ -16,7 +16,7 @@ $(function () {
 
 function CheckIfValidCollegeRegNo()
 {
-    var collegeRegNo = $("#TxtCollegeRegNo_EPC").val();
+    var collegeRegNo = $("#TxtCollegeRegNo_Lookup").val();
 
     if (collegeRegNo == "")
         GeneralWarningsAndErrorDialog("Invalid College Registration No.", "Please enter a valid College Registration No to validate.", "red");

@@ -1,0 +1,55 @@
+﻿@model IEnumerable<GCETNChapter.Models.ViewModels.News.NewsVO>
+<script src="~/JQueryScripts/PublicPages/NewsFeed.js"></script>
+
+@{
+    ViewBag.Title = "News";
+}
+
+
+<div id="divNewsPage" class="container partialBodySection hideDiv">
+    <br />
+    
+    <span class="headerText">News Feed</span>
+    <hr />
+
+
+    @if (Model != null)
+    {
+        foreach (var item in Model)
+        {
+            <div class="col-md-12 newsHeadline">
+                <span><img src="~/Images/OtherPages/NewsIcon.png" height="70" /></span>
+                <span class="formlabelFontLeft">@Html.DisplayFor(modelItem => item.HeadLine)</span>
+
+                <span class="glyphicon glyphicon-trash text-right editIcon"><a href="#"></a></span>
+                <span class="glyphicon glyphicon-pencil text-right editIcon"><a href="#"></a></span>
+            </div>
+            <div class="newsDetail">
+                <span>@Html.DisplayFor(modelItem => item.NewsDetail)</span>
+
+                <br />
+                <div class="text-right">
+                    <span class="smallFont">
+                        Posted On:
+                        @if (item.CreatedDate.Value.ToShortDateString() == DateTime.Now.ToShortDateString())
+                        {
+                            <span><b>Today</b></span>
+                        }
+                        else
+                        {
+                            @item.CreatedDate
+                        }
+                    </span>
+                </div>
+            </div>
+            <br />
+        }
+    }
+    else
+    {
+        <div class="normalFontLeft">
+            No News has been posted yet...
+        </div>
+    }
+
+</div>

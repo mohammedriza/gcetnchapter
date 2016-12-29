@@ -40,7 +40,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.CollegeRegistrationNo, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", id = "TxtCollegeRegNo_EPC", maxlength = "12" } })
+                @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", id = "TxtCollegeRegNo_Lookup", placeholder="Lookup for College Reg No", maxlength = "12", style = "display: inline;" } })
+                <a href="#" id="LnkLookupCollegeRegNo" class="editIcon" title="Lookup for College Registration Number"><span class="glyphicon glyphicon-search" style="font-size: 18px;"></span></a>
                 <a href="#" class="welcomeUser" onclick="CheckIfValidCollegeRegNo();">Validate College Reg No</a>
                 <span class="text-success" id="LblValidateCollegeRegNo_EPC"></span>
             </div>

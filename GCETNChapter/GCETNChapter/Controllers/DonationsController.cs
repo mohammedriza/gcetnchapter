@@ -82,9 +82,9 @@ namespace GCETNChapter.Controllers
                     {
                         ViewBag.Failure = string.Format("Payment Date should be On or before {0}. Please enter a valid Payment Date.", DateTime.Now.ToShortDateString());
                     }
-                    else if (donationsVo.Amount.ToString().Length > 11)
+                    else if (donationsVo.Amount.ToString().Length > 16)
                     {
-                        ViewBag.Failure = string.Format("Amount Paid should not exceed 8 digits and 2 decimals. E.g: 99999999.99 is the max value for this field.");
+                        ViewBag.Failure = string.Format("Amount Paid should not exceed 14 digits and 2 decimals. E.g: 99999999.99 is the max value for this field.");
                     }
                     else
                     {
@@ -132,6 +132,14 @@ namespace GCETNChapter.Controllers
             {
                 return "error";
             }
+        }
+
+
+        public PartialViewResult GetLookupForCollegeRegNo()
+        {
+            var response = new GeneralFunctionsDA().GetLookupCollegeRegNoDetails();
+
+            return PartialView("_LookupCollegeRegNoModal", response);
         }
     }
 }

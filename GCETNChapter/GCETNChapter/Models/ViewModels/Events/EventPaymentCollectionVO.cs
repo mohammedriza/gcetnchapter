@@ -23,6 +23,9 @@ namespace GCETNChapter.Models.ViewModels.Events
         [Display(Name = "* College Registration No")]
         public string CollegeRegistrationNo { get; set; }
 
+        [Display(Name = "Member Name")]
+        public string MemberName { get; set; }
+
         [Display(Name = "* Expense Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]

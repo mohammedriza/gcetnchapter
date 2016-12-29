@@ -1,5 +1,5 @@
 ﻿@model GCETNChapter.Models.ViewModels.ContactUsVO
-<script src="~/JQueryScripts/ContactUsPage.js"></script>
+<script src="~/JQueryScripts/PublicPages/ContactUsPage.js"></script>
 
 @{
     ViewBag.Title = "Contact Us";
@@ -9,67 +9,68 @@
 {
     @Html.AntiForgeryToken()
 
-    <div id="divContactUsPage" class="hideDiv partialBodySection contactUsBg">
-        <span class="headerText">Contact Us</span>
-        <hr />
-        <br /><br />
 
-        <div class="col-md-8">
-            <div class="row form-group">
-                <div class="col-md-2 formlabelFontRight">
-                    @Html.LabelFor(model => model.Name)
-                </div>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", maxlength="50" } })
-                    @Html.ValidationMessageFor(model => model.Name, "", new { @class = "textboxerror" })
-                </div>
-            </div>
+    <div class="container">
+        <div id="divContactUsPage" class="partialBodySection contactUsBg hideDiv">
+            <br />
+            <span class="headerText">Contact Us</span>
+            <hr />
+            <br /><br />
 
-            <div class="row form-group">
-                <div class="col-md-2 formlabelFontRight">
-                    @Html.LabelFor(model => model.Email)
+            <div class="col-md-12">
+                <div class="row form-group">
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.Name)
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Name, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                        @Html.ValidationMessageFor(model => model.Name, "", new { @class = "textboxerror" })
+                    </div>
                 </div>
-                <div class="col-md-10 ">
-                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
-                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "textboxerror" })
-                </div>
-            </div>
 
-            <div class="row form-group">
-                <div class="col-md-2 formlabelFontRight">
-                    @Html.LabelFor(model => model.Summary)
+                <div class="row form-group">
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.Email)
+                    </div>
+                    <div class="col-md-10 ">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", maxlength = "50" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "textboxerror" })
+                    </div>
                 </div>
-                <div class="col-md-10">
-                    @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control", maxlength = "150" } })
-                    @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "textboxerror" })
+
+                <div class="row form-group">
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.Summary)
+                    </div>
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Summary, new { htmlAttributes = new { @class = "form-control", maxlength = "150" } })
+                        @Html.ValidationMessageFor(model => model.Summary, "", new { @class = "textboxerror" })
+                    </div>
                 </div>
-            </div>
 
-            <div class="row form-group">
-                <div class="col-md-2 formlabelFontRight">
-                    @Html.LabelFor(model => model.Messaage)
+                <div class="row form-group">
+                    <div class="col-md-2 formlabelFontRight">
+                        @Html.LabelFor(model => model.Messaage)
+                    </div>
+                    <div class="col-md-10">
+                        @Html.TextAreaFor(model => model.Messaage, 5, 100, new { htmlAttributes = new { @class = "longtextbox", maxlength = "5000" } }) <br />
+                        @Html.ValidationMessageFor(model => model.Messaage, "", new { @class = "textboxerror" })
+                    </div>
                 </div>
-                <div class="col-md-10">
-                    @Html.TextAreaFor(model => model.Messaage, 5, 100, new { htmlAttributes = new { @class = "longtextbox", maxlength = "5000" } }) <br />
-                    @Html.ValidationMessageFor(model => model.Messaage, "", new { @class = "textboxerror" })
+
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit Form" class="btn btn-primary" />
+                    </div>
                 </div>
-            </div>
 
+                <br /><br /><br />
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input type="submit" value="Submit Form" class="btn btn-primary" />
+                <div class="col-md-6">
+                    @Html.Partial("_SuccessErrorMessages");
                 </div>
-            </div>
-
-            <br /><br /><br />
-
-            <div class="col-md-6">
-                @Html.Partial("_SuccessErrorMessages");
             </div>
         </div>
-    </div>
-
-    <div class="col-md-4 text-left">
     </div>
 }

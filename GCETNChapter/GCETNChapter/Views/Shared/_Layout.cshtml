@@ -20,7 +20,7 @@
 
     <script src="~/JQueryScripts/GeneralScripts.js"></script>
     
-    <title>GCE TN Trust</title>
+    <title>GCE TN Trust - @ViewBag.Title</title>
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
@@ -30,12 +30,12 @@
         <div>
             @if (Session["username"] == null)
             {
-                @Html.Partial("_PublicHeaderSection")
+                @Html.Partial("Layout/_PublicHeaderSection")
             }
             else
             {
-                @Html.Partial("_MemberHeaderSection")
-            }            
+                @Html.Partial("Layout/_MemberHeaderSection")
+            }
         </div>
 
         <div class="bodySection" style="min-height: 600px">
@@ -45,7 +45,7 @@
 
         <!-- FOOTER SECTION-->
         <div>
-            @Html.Partial("_FooterSection")
+            @Html.Partial("Layout/_FooterSection")
         </div>
 
     </div>
@@ -54,7 +54,7 @@
 
 
 
-    <!-- MODAL POPUP FOR GENERAL WARNINGS AND ERRORS -->
+    <!-- MODAL POPUP FOR WARNINGS AND ERRORS -->
     <div id="GeneralWarningAndErrorModal" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog">
 
@@ -78,7 +78,7 @@
     </div>
 
 
-    <!-- MODAL POPUP FOR Login-InProgress -->
+    <!-- MODAL POPUP FOR LOGIN IN-PROGRESS -->
     <div id="LoginProgressModal" class="modal fade" role="dialog" tabindex="-1">
         <div class="modal-dialog">
 
@@ -100,6 +100,30 @@
 
         </div>
     </div>
+
+
+    <!-- MODAL POPUP FOR COLLEGE REGISTRATION NO LOOKUP -->
+    <div id="CollegeRegNoLookupModal" class="modal fade" role="dialog" tabindex="-1">
+        <div class="modal-dialog">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <span id="GeneralModalHeaderText" class="modal-title text-success" style="font-weight: bold;"> Lookup for Member College Registratoin Number</span>
+                </div>
+                <div id="divLookupCollegeRegNoModal" class="modal-body">
+                    @*@Html.Partial("_LookupCollegeRegNoModal")*@
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+
 
 
     <script>

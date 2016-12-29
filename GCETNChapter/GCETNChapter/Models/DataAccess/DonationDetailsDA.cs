@@ -16,7 +16,7 @@ namespace GCETNChapter.Models.DataAccess
             {
                 rowsEffected = db.prcAddUpdateDonationDetails(donationsVo.DonationID, donationsVo.CollegeRegistrationNo, donationsVo.Amount, donationsVo.PaymentReason, donationsVo.PaymentDate,
                                                                 donationsVo.PaymentStartDate, donationsVo.PaymentEndDate, donationsVo.CreatedBy);
-            }
+             }
             return rowsEffected;
         }
 
@@ -36,6 +36,7 @@ namespace GCETNChapter.Models.DataAccess
                         {
                             DonationID = response.ElementAt(x).DonationID,
                             CollegeRegistrationNo = response.ElementAt(x).CollegeRegistrationNo,
+                            MemberName = response.ElementAt(x).FullName,
                             Amount = response.ElementAt(x).Amount,
                             PaymentReason = response.ElementAt(x).PaymentReason,
                             PaymentDate = response.ElementAt(x).PaymentDate,

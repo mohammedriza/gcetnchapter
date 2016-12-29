@@ -89,6 +89,9 @@ function AddEventExpenseDetail() {
     else if (Math.round(amount) == 0) {
         GeneralWarningsAndErrorDialog("Incomplete Information...", "Amount should be more than zero.", "red");
     }
+    else if (amount.length > 16) {
+        GeneralWarningsAndErrorDialog("Numeric Values are too long...", "Amount should be less than or equal to 16 digits.", "red");
+    }
     else {
         $.ajax({
             url: "/Events/AddEventExpenseDetail",

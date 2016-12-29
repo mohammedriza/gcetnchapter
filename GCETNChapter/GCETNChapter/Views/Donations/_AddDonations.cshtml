@@ -16,7 +16,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.CollegeRegistrationNo, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", maxlength = "12", id = "TxtCollegeRegNo" } })
+            @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", maxlength = "12", placeholder="Lookup for College Reg No", id = "TxtCollegeRegNo_Lookup", style = "display: inline;" } })
+            <a href="#" id="LnkLookupCollegeRegNo" class="editIcon" title="Lookup for College Registration Number"><span class="glyphicon glyphicon-search" style="font-size: 18px;"></span></a>
             @Html.ValidationMessageFor(model => model.CollegeRegistrationNo, "", new { @class = "textboxerror" })
         </div>
     </div>

@@ -13,8 +13,9 @@
         <thead>
             <tr>
                 <th></th>
-                <th>ID</th>
+                <th class="hidden">ID</th>
                 <th>Col. Reg. No.</th>
+                <th>Member Name</th>
                 <th>Payment Date</th>
                 <th>Amount</th>
                 <th>Payment Reason</th>
@@ -40,8 +41,9 @@
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </td>
-                        <td>@item.DonationID</td>
+                        <td class="hidden">@item.DonationID</td>
                         <td>@item.CollegeRegistrationNo</td>
+                        <td>@item.MemberName</td>
                         <td>@item.PaymentDate.Value.ToShortDateString()</td>
                         <td>@item.Amount</td>
                         <td>@item.PaymentReason</td>

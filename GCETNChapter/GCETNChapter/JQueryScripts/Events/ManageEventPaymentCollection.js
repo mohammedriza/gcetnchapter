@@ -83,12 +83,11 @@ function GetEventIdByEventName_PaymentCollection(eventName) {
 function AddEventPaymentCollection() {
     var eventID = $.trim($("#LblEventID_EPC").text());
     var paymentCollectionID = $.trim($("#LblPaymentCollectionID_EPC").text());
-    var collegeRegNo = $.trim($("#TxtCollegeRegNo_EPC").val());
+    var collegeRegNo = $.trim($("#TxtCollegeRegNo_Lookup").val());
     var paymentDate = $.trim($("#TxtPaymentDate_EPC").val());
     var amountReceived = $.trim($("#TxtAmountReceived_EPC").val());
 
-    if (eventID == 0 || eventID == "")
-    {
+    if (eventID == 0 || eventID == "") {
         GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
     }
     else if ((collegeRegNo).length > 12) {
@@ -102,6 +101,9 @@ function AddEventPaymentCollection() {
     }
     else if (Math.round(amountReceived) == 0) {
         GeneralWarningsAndErrorDialog("Incomplete Information...", "Amount Received should be more than zero.", "red");
+    }
+    else if (amountReceived.length > 16) {
+        GeneralWarningsAndErrorDialog("Numeric Values are too long...", "Amount Received should be less than or equal to 16 digits.", "red");
     }
     else {
         $.ajax({

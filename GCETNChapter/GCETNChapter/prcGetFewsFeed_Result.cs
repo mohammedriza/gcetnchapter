@@ -11,19 +11,15 @@ namespace GCETNChapter
 {
     using System;
     
-    public partial class prcGetDonationDetails_Result
+    public partial class prcGetFewsFeed_Result
     {
-        public int DonationID { get; set; }
-        public string CollegeRegistrationNo { get; set; }
-        public decimal Amount { get; set; }
-        public string PaymentReason { get; set; }
-        public System.DateTime PaymentDate { get; set; }
-        public System.DateTime PaymentStartDate { get; set; }
-        public System.DateTime PaymentEndDate { get; set; }
+        public int NewsID { get; set; }
+        public string Headline { get; set; }
+        public string NewsDetail { get; set; }
+        public string ImageFile { get; set; }
         public string CreatedBy { get; set; }
-        public System.DateTime CreatedDate { get; set; }
-        public string ModifiedBy { get; set; }
+        public Nullable<System.DateTime> CreatedDate { get; set; }
+        public string ModifiedB { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
-        public string FullName { get; set; }
     }
 }

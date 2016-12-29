@@ -5,6 +5,11 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="GCE_TN_ChapterModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <Function Name="prcAddAuditLogRecord" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="ActionSummary" Type="varchar(max)" Mode="In" />
+          <Parameter Name="ActionType" Type="varchar" Mode="In" />
+          <Parameter Name="ActionBy" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcAddEventPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
           <Parameter Name="Image" Type="varchar" Mode="In" />
@@ -120,6 +125,9 @@
           <Parameter Name="EventID" Type="int" Mode="In" />
         </Function>
         <Function Name="prcGetGenderList" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo" />
+        <Function Name="prcGetNewsFeed" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="NewsID" Type="int" Mode="In" />
+        </Function>
         <Function Name="prcGetProfileAddressInformation" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
         </Function>
@@ -433,6 +441,17 @@
             <Parameter Name="AccessID" Mode="In" Type="Int32" />
             <Parameter Name="AccessRole" Mode="In" Type="String" />
           </FunctionImport>
+          <FunctionImport Name="prcAddAuditLogRecord">
+            <Parameter Name="ActionSummary" Mode="In" Type="String" />
+            <Parameter Name="ActionType" Mode="In" Type="String" />
+            <Parameter Name="ActionBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetFewsFeed" ReturnType="Collection(GCE_TN_ChapterModel.prcGetFewsFeed_Result)">
+            <Parameter Name="NewsID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetNewsFeed" ReturnType="Collection(GCE_TN_ChapterModel.prcGetNewsFeed_Result)">
+            <Parameter Name="NewsID" Mode="In" Type="Int32" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -502,7 +521,6 @@
         <ComplexType Name="prcGetEventPaymentCollectionDetails_Result">
           <Property Type="Int32" Name="PaymentCollectionID" Nullable="false" />
           <Property Type="Int32" Name="EventID" Nullable="false" />
-          <Property Type="String" Name="CollegeRegistrationNo" Nullable="false" MaxLength="12" />
           <Property Type="DateTime" Name="PaymentDate" Nullable="true" />
           <Property Type="Decimal" Name="AmountReceived" Nullable="true" Precision="10" Scale="2" />
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
@@ -510,6 +528,8 @@
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="EventName" Nullable="false" MaxLength="50" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
+          <Property Type="String" Name="CollegeRegistrationNo" Nullable="false" MaxLength="12" />
         </ComplexType>
         <ComplexType Name="prcGetEventExpenseDetails_Result">
           <Property Type="Int32" Name="ExpenseDetailID" Nullable="false" />
@@ -535,6 +555,7 @@
           <Property Type="DateTime" Name="CreatedDate" Nullable="false" Precision="23" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="FullName" Nullable="true" MaxLength="100" />
         </ComplexType>
         <ComplexType Name="prcEventPhotosByEventID_Result">
           <Property Type="Int32" Name="EventID" Nullable="true" />
@@ -575,6 +596,26 @@
           <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="prcGetFewsFeed_Result">
+          <Property Type="Int32" Name="NewsID" Nullable="false" />
+          <Property Type="String" Name="Headline" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NewsDetail" Nullable="true" />
+          <Property Type="String" Name="ImageFile" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedB" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="prcGetNewsFeed_Result">
+          <Property Type="Int32" Name="NewsID" Nullable="false" />
+          <Property Type="String" Name="Headline" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="NewsDetail" Nullable="true" />
+          <Property Type="String" Name="ImageFile" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedB" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
         </ComplexType>
       </Schema>
@@ -707,7 +748,6 @@
               <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetEventPaymentCollectionDetails_Result">
                 <ScalarProperty Name="PaymentCollectionID" ColumnName="PaymentCollectionID" />
                 <ScalarProperty Name="EventID" ColumnName="EventID" />
-                <ScalarProperty Name="CollegeRegistrationNo" ColumnName="CollegeRegistrationNo" />
                 <ScalarProperty Name="PaymentDate" ColumnName="PaymentDate" />
                 <ScalarProperty Name="AmountReceived" ColumnName="AmountReceived" />
                 <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
@@ -715,6 +755,8 @@
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
                 <ScalarProperty Name="EventName" ColumnName="EventName" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
+                <ScalarProperty Name="CollegeRegistrationNo" ColumnName="CollegeRegistrationNo" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -750,6 +792,7 @@
                 <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
                 <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
                 <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="FullName" ColumnName="FullName" />
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
@@ -806,6 +849,21 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="prcAddNewAccessRole" FunctionName="GCE_TN_ChapterModel.Store.prcAddNewAccessRole" />
           <FunctionImportMapping FunctionImportName="prcGetAccessLevelAuthorization" FunctionName="GCE_TN_ChapterModel.Store.prcGetAccessLevelAuthorization" />
+          <FunctionImportMapping FunctionImportName="prcAddAuditLogRecord" FunctionName="GCE_TN_ChapterModel.Store.prcAddAuditLogRecord" />
+          <FunctionImportMapping FunctionImportName="prcGetNewsFeed" FunctionName="GCE_TN_ChapterModel.Store.prcGetNewsFeed">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetNewsFeed_Result">
+                <ScalarProperty Name="NewsID" ColumnName="NewsID" />
+                <ScalarProperty Name="Headline" ColumnName="Headline" />
+                <ScalarProperty Name="NewsDetail" ColumnName="NewsDetail" />
+                <ScalarProperty Name="ImageFile" ColumnName="ImageFile" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedB" ColumnName="ModifiedB" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

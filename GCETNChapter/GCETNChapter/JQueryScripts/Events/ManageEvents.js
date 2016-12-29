@@ -83,6 +83,9 @@ function AddNewEvent() {
     else if (Math.round(totalCollectedAmount) == 0 || Math.round(totalExpenseAmount) == 0) {
         GeneralWarningsAndErrorDialog("Incomplete Information...", "Total Collection Amount or Total Expense Amount should be more than zeros.", "red");
     }
+    else if (totalCollectedAmount.length > 16 || totalExpenseAmount.length > 16) {
+        GeneralWarningsAndErrorDialog("Numeric Values are too long...", "Total Collection Amount or Total Expense Amount should be less than or equal to 16 digits.", "red");
+    }
     else if (startDate > endDate) {
         GeneralWarningsAndErrorDialog("Incomplete Information...", "Start Date should be before the End Date.", "red");
     }

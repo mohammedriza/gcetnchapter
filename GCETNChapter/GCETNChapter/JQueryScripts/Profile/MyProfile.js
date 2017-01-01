@@ -132,39 +132,43 @@ function UpdatePersonalAndLoginInfo() {
     var password = $("#TxtPassword").val();
     var confirmPassword = $("#TxtConfirmPassword").val();
 
-    if (password != confirmPassword)
-        GeneralWarningsAndErrorDialog("ALERT...", "Password and Confirm Password should be match.", "red");
-    else if (fullName == "" || dOB == "" || password == "" || confirmPassword == "")
-        GeneralWarningsAndErrorDialog("ALERT...", "Please make sure all mandatory fields are filled with data.", "red");
-    else if (gender == "-- Select Gender --")
-        GeneralWarningsAndErrorDialog("ALERT...", "Please select a valid Gender", "red");
-    else {
-        $.ajax({
-            url: "/MemberProfile/UpdatePersonalAndLoginInfo/",
-            type: "POST",
-            data: {
-                Username: username,
-                Password: password,
-                FullName: fullName,
-                Gender: gender,
-                DateOfBirth: dOB,
-                ProfileImage: profileImg
-            },
-            success: function (data, result) {
-                if (data == "Success") {
-                    GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
+    var dateValidation = ValidateDateFormat(dOB);
+
+    if (dateValidation != false) {
+        if (password != confirmPassword)
+            GeneralWarningsAndErrorDialog("ALERT...", "Password and Confirm Password should be match.", "red");
+        else if (fullName == "" || dOB == "" || password == "" || confirmPassword == "")
+            GeneralWarningsAndErrorDialog("ALERT...", "Please make sure all mandatory fields are filled with data.", "red");
+        else if (gender == "-- Select Gender --")
+            GeneralWarningsAndErrorDialog("ALERT...", "Please select a valid Gender", "red");
+        else {
+            $.ajax({
+                url: "/MemberProfile/UpdatePersonalAndLoginInfo/",
+                type: "POST",
+                data: {
+                    Username: username,
+                    Password: password,
+                    FullName: fullName,
+                    Gender: gender,
+                    DateOfBirth: dOB,
+                    ProfileImage: profileImg
+                },
+                success: function (data, result) {
+                    if (data == "Success") {
+                        GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
+                    }
+                    else if (data == "Error") {
+                        GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
+                    }
+                    else if (data == "401") {
+                        ShowAccessDeniedMessage();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
                 }
-                else if (data == "Error") {
-                    GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
-                }
-                else if (data == "401") {
-                    ShowAccessDeniedMessage();
-                }
-            },
-            error: function (xhr, status, error) {
-                GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
-            }
-        });
+            });
+        }
     }
 }
 

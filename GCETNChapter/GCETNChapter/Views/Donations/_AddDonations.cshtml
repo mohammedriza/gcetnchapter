@@ -33,7 +33,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.PaymentDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "form-control", id = "TxtPaymentDate" } })
+            @Html.EditorFor(model => model.PaymentDate, new { htmlAttributes = new { @class = "dateValue form-control", id = "TxtPaymentDate", style = "display: inline;" } })
+            <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Payment Date should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
             @Html.ValidationMessageFor(model => model.PaymentDate, "", new { @class = "textboxerror" })
         </div>
     </div>
@@ -41,7 +42,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.PaymentStartDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.PaymentStartDate, new { htmlAttributes = new { @class = "form-control", id = "TxtPaymentStartDate" } })
+            @Html.EditorFor(model => model.PaymentStartDate, new { htmlAttributes = new { @class = "dateValue form-control", id = "TxtPaymentStartDate", style = "display: inline;" } })
+            <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Payment Start Date should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
             @Html.ValidationMessageFor(model => model.PaymentStartDate, "", new { @class = "textboxerror" })
         </div>
     </div>
@@ -49,7 +51,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.PaymentEndDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.PaymentEndDate, new { htmlAttributes = new { @class = "form-control", id = "TxtPaymentEndDate" } })
+            @Html.EditorFor(model => model.PaymentEndDate, new { htmlAttributes = new { @class = "dateValue form-control", id = "TxtPaymentEndDate", style = "display: inline;" } })
+            <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Payment End Date should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
             @Html.ValidationMessageFor(model => model.PaymentEndDate, "", new { @class = "textboxerror" })
         </div>
     </div>
@@ -57,7 +60,7 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "form-control", type = "number", id = "TxtAmount" } })
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "currency form-control", id = "TxtAmount" } })
             @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "textboxerror" })
         </div>
     </div>

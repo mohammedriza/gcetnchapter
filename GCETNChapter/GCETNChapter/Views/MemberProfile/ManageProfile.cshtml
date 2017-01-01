@@ -12,109 +12,114 @@
 {
     @Html.AntiForgeryToken()
 
-    <div id="divMyProfilePage" class="partialBodySection hideDiv" style="min-height: 600px">
-        <br />
-        <div>
-            <div class="row">
-                <div class="col-md-2 text-center">
-                    <a href="#" id="LnkMyProfile">
-                        <p class="well well-sm">
-                            My Profile
-                        </p>
-                    </a>
-                </div>
+    <div class="row">
+        <div class="col-md-1"></div>
+        <div id="divMyProfilePage" class="partialBodySection hideDiv col-md-10">
+            <br />
+            <div>
+                <div class="row">
+                    <div class="col-md-2 text-center">
+                        <a href="#" id="LnkMyProfile">
+                            <p class="well well-sm">
+                                My Profile
+                            </p>
+                        </a>
+                    </div>
 
-                <div class="col-md-2 text-center">
-                    <a href="#" id="LnkManageMemberProfile">
-                        <p class="well well-sm">
-                            Manage Users & Profiles
-                        </p>
-                    </a>
-                </div>
-            </div>
-        </div>
-        <br />
-
-        <span class="headerText">
-            <span id="LblProfileHeaderText"> My Profile </span>
-            <span id="LblProfileOwnerUsername">@ViewBag.RequestUser</span>
-        </span>
-        <br /><br />
-
-        <div id="divManageUsers">
-            <div id="divViewUserList" class="hideDiv">
-                @Html.Partial("User/_ViewUserList")
-            </div>
-            <div id="divAddUpdateUser" class="hideDiv">
-                @Html.Partial("User/_AddUpdateUser")
-            </div>
-        </div>
-
-        <div id="divManageProfile">
-            <!-- Right Side Menu Section -->
-            <div id="divRightMenuSection" class="col-lg-2 col-md-3 col-sm-3">
-                <a href="#" id="LnkLoginAndPersonalInfo" onclick="GetProfileLoginAndPersonalInfo();">
-                    <p class="well well-sm subm">Login and Personal Info</p>
-                </a>
-                <a href="#" id="LnkCollegeInfo" onclick="GetProfileCollegeInformation();">
-                    <p class="well well-sm">College Information</p>
-                </a>
-                <a href="#" id="LnkContactInfo" onclick="GetProfileContactInformation();">
-                    <p class="well well-sm">Contact Information</p>
-                </a>
-                <a href="#" id="LnkAddressInfo" onclick="GetProfileAddressInformation();">
-                    <p class="well well-sm">Address Information</p>
-                </a>
-                <a href="#" id="LnkWorkplaceAndExpertiseInfo" onclick="GetProfileWorkplaceAndExpertiseInfo();">
-                    <p class="well well-sm">Workplace And Expertise</p>
-                </a>
-            </div>
-
-            <!-- Left Control Section -->
-            <div id="divLeftControlSection" class="col-lg-10 col-md-9 col-sm-9">
-
-                <!-- WELCOME MESSAGE -->
-                <div id="divWelcomeMessage" class="panel panel-default">
-                    <div class="panel-heading formlabelFontLeft">Welcome to My Profile</div>
-                    <div class="panel-body">
-
-                        This paage allows you to keep your profile information upto date. Having your profile details updated is important to make sure we dont lose track of you.
-
+                    <div class="col-md-2 text-center">
+                        <a href="#" id="LnkManageMemberProfile">
+                            <p class="well well-sm">
+                                Manage Users & Profiles
+                            </p>
+                        </a>
                     </div>
                 </div>
+            </div>
+            <br />
 
-                <!-- LOGIN AND PERSONAL INFORMATION -->
-                <div id="divLoginAndPersonalInfo" class="hideDiv">
-                    @Html.Partial("Profile/_LoginAndPersonalInfo", Model)
+            <span class="headerText">
+                <span id="LblProfileHeaderText"> My Profile </span>
+                <span id="LblProfileOwnerUsername">@ViewBag.RequestUser</span>
+            </span>
+            <br /><br />
+
+            <div id="divManageUsers">
+                <div id="divViewUserList" class="hideDiv">
+                    @Html.Partial("User/_ViewUserList")
                 </div>
-
-                <!-- CONTACT INFORMATION -->
-                <div id="divContactInfo" class="hideDiv">
-                    @Html.Partial("Profile/_ContactInformation", Model)
-                </div>
-
-                <!-- COLLEGE INFORMATION -->
-                <div id="divCollegeInfo" class="hideDiv">
-                    @Html.Partial("Profile/_CollegeInformation", Model)
-                </div>
-
-                <!-- ADDRESS INFORMATION -->
-                <div id="divAddressInfo" class="hideDiv">
-                    @Html.Partial("Profile/_AddressInformation", Model)
-                </div>
-
-                <!-- WORKPLACE AND EXPERTISE INFORMATION -->
-                <div id="divWorkplaceAndExpertiseInfo" class="hideDiv">
-                    @Html.Partial("Profile/_WorkplaceAndExpertiseInformation", Model)
-                </div>
-
-                <br />
-                <div class="col-md-6">
-                    @Html.Partial("_SuccessErrorMessages")
+                <div id="divAddUpdateUser" class="hideDiv">
+                    @Html.Partial("User/_AddUpdateUser")
                 </div>
             </div>
-        </div>
 
+            <div id="divManageProfile">
+                <!-- Right Side Menu Section -->
+                <div id="divRightMenuSection" class="col-lg-2 col-md-3 col-sm-3">
+                    <a href="#" id="LnkLoginAndPersonalInfo" onclick="GetProfileLoginAndPersonalInfo();">
+                        <p class="well well-sm subm">Login and Personal Info</p>
+                    </a>
+                    <a href="#" id="LnkCollegeInfo" onclick="GetProfileCollegeInformation();">
+                        <p class="well well-sm">College Information</p>
+                    </a>
+                    <a href="#" id="LnkContactInfo" onclick="GetProfileContactInformation();">
+                        <p class="well well-sm">Contact Information</p>
+                    </a>
+                    <a href="#" id="LnkAddressInfo" onclick="GetProfileAddressInformation();">
+                        <p class="well well-sm">Address Information</p>
+                    </a>
+                    <a href="#" id="LnkWorkplaceAndExpertiseInfo" onclick="GetProfileWorkplaceAndExpertiseInfo();">
+                        <p class="well well-sm">Workplace And Expertise</p>
+                    </a>
+                </div>
+
+                <!-- Left Control Section -->
+                <div id="divLeftControlSection" class="col-lg-10 col-md-9 col-sm-9">
+
+                    <!-- WELCOME MESSAGE -->
+                    <div id="divWelcomeMessage" class="panel panel-default">
+                        <div class="panel-heading formlabelFontLeft">Welcome to My Profile</div>
+                        <div class="panel-body">
+
+                            This paage allows you to keep your profile information upto date. Having your profile details updated is important to make sure we dont lose track of you.
+
+                        </div>
+                    </div>
+
+                    <!-- LOGIN AND PERSONAL INFORMATION -->
+                    <div id="divLoginAndPersonalInfo" class="hideDiv">
+                        @Html.Partial("Profile/_LoginAndPersonalInfo", Model)
+                    </div>
+
+                    <!-- CONTACT INFORMATION -->
+                    <div id="divContactInfo" class="hideDiv">
+                        @Html.Partial("Profile/_ContactInformation", Model)
+                    </div>
+
+                    <!-- COLLEGE INFORMATION -->
+                    <div id="divCollegeInfo" class="hideDiv">
+                        @Html.Partial("Profile/_CollegeInformation", Model)
+                    </div>
+
+                    <!-- ADDRESS INFORMATION -->
+                    <div id="divAddressInfo" class="hideDiv">
+                        @Html.Partial("Profile/_AddressInformation", Model)
+                    </div>
+
+                    <!-- WORKPLACE AND EXPERTISE INFORMATION -->
+                    <div id="divWorkplaceAndExpertiseInfo" class="hideDiv">
+                        @Html.Partial("Profile/_WorkplaceAndExpertiseInformation", Model)
+                    </div>
+
+                    <br />
+                    <div class="col-md-6">
+                        @Html.Partial("_SuccessErrorMessages")
+                    </div>
+                </div>
+            </div>
+
+        </div>
+        <div class="col-md-1"></div>
     </div>
+
 
 }

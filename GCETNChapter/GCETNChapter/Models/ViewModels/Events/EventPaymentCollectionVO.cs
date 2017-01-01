@@ -39,10 +39,12 @@ namespace GCETNChapter.Models.ViewModels.Events
         public string CreatedBy { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? ModifiedDate { get; set; }
     }
 }

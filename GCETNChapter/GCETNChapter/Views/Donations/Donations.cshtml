@@ -1,24 +1,29 @@
 ﻿@model GCETNChapter.Models.ViewModels.DonationDetailsVO
-<script src="~/JQueryScripts/MemberPages/Donations.js"></script>
+<script src="~/JQueryScripts/Donations/Donations.js"></script>
 
 @{
     ViewBag.Title = "Donatoins";
 }
 
-<div id="divDonationDetailsPage" class="form-horizontal partialBodySection hideDiv">
-    <br />
+<div class="row">
+    <div class="col-md-1"></div>
+    <div id="divDonationDetailsPage" class="form-horizontal partialBodySection hideDiv col-md-10">
+        <br />
 
-    <div class="col-md-12">
-        @Html.Partial("_SuccessErrorMessages")
+        <div class="col-md-12">
+            @Html.Partial("_SuccessErrorMessages")
+        </div>
+
+        <div id="divViewAllDonations">
+            @Html.Partial("_ViewDonations", Model)
+        </div>
+
+        <div id="divAddDonations" class="hideDiv">
+            @Html.Partial("_AddDonations", Model)
+        </div>
+
     </div>
-
-    <div id="divViewAllDonations">
-        @Html.Partial("_ViewDonations", Model)
-    </div>
-
-    <div id="divAddDonations" class="hideDiv">
-        @Html.Partial("_AddDonations", Model)
-    </div>
-
+    <div class="col-md-1"></div>
 </div>
+
 

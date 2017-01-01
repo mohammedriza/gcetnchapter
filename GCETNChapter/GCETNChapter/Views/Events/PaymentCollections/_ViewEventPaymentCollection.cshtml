@@ -13,14 +13,14 @@
         <thead>
             <tr>
                 <th></th>
-                <th>Event ID</th>
+                <th>Event Name</th>
                 <th>Member Name</th>
-                <th>Payment Date</th>
-                <th>Amount Received (Rs.)</th>
+                <th><span class="dateFormatText">(MM/DD/YYYY)</span>Payment Date</th>
+                <th class="text-right">Amount Received (Rs.)</th>
                 <th>Created By</th>
-                <th>Created Date</th>
+                <th><span class="dateFormatText">(MM/DD/YYYY)</span>Created Date</th>
                 <th>Modified By</th>
-                <th>Modified Date</th>
+                <th><span class="dateFormatText">(MM/DD/YYYY)</span> Modified Date </th>
             </tr>
         </thead>
         <tbody>
@@ -37,12 +37,12 @@
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </td>
-                        <td>@item.EventID</td>
+                        <td>@item.EventName</td>
                         <td>@item.MemberName</td>
                         <td>@item.PaymentDate.Value.ToShortDateString()</td>
-                        <td>@item.AmountReceived</td>
+                        <td class="text-right">@Convert.ToDecimal(item.AmountReceived).ToString("#,##0.00")</td>
                         <td>@item.CreatedBy</td>
-                        <td>@item.CreatedDate</td>
+                        <td>@item.CreatedDate.Value.ToShortDateString()</td>
                         <td>@item.ModifiedBy</td>
                         <td>@item.ModifiedDate</td>
                     </tr>

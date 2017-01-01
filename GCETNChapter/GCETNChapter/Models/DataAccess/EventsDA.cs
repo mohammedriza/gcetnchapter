@@ -152,6 +152,7 @@ namespace GCETNChapter.Models.DataAccess
                     PaymentCollection.Add(new EventPaymentCollectionVO
                     {
                         PaymentCollectionID = response.ElementAt(x).PaymentCollectionID,
+                        EventName = response.ElementAt(x).EventName,
                         EventID = response.ElementAt(x).EventID,
                         MemberName = response.ElementAt(x).FullName,
                         AmountReceived = response.ElementAt(x).AmountReceived,
@@ -228,6 +229,7 @@ namespace GCETNChapter.Models.DataAccess
                     {
                         ExpenseDetailID = response.ElementAt(x).ExpenseDetailID,
                         EventID = response.ElementAt(x).EventID,
+                        EventName = response.ElementAt(x).EventName,
                         ExpenseDetail = response.ElementAt(x).ExpenseDetail,
                         Amount = response.ElementAt(x).Amount,
                         ExpenseDate = response.ElementAt(x).ExpenseDate,

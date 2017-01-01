@@ -42,5 +42,29 @@ namespace GCETNChapter.Models.DataAccess
                 return result;
             }
         }
+
+
+        public string FormatToUSDate(string date)
+        {
+            try
+            {
+                var month = Convert.ToInt32(date.Substring(0, 2));
+                var day = Convert.ToInt32(date.Substring(3, 2));
+                var year = Convert.ToInt32(date.Substring(6, 4));
+                var currYear = Convert.ToInt32(DateTime.Now.Year);
+
+                if (day < 1 || day > 31 || month < 1 || month > 12 || year > currYear || year < 1960)
+                    return "false";
+                else
+                    return month + "/" + day + "/" + year;
+            }
+            catch(Exception)
+            {
+                return "false";
+            }
+        }
+
+
+
     }
 }

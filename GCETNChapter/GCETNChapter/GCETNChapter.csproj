@@ -454,7 +454,6 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\ScrollingCss.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -519,8 +518,14 @@
     <Content Include="Images\FooterIcons\twitter.png" />
     <Content Include="Images\FooterIcons\Visit.png" />
     <Content Include="Images\FooterIcons\Whatsapp.png" />
+    <Content Include="Images\SampleAd.jpg" />
+    <Content Include="Images\SampleAd2.jpg" />
+    <Content Include="Images\Scrolling\Image_1.jpg" />
+    <Content Include="Images\Scrolling\Image_2.jpg" />
+    <Content Include="Images\Scrolling\Image_3.jpg" />
+    <Content Include="Images\Scrolling\Image_4.jpg" />
     <Content Include="Images\loading.gif" />
-    <Content Include="Images\LoginBackground.jpg" />
+    <Content Include="Images\LoginBG.jpg" />
     <Content Include="Images\logo_home.png" />
     <Content Include="Images\logo_mini.png" />
     <Content Include="Images\MessageSent.png" />
@@ -530,10 +535,6 @@
     <Content Include="Images\OtherPages\Founder.png" />
     <Content Include="Images\OtherPages\NewsIcon.png" />
     <Content Include="Images\OtherPages\UnauthorizedAccess.png" />
-    <Content Include="Images\Scrolling\Image1.jpg" />
-    <Content Include="Images\Scrolling\Image2.jpg" />
-    <Content Include="Images\Scrolling\Image3.jpg" />
-    <Content Include="Images\Scrolling\Image4.jpg" />
     <Content Include="JQueryScripts\Advertisement\Advertisement.js" />
     <Content Include="JQueryScripts\PublicPages\AboutUsPage.js" />
     <Content Include="JQueryScripts\AccessManager\AccessLevels.js" />
@@ -546,7 +547,7 @@
     <Content Include="JQueryScripts\GeneralScripts.js" />
     <Content Include="JQueryScripts\PublicPages\HomePage.js" />
     <Content Include="JQueryScripts\Registration\LoginPage.js" />
-    <Content Include="JQueryScripts\MemberPages\Donations.js" />
+    <Content Include="JQueryScripts\Donations\Donations.js" />
     <Content Include="JQueryScripts\PublicPages\NewsFeed.js" />
     <Content Include="JQueryScripts\Profile\MyProfile.js" />
     <Content Include="JQueryScripts\Profile\ManageUsers.js" />

@@ -22,7 +22,7 @@ namespace GCETNChapter.Models.ViewModels
         [DataType(DataType.Date, ErrorMessage = "Please enter a valid Date of Birth.")]
         [Required(ErrorMessage = "Please select your Date of Birth.")]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
-        public DateTime DateOfBirth { get; set; }
+        public DateTime? DateOfBirth { get; set; }
 
         [Display(Name = "* Username")]
         [StringLength(50, ErrorMessage = "Username should exceed 50 characters", MinimumLength = 1)]

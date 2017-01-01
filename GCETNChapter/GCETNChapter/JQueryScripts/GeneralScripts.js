@@ -45,17 +45,75 @@ function CheckForAccessAuthorization(value) {
             return "False";
         },
         success: function (data) {
-            result = data;            
+            result = data;
         }
     });
     return result;
 }
 
-//--- Show Access Denied Message in Modal Popup ---//
+//--- SHOW ACCESS DENIED MESSAGE IN MODAL POPUP ---//
 function ShowAccessDeniedMessage()
 {
     GeneralWarningsAndErrorDialog("Access Denied...", "Sorry. You do not have access to perform this action. Please contact the systems administrator to request for access.", "red");
 }
+
+
+//************************************************* DATE FORMAT VALIDATION FUNCTIONS ******************************************//
+//*****************************************************************************************************************************//
+
+// NOTE: For the Date Textbox, add "dateValue" in the class element. This function will pick the class element and initialize the field
+
+//--- VALIDATE DATE FORMAT ---//
+function ValidateDateFormat(dateValue) {
+    dateValue = $.trim(dateValue);  // Trim the dateValue and remove all spaces
+
+    if (dateValue.length > 10 || dateValue.length < 1) {
+        GeneralWarningsAndErrorDialog("Invalid Date Format used...", "Please enter a valid date in the date field/s. Only MM/DD/YYYY date formats is accepted.", "red");
+        return false;
+    }
+    else {
+        var dateSplit = dateValue.split("/");
+        var month = dateSplit[0];
+        var day = dateSplit[1];
+        var year = dateSplit[2];
+        var currYear = new Date().getFullYear();
+
+        if (day < 1 || day > 31 || month < 1 || month > 12 || year > currYear || year < 1960) {
+            GeneralWarningsAndErrorDialog("Invalid Date Format used...", "Please enter a valid date in the date field/s. Only MM/DD/YYYY date formats is accepted.", "red");
+            return false;
+        }
+        else {
+            return true;
+        }
+    }
+}
+
+// FUNCTION THAT INITIALIZES THE DATE TEXTBOX AND TOOLTIP //
+function DatePickerAndTooltipInit() {
+    $('[data-toggle="tooltip"]').tooltip();
+
+    //--- IF BROWSER IS "IE", THE SHOW JQUERY DATE PICKER ---//
+    if (navigator.userAgent.match(/msie/i) || navigator.userAgent.match(/trident/i)) {
+        $(".dateValue").datepicker({
+            dateFormat: "mm/dd/yy"
+        });
+
+        $(".dateValue").attr("placeholder", "MM / DD / YYYY.");
+        $(".dateValue").attr("maxlength", "10");
+    }
+}
+
+//--- Executes the function once an Ajax call is completed ---//
+$(document).ajaxComplete(function () {
+    DatePickerAndTooltipInit();
+});
+
+//--- Executes the function once all elements in the page are loaded ---//
+$(function () {
+    DatePickerAndTooltipInit();
+});
+
+//***************************************************** END ******************************************************************//
 
 
 //************ COLLEGE REGISTRATION NUMBER LOOKUP MODAL ************//
@@ -89,3 +147,21 @@ $(document).on("click", "#LnkLookupCollegeRegNo", function () {
 });
 
 //************************* END *********************************//
+
+
+
+//************ VALIDATE IF THE AMOUNT VIELD CONTAINS NON-NUMERIC VALUES ************//
+//**********************************************************************************//
+
+function ValidateIfNumeric(number) {
+    if (!$.isNumeric(number)) {        
+        alert("Please use only numeric values in the Amount fields, without any comma's, etc.");
+        return false;
+    }
+    else {
+        return true;
+    }
+}
+
+
+//************************************** END **************************************//

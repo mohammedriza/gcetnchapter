@@ -38,7 +38,7 @@
                             <div> @Model[x].Image1 </div>
                             <div> <img src="~/EventUploads/EventPhotos/"+ @Model[x].Image1 height="150"> </div>
                             <span>(ID: @Model[x].ImageID )</span>
-                            <span> @Model[x].CreatedDate </span>
+                            <span> @Model[x].CreatedDate.Value.ToShortDateString() </span>
                         </div>
                     </td>
                     }
@@ -50,7 +50,7 @@
                             <div> @Model[x + 1].Image1 </div>
                             <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 1].Image1 height="150"> </div>
                             <span>(ID: @Model[x + 1].ImageID )</span>
-                            <span> @Model[x + 1].CreatedDate </span>
+                            <span> @Model[x + 1].CreatedDate.Value.ToShortDateString() </span>
                         </div>
                     </td>
                     }
@@ -62,7 +62,7 @@
                             <div> @Model[x + 2].Image1 </div>
                             <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 2].Image1 height="150"> </div>
                             <span>(ID: @Model[x + 2].ImageID )</span>
-                            <span> @Model[x + 2].CreatedDate </span>
+                            <span> @Model[x + 2].CreatedDate.Value.ToShortDateString() </span>
                         </div>
                     </td>
                     }
@@ -74,7 +74,7 @@
                                 <div> @Model[x + 3].Image1 </div>
                                 <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 3].Image1 height="150"> </div>
                                 <span>(ID: @Model[x + 3].ImageID )</span>
-                                <span> @Model[x + 3].CreatedDate </span>
+                                <span> @Model[x + 3].CreatedDate.Value.ToShortDateString() </span>
                             </div>
                         </td>
                     }
@@ -86,7 +86,7 @@
                                 <div> @Model[x + 4].Image1 </div>
                                 <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 4].Image1 height="150"> </div>
                                 <span>(ID: @Model[x + 4].ImageID )</span>
-                                <span> @Model[x + 4].CreatedDate </span>
+                                <span> @Model[x + 4].CreatedDate.Value.ToShortDateString() </span>
                             </div>
                         </td>
                     }
@@ -98,46 +98,6 @@
         </tbody>
     </table>
 
-
-    <table id="TblViewEventGallery_EG" class="table table-responsive hidden">
-        <thead>
-            <tr>
-                <th></th>
-                <th>Event ID</th>
-                <th>Image ID</th>
-                <th>Image Name</th>
-                <th>Created By</th>
-                <th>Created Date</th>
-                <th>Modified By</th>
-                <th>Modified Date</th>
-            </tr>
-        </thead>
-        <tbody>
-            @if (Model != null)
-            {
-                if (Model[0].EventID != 0)
-                {
-                    foreach (var item in Model)
-                    {
-                    <tr>
-                        <td>
-                            <a href="#" class="editIcon" title="Delete Photo" onclick="DeleteEventPhoto(@item.ImageID)">
-                                <span class="glyphicon glyphicon-trash"></span>
-                            </a>
-                        </td>
-                        <td>@item.EventID</td>
-                        <td>@item.ImageID</td>
-                        <td>@item.Image1</td>
-                        <td>@item.CreatedBy</td>
-                        <td>@item.CreatedDate</td>
-                        <td>@item.ModifiedBy</td>
-                        <td>@item.ModifiedDate</td>
-                    </tr>
-                    }
-                }
-            }
-        </tbody>
-    </table>
 </div>
 
 

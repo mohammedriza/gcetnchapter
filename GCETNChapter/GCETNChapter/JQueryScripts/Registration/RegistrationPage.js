@@ -8,5 +8,7 @@
     $('#LnkEvents').removeClass('menuitemSelected');
     $('#LnkNews').removeClass('menuitemSelected');
     $('#LnkMembers').removeClass('menuitemSelected');
-    $('#LnkContactUs').removeClass('menuitemSelected');
+    $('#LnkContactUs').removeClass('menuitemSelected');    
 })
+
+

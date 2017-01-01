@@ -11,11 +11,36 @@ namespace GCETNChapter.Controllers
     public class MemberProfileController : Controller
     {
         //--- CHECK IF USER'S SESSION EXIST. ELSE REDIRECT TO HOME PAGE ---//
-        public void CheckSessionStatus()
+        private void CheckSessionStatus()
         {
             if (Session["username"] == null)
                 Response.Redirect("~/Home/Index/");
         }
+
+        //--- Check if User is authorized to VIEW other user's profiles ---//
+        private bool IsAuthorizedToVIEWProfile(string ProfileOwner)
+        {
+            if ((Session["username"].ToString() != ProfileOwner) && (!string.IsNullOrEmpty(ProfileOwner)))
+            {
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(127);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+                return authorize;
+            }
+            else
+                return true;
+        }
+
+        //--- Check if User is authorized to UPDATE other user's profiles ---//
+        private bool IsAuthorizedToUPDATEProfile(string ProfileOwner)
+        {
+            if ((Session["username"].ToString() != ProfileOwner) && (!string.IsNullOrEmpty(ProfileOwner)))
+            {
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(121);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+                return authorize;
+            }
+            else
+                return true;
+        }
+
 
         private void GetDropdownListDataForRegistrationPage()
         {            
@@ -48,164 +73,254 @@ namespace GCETNChapter.Controllers
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
-            var username = Session["username"].ToString();
-            if (!string.IsNullOrEmpty(RequestUser))
-                username = RequestUser;
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToVIEWProfile(RequestUser);
+            if (authorize == false)
+            {
+                return PartialView("_UnauthorizedAccess");
+            }
+            else
+            {
+                //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
+                var username = Session["username"].ToString();
+                if (!string.IsNullOrEmpty(RequestUser))
+                    username = RequestUser;
 
-            ViewBag.GenderList = MemberDA.GetGenderList();
-            var response = new MemberProfileDA().GetProfileLoginAndPersonalInfo(username);
+                ViewBag.GenderList = MemberDA.GetGenderList();
+                var response = new MemberProfileDA().GetProfileLoginAndPersonalInfo(username);
 
-            return PartialView("Profile/_LoginAndPersonalInfo", response);
+                return PartialView("Profile/_LoginAndPersonalInfo", response);
+            }
         }
 
         public PartialViewResult GetProfileContactInformation(string RequestUser)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
-            var username = Session["username"].ToString();
-            if (!string.IsNullOrEmpty(RequestUser))
-                username = RequestUser;
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToVIEWProfile(RequestUser);
+            if (authorize == false)
+            {
+                return PartialView("_UnauthorizedAccess");
+            }
+            else
+            {
+                //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
+                var username = Session["username"].ToString();
+                if (!string.IsNullOrEmpty(RequestUser))
+                    username = RequestUser;
 
-            var response = new MemberProfileDA().GetProfileContactInformation(username);
+                var response = new MemberProfileDA().GetProfileContactInformation(username);
 
-            return PartialView("Profile/_ContactInformation", response);
+                return PartialView("Profile/_ContactInformation", response);
+            }
         }
 
         public PartialViewResult GetProfileAddressInformation(string RequestUser)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            ViewBag.CountryList = MemberDA.GetCountryList();
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToVIEWProfile(RequestUser);
+            if (authorize == false)
+            {
+                return PartialView("_UnauthorizedAccess");
+            }
+            else
+            {
+                ViewBag.CountryList = MemberDA.GetCountryList();
 
-            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
-            var username = Session["username"].ToString();
-            if (!string.IsNullOrEmpty(RequestUser))
-                username = RequestUser;
+                //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
+                var username = Session["username"].ToString();
+                if (!string.IsNullOrEmpty(RequestUser))
+                    username = RequestUser;
 
-            var response = new MemberProfileDA().GetProfileAddressInformation(username);
+                var response = new MemberProfileDA().GetProfileAddressInformation(username);
 
-            return PartialView("Profile/_AddressInformation", response);
+                return PartialView("Profile/_AddressInformation", response);
+            }
         }
 
         public PartialViewResult GetProfileCollegeInformation(string RequestUser)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            ViewBag.BranchList = MemberDA.GetBranchList();
-            ViewBag.BatchList = MemberDA.GetBatchList();
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToVIEWProfile(RequestUser);
+            if (authorize == false)
+            {
+                return PartialView("_UnauthorizedAccess");
+            }
+            else
+            {
+                ViewBag.BranchList = MemberDA.GetBranchList();
+                ViewBag.BatchList = MemberDA.GetBatchList();
 
-            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
-            var username = Session["username"].ToString();
-            if (!string.IsNullOrEmpty(RequestUser))
-                username = RequestUser;
+                //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
+                var username = Session["username"].ToString();
+                if (!string.IsNullOrEmpty(RequestUser))
+                    username = RequestUser;
 
-            var response = new MemberProfileDA().GetProfileCollegeInformation(username);
+                var response = new MemberProfileDA().GetProfileCollegeInformation(username);
 
-            return PartialView("Profile/_CollegeInformation", response);
+                return PartialView("Profile/_CollegeInformation", response);
+            }
         }
 
         public PartialViewResult GetProfileWorkplaceAndExpertiseInfo(string RequestUser)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
-            var username = Session["username"].ToString();
-            if (!string.IsNullOrEmpty(RequestUser))
-                username = RequestUser;
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToVIEWProfile(RequestUser);
+            if (authorize == false)
+            {
+                return PartialView("_UnauthorizedAccess");
+            }
+            else
+            {
+                //-- 'RequestUser' parameter is parsed by admin when modifying another user's profile, else use loggedIn user's username --//
+                var username = Session["username"].ToString();
+                if (!string.IsNullOrEmpty(RequestUser))
+                    username = RequestUser;
 
-            var response = new MemberProfileDA().GetProfileWorkplaceAndExpertiseInfo(username);
+                var response = new MemberProfileDA().GetProfileWorkplaceAndExpertiseInfo(username);
 
-            return PartialView("Profile/_WorkplaceAndExpertiseInformation", response);
+                return PartialView("Profile/_WorkplaceAndExpertiseInformation", response);
+            }
         }
 
 
         [HttpPost]
-        public bool UpdatePersonalAndLoginInfo(MemberProfileVO profileVo)
+        public string UpdatePersonalAndLoginInfo(MemberProfileVO profileVo)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            //-- Username is always picked from the Username Tetxbox for login and personal info updates as the username field is already pulled from database --//
-            profileVo.ActionUser = Session["username"].ToString();
-            var response = new MemberProfileDA().UpdatePersonalAndLoginInfo(profileVo);
-
-            if (response >= 1)
-                return true;
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToUPDATEProfile(profileVo.Username);
+            if (authorize == false)
+            {
+                return "401";
+            }
             else
-                return false;
+            {
+                //-- Username is always picked from the Username Tetxbox for login and personal info updates as the username field is already pulled from database --//
+                profileVo.ActionUser = Session["username"].ToString();
+                var response = new MemberProfileDA().UpdatePersonalAndLoginInfo(profileVo);
+
+                if (response >= 1)
+                    return "Success";
+                else
+                    return "Error";
+            }
         }
 
         [HttpPost]
-        public bool UpdateProfileAddressInformation(MemberProfileVO profileVo)
+        public string UpdateProfileAddressInformation(MemberProfileVO profileVo)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
-            if (string.IsNullOrEmpty(profileVo.Username))
-                profileVo.Username = Session["username"].ToString();
-
-            profileVo.ActionUser = Session["username"].ToString();
-            var response = new MemberProfileDA().UpdateProfileAddressInformation(profileVo);
-
-            if (response >= 1)
-                return true;
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToUPDATEProfile(profileVo.Username);
+            if (authorize == false)
+            {
+                return "401";
+            }
             else
-                return false;
+            {
+                //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
+                if (string.IsNullOrEmpty(profileVo.Username))
+                    profileVo.Username = Session["username"].ToString();
+
+                profileVo.ActionUser = Session["username"].ToString();
+                var response = new MemberProfileDA().UpdateProfileAddressInformation(profileVo);
+
+                if (response >= 1)
+                    return "Success";
+                else
+                    return "Error";
+            }
         }
 
         [HttpPost]
-        public bool UpdateProfileCollegeInformation(MemberProfileVO profileVo)
+        public string UpdateProfileCollegeInformation(MemberProfileVO profileVo)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
-            if (string.IsNullOrEmpty(profileVo.Username))
-                profileVo.Username = Session["username"].ToString();
-
-            profileVo.ActionUser = Session["username"].ToString();
-            var response = new MemberProfileDA().UpdateProfileCollegeInformation(profileVo);
-
-            if (response >= 1)
-                return true;
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToUPDATEProfile(profileVo.Username);
+            if (authorize == false)
+            {
+                return "401";
+            }
             else
-                return false;
+            {
+                //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
+                if (string.IsNullOrEmpty(profileVo.Username))
+                    profileVo.Username = Session["username"].ToString();
+
+                profileVo.ActionUser = Session["username"].ToString();
+                var response = new MemberProfileDA().UpdateProfileCollegeInformation(profileVo);
+
+                if (response >= 1)
+                    return "Success";
+                else
+                    return "Error";
+            }
         }
 
         [HttpPost]
-        public bool UpdateProfileContactInformation(MemberProfileVO profileVo)
+        public string UpdateProfileContactInformation(MemberProfileVO profileVo)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
-            if (string.IsNullOrEmpty(profileVo.Username))
-                profileVo.Username = Session["username"].ToString();
-
-            profileVo.ActionUser = Session["username"].ToString();
-            var response = new MemberProfileDA().UpdateProfileContactInformation(profileVo);
-
-            if (response >= 1)
-                return true;
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToUPDATEProfile(profileVo.Username);
+            if (authorize == false)
+            {
+                return "401";
+            }
             else
-                return false;
+            {
+                //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
+                if (string.IsNullOrEmpty(profileVo.Username))
+                    profileVo.Username = Session["username"].ToString();
+
+                profileVo.ActionUser = Session["username"].ToString();
+                var response = new MemberProfileDA().UpdateProfileContactInformation(profileVo);
+
+                if (response >= 1)
+                    return "Success";
+                else
+                    return "Error";
+            }
         }
 
         [HttpPost]
-        public bool UpdateProfileWorkplaceAndExpertiseInfo(MemberProfileVO profileVo)
+        public string UpdateProfileWorkplaceAndExpertiseInfo(MemberProfileVO profileVo)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
-            if (string.IsNullOrEmpty(profileVo.Username))
-                profileVo.Username = Session["username"].ToString();
-
-            profileVo.ActionUser = Session["username"].ToString();
-            var response = new MemberProfileDA().UpdateProfileWorkplaceAndExpertiseInfo(profileVo);
-
-            if (response >= 1)
-                return true;
+            //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+            var authorize = IsAuthorizedToUPDATEProfile(profileVo.Username);
+            if (authorize == false)
+            {
+                return "401";
+            }
             else
-                return false;
+            {
+                //-- If Admin has not selected a user id (not returned in profileVo.Username), then use loggedIn user's username --//
+                if (string.IsNullOrEmpty(profileVo.Username))
+                    profileVo.Username = Session["username"].ToString();
+
+                profileVo.ActionUser = Session["username"].ToString();
+                var response = new MemberProfileDA().UpdateProfileWorkplaceAndExpertiseInfo(profileVo);
+
+                if (response >= 1)
+                    return "Success";
+                else
+                    return "Error";
+            }
         }
 
 
@@ -225,8 +340,15 @@ namespace GCETNChapter.Controllers
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            var response = new MemberProfileDA().GetUsersDetails(null);
-            return PartialView("User/_ViewUserList", response);
+            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(123);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+            if (authorize == false)
+                return PartialView("_UnauthorizedAccess");
+            else
+            {
+                var response = new MemberProfileDA().GetUsersDetails(null);
+                return PartialView("User/_ViewUserList", response);
+            }
         }
 
 
@@ -235,11 +357,18 @@ namespace GCETNChapter.Controllers
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            ViewBag.AccessRoleList = new MemberProfileDA().GetUserAccessRoleList();
-            ViewBag.AccountStatusList = new MemberProfileDA().GetUserAccountStatusList();
+            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(120);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-            var response = new MemberProfileDA().GetUsersDetailsByUserID(Username);
-            return PartialView("User/_AddUpdateUser", response);
+            if (authorize == false)
+                return PartialView("_UnauthorizedAccess");
+            else
+            {
+                ViewBag.AccessRoleList = new MemberProfileDA().GetUserAccessRoleList();
+                ViewBag.AccountStatusList = new MemberProfileDA().GetUserAccountStatusList();
+
+                var response = new MemberProfileDA().GetUsersDetailsByUserID(Username);
+                return PartialView("User/_AddUpdateUser", response);
+            }
         }
 
 
@@ -249,15 +378,32 @@ namespace GCETNChapter.Controllers
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
+            //--- Check this only if its a ADD Transaction --//
             if (TransType == "ADD")
             {
-                var ExistUsername = MemberDA.CheckIfUsernameExist(Users.Username);
-                var ExistCollegeRegNo = MemberDA.CheckIfCollegeRegNoExist(Users.CollegeRegistrationNo);
+                var authorize1 = new GeneralFunctionsDA().GetAccessLevelAuthorization(119);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                if (!string.IsNullOrEmpty(ExistUsername))
-                    return "User Exist";
-                else if (!string.IsNullOrEmpty(ExistCollegeRegNo))
-                    return "CollegeRegNo Exist";
+                if (authorize1 == false)
+                    return "401";
+                else
+                {
+                    var ExistUsername = MemberDA.CheckIfUsernameExist(Users.Username);
+                    var ExistCollegeRegNo = MemberDA.CheckIfCollegeRegNoExist(Users.CollegeRegistrationNo);
+
+                    if (!string.IsNullOrEmpty(ExistUsername))
+                        return "User Exist";
+                    else if (!string.IsNullOrEmpty(ExistCollegeRegNo))
+                        return "CollegeRegNo Exist";
+                }
+            }
+
+            //--- Check this only if its a UPDATE Transaction --//
+            if (TransType == "UPDATE")
+            {
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(120);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                if (authorize == false)
+                    return "401";
             }
 
             Users.CreatedBy = Session["username"].ToString();
@@ -276,12 +422,19 @@ namespace GCETNChapter.Controllers
         {
             try
             {
-                var rowsEffected = new MemberProfileDA().DeleteUserAccount(Username);
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(122);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                if (rowsEffected >= 1)
-                    return "Success";
+                if (authorize == false)
+                    return "401";
                 else
-                    return "Error";
+                {
+                    var rowsEffected = new MemberProfileDA().DeleteUserAccount(Username);
+
+                    if (rowsEffected >= 1)
+                        return "Success";
+                    else
+                        return "Error";
+                }
             }
             catch(Exception ex)
             {

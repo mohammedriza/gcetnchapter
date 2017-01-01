@@ -47,7 +47,8 @@
         <div class="form-group">
             @Html.LabelFor(model => model.ExpenseDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.ExpenseDate, new { htmlAttributes = new { @class = "form-control", id = "TxtExpenseDate_EED" } })
+                @Html.EditorFor(model => model.ExpenseDate, new { htmlAttributes = new { @class = "dateValue form-control", id = "TxtExpenseDate_EED", style = "display: inline;" } })
+                <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Expense Date should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
             </div>
         </div>
 
@@ -68,7 +69,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="BtnCancelAddUpdate_EED" type="button" value="Cancel" class="btn btn-default" />
-                <input id="BtnSaveEventExpenseDetail_EED" type="button" value="Add Expense Detail" class="btn btn-primary" />
+                <input id="BtnSaveEventExpenseDetail_EED" type="button" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>

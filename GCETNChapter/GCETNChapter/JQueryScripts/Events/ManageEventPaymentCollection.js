@@ -26,7 +26,7 @@ function GetEventPaymentCollectionByID(paymentCollectionID, eventID) {
                 //-- Call method to show divAddEventPaymentCollection and hide the others --//
                 showAddEventPaymentCollection();
                 if (paymentCollectionID > 0) {
-                    $("#BtnSaveEventPaymentCollection_EPC").val("Edit Payment Collection");
+                    //$("#BtnSaveEventPaymentCollection_EPC").val("Edit Payment Collection");
                     $("#LblPaymentCollectionHeader").text("Edit Payment Collection");
                 }
             }
@@ -45,12 +45,16 @@ function DeleteEventPaymentCollection(paymentCollectionID) {
             type: "POST",
             data: { PaymentCollectionID: paymentCollectionID },
             success: function (data, result) {
-                if (data == "True") {
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Payment Collection ID " + paymentCollectionID + " and its details are deleted successfully.", "green");
                     GetAllEventPaymentCollections();
                 }
-                else if (data == "False")
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the selected Payment Collection item. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
@@ -79,49 +83,57 @@ function GetEventIdByEventName_PaymentCollection(eventName) {
 function AddEventPaymentCollection() {
     var eventID = $.trim($("#LblEventID_EPC").text());
     var paymentCollectionID = $.trim($("#LblPaymentCollectionID_EPC").text());
-    var collegeRegNo = $.trim($("#TxtCollegeRegNo_EPC").val());
+    var collegeRegNo = $.trim($("#TxtCollegeRegNo_Lookup").val());
     var paymentDate = $.trim($("#TxtPaymentDate_EPC").val());
     var amountReceived = $.trim($("#TxtAmountReceived_EPC").val());
 
-    if (eventID == 0 || eventID == "")
-    {
-        GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
-    }
-    else if ((collegeRegNo).length > 12) {
-        GeneralWarningsAndErrorDialog("Invalid College Registration No...", "College Registration No should not be more than 12 characters.", "red");
-    }
-    else if (paymentDate == "") {
-        GeneralWarningsAndErrorDialog("Invalid Payment Date...", "Please enter a valid Payment Date.", "red");
-    }
-    else if (collegeRegNo == "") {
-        GeneralWarningsAndErrorDialog("Invalid College Registration No...", "Please enter a valid College Registration No.", "red");
-    }
-    else if (Math.round(amountReceived) == 0) {
-        GeneralWarningsAndErrorDialog("Incomplete Information...", "Amount Received should be more than zero.", "red");
-    }
-    else {
-        $.ajax({
-            url: "/Events/AddEventPaymentCollection",
-            type: "POST",
-            data: {
-                EventID: eventID,
-                PaymentCollectionID: paymentCollectionID,
-                CollegeRegistrationNo: collegeRegNo,
-                PaymentDate: paymentDate,
-                AmountReceived: amountReceived
-            },
-            success: function (data, result) {
-                if (data == "True") {
-                    GeneralWarningsAndErrorDialog("SUCCESS", "Payment Collection updated successfully.", "green");
-                    GetAllEventPaymentCollections();
+    var DateValidation = ValidateDateFormat(paymentDate);
+    var amountValidation = ValidateIfNumeric(amountReceived);
+
+    if (DateValidation == true && amountValidation == true) {
+
+        if (eventID == 0 || eventID == "") {
+            GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
+        }
+        else if ((collegeRegNo).length > 12) {
+            GeneralWarningsAndErrorDialog("Invalid College Registration No...", "College Registration No should not be more than 12 characters.", "red");
+        }
+        else if (paymentDate == "") {
+            GeneralWarningsAndErrorDialog("Invalid Payment Date...", "Please enter a valid Payment Date.", "red");
+        }
+        else if (collegeRegNo == "") {
+            GeneralWarningsAndErrorDialog("Invalid College Registration No...", "Please enter a valid College Registration No.", "red");
+        }
+        else if (Math.round(amountReceived) == 0) {
+            GeneralWarningsAndErrorDialog("Incomplete Information...", "Amount Received should be more than zero.", "red");
+        }
+        else if (amountReceived.length > 16) {
+            GeneralWarningsAndErrorDialog("Numeric Values are too long...", "Amount Received should be less than or equal to 16 digits.", "red");
+        }
+        else {
+            $.ajax({
+                url: "/Events/AddEventPaymentCollection",
+                type: "POST",
+                data: {
+                    EventID: eventID,
+                    PaymentCollectionID: paymentCollectionID,
+                    CollegeRegistrationNo: collegeRegNo,
+                    PaymentDate: paymentDate,
+                    AmountReceived: amountReceived
+                },
+                success: function (data, result) {
+                    if (data == "True") {
+                        GeneralWarningsAndErrorDialog("SUCCESS", "Payment Collection updated successfully.", "green");
+                        GetAllEventPaymentCollections();
+                    }
+                    else if (data == "False")
+                        GeneralWarningsAndErrorDialog("Invalid College Registration No.", "Please make sure the College Registration No you entered is valid.", "red");
+                },
+                error: function (xhr, status, error) {
+                    GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
                 }
-                else if (data == "False")
-                    GeneralWarningsAndErrorDialog("Invalid College Registration No.", "Please make sure the College Registration No you entered is valid.", "red");
-            },
-            error: function (xhr, status, error) {
-                GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
-            }
-        });
+            });
+        }
     }
 }
 
@@ -139,7 +151,7 @@ $(document).on("click", "#BtnSaveEventPaymentCollection_EPC", function () {
 $(document).on("click", "#LnkAddPaymentCollection_EPC", function () {
     showAddEventPaymentCollection();
     GetEventPaymentCollectionByID(0, 0);
-    $("#BtnSaveEventPaymentCollection_EPC").val("Add Payment Collection");
+    //$("#BtnSaveEventPaymentCollection_EPC").val("Add Payment Collection");
     $("#LblPaymentCollectionHeader").text("Add Payment Collection");
 });
 

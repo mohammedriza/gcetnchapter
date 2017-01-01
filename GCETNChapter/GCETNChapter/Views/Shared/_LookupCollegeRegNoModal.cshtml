@@ -1,0 +1,38 @@
+﻿@model List<GCETNChapter.Models.ViewModels.LookupCollegeRegNoVO>
+
+<script>
+    //--- Initialize College Reg No lookup Table to a DataTable ---//
+    $("#TblLookupCollegeRegNo").DataTable({
+        "bSort": false
+    });
+</script>
+
+<table id="TblLookupCollegeRegNo" class="table table-responsive table-hover" style="width: 100%;">
+    <thead>
+        <tr>
+            <th>Member Name</th>
+            <th>College Reg No</th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.FullName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CollegeRegistrationNo)
+                    </td>
+                    <td>
+                        <a href="#" class="editIcon" onclick="GetLookupValue('@item.CollegeRegistrationNo');">Select</a>
+                    </td>
+                </tr>
+            }
+        }
+    </tbody>
+</table>
+

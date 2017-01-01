@@ -8,16 +8,16 @@
         <div class="form-group">
             <div class="col-md-4 formlabelFontRight">
                 Access Role
-            </div>            
+            </div>
             <div class="col-md-8">
-                <input id="TxtAccessRole" type="text" class="form-control" placeholder="Access Role Name" maxlength="12" />
+                <input id="TxtAccessRole_Add" type="text" class="form-control" placeholder="Access Role Name" maxlength="12" />
             </div>
         </div>
 
         <div class="form-group">
             <div class="col-md-4 formlabelFontRight">
                 Created By
-            </div>            
+            </div>
             <div class="col-md-8 normalFontLeft">
                 <span>@Session["username"].ToString()</span>
             </div>
@@ -25,8 +25,8 @@
 
         <div class="form-group">
             <div class="col-md-offset-4 col-md-8">
-                <input id="BtnCancel" type="button" value="Cancel" class="btn btn-default" data-dissmiss="modal" />
-                <input id="BtnCreateAccessRole" type="button" value="Create Access Role" class="btn btn-primary" />
+                <input id="BtnCancel" type="button" value="Cancel" class="btn btn-default" />
+                <input id="BtnCreateAccessRole" type="button" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>

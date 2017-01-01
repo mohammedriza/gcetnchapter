@@ -26,7 +26,7 @@ function GetEventExpenseDetailByID(expenseDetailID, eventID) {
                 //-- Call method to show divAddEventExpenseDetail and hide the others --//
                 showAddEventExpenseDetail();
                 if (expenseDetailID > 0) {
-                    $("#BtnSaveEventExpenseDetail_EED").val("Edit Expense Detail");
+                    //$("#BtnSaveEventExpenseDetail_EED").val("Edit Expense Detail");
                     $("#LblExpenseDetailHeader").text("Edit Expense Detail");
                 }
             }
@@ -45,12 +45,16 @@ function DeleteEventExpenseDetail(expenseDetailID) {
             type: "POST",
             data: { ExpenseDetailID: expenseDetailID },
             success: function (data, result) {
-                if (data == "True") {
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Expense Detail ID " + expenseDetailID + " and its details are deleted successfully.", "green");
                     GetAllEventExpenseDetails();
                 }
-                else if (data == "False")
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the selected Expense Detail item. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
@@ -68,46 +72,53 @@ function AddEventExpenseDetail() {
     var expenseDate = $.trim($("#TxtExpenseDate_EED").val());
     var amount = $.trim($("#TxtAmount_EED").val());
 
-    if (eventID == 0 || eventID == "")
-    {
-        GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
-    }
-    else if ((expenseDetail == ""))
-    {
-        GeneralWarningsAndErrorDialog("Invalid Expense Detail...", "Please enter a valid Expense Detail.", "red");
-    }
-    else if ((expenseDetail).length > 100) {
-        GeneralWarningsAndErrorDialog("Expense Details too long...", "Expense Detail should not exceed 100 characters.", "red");
-    }
-    else if (expenseDate == "") {
-        GeneralWarningsAndErrorDialog("Invalid Expense Date...", "Please enter a valid Expense Date.", "red");
-    }
-    else if (Math.round(amount) == 0) {
-        GeneralWarningsAndErrorDialog("Incomplete Information...", "Amount should be more than zero.", "red");
-    }
-    else {
-        $.ajax({
-            url: "/Events/AddEventExpenseDetail",
-            type: "POST",
-            data: {
-                EventID: eventID,
-                ExpenseDetailID: expenseDetailID,
-                ExpenseDetail: expenseDetail,
-                ExpenseDate: expenseDate,
-                Amount: amount
-            },
-            success: function (data, result) {
-                if (data == "True") {
-                    GeneralWarningsAndErrorDialog("SUCCESS...", "Expense Detail updated successfully.", "green");
-                    GetAllEventExpenseDetails();
+    var DateValidation = ValidateDateFormat(expenseDate);
+    var amountValidation = ValidateIfNumeric(amount);
+
+    if (DateValidation == true && amountValidation == true) {
+
+        if (eventID == 0 || eventID == "") {
+            GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
+        }
+        else if ((expenseDetail == "")) {
+            GeneralWarningsAndErrorDialog("Invalid Expense Detail...", "Please enter a valid Expense Detail.", "red");
+        }
+        else if ((expenseDetail).length > 100) {
+            GeneralWarningsAndErrorDialog("Expense Details too long...", "Expense Detail should not exceed 100 characters.", "red");
+        }
+        else if (expenseDate == "") {
+            GeneralWarningsAndErrorDialog("Invalid Expense Date...", "Please enter a valid Expense Date.", "red");
+        }
+        else if (Math.round(amount) == 0) {
+            GeneralWarningsAndErrorDialog("Incomplete Information...", "Amount should be more than zero.", "red");
+        }
+        else if (amount.length > 16) {
+            GeneralWarningsAndErrorDialog("Numeric Values are too long...", "Amount should be less than or equal to 16 digits.", "red");
+        }
+        else {
+            $.ajax({
+                url: "/Events/AddEventExpenseDetail",
+                type: "POST",
+                data: {
+                    EventID: eventID,
+                    ExpenseDetailID: expenseDetailID,
+                    ExpenseDetail: expenseDetail,
+                    ExpenseDate: expenseDate,
+                    Amount: amount
+                },
+                success: function (data, result) {
+                    if (data == "True") {
+                        GeneralWarningsAndErrorDialog("SUCCESS...", "Expense Detail updated successfully.", "green");
+                        GetAllEventExpenseDetails();
+                    }
+                    else if (data == "False")
+                        GeneralWarningsAndErrorDialog("ERROR...", "Failed to update selected Expense Detail item. Please try again later.", "red");
+                },
+                error: function (xhr, status, error) {
+                    GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
                 }
-                else if (data == "False")
-                    GeneralWarningsAndErrorDialog("ERROR...", "Failed to update selected Expense Detail item. Please try again later.", "red");
-            },
-            error: function (xhr, status, error) {
-                GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
-            }
-        });
+            });
+        }
     }
 }
 
@@ -140,7 +151,7 @@ $(document).on("click", "#BtnSaveEventExpenseDetail_EED", function () {
 $(document).on("click", "#LnkAddExpenseDetails_EED", function () {
     showAddEventExpenseDetail();
     GetEventExpenseDetailByID(0, 0);
-    $("#BtnSaveEventExpenseDetail_EED").val("Add Expense Details");
+    //$("#BtnSaveEventExpenseDetail_EED").val("Add Expense Details");
     $("#LblExpenseDetailsHeader").text("Add Expense Details");
 });
 

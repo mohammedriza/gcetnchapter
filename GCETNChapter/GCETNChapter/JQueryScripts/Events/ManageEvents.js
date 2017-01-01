@@ -26,7 +26,7 @@ function GetEventDetailsByEventID(eventID) {
                 //-- Call method to show divAddEvents and hide the others --//
                 showDivAddEvent();
                 if (eventID > 0) {
-                    $("#BtnSaveAddEvent_AE").val("Edit Event");
+                    //$("#BtnSaveAddEvent_AE").val("Edit Event");
                     $("#LblManageEventsHeader_AE").text("Edit Event Details");
                 }
             }
@@ -46,12 +46,16 @@ function DeleteEvent(eventID)
             type: "POST",
             data: { EventID: eventID },
             success: function (data, result) {
-                if (data == "True") {
+                if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Event ID " + eventID + " and all its details are deleted successfully.", "green");
                     GetViewEventsPartialView();
                 }
-                else if (data == "False")
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the event. Please try again later.", "red");
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
             },
             error: function (xhr, status, error) {
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
@@ -70,42 +74,52 @@ function AddNewEvent() {
     var totalCollectedAmount = $.trim($("#TxtTotalCollectedAmount").val());
     var totalExpenseAmount = $.trim($("#TxtTotalExpenseAmount").val());
 
-    if ((eventName).length > 100) {
-        GeneralWarningsAndErrorDialog("Event Name is too long...", "Event Name should not be more than 100 characters.", "red");
-    }
-    else if (eventName == "" || startDate == "" || endDate == "" || totalCollectedAmount == "" || totalExpenseAmount == "") {
-        GeneralWarningsAndErrorDialog("Incomplete Information...", "Please make sure all information are entered before the event is created.", "red");
-    }
-    else if (Math.round(totalCollectedAmount) == 0 || Math.round(totalExpenseAmount) == 0) {
-        GeneralWarningsAndErrorDialog("Incomplete Information...", "Total Collection Amount or Total Expense Amount should be more than zeros.", "red");
-    }
-    else if (startDate > endDate) {
-        GeneralWarningsAndErrorDialog("Incomplete Information...", "Start Date should be before the End Date.", "red");
-    }
-    else {
-        $.ajax({
-            url: "/Events/AddNewEvent",
-            type: "POST",
-            data: {
-                EventID: eventID,
-                EventName: eventName,
-                StartDate: startDate,
-                EndDate: endDate,
-                TotalCollectedAmount: totalCollectedAmount,
-                TotalExpenseAmount: totalExpenseAmount
-            },
-            success: function (data, result) {
-                if (data == "True") {
-                    GeneralWarningsAndErrorDialog("SUCCESS", "Event details updated successfully.", "green");
-                    GetViewEventsPartialView();
+    var StartDateValidation = ValidateDateFormat(startDate);
+    var EndDateValidation = ValidateDateFormat(endDate);
+    var amountValidation1 = ValidateIfNumeric(totalCollectedAmount);
+    var amountValidation2 = ValidateIfNumeric(totalExpenseAmount);
+
+    if (StartDateValidation == true && EndDateValidation == true && amountValidation1 == true && amountValidation2 == true) {
+        if ((eventName).length > 100) {
+            GeneralWarningsAndErrorDialog("Event Name is too long...", "Event Name should not be more than 100 characters.", "red");
+        }
+        else if (eventName == "" || startDate == "" || endDate == "" || totalCollectedAmount == "" || totalExpenseAmount == "") {
+            GeneralWarningsAndErrorDialog("Incomplete Information...", "Please make sure all information are entered before the event is created.", "red");
+        }
+        else if (Math.round(totalCollectedAmount) == 0 || Math.round(totalExpenseAmount) == 0) {
+            GeneralWarningsAndErrorDialog("Incomplete Information...", "Total Collection Amount or Total Expense Amount should be more than zeros.", "red");
+        }
+        else if (totalCollectedAmount.length > 16 || totalExpenseAmount.length > 16) {
+            GeneralWarningsAndErrorDialog("Numeric Values are too long...", "Total Collection Amount or Total Expense Amount should be less than or equal to 16 digits.", "red");
+        }
+        else if (startDate > endDate) {
+            GeneralWarningsAndErrorDialog("Incomplete Information...", "Start Date should be before the End Date.", "red");
+        }
+        else {
+            $.ajax({
+                url: "/Events/AddNewEvent",
+                type: "POST",
+                data: {
+                    EventID: eventID,
+                    EventName: eventName,
+                    StartDate: startDate,
+                    EndDate: endDate,
+                    TotalCollectedAmount: totalCollectedAmount,
+                    TotalExpenseAmount: totalExpenseAmount
+                },
+                success: function (data, result) {
+                    if (data == "True") {
+                        GeneralWarningsAndErrorDialog("SUCCESS", "Event details updated successfully.", "green");
+                        GetViewEventsPartialView();
+                    }
+                    else if (data == "False")
+                        GeneralWarningsAndErrorDialog("ERROR", "Failed to create the event. Please try again later.", "red");
+                },
+                error: function (xhr, status, error) {
+                    GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
                 }
-                else if (data == "False")
-                    GeneralWarningsAndErrorDialog("ERROR", "Failed to create the event. Please try again later.", "red");
-            },
-            error: function (xhr, status, error) {
-                GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
-            }
-        });
+            });
+        }
     }
 }
 

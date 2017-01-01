@@ -16,6 +16,9 @@ namespace GCETNChapter.Models.ViewModels
         [Required(ErrorMessage = "Please enter a valid College Registration No.")]
         public string CollegeRegistrationNo { get; set; }
 
+        [Display(Name = "Member Name")]
+        public string MemberName { get; set; }
+
         [Display(Name = "* Amount")]
         [DataType(DataType.Currency)]
         [Required(ErrorMessage = "Please enter a valid Amount.")]
@@ -48,10 +51,12 @@ namespace GCETNChapter.Models.ViewModels
         public string CreatedBy { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? ModifiedDate { get; set; }
 
     }

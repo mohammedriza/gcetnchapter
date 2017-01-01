@@ -23,7 +23,10 @@ namespace GCETNChapter.Models.ViewModels.Events
         [Display(Name = "* College Registration No")]
         public string CollegeRegistrationNo { get; set; }
 
-        [Display(Name = "* Expense Date")]
+        [Display(Name = "Member Name")]
+        public string MemberName { get; set; }
+
+        [Display(Name = "* Payment Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? PaymentDate { get; set; }
@@ -36,10 +39,12 @@ namespace GCETNChapter.Models.ViewModels.Events
         public string CreatedBy { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
 
         [DataType(DataType.Date)]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? ModifiedDate { get; set; }
     }
 }

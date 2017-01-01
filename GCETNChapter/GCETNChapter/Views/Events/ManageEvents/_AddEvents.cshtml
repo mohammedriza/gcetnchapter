@@ -33,14 +33,16 @@
         <div class="form-group">
             @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "form-control", id = "TxtStartDate" } })
+                @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "dateValue form-control", id = "TxtStartDate", style = "display: inline;" } })
+                <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Start Date should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
             </div>
         </div>
 
         <div class="form-group">
             @Html.LabelFor(model => model.EndDate, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
             <div class="col-md-10">
-                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "form-control", id = "TxtEndDate" } })
+                @Html.EditorFor(model => model.EndDate, new { htmlAttributes = new { @class = "dateValue form-control", id = "TxtEndDate", style = "display: inline;" } })
+                <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="End Date should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
             </div>
         </div>
 
@@ -68,7 +70,7 @@
         <div class="form-group">
             <div class="col-md-offset-2 col-md-10">
                 <input id="BtnCancelAddEvent_AE" type="button" value="Cancel" class="btn btn-default" />
-                <input id="BtnSaveAddEvent_AE" type="button" value="Create Event" class="btn btn-primary" />
+                <input id="BtnSaveAddEvent_AE" type="button" value="Save" class="btn btn-primary" />
             </div>
         </div>
     </div>

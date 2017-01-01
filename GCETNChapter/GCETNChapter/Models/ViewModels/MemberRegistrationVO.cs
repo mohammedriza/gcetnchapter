@@ -48,6 +48,7 @@ namespace GCETNChapter.Models.ViewModels
         public string ProfileImage { get; set; }
 
         [Display(Name = "Member Joined Date")]
+        [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = "")]
         public DateTime? MemberJoinedDate { get; set; }
 
         

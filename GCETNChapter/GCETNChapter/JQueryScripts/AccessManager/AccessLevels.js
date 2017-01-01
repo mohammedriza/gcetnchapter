@@ -31,6 +31,87 @@ function GetAccessLevelsByUserRole() {
 }
 
 
+function AddNewAccessRole() {
+    var accessRole = $("#TxtAccessRole_Add").val();
+
+    if (accessRole == "") {
+        GeneralWarningsAndErrorDialog("Invalid Access Role", "Please enter a valid access role to continue.", "red");
+    }
+    else {
+        $.ajax({
+            url: "/AccessManager/AddNewAccessRole/",
+            type: "POST",
+            data: { AccessRole: accessRole },
+            success: function (data) {
+                if (data == 200) {
+                    GeneralWarningsAndErrorDialog("SUCCESS", "Access Role successfully created. Close the modal and refresh the page to see the new Access Role in the dropdown and add required Access Levels.", "green");
+                }
+                else if (data == 400) {
+                    GeneralWarningsAndErrorDialog("Access Role Already Exist...", "The Access Role you entered already exist. Please try again with a different Access Role.", "red");
+                }
+                else if (data == 401) {
+                    ShowAccessDeniedMessage();
+                }
+                else {
+                    GeneralWarningsAndErrorDialog("ERROR", "Failed to add the Access Role. Please try again later.", "red");
+                }
+            },
+            error: function () {
+                GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
+            }
+        });
+    }
+}
+
+
+function AddUpdateAccessRights(accessID, grantAccess, accessRole) {
+
+    if (accessRole == "-- Select Access Role --") {
+        GeneralWarningsAndErrorDialog("ERROR", "Please select an Access Role from the dropdown to add Access Level.", "red");
+    }
+    else {
+        $.ajax({
+            url: "/AccessManager/AddUpdateAccessRights/",
+            type: "POST",
+            data: {
+                AccessRole: accessRole,
+                AccessID: accessID,
+                GrantAccess: grantAccess
+            },
+            success: function (data) {
+                if (data == "Error")
+                    GeneralWarningsAndErrorDialog("ERROR", "Failed to add the Access Level to the selected Access Role. Please try again later.", "red");
+                else if (data == "Success") {
+                    GetAccessLevelsByUserRole();
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
+                }
+                else {
+                    GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
+                }
+            },
+            error: function () {
+                GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
+            }
+        });
+    }
+}
+
+//--- Get Selected Acceess Level Row and its values to Add AccessRights ---//
+function GetSelectedRowAccessLevel() {
+    $('#TblAccessLevels').find('tr').click(function () {
+        //alert('You clicked row ' + ($(this).index() + 1));
+
+        var accessID = $(this).find("#LblAccessID").text();
+        var grantAccess = $(this).find("#ChboxGrantAccess").prop("checked");
+        var accessRole = $("#DDLAccessRoleList").val();
+
+        AddUpdateAccessRights(accessID, grantAccess, accessRole);
+    });
+
+}
+
 //**************************************************************************************************************************************************************************//
 //************************************************************************ BUTTON/LINK CLICK EVENTS ************************************************************************//
 //**************************************************************************************************************************************************************************//
@@ -40,11 +121,24 @@ $(document).on("change", "#DDLAccessRoleList", function () {
     GetAccessLevelsByUserRole();
 });
 
+//--- Open Add Access Role Modal ---//
 $(document).on("click", "#LnkAddNewAccessRole", function () {
     $("#AddNewAccessRoleModal").modal();;
 });
 
+//--- Close Add Access Role Modal ---//
 $(document).on("click", "#BtnCancel", function () {
     $("#AddNewAccessRoleModal").modal("hide");;
 });
 
+//--- Create New Access Role ---//
+$(document).on("click", "#BtnCreateAccessRole", function () {
+    AddNewAccessRole();
+});
+
+//--- Convert AccessRole to UpperCase when user keep typing ---//
+$(document).on("change", "#TxtAccessRole_Add", function () {
+    var value = $("#TxtAccessRole_Add").val();
+    value = value.toUpperCase();
+    $("#TxtAccessRole_Add").val(value);
+});

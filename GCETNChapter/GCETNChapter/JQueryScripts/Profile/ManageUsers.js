@@ -10,7 +10,7 @@ function GetUserAccountDetailsByUsername(username) {
                 ShowAddUpdateUserView();
                 $("#TxtUsername_Add").prop("disabled", true);       //--- Disable the Username Textbox when Updating user ---//
                 $("#BtnResetPassword_Add").removeClass("hidden");   //--- Hide the Reset Password button when Adding a new User ---//
-                $("#BtnAddNewuser").val("Modify User");
+                $("#BtnAddNewuser").val("Update User");
 
                 $("#TxtCollegeRegNo_Add").prop("disabled", true);   //-- Disable the Username Textbox when Updating user ---//
                 $("#LblTransType").val("UPDATE");                   //--- Set Transcation Type to UPDATE when updating User ---//
@@ -72,16 +72,22 @@ function CreateUpdateUserDetails()
                 TransType: transType
             },
             success: function (data) {
-                if (data == "User Exist")
+                if (data == "User Exist") {
                     GeneralWarningsAndErrorDialog("ERROR", "The Username you entered already exist. Please use a different Username.", "red");
-                else if (data == "CollegeRegNo Exist")
+                }
+                else if (data == "CollegeRegNo Exist") {
                     GeneralWarningsAndErrorDialog("ERROR", "The College Registration No you entered already exist. Please use a different College Registration No.", "red");
-                else if (data == "Error")
+                }
+                else if (data == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to Add/Update User Account Details. Please try again later.", "red");
+                }
                 else if (data == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "User Account Details successfully Saved.", "green");
                     alert("NOTE: New Account creations with 'PENDING' Account Status, will always go through the approval process. Please approve the user so that the user can login to the member portal.");
                     GetAllUserAccountDetails();
+                }
+                else if (data == "401") {
+                    ShowAccessDeniedMessage();
                 }
             },
             error: function () {
@@ -93,34 +99,38 @@ function CreateUpdateUserDetails()
 
 
 //--- Delete Existing User Account ---//
-function DeleteUserAccount(v_username) {
-    var username = v_username;
-
+function DeleteUserAccount(username) {
     if (username == "")
         GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
     else {
-        $.ajax({
-            url: "/MemberProfile/DeleteUserAccount/",
-            type: "POST",
-            data: { Username: username },
-            success: function (data) {
-                if (data == "ChildRecordsFound")
-                    GeneralWarningsAndErrorDialog("ERROR", "The Username you entered already has child records created and cannot be deleted. Please change the Account Status to INACTIVE, to Deactivate this User Account.", "red");
-                else if (data == "Error")
-                    GeneralWarningsAndErrorDialog("ERROR", "Failed to the User Account Details. Please try again later.", "red");
-                else if (data == "Success") {
-                    GeneralWarningsAndErrorDialog("SUCCESS", "User Account Details successfully deleted.", "green");
-                    GetAllUserAccountDetails();
-                }
-                else
-                {
+        if (confirm("Are you sure you want to delete the User " + username + "?. Please confirm.")) {
+            $.ajax({
+                url: "/MemberProfile/DeleteUserAccount/",
+                type: "POST",
+                data: { Username: username },
+                success: function (data) {
+                    if (data == "ChildRecordsFound") {
+                        GeneralWarningsAndErrorDialog("ERROR", "The Username you entered already has child records created and cannot be deleted. Please change the Account Status to INACTIVE, to Deactivate this User Account.", "red");
+                    }
+                    else if (data == "Error") {
+                        GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the User Account Details. Please try again later.", "red");
+                    }
+                    else if (data == "Success") {
+                        GeneralWarningsAndErrorDialog("SUCCESS", "User Account Details successfully deleted.", "green");
+                        GetAllUserAccountDetails();
+                    }
+                    else if (data == "401") {
+                        ShowAccessDeniedMessage();
+                    }
+                    else {
+                        GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
+                    }
+                },
+                error: function () {
                     GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
                 }
-            },
-            error: function () {
-                GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
-            }
-        });
+            });
+        }
     }
 }
 
@@ -151,15 +161,21 @@ function ModifyUserProfile(username)
 //**************************************************************************************************************************************************************************//
 //--- Show Add/UpdateUser View ---//
 $(document).on("click", "#LnkCreateNewUser", function () {
-    ShowAddUpdateUserView();
-    $("#TxtUsername_Add").prop("disabled", false);  //--- Enable the Username Textbox when Adding a new user, else disable it ---//
-    $("#BtnResetPassword_Add").addClass("hidden");  //--- Hide the Reset Password button when Adding a new User ---//
-    $("#BtnAddNewuser").val("Create User");         //--- Set the button Vlaue to "Create User"
-    $("#LblTransType").val("ADD");                  //--- Set Transcation Type to ADD when creating new User ---//
+    var returnVal = CheckForAccessAuthorization(119);
+    if (returnVal == "True") {
+        ShowAddUpdateUserView();
+        $("#TxtUsername_Add").prop("disabled", false);  //--- Enable the Username Textbox when Adding a new user, else disable it ---//
+        $("#TxtCollegeRegNo_Add").prop("disabled", false);  //--- Enable the Username Textbox when Adding a new user, else disable it ---//
+        $("#BtnResetPassword_Add").addClass("hidden");  //--- Hide the Reset Password button when Adding a new User ---//
+        $("#BtnAddNewuser").val("Create User");         //--- Set the button Value to "Create User"
+        $("#LblTransType").val("ADD");                  //--- Set Transcation Type to ADD when creating new User ---//
+
+        InitializeAddUserView();                        //--- Initialize the Add User View and clear all textboxes and set to default ---//
+    }
+    else if (returnVal == "False") {
+        ShowAccessDeniedMessage();
+    }
 });
-
-//--- Edit User Account Details ---//
-
 
 //--- Cancel Add/UpdateUser View and return to ViewUserLIst View ---//
 $(document).on("click", "#BtnCancel_Add", function () {
@@ -186,5 +202,14 @@ function ShowViewUserListView()
 function ShowAddUpdateUserView() {
     $("#divAddUpdateUser").fadeIn(1000);
     $("#divViewUserList").hide();
-    //InitializeAddUpdateUserView();
+}
+
+function InitializeAddUserView()
+{
+    $("#TxtUsername_Add").val("");
+    $("#TxtPassword_Add").val("");
+    $("#TxtConfirmPassword_Add").val("");
+    $("#TxtCollegeRegNo_Add").val("");
+    $("#DDLAccessRole_Add").val("-- Select Access Role --");
+    $("#DDAccountStatus_Add").val("-- Select Account Status --");
 }

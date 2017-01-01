@@ -745,5 +745,66 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetAccessLevelDetails_Result>("prcGetAccessLevelDetails", accessRoleParameter);
         }
+    
+        public virtual int prcAddNewAccessRole(string accessRole, string createdBy, ObjectParameter result)
+        {
+            var accessRoleParameter = accessRole != null ?
+                new ObjectParameter("AccessRole", accessRole) :
+                new ObjectParameter("AccessRole", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddNewAccessRole", accessRoleParameter, createdByParameter, result);
+        }
+    
+        public virtual ObjectResult<Nullable<bool>> prcGetAccessLevelAuthorization(Nullable<int> accessID, string accessRole)
+        {
+            var accessIDParameter = accessID.HasValue ?
+                new ObjectParameter("AccessID", accessID) :
+                new ObjectParameter("AccessID", typeof(int));
+    
+            var accessRoleParameter = accessRole != null ?
+                new ObjectParameter("AccessRole", accessRole) :
+                new ObjectParameter("AccessRole", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<Nullable<bool>>("prcGetAccessLevelAuthorization", accessIDParameter, accessRoleParameter);
+        }
+    
+        public virtual int prcAddAuditLogRecord(string actionSummary, string actionType, string actionBy)
+        {
+            var actionSummaryParameter = actionSummary != null ?
+                new ObjectParameter("ActionSummary", actionSummary) :
+                new ObjectParameter("ActionSummary", typeof(string));
+    
+            var actionTypeParameter = actionType != null ?
+                new ObjectParameter("ActionType", actionType) :
+                new ObjectParameter("ActionType", typeof(string));
+    
+            var actionByParameter = actionBy != null ?
+                new ObjectParameter("ActionBy", actionBy) :
+                new ObjectParameter("ActionBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddAuditLogRecord", actionSummaryParameter, actionTypeParameter, actionByParameter);
+        }
+    
+        public virtual ObjectResult<prcGetFewsFeed_Result> prcGetFewsFeed(Nullable<int> newsID)
+        {
+            var newsIDParameter = newsID.HasValue ?
+                new ObjectParameter("NewsID", newsID) :
+                new ObjectParameter("NewsID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetFewsFeed_Result>("prcGetFewsFeed", newsIDParameter);
+        }
+    
+        public virtual ObjectResult<prcGetNewsFeed_Result> prcGetNewsFeed(Nullable<int> newsID)
+        {
+            var newsIDParameter = newsID.HasValue ?
+                new ObjectParameter("NewsID", newsID) :
+                new ObjectParameter("NewsID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetNewsFeed_Result>("prcGetNewsFeed", newsIDParameter);
+        }
     }
 }

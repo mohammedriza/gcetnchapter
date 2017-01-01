@@ -24,5 +24,6 @@ namespace GCETNChapter
         public System.DateTime CreatedDate { get; set; }
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string FullName { get; set; }
     }
 }

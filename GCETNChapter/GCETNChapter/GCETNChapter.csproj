@@ -198,11 +198,13 @@
     <Compile Include="App_Start\FilterConfig.cs" />
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccessManagerController.cs" />
+    <Compile Include="Controllers\AdvertisementController.cs" />
     <Compile Include="Controllers\DonationsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\MemberProfileController.cs" />
     <Compile Include="Controllers\MemberRegistrationController.cs" />
+    <Compile Include="Controllers\NewsController.cs" />
     <Compile Include="GCETNChapterEntity.Context.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -228,17 +230,20 @@
     <Compile Include="Models\DataAccess\HomeDA.cs" />
     <Compile Include="Models\DataAccess\MemberDA.cs" />
     <Compile Include="Models\DataAccess\MemberProfileDA.cs" />
+    <Compile Include="Models\DataAccess\NewsDA.cs" />
     <Compile Include="Models\ViewModels\DonationDetailsVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventExpenseDetailsVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventGalleryVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventPaymentCollectionVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventsVO.cs" />
     <Compile Include="Models\ViewModels\LoginDetailsVO.cs" />
+    <Compile Include="Models\ViewModels\LookupCollegeRegNoVO.cs" />
     <Compile Include="Models\ViewModels\ManageAccess\AccessLevelsVO.cs" />
     <Compile Include="Models\ViewModels\ManageAccess\AccessRolesVO.cs" />
     <Compile Include="Models\ViewModels\MemberProfileVO.cs" />
     <Compile Include="Models\ViewModels\ContactUsVO.cs" />
     <Compile Include="Models\ViewModels\MemberRegistrationVO.cs" />
+    <Compile Include="Models\ViewModels\News\NewsVO.cs" />
     <Compile Include="Models\ViewModels\UserVO.cs" />
     <Compile Include="prcEventPhotosByEventID_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
@@ -270,7 +275,13 @@
     <Compile Include="prcGetEventPhotosByEventID_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="prcGetFewsFeed_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="prcGetGenderList_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetNewsFeed_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="prcGetProfileAddressInformation_Result.cs">
@@ -443,7 +454,6 @@
     <Content Include="Content\DataTables\images\sort_desc.png" />
     <Content Include="Content\DataTables\images\sort_desc_disabled.png" />
     <Content Include="Content\DataTables\swf\flashExport.swf" />
-    <Content Include="Content\ScrollingCss.css" />
     <Content Include="Content\themes\base\accordion.css" />
     <Content Include="Content\themes\base\all.css" />
     <Content Include="Content\themes\base\autocomplete.css" />
@@ -508,32 +518,40 @@
     <Content Include="Images\FooterIcons\twitter.png" />
     <Content Include="Images\FooterIcons\Visit.png" />
     <Content Include="Images\FooterIcons\Whatsapp.png" />
+    <Content Include="Images\SampleAd.jpg" />
+    <Content Include="Images\SampleAd2.jpg" />
+    <Content Include="Images\Scrolling\Image_1.jpg" />
+    <Content Include="Images\Scrolling\Image_2.jpg" />
+    <Content Include="Images\Scrolling\Image_3.jpg" />
+    <Content Include="Images\Scrolling\Image_4.jpg" />
     <Content Include="Images\loading.gif" />
-    <Content Include="Images\LoginBackground.jpg" />
+    <Content Include="Images\LoginBG.jpg" />
     <Content Include="Images\logo_home.png" />
     <Content Include="Images\logo_mini.png" />
     <Content Include="Images\MessageSent.png" />
     <Content Include="Images\OtherPages\AboutUsGroupImg.png" />
+    <Content Include="Images\OtherPages\ContactUs.png" />
+    <Content Include="Images\OtherPages\ContactUsBg.jpg" />
     <Content Include="Images\OtherPages\Founder.png" />
-    <Content Include="Images\Scrolling\Image1.jpg" />
-    <Content Include="Images\Scrolling\Image2.jpg" />
-    <Content Include="Images\Scrolling\Image3.jpg" />
-    <Content Include="Images\Scrolling\Image4.jpg" />
-    <Content Include="JQueryScripts\AboutUsPage.js" />
+    <Content Include="Images\OtherPages\NewsIcon.png" />
+    <Content Include="Images\OtherPages\UnauthorizedAccess.png" />
+    <Content Include="JQueryScripts\Advertisement\Advertisement.js" />
+    <Content Include="JQueryScripts\PublicPages\AboutUsPage.js" />
     <Content Include="JQueryScripts\AccessManager\AccessLevels.js" />
-    <Content Include="JQueryScripts\ContactUsPage.js" />
+    <Content Include="JQueryScripts\PublicPages\ContactUsPage.js" />
     <Content Include="JQueryScripts\Events\ManageEventExpenseDetails.js" />
     <Content Include="JQueryScripts\Events\ManageEventGallery.js" />
     <Content Include="JQueryScripts\Events\ManageEventPaymentCollection.js" />
     <Content Include="JQueryScripts\Events\ManageEvents.js" />
     <Content Include="JQueryScripts\Events\EventsPage.js" />
     <Content Include="JQueryScripts\GeneralScripts.js" />
-    <Content Include="JQueryScripts\HomePage.js" />
-    <Content Include="JQueryScripts\LoginPage.js" />
-    <Content Include="JQueryScripts\MemberPages\Donations.js" />
+    <Content Include="JQueryScripts\PublicPages\HomePage.js" />
+    <Content Include="JQueryScripts\Registration\LoginPage.js" />
+    <Content Include="JQueryScripts\Donations\Donations.js" />
+    <Content Include="JQueryScripts\PublicPages\NewsFeed.js" />
     <Content Include="JQueryScripts\Profile\MyProfile.js" />
     <Content Include="JQueryScripts\Profile\ManageUsers.js" />
-    <Content Include="JQueryScripts\RegistrationPage.js" />
+    <Content Include="JQueryScripts\Registration\RegistrationPage.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
     <Content Include="ApplicationInsights.config">
@@ -667,16 +685,16 @@
     <Content Include="Views\MemberRegistration\Login.cshtml" />
     <Content Include="Views\Shared\_SuccessErrorMessages.cshtml" />
     <Content Include="Views\MemberProfile\ManageProfile.cshtml" />
-    <Content Include="Views\Shared\_FooterSection.cshtml" />
-    <Content Include="Views\Shared\_PublicHeaderSection.cshtml" />
-    <Content Include="Views\Shared\_MemberHeaderSection.cshtml" />
+    <Content Include="Views\Shared\Layout\_FooterSection.cshtml" />
+    <Content Include="Views\Shared\Layout\_PublicHeaderSection.cshtml" />
+    <Content Include="Views\Shared\Layout\_MemberHeaderSection.cshtml" />
     <Content Include="Views\MemberProfile\Logout.cshtml" />
     <Content Include="Views\MemberProfile\Profile\_LoginAndPersonalInfo.cshtml" />
     <Content Include="Views\MemberProfile\Profile\_ContactInformation.cshtml" />
     <Content Include="Views\MemberProfile\Profile\_CollegeInformation.cshtml" />
     <Content Include="Views\MemberProfile\Profile\_AddressInformation.cshtml" />
     <Content Include="Views\MemberProfile\Profile\_WorkplaceAndExpertiseInformation.cshtml" />
-    <Content Include="Views\Shared\_ReusableModalPopup.cshtml" />
+    <Content Include="Views\Shared\_UnauthorizedAccess.cshtml" />
     <Content Include="Views\Donations\Donations.cshtml" />
     <Content Include="Views\Home\MessageSent.cshtml" />
     <Content Include="Views\Events\Events.cshtml" />
@@ -695,10 +713,14 @@
     <Content Include="Views\AccessManager\ManageAccess.cshtml" />
     <Content Include="Views\AccessManager\AccessLevel\_CreateAccessRole.cshtml" />
     <Content Include="Views\AccessManager\AccessLevel\_ManageAccessLevel.cshtml" />
+    <Content Include="Views\Advertisement\Index.cshtml" />
+    <Content Include="Views\News\ViewNews.cshtml" />
+    <Content Include="Views\Shared\_LookupCollegeRegNoModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="EventUploads\EventPhotos\" />
+    <Folder Include="JQueryScripts\News\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

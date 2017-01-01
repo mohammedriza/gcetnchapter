@@ -15,7 +15,6 @@ namespace GCETNChapter
     {
         public int PaymentCollectionID { get; set; }
         public int EventID { get; set; }
-        public string CollegeRegistrationNo { get; set; }
         public Nullable<System.DateTime> PaymentDate { get; set; }
         public Nullable<decimal> AmountReceived { get; set; }
         public string CreatedBy { get; set; }
@@ -23,5 +22,7 @@ namespace GCETNChapter
         public string ModifiedBy { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string EventName { get; set; }
+        public string FullName { get; set; }
+        public string CollegeRegistrationNo { get; set; }
     }
 }

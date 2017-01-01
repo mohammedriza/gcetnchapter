@@ -11,19 +11,20 @@
 <div class="row">
     <table id="TblViewDonations" class="table table-responsive">
         <thead>
-            <tr>
+            <tr class="tableHeaderFont">
                 <th></th>
-                <th>ID</th>
+                <th class="hidden">ID</th>
                 <th>Col. Reg. No.</th>
-                <th>Payment Date</th>
-                <th>Amount</th>
+                <th>Member Name</th>
+                <th><span class="dateFormatText">(MM/DD/YYYY)</span>Payment Date</th>
+                <th class="text-right">Amount</th>
                 <th>Payment Reason</th>
-                <th>Pmnt Start date</th>
-                <th>Pmnt End date</th>
+                <th><span class="dateFormatText">(MM/DD/YYYY)</span>Pmnt Start date </th>
+                <th><span class="dateFormatText">(MM/DD/YYYY)</span>Pmnt End date </th>
                 <th>Created By</th>
-                <th>Created Date</th>
+                <th><span class="dateFormatText">(MM/DD/YYYY)</span>Created Date </th>
                 <th>Modified By</th>
-                <th>Modified Date</th>
+                <th><span class="dateFormatText">(MM/DD/YYYY)</span> Modified Date</th>
             </tr>
         </thead>
         <tbody>
@@ -31,7 +32,7 @@
             {
                 foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="tableBodyFont">
                         <td>
                             <a href="#" class="editIcon" title="Edit Donation" onclick="GetDonatoinDetailsByDonationID(@item.DonationID)">
                                 <span class="glyphicon glyphicon-pencil"></span>
@@ -40,15 +41,16 @@
                                 <span class="glyphicon glyphicon-trash"></span>
                             </a>
                         </td>
-                        <td>@item.DonationID</td>
+                        <td class="hidden">@item.DonationID</td>
                         <td>@item.CollegeRegistrationNo</td>
+                        <td>@item.MemberName</td>
                         <td>@item.PaymentDate.Value.ToShortDateString()</td>
-                        <td>@item.Amount</td>
+                        <td class="text-right">@Convert.ToDecimal(item.Amount).ToString("#,##0.00")</td>
                         <td>@item.PaymentReason</td>
                         <td>@item.PaymentStartDate.Value.ToShortDateString()</td>
                         <td>@item.PaymentEndDate.Value.ToShortDateString()</td>
                         <td>@item.CreatedBy</td>
-                        <td>@item.CreatedDate</td>
+                        <td>@item.CreatedDate.Value.ToShortDateString()</td>
                         <td>@item.ModifiedBy</td>
                         <td>@item.ModifiedDate</td>
                     </tr>

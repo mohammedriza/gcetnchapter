@@ -106,6 +106,8 @@ function DatePickerAndTooltipInit() {
 //--- Executes the function once an Ajax call is completed ---//
 $(document).ajaxComplete(function () {
     DatePickerAndTooltipInit();
+
+    $("#TblAllMembers").DataTable();
 });
 
 //--- Executes the function once all elements in the page are loaded ---//

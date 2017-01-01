@@ -243,6 +243,7 @@
     <Compile Include="Models\ViewModels\MemberProfileVO.cs" />
     <Compile Include="Models\ViewModels\ContactUsVO.cs" />
     <Compile Include="Models\ViewModels\MemberRegistrationVO.cs" />
+    <Compile Include="Models\ViewModels\Members\MembersVO.cs" />
     <Compile Include="Models\ViewModels\News\NewsVO.cs" />
     <Compile Include="Models\ViewModels\UserVO.cs" />
     <Compile Include="prcEventPhotosByEventID_Result.cs">
@@ -536,6 +537,7 @@
     <Content Include="Images\OtherPages\NewsIcon.png" />
     <Content Include="Images\OtherPages\UnauthorizedAccess.png" />
     <Content Include="JQueryScripts\Advertisement\Advertisement.js" />
+    <Content Include="JQueryScripts\Profile\AllMembers.js" />
     <Content Include="JQueryScripts\PublicPages\AboutUsPage.js" />
     <Content Include="JQueryScripts\AccessManager\AccessLevels.js" />
     <Content Include="JQueryScripts\PublicPages\ContactUsPage.js" />
@@ -716,6 +718,7 @@
     <Content Include="Views\Advertisement\Index.cshtml" />
     <Content Include="Views\News\ViewNews.cshtml" />
     <Content Include="Views\Shared\_LookupCollegeRegNoModal.cshtml" />
+    <Content Include="Views\MemberProfile\Members\_AllMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

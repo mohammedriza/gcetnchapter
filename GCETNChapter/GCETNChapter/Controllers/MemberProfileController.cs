@@ -443,5 +443,20 @@ namespace GCETNChapter.Controllers
             }
             return null;
         }
+
+
+        //--- ALL MEMBERS RELATED METHODS ---//
+        public PartialViewResult GetAllMembers()
+        {
+            try
+            {
+                var members = new MemberProfileDA().GetAllMembers();
+                return PartialView("Members/_AllMembers", members);
+            }
+            catch(Exception ex)
+            {
+                return PartialView("Members/_AllMembers", ex.Message);
+            }
+        }
     }
 }

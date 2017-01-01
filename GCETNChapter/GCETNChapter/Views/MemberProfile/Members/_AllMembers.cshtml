@@ -1,0 +1,58 @@
+﻿@model IEnumerable<GCETNChapter.Models.ViewModels.Members.MembersVO>
+
+
+<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table id="TblAllMembers" class="table table-hover table-responsive">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.FullName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Batch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Branch)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.CurrentCountry)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.WhatsappNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.PrimaryContactNo)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.Email)
+        </th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.FullName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Batch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Branch)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.CurrentCountry)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.WhatsappNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.PrimaryContactNo)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.Email)
+        </td>
+    </tr>
+}
+
+</table>

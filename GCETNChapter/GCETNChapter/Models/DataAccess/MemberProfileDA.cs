@@ -1,4 +1,5 @@
 ﻿using GCETNChapter.Models.ViewModels;
+using GCETNChapter.Models.ViewModels.Members;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -251,6 +252,16 @@ namespace GCETNChapter.Models.DataAccess
             {
                 var rowsEffected = db.prcDeleteUserAccount(Username);
                 return rowsEffected;
+            }
+        }
+
+
+        public List<MembersVO> GetAllMembers()
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var result = db.Database.SqlQuery<MembersVO>("SELECT FullName, Branch, Batch, PrimaryContactNo, WhatsappNo, Email, CurrentCountry FROM GCE_MemberInfo").ToList();
+                return result;
             }
         }
 

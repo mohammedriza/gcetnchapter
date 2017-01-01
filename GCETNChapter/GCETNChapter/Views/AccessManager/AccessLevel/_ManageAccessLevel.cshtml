@@ -23,7 +23,7 @@
 @if (Model != null)
 {
 <table id="TblAccessLevels" class="table table-hover table-responsive">
-    <tr class="formlabelFontLeft">
+    <tr class="tableHeaderFont">
         <th>
             @Html.DisplayNameFor(model => model.AccessID)
         </th>
@@ -41,21 +41,21 @@
         </th>
         <th>
             @Html.DisplayNameFor(model => model.CreatedDate)
-            <span class="dateFormatText">(MM/DD/YYYY)</span> 
+            <span class="dateFormatText">(MM/DD/YYYY)</span>
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedBy)
         </th>
         <th>
             @Html.DisplayNameFor(model => model.ModifiedDate)
-            <span class="dateFormatText">(MM/DD/YYYY)</span> 
+            <span class="dateFormatText">(MM/DD/YYYY)</span>
         </th>
         <th></th>
     </tr>
 
 @foreach (var item in Model)
 {
-    <tr class="normalFontLeft">
+    <tr class="tableBodyFont">
         <td id="LblAccessID">
             @Html.DisplayFor(modelItem => item.AccessID)
         </td>

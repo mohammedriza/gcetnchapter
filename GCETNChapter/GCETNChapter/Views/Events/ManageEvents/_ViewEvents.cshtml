@@ -11,7 +11,7 @@
 <div class="row">
     <table id="TblViewEvents" class="table table-responsive">
         <thead>
-            <tr>
+            <tr class="tableHeaderFont">
                 <th></th>
                 <th>Event Name</th>
                 <th><span class="dateFormatText">(MM/DD/YYYY)</span>Start Date</th>
@@ -29,7 +29,7 @@
             {
                 foreach (var item in Model)
                 {
-                <tr>
+                <tr class="tableBodyFont">
                     <td>
                         <a href="#" class="editIcon" title="Edit Event" onclick="GetEventDetailsByEventID(@item.EventID)">
                             <span class="glyphicon glyphicon-pencil"></span>

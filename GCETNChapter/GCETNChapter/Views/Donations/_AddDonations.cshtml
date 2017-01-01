@@ -60,7 +60,8 @@
     <div class="form-group">
         @Html.LabelFor(model => model.Amount, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
         <div class="col-md-10">
-            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "currency form-control", id = "TxtAmount" } })
+            @Html.EditorFor(model => model.Amount, new { htmlAttributes = new { @class = "currency form-control", id = "TxtAmount", style="display: inline;" } })
+            <span class="smallFont">E.g.: 15000.00 (wihtout comma separated)</span>
             @Html.ValidationMessageFor(model => model.Amount, "", new { @class = "textboxerror" })
         </div>
     </div>

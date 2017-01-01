@@ -11,7 +11,7 @@
 <div class="row">
     <table id="TblViewEventExpenseDetails_EED" class="table table-responsive">
         <thead>
-            <tr>
+            <tr class="tableHeaderFont">
                 <th></th>
                 <th>Event Name</th>
                 <th>Details</th>
@@ -28,7 +28,7 @@
             {
                 foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="tableBodyFont">
                         <td>
                             <a href="#" class="editIcon" title="Edit Payment Collection" onclick="GetEventExpenseDetailByID(@item.ExpenseDetailID, 0)">
                                 <span class="glyphicon glyphicon-pencil"></span>

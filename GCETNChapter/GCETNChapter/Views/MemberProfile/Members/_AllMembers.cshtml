@@ -30,11 +30,11 @@
             </tr>
         </thead>
 
-        @if (Model != null)
-        {
-            foreach (var item in Model)
+        <tbody>
+            @if (Model != null)
             {
-                <tbody>
+                foreach (var item in Model)
+                {
                     <tr>
                         <td>
                             @Html.DisplayFor(modelItem => item.FullName)
@@ -58,8 +58,8 @@
                             @Html.DisplayFor(modelItem => item.Email)
                         </td>
                     </tr>
-                </tbody>
+                }
             }
-        }
+        </tbody>
     </table>
 </div>

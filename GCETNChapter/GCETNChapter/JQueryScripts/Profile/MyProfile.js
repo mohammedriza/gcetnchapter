@@ -405,8 +405,9 @@ function isValidEmailAddress(emailAddress) {
 //*****************************************************************//
 
 $(document).on("click", "#LnkManageMemberProfile", function () {
-    $("#divManageProfile").hide();
     $("#divManageUsers").fadeIn(1000);
+    $("#divManageProfile").hide();
+    $("#divViewAllMembers").hide();
     $("#LblProfileHeaderText").text("Member Admin");
     $("#LblProfileOwnerUsername").text("");
     GetAllUserAccountDetails();
@@ -437,10 +438,18 @@ function ShowMyProfile() {
 function MyProfileSelectorCss() {
     $("#LnkMyProfile P").addClass("subHeadingSelector");
     $("#LnkManageMemberProfile P").removeClass("subHeadingSelector");
+    $("#LnkViewAllMembeers P").removeClass("subHeadingSelector");
 }
 
 function ManageUsersSelectorCss() {
     $("#LnkMyProfile P").removeClass("subHeadingSelector");
     $("#LnkManageMemberProfile P").addClass("subHeadingSelector");
+    $("#LnkViewAllMembeers P").removeClass("subHeadingSelector");
+}
+
+function ViewAllMembersSelectorCss() {
+    $("#LnkMyProfile P").removeClass("subHeadingSelector");
+    $("#LnkManageMemberProfile P").removeClass("subHeadingSelector");
+    $("#LnkViewAllMembeers P").addClass("subHeadingSelector");
 }
 

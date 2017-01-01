@@ -196,12 +196,15 @@ function ShowViewUserListView()
 {
     $("#divViewUserList").fadeIn(1000);
     $("#TblViewUserList").DataTable();
+    $("#TblAllMembers").DataTable();
     $("#divAddUpdateUser").hide();
+
 }
 
 function ShowAddUpdateUserView() {
     $("#divAddUpdateUser").fadeIn(1000);
     $("#divViewUserList").hide();
+    $("#divViewAllMembers").hide();
 }
 
 function InitializeAddUserView()

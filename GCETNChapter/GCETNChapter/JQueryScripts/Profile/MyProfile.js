@@ -407,7 +407,7 @@ function isValidEmailAddress(emailAddress) {
 $(document).on("click", "#LnkManageMemberProfile", function () {
     $("#divManageProfile").hide();
     $("#divManageUsers").fadeIn(1000);
-    $("#LblProfileHeaderText").text("Manage User & Profiles");
+    $("#LblProfileHeaderText").text("Member Admin");
     $("#LblProfileOwnerUsername").text("");
     GetAllUserAccountDetails();
     ManageUsersSelectorCss();

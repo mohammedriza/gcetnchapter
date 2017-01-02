@@ -280,11 +280,11 @@ namespace GCETNChapter.Models.DataAccess
 
         //%%%%%%%%%%%%%%%%%%% MANAGE EVENT GALLERY %%%%%%%%%%%%%%%%%%%//
 
-        public int AddEventPhotos(EventGalleryVO GalleryVo, string ImageName)
+        public int AddEventPhotos(EventGalleryVO GalleryVo)
         {
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
-                var response = db.prcAddEventPhotos(GalleryVo.EventID, ImageName, GalleryVo.CreatedBy);
+                var response = db.prcAddEventPhotos(GalleryVo.EventID, GalleryVo.ImageFileName, GalleryVo.CreatedBy);
 
                 return response;
             }
@@ -306,7 +306,7 @@ namespace GCETNChapter.Models.DataAccess
                         EventID = response.ElementAt(x).EventID,
                         EventNameList = EventsDA.GetAllEventNames(),
                         EventName = response.ElementAt(x).EventName,
-                        Image1 = response.ElementAt(x).Image,
+                        ImageFileName = response.ElementAt(x).Image,
                         CreatedBy = response.ElementAt(x).CreatedBy,
                         CreatedDate = response.ElementAt(x).CreatedDate,
                         ModifiedBy = response.ElementAt(x).ModifiedBy,

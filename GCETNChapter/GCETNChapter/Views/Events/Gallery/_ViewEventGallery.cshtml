@@ -35,8 +35,8 @@
                     {
                     <td>
                         <div class="row smallFont">
-                            <div> @Model[x].Image1 </div>
-                            <div> <img src="~/EventUploads/EventPhotos/"+ @Model[x].Image1 height="150"> </div>
+                            <div> @Model[x].ImageFileName </div>
+                            <div> <img src="~/_ImageUploads/EventPhotos/@Model[x].ImageFileName" height="150" /> </div>
                             <span>(ID: @Model[x].ImageID )</span>
                             <span> @Model[x].CreatedDate.Value.ToShortDateString() </span>
                         </div>
@@ -47,8 +47,8 @@
                     {
                     <td>
                         <div class="row smallFont">
-                            <div> @Model[x + 1].Image1 </div>
-                            <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 1].Image1 height="150"> </div>
+                            <div> @Model[x + 1].ImageFileName </div>
+                            <div> <img src="~/_ImageUploads/EventPhotos/@Model[x + 1].ImageFileName" height="150" /> </div>
                             <span>(ID: @Model[x + 1].ImageID )</span>
                             <span> @Model[x + 1].CreatedDate.Value.ToShortDateString() </span>
                         </div>
@@ -59,8 +59,8 @@
                     {
                     <td>
                         <div class="row smallFont">
-                            <div> @Model[x + 2].Image1 </div>
-                            <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 2].Image1 height="150"> </div>
+                            <div> @Model[x + 2].ImageFileName </div>
+                            <div> <img src="~/_ImageUploads/EventPhotos/@Model[x + 2].ImageFileName" height="150" /> </div>
                             <span>(ID: @Model[x + 2].ImageID )</span>
                             <span> @Model[x + 2].CreatedDate.Value.ToShortDateString() </span>
                         </div>
@@ -71,8 +71,8 @@
                     {
                         <td>
                             <div class="row smallFont">
-                                <div> @Model[x + 3].Image1 </div>
-                                <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 3].Image1 height="150"> </div>
+                                <div> @Model[x + 3].ImageFileName </div>
+                                <div> <img src="~/_ImageUploads/EventPhotos/@Model[x + 3].ImageFileName" height="150" /> </div>
                                 <span>(ID: @Model[x + 3].ImageID )</span>
                                 <span> @Model[x + 3].CreatedDate.Value.ToShortDateString() </span>
                             </div>
@@ -83,20 +83,34 @@
                     {
                         <td>
                             <div class="row smallFont">
-                                <div> @Model[x + 4].Image1 </div>
-                                <div> <img src="~/EventUploads/EventPhotos/" + @Model[x + 4].Image1 height="150"> </div>
+                                <div> @Model[x + 4].ImageFileName </div>
+                                <div> <img src="~/_ImageUploads/EventPhotos/@Model[x + 4].ImageFileName" height="150" /> </div>
                                 <span>(ID: @Model[x + 4].ImageID )</span>
                                 <span> @Model[x + 4].CreatedDate.Value.ToShortDateString() </span>
                             </div>
                         </td>
                     }
-                </tr>                    
+                </tr>
                     x = x + 4;
                 }
             }
         }
         </tbody>
     </table>
+
+    @if (Model != null)
+    {
+        if (Model[0].EventID == 0)
+        {
+            <div class="alert alert-danger text-center">
+                <span>There are no images found for the selected Event.</span>
+            </div>
+        }
+    }
+
+    <div id="divEnlargeImageFile" class="enlargeImage hideDiv">
+        <img id="ImageFile" src="" height="600" />
+    </div>
 
 </div>
 

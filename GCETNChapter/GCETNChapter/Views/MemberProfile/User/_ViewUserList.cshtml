@@ -8,7 +8,7 @@
 <div class="row">
     <table id="TblViewUserList" class="table table-hover table-responsive">
         <thead>
-            <tr>
+            <tr class="tableHeaderFont">
                 <th></th>
                 <th>Username</th>
                 <th>College Reg No</th>
@@ -25,7 +25,7 @@
             {
                 foreach (var item in Model)
                 {
-                    <tr>
+                    <tr class="tableBodyFont">
                         <td>
                             <a href="#" class="editIcon" title="Edit User Account" onclick="GetUserAccountDetailsByUsername('@item.Username')">
                                 <span class="glyphicon glyphicon-pencil"></span>

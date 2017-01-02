@@ -1,66 +1,66 @@
 ﻿@model GCETNChapter.Models.ViewModels.Events.EventGalleryVO
 
 
-@using (Html.BeginForm())
-{
-    @Html.AntiForgeryToken()
 
     <span id="LblEventGalleryHeader" class="headerText">Add Event Photos</span>
     <br /><br /><br />
 
         <div class="form-horizontal">
 
-            @if (Model != null)
-            {
-                if (Model.ImageID > 0)
-                {
-                    <div class="form-group">
-                        @Html.LabelFor(model => model.ImageID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                        <div id="LblImageID_EG" class="col-md-10 normalFontLeft">
-                            @Html.DisplayFor(model => model.ImageID)
-                        </div>
-                    </div>
-                }
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.EventNameList, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                    <div class="col-md-10 normalFontLeft">
-                        @Html.DropDownListFor(model => model.EventName, new SelectList(Model.EventNameList, Model.EventName), new { @class = "form-control", id = "DDLEventName_EventGallery" })
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                    <div id="LblEventID_EG" class="col-md-10 normalFontLeft">
-                        @Html.DisplayFor(model => model.EventID)
-                    </div>
-                </div>
-            }
-
+    @if (Model != null)
+    {
+        if (Model.ImageID > 0)
+        {
             <div class="form-group">
-                <div class="col-md-2 formlabelFontRight">
-                    <span> * Select Photos </span>
-                </div>
-                <div class="col-md-10">
-                    <input id="ImageFileUpload1" type="file" class="form-conrtol rowPadding" />
-                    <input id="ImageFileUpload2" type="file" class="form-conrtol rowPadding" />
-                    <input id="ImageFileUpload3" type="file" class="form-conrtol rowPadding" />
-                </div>
-            </div>            
-
-            <div class="form-group">
-                @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-                <div id="LblCreatedBy_EED" class="col-md-10 normalFontLeft">
-                    @Html.DisplayFor(model => model.CreatedBy)
+                @Html.LabelFor(model => model.ImageID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                <div id="LblImageID_EG" class="col-md-10 normalFontLeft">
+                    @Html.DisplayFor(model => model.ImageID)
                 </div>
             </div>
+        }
 
-            <div class="form-group">
-                <div class="col-md-offset-2 col-md-10">
-                    <input id="BtnCancelAddUpdate_EG" type="button" value="Cancel" class="btn btn-default" />
-                    <input id="BtnSaveEventGallery_EG" type="button" value="Save" class="btn btn-primary" />
-                </div>
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventNameList, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+            <div class="col-md-10 normalFontLeft">
+                @Html.DropDownListFor(model => model.EventName, new SelectList(Model.EventNameList, Model.EventName), new { @class = "form-control", id = "DDLEventName_EventGallery" })
             </div>
         </div>
-}
+
+        <div class="form-group">
+            @Html.LabelFor(model => model.EventID, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+            <div id="LblEventID_EG" class="col-md-10 normalFontLeft">
+                @Html.DisplayFor(model => model.EventID)
+            </div>
+        </div>
+    }
+
+    <div class="form-group">
+        <div class="col-md-2 formlabelFontRight">
+            <span> * Select Photos </span>
+        </div>
+        <div class="col-md-10">
+            <input id="ImageFileUpload1" type="file" name="file1" class="form-conrtol rowPadding" />
+            <input id="ImageFileUpload2" type="file" name="file2" class="form-conrtol rowPadding" />
+            <input id="ImageFileUpload3" type="file" name="file3" class="form-conrtol rowPadding" />
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.CreatedBy, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+        <div id="LblCreatedBy_EED" class="col-md-10 normalFontLeft">
+            @Html.DisplayFor(model => model.CreatedBy)
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-10">
+            <input id="BtnCancelAddUpdate_EG" type="button" value="Cancel" class="btn btn-default" />
+            <input id="BtnSaveEventGallery_EG" type="button" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+</div>
+
+
+
+
 

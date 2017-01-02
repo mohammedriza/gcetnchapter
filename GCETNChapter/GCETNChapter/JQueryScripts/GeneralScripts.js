@@ -27,7 +27,7 @@ $(document).ready(function () {
     $('[data-toggle="tooltip"]').tooltip();
 
     console.log("%c>>> STOP...", "color: red; font-size: 50px;");
-    console.log("%cAny malicious scripts ran in the console with the intension of hacking thi site will store all your information including your IP, PC Name, Wireless Provider Details, etc. And necessary action will be taken towards the offender.", "color: red; font-size: 20px;");
+    console.log("%cAny malicious scripts ran in the console with the intension of hacking this site will store all your information including your IP, PC Name, Wireless Provider Details, etc. And necessary action will be taken towards the offender.", "color: red; font-size: 20px;");
 });
 
 
@@ -165,5 +165,18 @@ function ValidateIfNumeric(number) {
     }
 }
 
+
+//************************************** END **************************************//
+
+
+//************ HOME MENU DROPDOWN MENU IN MEMBER HEADER MENU LINKS *****************//
+//**********************************************************************************//
+$(document).on("mouseover", "#LnkPublicMenuHome", function () {
+    $("#PublicMenuDropdown").fadeIn(500);
+});
+
+$(document).on("click", this, function () {
+    $("#PublicMenuDropdown").fadeOut(500);
+});
 
 //************************************** END **************************************//

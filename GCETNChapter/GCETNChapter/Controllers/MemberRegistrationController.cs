@@ -54,6 +54,10 @@ namespace GCETNChapter.Controllers
                     {
                         this.ModelState.AddModelError("PermanentCountry", "Please select a Country.");
                     }
+                    else if(MemberVO.CollegeRegistrationNo.Length > 9)
+                    {
+                        this.ModelState.AddModelError("CollegeRegistrationNo", "College Registration No should contain 9 or less characters.");
+                    }
                     else
                     {
                         var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(MemberVO.CollegeRegistrationNo);

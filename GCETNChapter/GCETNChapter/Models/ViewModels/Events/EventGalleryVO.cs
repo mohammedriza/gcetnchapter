@@ -21,13 +21,7 @@ namespace GCETNChapter.Models.ViewModels.Events
         public int? ImageID { get; set; }
         
         [Display(Name = "* Image")]
-        public string Image1 { get; set; }
-
-        [Display(Name = "* Image")]
-        public string Image2 { get; set; }
-
-        [Display(Name = "* Image")]
-        public string Image3 { get; set; }
+        public string ImageFileName { get; set; }
 
         [Display(Name = "Created By")]
         public string CreatedBy { get; set; }

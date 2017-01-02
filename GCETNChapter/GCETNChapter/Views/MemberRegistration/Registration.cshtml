@@ -122,7 +122,7 @@
                             @Html.LabelFor(model => model.CollegeRegistrationNo)
                         </div>
                         <div class="col-md-4">
-                            @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", maxlength = "12" } })
+                            @Html.EditorFor(model => model.CollegeRegistrationNo, new { htmlAttributes = new { @class = "form-control", maxlength = "9" } })
                             @Html.ValidationMessageFor(model => model.CollegeRegistrationNo, "", new { @class = "textboxerror" })
                         </div>
                     </div>

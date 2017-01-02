@@ -41,6 +41,17 @@ textarea {
     border-bottom: 3px solid #428bca;
 }
 
+.brandFont{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 18px;
+    color: #8d8b8b;
+    left: 0;
+    padding: 5px;
+    font-weight: bold;
+    text-align: left;
+    vertical-align: middle;
+}
+
 .headerSection{
     padding-bottom: 0px;
     background-color: #ffffff;
@@ -78,14 +89,14 @@ textarea {
 }
 
 .footerTextNormal{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
     font-weight: normal;
     color: #fff;
 }
 
 .footerTextBold{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
     font-weight: bold;
     color: #fff;
@@ -96,7 +107,7 @@ textarea {
 }
 
 .menuitem{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 13px;
     font-weight: bold;
     color: #000000;
@@ -121,7 +132,7 @@ textarea {
 /* LABELS, TEXTBOX, DROPDOWN AND TEXTAREA */
 
 .formlabelFontRight{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 13px;
     color: #333;
     left: 0;
@@ -132,7 +143,7 @@ textarea {
 }
 
 .formlabelFontLeft{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 13px;
     color: #333;
     left: 0;
@@ -142,7 +153,7 @@ textarea {
 }
 
 .normalFontRight{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 13px;
     color: #333;
     left: 0;
@@ -152,7 +163,7 @@ textarea {
 }
 
 .normalFontLeft{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 13px;
     color: #333;
     right: 0;
@@ -162,7 +173,7 @@ textarea {
 }
 
 .tableHeaderFont{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
     color: #333;
     padding: 3px;
@@ -170,7 +181,7 @@ textarea {
 }
 
 .tableBodyFont{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
     color: #333;
     padding: 3px;
@@ -178,7 +189,7 @@ textarea {
 }
 
 .headerText{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 24px;
     color: #333;
     left: 0;
@@ -199,7 +210,7 @@ textarea {
 }
 
 .scrollingImageText{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 16px;
     color: #000;
     background: rgba(255, 255, 255, 0.5);
@@ -217,7 +228,7 @@ textarea {
 }
 
 .welcomeUser{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 12px;
     color: #428bca;
     padding: 2px 5px 2px 5px;
@@ -240,7 +251,7 @@ textarea {
 
 /*
 .subMenuFont{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 14px;
     color: #428bca;
     padding: 9px;
@@ -276,7 +287,7 @@ textarea {
 }
 
 .smallFont{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 10px;
     color: #333;
     padding: 3px;
@@ -285,7 +296,7 @@ textarea {
 }
 
 .dateFormatText{
-    font-family: Verdana;
+    font-family: Helvetica, Arial, sans-serif;
     font-size: 10px;
     color: #428bca;
     padding: 3px;
@@ -406,4 +417,10 @@ textarea.longtextbox {
     text-align: left;
     padding: 30px;
     background-color: #edf0f5;
+}
+
+.enlargeImage{
+    background-color: #ccc;
+    border-radius: 20px;
+    border: 2px solid #999;
 }

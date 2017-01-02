@@ -59,6 +59,7 @@ function AddEventGallery() {
     var imageFile2 = $.trim($("#ImageFileUpload2").val());
     var imageFile3 = $.trim($("#ImageFileUpload3").val());
 
+
     if (eventID == 0 || eventID == "") {
         GeneralWarningsAndErrorDialog("Select an Event from the list...", "Please select an Event from the Event Dropdown list.", "red");
     }
@@ -66,27 +67,26 @@ function AddEventGallery() {
         GeneralWarningsAndErrorDialog("No Imges Files to upload...", "Please include atleast 1 image file to upload.", "red");
     }
     else {
-        $.ajax({
-            url: "/Events/AddEventGallery",
-            type: "POST",
-            data: {
-                EventID: eventID,
-                Image1: imageFile1,
-                Image2: imageFile2,
-                Image3: imageFile3,
-            },
-            success: function (data, result) {
-                if (data == "True") {
-                    GeneralWarningsAndErrorDialog("SUCCESS...", "Event Photos uploaded successfully.", "green");
-                    GetEventGalleryPhotosByEventID(eventID);
-                }
-                else if (data == "False")
-                    GeneralWarningsAndErrorDialog("ERROR...", "Failed to upload event photos. Please try again later.", "red");
-            },
-            error: function (xhr, status, error) {
-                GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
+        var xhr = new XMLHttpRequest();
+        var fd = new FormData();
+        fd.append("file1", document.getElementById('ImageFileUpload1').files[0]);
+        fd.append("file2", document.getElementById('ImageFileUpload2').files[0]);
+        fd.append("file3", document.getElementById('ImageFileUpload3').files[0]);
+        fd.append("EventID", eventID);
+
+        xhr.open("POST", "/Events/AddEventGallery/", true);
+        xhr.send(fd);
+        xhr.addEventListener("load", function (event) {
+            if (event.target.response == "Success") {
+                GeneralWarningsAndErrorDialog("SUCCESS...", "Event Photos uploaded successfully.", "green");
+                GetEventGalleryPhotosByEventID(eventID);
             }
-        });
+            else if (event.target.response == "Error")
+                GeneralWarningsAndErrorDialog("ERROR...", "Failed to upload event photos. Please try again later.", "red");
+            else if (event.target.response == "NoFiles")
+                GeneralWarningsAndErrorDialog("ERROR...", "Please select atleast 1 filed to continue...", "red");
+        },
+        false);
     }
 }
 
@@ -168,3 +168,11 @@ function showAddEventGallery() {
     $("#divAddEventGallery").fadeIn(1000);
 }
 
+
+
+function EnlargeImage(ImageName) {
+    $(document).on("mouseover", ("#" + ImageName), function () {
+        $("#divEnlargeImageFile").fadeIn(500);
+        $("#ImageFile").prop("src", ("~/EventUploads/EventPhotos/" + ImageName))
+    });
+}

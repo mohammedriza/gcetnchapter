@@ -510,6 +510,16 @@
     </Content>
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
+    <Content Include="Images\BoardMembers\246vasan.png" />
+    <Content Include="Images\BoardMembers\317Khaja_nizambudhin.png" />
+    <Content Include="Images\BoardMembers\328Riyal.png" />
+    <Content Include="Images\BoardMembers\35mehaboob_basha.png" />
+    <Content Include="Images\BoardMembers\382jafrullahkhan.png" />
+    <Content Include="Images\BoardMembers\413Rahim.png" />
+    <Content Include="Images\BoardMembers\41karupannan.png" />
+    <Content Include="Images\BoardMembers\664Ravi.png" />
+    <Content Include="Images\BoardMembers\767ChockaLingam.png" />
+    <Content Include="Images\BoardMembers\880charles.png" />
     <Content Include="Images\FooterIcons\Call.png" />
     <Content Include="Images\FooterIcons\Contact.png" />
     <Content Include="Images\FooterIcons\Copyright.png" />
@@ -719,11 +729,14 @@
     <Content Include="Views\News\ViewNews.cshtml" />
     <Content Include="Views\Shared\_LookupCollegeRegNoModal.cshtml" />
     <Content Include="Views\MemberProfile\Members\_AllMembers.cshtml" />
+    <Content Include="Views\Home\AboutUs\_AboutGCETNTrust.cshtml" />
+    <Content Include="Views\Home\AboutUs\_FounderMessage.cshtml" />
+    <Content Include="Views\Home\AboutUs\_TheBoardMembers.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="EventUploads\EventPhotos\" />
     <Folder Include="JQueryScripts\News\" />
+    <Folder Include="_ImageUploads\EventPhotos\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

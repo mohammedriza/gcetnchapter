@@ -1,5 +1,6 @@
 ﻿@model IEnumerable<GCETNChapter.Models.ViewModels.News.NewsVO>
 <script src="~/JQueryScripts/PublicPages/NewsFeed.js"></script>
+@using GCETNChapter.Models.ViewModels;
 
 @{
     ViewBag.Title = "News";
@@ -21,8 +22,11 @@
                 <span><img src="~/Images/OtherPages/NewsIcon.png" height="70" /></span>
                 <span class="formlabelFontLeft">@Html.DisplayFor(modelItem => item.HeadLine)</span>
 
+                @if (ViewBag.AccessRole == "SUPERADMIN")
+                {
                 <span class="glyphicon glyphicon-trash text-right editIcon"><a href="#"></a></span>
                 <span class="glyphicon glyphicon-pencil text-right editIcon"><a href="#"></a></span>
+                }
             </div>
             <div class="newsDetail">
                 <span>@Html.DisplayFor(modelItem => item.NewsDetail)</span>

@@ -3,6 +3,7 @@ using GCETNChapter.Models.ViewModels;
 using GCETNChapter.Models.ViewModels.Events;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -441,34 +442,69 @@ namespace GCETNChapter.Controllers
 
 
         [HttpPost]  // POST: Event Expense Details
-        public bool AddEventGallery(EventGalleryVO galleryVo)
+        public string AddEventGallery(EventGalleryVO galleryVo)
         {
             CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
             try
             {
                 int rowsEffected = 0;
-
                 galleryVo.CreatedBy = Session["username"].ToString();
 
-                if (!string.IsNullOrEmpty(galleryVo.Image1))
-                    rowsEffected = rowsEffected + new EventsDA().AddEventPhotos(galleryVo, galleryVo.Image1);
+                if (Request.Files.Count > 0)
+                {
+                    for (int x = 0; x < Request.Files.Count; x++)
+                    {
+                        var file = Request.Files[x];
 
-                if (!string.IsNullOrEmpty(galleryVo.Image2))
-                    rowsEffected = rowsEffected + new EventsDA().AddEventPhotos(galleryVo, galleryVo.Image2);
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            //--- Upload File to Folder Location ---//
+                            string paramDatetime = (DateTime.Now.Month + DateTime.Now.Year + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToString();
+                            galleryVo.ImageFileName = string.Format("{0}_{1}_{2}", galleryVo.EventID, paramDatetime, Path.GetFileName(file.FileName));
 
-                if (!string.IsNullOrEmpty(galleryVo.Image3))
-                    rowsEffected = rowsEffected + new EventsDA().AddEventPhotos(galleryVo, galleryVo.Image3);
+                            var path = Path.Combine(Server.MapPath("~/_ImageUploads/EventPhotos/"), galleryVo.ImageFileName);
+                            file.SaveAs(path);
+
+                            //--- Add Record to Database ---//
+                            rowsEffected = rowsEffected + new EventsDA().AddEventPhotos(galleryVo);
+                        }
+                    }
+                }
+                else
+                {
+                    return "NoFiles";
+                }
 
                 if (rowsEffected >= 1)
-                    return true;
+                    return "Success";
                 else
-                    return false;
+                    return "Error";
             }
             catch (Exception)
             {
-                return false;
+                return "Error";
             }
+        }
+
+
+        [HttpPost]
+        public bool UploadEventPhotos(int EventID)
+        {
+            if (Request.Files.Count > 0)
+            {
+                var file1 = Request.Files[0];
+                var file2 = Request.Files[1];
+                var file3 = Request.Files[2];
+
+                if (file1 != null && file1.ContentLength > 0)
+                {
+                    var fileName = Path.GetFileName(file1.FileName);
+                    var path = Path.Combine(Server.MapPath("~/EventUploads/EventPhotos/"), fileName);
+                    file1.SaveAs(path);
+                }
+            }
+            return true;
         }
 
         [HttpPost]

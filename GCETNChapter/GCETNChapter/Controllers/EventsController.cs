@@ -489,25 +489,6 @@ namespace GCETNChapter.Controllers
 
 
         [HttpPost]
-        public bool UploadEventPhotos(int EventID)
-        {
-            if (Request.Files.Count > 0)
-            {
-                var file1 = Request.Files[0];
-                var file2 = Request.Files[1];
-                var file3 = Request.Files[2];
-
-                if (file1 != null && file1.ContentLength > 0)
-                {
-                    var fileName = Path.GetFileName(file1.FileName);
-                    var path = Path.Combine(Server.MapPath("~/EventUploads/EventPhotos/"), fileName);
-                    file1.SaveAs(path);
-                }
-            }
-            return true;
-        }
-
-        [HttpPost]
         public string DeleteEventPhoto(int ImageID)
         {
             try

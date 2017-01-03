@@ -139,7 +139,6 @@ textarea {
     padding: 5px 10px 5px 15px;
     font-weight: bold;
     text-align: right;
-    white-space: nowrap;
 }
 
 .formlabelFontLeft{
@@ -303,6 +302,19 @@ textarea {
     font-weight: bold;
     text-align: left;
     display: block;
+}
+
+.textareastyle {
+    display: block;
+    width: auto;
+    height: 120px;
+    border: 1px solid #cccccc;
+    border-left: 5px solid #cccccc;
+    padding: 6px 12px;
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 14px;
+    color: #555555;
+    border-radius: 4px;
 }
 
 

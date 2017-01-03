@@ -1,21 +1,31 @@
-﻿<script src="~/JQueryScripts/Advertisement/Advertisement.js"></script>
+﻿@model GCETNChapter.Models.ViewModels.Advertisement.AdvertisementVO
+<script src="~/JQueryScripts/Advertisement/Advertisement.js"></script>
 
 @{
     ViewBag.Title = "Advertisements";
 }
 
-<div id="divAdvertisementsPage" class="form-horizontal partialBodySection hideDiv">
-    <br />
+@using (Html.BeginForm()) 
+{
+    @Html.AntiForgeryToken()
+
 
     <div class="row">
         <div class="col-md-1"></div>
-        <div class="col-md-10 text-center">
-            <h2> This page is not yet ready. Please contact the systems administrator for further details...</h2>
+        <div id="divAdvertisementPage" class="form-horizontal partialBodySection hideDiv col-md-10">
+            <br />
+
+            <div id="divAddAdvertisement">
+                <div class="col-md-6">
+                    @Html.Partial("_AddEditAdvertisement")
+                </div>
+                <div class="col-md-6">
+                    @Html.Partial("_DraftAdvertisement")
+                </div>
+            </div>
+
         </div>
         <div class="col-md-1"></div>
     </div>
 
-</div>
-
-
-
+}

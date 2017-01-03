@@ -231,6 +231,7 @@
     <Compile Include="Models\DataAccess\MemberDA.cs" />
     <Compile Include="Models\DataAccess\MemberProfileDA.cs" />
     <Compile Include="Models\DataAccess\NewsDA.cs" />
+    <Compile Include="Models\ViewModels\Advertisement\AdvertisementVO.cs" />
     <Compile Include="Models\ViewModels\DonationDetailsVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventExpenseDetailsVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventGalleryVO.cs" />
@@ -646,6 +647,7 @@
     <Content Include="Scripts\DataTables\responsive.jqueryui.min.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
+    <Content Include="_ImageUploads\Advertisements\Sample_NoImage.png" />
     <EntityDeploy Include="GCETNChapterEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GCETNChapterEntity.Designer.cs</LastGenOutput>
@@ -732,6 +734,8 @@
     <Content Include="Views\Home\AboutUs\_AboutGCETNTrust.cshtml" />
     <Content Include="Views\Home\AboutUs\_FounderMessage.cshtml" />
     <Content Include="Views\Home\AboutUs\_TheBoardMembers.cshtml" />
+    <Content Include="Views\Advertisement\_AddEditAdvertisement.cshtml" />
+    <Content Include="Views\Advertisement\_DraftAdvertisement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

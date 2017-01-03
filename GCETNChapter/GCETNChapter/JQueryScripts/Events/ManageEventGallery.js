@@ -84,7 +84,7 @@ function AddEventGallery() {
             else if (event.target.response == "Error")
                 GeneralWarningsAndErrorDialog("ERROR...", "Failed to upload event photos. Please try again later.", "red");
             else if (event.target.response == "NoFiles")
-                GeneralWarningsAndErrorDialog("ERROR...", "Please select atleast 1 filed to continue...", "red");
+                GeneralWarningsAndErrorDialog("ERROR...", "Please select atleast 1 file to continue...", "red");
         },
         false);
     }

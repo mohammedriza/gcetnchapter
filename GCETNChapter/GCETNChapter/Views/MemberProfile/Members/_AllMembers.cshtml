@@ -6,6 +6,7 @@
     <table id="TblAllMembers" class="table table-hover table-responsive">
         <thead>
             <tr class="tableHeaderFont">
+                <th></th>
                 <th>
                     @Html.DisplayNameFor(model => model.FullName)
                 </th>
@@ -36,6 +37,9 @@
                 foreach (var item in Model)
                 {
                     <tr class="tableBodyFont">
+                        <td>
+                            <img src="~/Images/LoginBG.jpg" height="50" style="border-radius: 10px;" />
+                        </td>
                         <td>
                             @Html.DisplayFor(modelItem => item.FullName)
                         </td>

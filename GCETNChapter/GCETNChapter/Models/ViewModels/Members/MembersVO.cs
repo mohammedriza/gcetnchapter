@@ -29,5 +29,9 @@ namespace GCETNChapter.Models.ViewModels.Members
         [Display(Name = "Email")]
         public string Email { get; set; }
 
+        [Display(Name = "Profile Image")]
+        public string ProfileImage { get; set; }
+        
+
     }
 }

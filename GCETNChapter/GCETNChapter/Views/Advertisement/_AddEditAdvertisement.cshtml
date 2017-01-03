@@ -1,48 +1,63 @@
 ﻿@model GCETNChapter.Models.ViewModels.Advertisement.AdvertisementVO
 
-<div class="form-horizontal">
+<div>
     <span id="LblAdvertisementHeaderText" class="headerText">Add Advertisement</span>
     <br /><br /><br />
+    @Html.HiddenFor(model => model.AdvertisementID, new { id = "LblHiddenAdID" })
+    @Html.HiddenFor(model => model.ImageFileName, new { id = "LblHiddenImageFileName" })
 
     @Html.ValidationSummary(true, "", new { @class = "text-danger" })
     <div class="form-group">
-        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "TxtTitle" } })
-            @Html.ValidationMessageFor(model => model.Title, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.Title, htmlAttributes: new { @class = "formlabelFontRight col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.Title, new { htmlAttributes = new { @class = "form-control", id = "TxtTitle", maxlength = "150" } })
         </div>
     </div>
 
     <div class="form-group">
-        @Html.LabelFor(model => model.Body, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-        <div class="col-md-10">
-            @Html.TextAreaFor(model => model.Body, 5, 40,  new { @class = "textareastyle", id = "TxtBody" } )
-            @Html.ValidationMessageFor(model => model.Body, "", new { @class = "text-danger" })
+        @Html.LabelFor(model => model.Description, htmlAttributes: new { @class = "formlabelFontRight col-md-3" })
+        <div class="col-md-9">
+            @Html.TextAreaFor(model => model.Description, 5, 40,  new { @class = "textareastyle", id = "TxtDescription", maxlength = "300" } )
         </div>
     </div>
 
     <div class="form-group">
         <div>
-            <span class="formlabelFontRight col-md-2">* Select an Image</span>
+            <span class="formlabelFontRight col-md-3">* Select an Image</span>
         </div>
-        <div class="col-md-10">
-            <input type="file" id="ImgImageFile" name="ImageFile" class="form-control" />
-        </div>
-    </div>
-
-    <div class="form-group">
-        @Html.LabelFor(model => model.Footer, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
-        <div class="col-md-10">
-            @Html.EditorFor(model => model.Footer, new { htmlAttributes = new { @class = "form-control", id = "TxtFooter" } })
-            @Html.ValidationMessageFor(model => model.Footer, "", new { @class = "text-danger" })
+        <div class="col-md-9">
+            <input type="file" id="ImgImageFile" name="ImageFileName" class="form-control" />
         </div>
     </div>
 
     <div class="form-group">
-        <div class="col-md-offset-2 col-md-10">            
+        @Html.LabelFor(model => model.StartDate, htmlAttributes: new { @class = "formlabelFontRight col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.StartDate, new { htmlAttributes = new { @class = "dateValue form-control", id = "TxtStartDate", style = "display: inline;" } })
+            <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Payment Date should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.ExpiryDate, htmlAttributes: new { @class = "formlabelFontRight col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.ExpiryDate, new { htmlAttributes = new { @class = "dateValue form-control", id = "TxtExpiryDate", style = "display: inline;" } })
+            <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Payment Date should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
+        </div>
+    </div>
+
+    <div class="form-group">
+        @Html.LabelFor(model => model.Footer, htmlAttributes: new { @class = "formlabelFontRight col-md-3" })
+        <div class="col-md-9">
+            @Html.EditorFor(model => model.Footer, new { htmlAttributes = new { @class = "form-control", id = "TxtFooter", maxlength = "150" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-offset-2 col-md-9">
             <input id="BtnSaveAdvertisement" type="button" value="Save" class="btn btn-primary" />
 
-            <br /><br />            
+            <br /><br />
             <a  href="#" id="LnkBackToAllAds"><span class="glyphicon glyphicon-hand-left"></span>  Back to Advertisement List</a>
         </div>
     </div>

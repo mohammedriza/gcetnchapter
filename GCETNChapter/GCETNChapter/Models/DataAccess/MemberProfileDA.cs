@@ -260,7 +260,7 @@ namespace GCETNChapter.Models.DataAccess
         {
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
-                var result = db.Database.SqlQuery<MembersVO>("SELECT FullName, Branch, Batch, PrimaryContactNo, WhatsappNo, Email, CurrentCountry FROM GCE_MemberInfo").ToList();
+                var result = db.Database.SqlQuery<MembersVO>("SELECT FullName, Branch, Batch, PrimaryContactNo, WhatsappNo, Email, CurrentCountry, ProfileImage FROM GCE_MemberInfo").ToList();
                 return result;
             }
         }

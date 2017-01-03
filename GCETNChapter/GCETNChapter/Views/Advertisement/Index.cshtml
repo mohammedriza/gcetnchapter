@@ -5,27 +5,24 @@
     ViewBag.Title = "Advertisements";
 }
 
-@using (Html.BeginForm()) 
-{
-    @Html.AntiForgeryToken()
+<div class="row" style="height: 100%; width: 100%; display: block;">
+    <div class="col-md-1"></div>
+    <div id="divAdvertisementPage" class="form-horizontal partialBodySection hideDiv col-md-10">
+        <br />
 
-
-    <div class="row">
-        <div class="col-md-1"></div>
-        <div id="divAdvertisementPage" class="form-horizontal partialBodySection hideDiv col-md-10">
-            <br />
-
-            <div id="divAddAdvertisement">
-                <div class="col-md-6">
-                    @Html.Partial("_AddEditAdvertisement")
-                </div>
-                <div class="col-md-6">
-                    @Html.Partial("_DraftAdvertisement")
-                </div>
+        <div id="divAddAdvertisementSection">
+            <div id="divAddAdvertisement" class="col-md-6">
+                @Html.Partial("_AddEditAdvertisement")
             </div>
-
+            <div id="divDraftAdvertisement" class="col-md-6">
+                @Html.Partial("_DraftAdvertisement")
+            </div>
         </div>
-        <div class="col-md-1"></div>
-    </div>
+        <div id="divViewAdvertisements">            
+            @Html.Partial("_ViewAdvertisements")
+            <!-- Ajax Partial View here to show Advertisement List -->
+        </div>
 
-}
+    </div>
+    <div class="col-md-1"></div>
+</div>

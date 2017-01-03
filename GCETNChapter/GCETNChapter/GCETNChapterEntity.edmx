@@ -35,10 +35,20 @@
           <Parameter Name="AccessRole" Type="varchar" Mode="In" />
           <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcAddUpdateAdvertisements" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AdvertisementID" Type="int" Mode="In" />
+          <Parameter Name="Title" Type="varchar" Mode="In" />
+          <Parameter Name="Description" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Footer" Type="varchar" Mode="In" />
+          <Parameter Name="ImageFileName" Type="varchar" Mode="In" />
+          <Parameter Name="StartDate" Type="date" Mode="In" />
+          <Parameter Name="ExpiryDate" Type="date" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcAddUpdateDonationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DonationID" Type="int" Mode="In" />
           <Parameter Name="CollegeRegistrationNo" Type="varchar" Mode="In" />
-          <Parameter Name="Amount" Type="numeric" Mode="In" />
+          <Parameter Name="Amount" Type="decimal" Mode="In" />
           <Parameter Name="PaymentReason" Type="varchar" Mode="In" />
           <Parameter Name="PaymentDate" Type="date" Mode="In" />
           <Parameter Name="PaymentStartDate" Type="date" Mode="In" />
@@ -75,6 +85,9 @@
           <Parameter Name="AccountStatus" Type="varchar" Mode="In" />
           <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcDeleteAdvertisement" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AdvertisementID" Type="int" Mode="In" />
+        </Function>
         <Function Name="prcDeleteDonations" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="DonationID" Type="int" Mode="In" />
         </Function>
@@ -99,6 +112,9 @@
         </Function>
         <Function Name="prcGetAccessLevelDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="AccessRole" Type="varchar" Mode="In" />
+        </Function>
+        <Function Name="prcGetAdvertisementDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="AdvertisementID" Type="int" Mode="In" />
         </Function>
         <Function Name="prcGetAuthenticationDetails" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
@@ -450,7 +466,23 @@
             <Parameter Name="NewsID" Mode="In" Type="Int32" />
           </FunctionImport>
           <FunctionImport Name="prcGetNewsFeed" ReturnType="Collection(GCE_TN_ChapterModel.prcGetNewsFeed_Result)">
-            <Parameter Name="NewsID" Mode="In" Type="Int32" />
+          <Parameter Name="NewsID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcAddUpdateAdvertisements">
+            <Parameter Name="AdvertisementID" Mode="In" Type="Int32" />
+            <Parameter Name="Title" Mode="In" Type="String" />
+            <Parameter Name="Description" Mode="In" Type="String" />
+            <Parameter Name="Footer" Mode="In" Type="String" />
+            <Parameter Name="ImageFileName" Mode="In" Type="String" />
+            <Parameter Name="StartDate" Mode="In" Type="DateTime" />
+            <Parameter Name="ExpiryDate" Mode="In" Type="DateTime" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcGetAdvertisementDetails" ReturnType="Collection(GCE_TN_ChapterModel.prcGetAdvertisementDetails_Result)">
+          <Parameter Name="AdvertisementID" Mode="In" Type="Int32" />
+          </FunctionImport>
+          <FunctionImport Name="prcDeleteAdvertisement">
+          <Parameter Name="AdvertisementID" Mode="In" Type="Int32" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
@@ -617,6 +649,19 @@
           <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
           <Property Type="String" Name="ModifiedB" Nullable="true" MaxLength="50" />
           <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+        </ComplexType>
+        <ComplexType Name="prcGetAdvertisementDetails_Result">
+          <Property Type="Int32" Name="AdvertisementID" Nullable="false" />
+          <Property Type="String" Name="Title" Nullable="true" MaxLength="150" />
+          <Property Type="String" Name="Description" Nullable="true" />
+          <Property Type="String" Name="Footer" Nullable="true" MaxLength="150" />
+          <Property Type="DateTime" Name="StartDate" Nullable="true" />
+          <Property Type="DateTime" Name="ExpiryDate" Nullable="true" />
+          <Property Type="String" Name="CreatedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="CreatedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ModifiedBy" Nullable="true" MaxLength="50" />
+          <Property Type="DateTime" Name="ModifiedDate" Nullable="true" Precision="23" />
+          <Property Type="String" Name="ImageFileName" Nullable="true" MaxLength="50" />
         </ComplexType>
       </Schema>
     </edmx:ConceptualModels>
@@ -864,6 +909,25 @@
               </ComplexTypeMapping>
             </ResultMapping>
           </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcAddUpdateAdvertisements" FunctionName="GCE_TN_ChapterModel.Store.prcAddUpdateAdvertisements" />
+          <FunctionImportMapping FunctionImportName="prcGetAdvertisementDetails" FunctionName="GCE_TN_ChapterModel.Store.prcGetAdvertisementDetails">
+            <ResultMapping>
+              <ComplexTypeMapping TypeName="GCE_TN_ChapterModel.prcGetAdvertisementDetails_Result">
+                <ScalarProperty Name="AdvertisementID" ColumnName="AdvertisementID" />
+                <ScalarProperty Name="Title" ColumnName="Title" />
+                <ScalarProperty Name="Description" ColumnName="Description" />
+                <ScalarProperty Name="Footer" ColumnName="Footer" />
+                <ScalarProperty Name="StartDate" ColumnName="StartDate" />
+                <ScalarProperty Name="ExpiryDate" ColumnName="ExpiryDate" />
+                <ScalarProperty Name="CreatedBy" ColumnName="CreatedBy" />
+                <ScalarProperty Name="CreatedDate" ColumnName="CreatedDate" />
+                <ScalarProperty Name="ModifiedBy" ColumnName="ModifiedBy" />
+                <ScalarProperty Name="ModifiedDate" ColumnName="ModifiedDate" />
+                <ScalarProperty Name="ImageFileName" ColumnName="ImageFileName" />
+              </ComplexTypeMapping>
+            </ResultMapping>
+          </FunctionImportMapping>
+          <FunctionImportMapping FunctionImportName="prcDeleteAdvertisement" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteAdvertisement" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

@@ -224,6 +224,7 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\DataAccess\AccessManagerDA.cs" />
+    <Compile Include="Models\DataAccess\AdvertisementDA.cs" />
     <Compile Include="Models\DataAccess\DonationDetailsDA.cs" />
     <Compile Include="Models\DataAccess\EventsDA.cs" />
     <Compile Include="Models\DataAccess\GeneralFunctionsDA.cs" />
@@ -251,6 +252,9 @@
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="prcGetAccessLevelDetails_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
+    <Compile Include="prcGetAdvertisementDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
     <Compile Include="prcGetAuthenticationDetails_Result.cs">
@@ -736,11 +740,14 @@
     <Content Include="Views\Home\AboutUs\_TheBoardMembers.cshtml" />
     <Content Include="Views\Advertisement\_AddEditAdvertisement.cshtml" />
     <Content Include="Views\Advertisement\_DraftAdvertisement.cshtml" />
+    <Content Include="Views\Advertisement\_ViewAdvertisements.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="JQueryScripts\News\" />
     <Folder Include="_ImageUploads\EventPhotos\" />
+    <Folder Include="_ImageUploads\MemberProfile\" />
+    <Folder Include="_ImageUploads\Temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

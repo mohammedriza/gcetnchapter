@@ -185,6 +185,7 @@ textarea {
     color: #333;
     padding: 3px;
     font-weight: normal;
+    vertical-align: middle;
 }
 
 .headerText{

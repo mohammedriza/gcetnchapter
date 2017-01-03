@@ -806,5 +806,60 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetNewsFeed_Result>("prcGetNewsFeed", newsIDParameter);
         }
+    
+        public virtual int prcAddUpdateAdvertisements(Nullable<int> advertisementID, string title, string description, string footer, string imageFileName, Nullable<System.DateTime> startDate, Nullable<System.DateTime> expiryDate, string createdBy)
+        {
+            var advertisementIDParameter = advertisementID.HasValue ?
+                new ObjectParameter("AdvertisementID", advertisementID) :
+                new ObjectParameter("AdvertisementID", typeof(int));
+    
+            var titleParameter = title != null ?
+                new ObjectParameter("Title", title) :
+                new ObjectParameter("Title", typeof(string));
+    
+            var descriptionParameter = description != null ?
+                new ObjectParameter("Description", description) :
+                new ObjectParameter("Description", typeof(string));
+    
+            var footerParameter = footer != null ?
+                new ObjectParameter("Footer", footer) :
+                new ObjectParameter("Footer", typeof(string));
+    
+            var imageFileNameParameter = imageFileName != null ?
+                new ObjectParameter("ImageFileName", imageFileName) :
+                new ObjectParameter("ImageFileName", typeof(string));
+    
+            var startDateParameter = startDate.HasValue ?
+                new ObjectParameter("StartDate", startDate) :
+                new ObjectParameter("StartDate", typeof(System.DateTime));
+    
+            var expiryDateParameter = expiryDate.HasValue ?
+                new ObjectParameter("ExpiryDate", expiryDate) :
+                new ObjectParameter("ExpiryDate", typeof(System.DateTime));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddUpdateAdvertisements", advertisementIDParameter, titleParameter, descriptionParameter, footerParameter, imageFileNameParameter, startDateParameter, expiryDateParameter, createdByParameter);
+        }
+    
+        public virtual ObjectResult<prcGetAdvertisementDetails_Result> prcGetAdvertisementDetails(Nullable<int> advertisementID)
+        {
+            var advertisementIDParameter = advertisementID.HasValue ?
+                new ObjectParameter("AdvertisementID", advertisementID) :
+                new ObjectParameter("AdvertisementID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetAdvertisementDetails_Result>("prcGetAdvertisementDetails", advertisementIDParameter);
+        }
+    
+        public virtual int prcDeleteAdvertisement(Nullable<int> advertisementID)
+        {
+            var advertisementIDParameter = advertisementID.HasValue ?
+                new ObjectParameter("AdvertisementID", advertisementID) :
+                new ObjectParameter("AdvertisementID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteAdvertisement", advertisementIDParameter);
+        }
     }
 }

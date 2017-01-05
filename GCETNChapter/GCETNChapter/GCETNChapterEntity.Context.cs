@@ -861,5 +861,53 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteAdvertisement", advertisementIDParameter);
         }
+    
+        public virtual ObjectResult<prcGetActiveAdvertisements_Result> prcGetActiveAdvertisements()
+        {
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<prcGetActiveAdvertisements_Result>("prcGetActiveAdvertisements");
+        }
+    
+        public virtual int prcAddUpdateNewsFeed(Nullable<int> newsID, string headline, string newsDetail, string imageFile, string createdBy)
+        {
+            var newsIDParameter = newsID.HasValue ?
+                new ObjectParameter("NewsID", newsID) :
+                new ObjectParameter("NewsID", typeof(int));
+    
+            var headlineParameter = headline != null ?
+                new ObjectParameter("Headline", headline) :
+                new ObjectParameter("Headline", typeof(string));
+    
+            var newsDetailParameter = newsDetail != null ?
+                new ObjectParameter("NewsDetail", newsDetail) :
+                new ObjectParameter("NewsDetail", typeof(string));
+    
+            var imageFileParameter = imageFile != null ?
+                new ObjectParameter("ImageFile", imageFile) :
+                new ObjectParameter("ImageFile", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddUpdateNewsFeed", newsIDParameter, headlineParameter, newsDetailParameter, imageFileParameter, createdByParameter);
+        }
+    
+        public virtual int prcDeleteAccessRole(string accessRole)
+        {
+            var accessRoleParameter = accessRole != null ?
+                new ObjectParameter("AccessRole", accessRole) :
+                new ObjectParameter("AccessRole", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteAccessRole", accessRoleParameter);
+        }
+    
+        public virtual int prcDeleteNewsFeed(Nullable<int> newsID)
+        {
+            var newsIDParameter = newsID.HasValue ?
+                new ObjectParameter("NewsID", newsID) :
+                new ObjectParameter("NewsID", typeof(int));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteNewsFeed", newsIDParameter);
+        }
     }
 }

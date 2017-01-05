@@ -78,7 +78,8 @@ namespace GCETNChapter.Models.DataAccess
                     ConfirmPassword = response.ElementAt(0).Password,
                     FullName = response.ElementAt(0).FullName,
                     Gender = response.ElementAt(0).Gender,
-                    DateOfBirth = Convert.ToDateTime(response.ElementAt(0).DateOfBirth)
+                    DateOfBirth = Convert.ToDateTime(response.ElementAt(0).DateOfBirth),
+                    ProfileImage = response.ElementAt(0).ProfileImage
                 };
                 return profile;
             }            

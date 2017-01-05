@@ -39,7 +39,11 @@
                         @Html.LabelFor(model => model.ProfileImage)
                     </div>
                     <div class="col-md-4">
-                        @Html.EditorFor(model => model.ProfileImage, new { htmlAttributes = new { type = "file", id = "TxtProfileImage" } })
+                        <input type="file" name="ProfileImage" id = "TxtProfileImage" style="display: inline;" />
+                        @if(Model!= null)
+                        {
+                            <img src=@("/_ImageUploads/MemberProfile/"+ Model.ProfileImage) height="40" width="40" style="border-radius: 5px;" />
+                        }
                     </div>
                 </div>
             </div>

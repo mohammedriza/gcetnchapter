@@ -15,7 +15,9 @@
     <div class="col-md-9 text-left">
             <span class="formlabelFontLeft"> Select an Access Role to View Access Levels </span>
             @Html.DropDownList("Role", new SelectList(ViewBag.AccessRoles, ViewBag.Role), new { @class = "dropdownstyle", id = "DDLAccessRoleList" })
-        <a href="#" id="DeleteAccessRole" class="editIcon" data-toggle="tooltip" title="Delete the selected Access Role. NOTE: Please select the Access Role you want to delete and then click on Delete button."> <span class="glyphicon glyphicon-trash"></span> </a>
+        <a href="#" id="DeleteAccessRole" class="editIcon" data-toggle="tooltip" title="Delete the selected Access Role. NOTE: Please select the Access Role you want to delete and then click on Delete button.">
+            <span class="glyphicon glyphicon-trash"></span>
+        </a>
     </div>
 
 </div>

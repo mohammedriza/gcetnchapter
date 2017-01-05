@@ -1,0 +1,32 @@
+﻿@model List<GCETNChapter.Models.ViewModels.News.NewsVO>
+
+<div class="form-horizontal">
+    @Html.HiddenFor(model => model[0].NewsID, new { id="LblNewsID" })
+
+    <div class="form-group">
+        <div class="col-md-4 formlabelFontRight">
+            @Html.LabelFor(model => model[0].HeadLine)
+        </div>
+        <div class="col-md-8">
+            @Html.EditorFor(model => model[0].HeadLine, new { htmlAttributes = new { @class = "form-control", id = "TxtNewsHeadline", placeholder = "Enter News Headline...", maxlength = "100" } })
+        </div>
+    </div>
+
+    <div class="form-group">
+        <div class="col-md-4 formlabelFontRight">
+            @Html.LabelFor(model => model[0].NewsDetail)
+        </div>
+        <div class="col-md-8">
+            @Html.TextAreaFor(model => model[0].NewsDetail, 10, 100, new { @class = "textareastyle", id = "TxtNewsDetail", placeholder = "Enter News Detail...", maxlength = "1000" } )
+        </div>
+    </div>
+
+    <br />
+    <div class="form-group">
+        <div class="col-md-offset-4 col-md-8">
+            <input id="BtnCancel" type="button" value="Cancel" class="btn btn-default" />
+            <input id="BtnSaveNewsFeed" type="button" value="Save" class="btn btn-primary" />
+        </div>
+    </div>
+
+</div>

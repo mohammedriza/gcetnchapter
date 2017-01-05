@@ -26,6 +26,8 @@ namespace GCETNChapter.Models.ViewModels.Events
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]
         public DateTime? EndDate { get; set; }
 
+        public string Image { get; set; }
+        
         [Display(Name = "Total Collected Amount")]
         [DataType(DataType.Currency)]
         public decimal TotalCollectedAmount { get; set; }

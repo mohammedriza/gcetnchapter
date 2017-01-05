@@ -437,3 +437,38 @@ textarea.longtextbox {
     border-radius: 20px;
     border: 2px solid #999;
 }
+
+/* Advertisement Styles */
+.AdvertisementHeader{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 15px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+..AdvertisementDescription{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 13px;
+    font-weight: normal;
+    text-align: center;
+    padding: 10px;
+}
+
+.AdvertisementFooter{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: bold;
+    text-align: center;
+    padding: 10px;
+}
+
+.AdvertisementExpiry{
+    font-family: Helvetica, Arial, sans-serif;
+    font-size: 12px;
+    font-weight: normal;
+    text-align: right;
+    font-style: italic;
+    padding: 10px;
+    background-color: #fff;
+}

@@ -25,6 +25,18 @@ namespace GCETNChapter.Controllers
             return View();
         }
 
+        public ActionResult Gallery()
+        {
+            var response = new HomeDA().GetLatestEventsForPublicPage();
+            return View(response);
+        }
+
+        public ActionResult Events()
+        {
+            var response = new HomeDA().GetLatestEventsForPublicPage();
+            return View(response);
+        }
+
         [HttpPost]
         public ActionResult ContactForm(ContactUsVO contactUs)
         {
@@ -44,6 +56,14 @@ namespace GCETNChapter.Controllers
         {
             ViewBag.SuccessMessage = "Thank You for contacting us. Your message has been sent to the Trust group. We'll contact you shortly.";
             return View();
+        }
+
+
+        //---- GET LIST OF ACTIVE ADVERTISEMENTS TO SCROLL IN MARQUEE ---//
+        public PartialViewResult GetActiveAdvertisements()
+        {
+            var ActiveAds = new HomeDA().GetActiveAdvertisements();
+            return PartialView("Index/_Advertisement", ActiveAds);
         }
     }
 }

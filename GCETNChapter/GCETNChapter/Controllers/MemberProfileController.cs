@@ -2,6 +2,7 @@
 using GCETNChapter.Models.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.IO;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -204,6 +205,24 @@ namespace GCETNChapter.Controllers
             }
             else
             {
+                if (Request.Files.Count > 0)
+                {
+                    for (int x = 0; x < Request.Files.Count; x++)
+                    {
+                        var file = Request.Files[x];
+
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            //--- Upload File to Folder Location ---//
+                            profileVo.ProfileImage = string.Format("{0}_{1}", profileVo.Username, Path.GetFileName(file.FileName));
+
+                            var path = Path.Combine(Server.MapPath("~/_ImageUploads/MemberProfile/"), profileVo.ProfileImage);
+                            file.SaveAs(path);
+                        }
+                    }
+                }
+
+                //--- Add Record to Database ---//
                 //-- Username is always picked from the Username Tetxbox for login and personal info updates as the username field is already pulled from database --//
                 profileVo.ActionUser = Session["username"].ToString();
                 var response = new MemberProfileDA().UpdatePersonalAndLoginInfo(profileVo);
@@ -214,6 +233,7 @@ namespace GCETNChapter.Controllers
                     return "Error";
             }
         }
+
 
         [HttpPost]
         public string UpdateProfileAddressInformation(MemberProfileVO profileVo)

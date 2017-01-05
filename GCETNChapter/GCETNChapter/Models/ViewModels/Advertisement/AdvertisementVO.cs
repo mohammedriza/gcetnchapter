@@ -23,6 +23,9 @@ namespace GCETNChapter.Models.ViewModels.Advertisement
         [Display(Name = "Footer")]
         public string Footer { get; set; }
 
+        [Display(Name = "Status")]
+        public string Status { get; set; }
+
         [Display(Name = "* Start Date")]
         [DataType(DataType.Date)]
         [DisplayFormat(DataFormatString = "{0:yyyy-MM-dd}", ApplyFormatInEditMode = true, NullDisplayText = null)]

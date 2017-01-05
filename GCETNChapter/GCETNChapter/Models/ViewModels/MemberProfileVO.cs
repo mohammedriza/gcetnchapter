@@ -42,7 +42,6 @@ namespace GCETNChapter.Models.ViewModels
         public string ConfirmPassword { get; set; }
 
         [Display(Name = "Profile Image")]
-        [DataType(DataType.ImageUrl)]
         [StringLength(50, ErrorMessage = "Image Filename should not exceed 50 characters", MinimumLength = 0)]
         public string ProfileImage { get; set; }
 

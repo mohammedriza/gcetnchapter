@@ -11,19 +11,12 @@ namespace GCETNChapter
 {
     using System;
     
-    public partial class prcGetAdvertisementDetails_Result
+    public partial class prcGetActiveAdvertisements_Result
     {
-        public int AdvertisementID { get; set; }
         public string Title { get; set; }
         public string Description { get; set; }
         public string Footer { get; set; }
-        public Nullable<System.DateTime> StartDate { get; set; }
-        public Nullable<System.DateTime> ExpiryDate { get; set; }
-        public string CreatedBy { get; set; }
-        public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string ModifiedBy { get; set; }
-        public Nullable<System.DateTime> ModifiedDate { get; set; }
         public string ImageFileName { get; set; }
-        public string Status { get; set; }
+        public Nullable<System.DateTime> ExpiryDate { get; set; }
     }
 }

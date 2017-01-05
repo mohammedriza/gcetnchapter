@@ -94,5 +94,27 @@ namespace GCETNChapter.Controllers
                     return "Error";
             }
         }
+
+
+        [HttpPost]
+        public string DeleteAccessRole(string AccessRole)
+        {
+            try
+            {
+                var rowsEffected = new AccessManagerDA().DeleteAccessRole(AccessRole);
+
+                if (rowsEffected >= 1)
+                    return "Success";
+                else
+                    return "Error";
+            }
+            catch (Exception ex)
+            {
+                return "Exception: " + ex.InnerException;
+            }
+        }
+
+
+
     }
 }

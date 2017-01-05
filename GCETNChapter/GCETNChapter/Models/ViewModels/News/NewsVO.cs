@@ -8,15 +8,19 @@ namespace GCETNChapter.Models.ViewModels.News
 {
     public class NewsVO
     {
-        [Display(Name = "Select an Icon")]
+        public int? NewsID { get; set; }
+
+        [Display(Name = "Choose Image")]
         public string ImageFile { get; set; }
 
-        [Display(Name = "Enter News Headling")]
+        [Display(Name = "News Headline")]
         public string HeadLine { get; set; }
 
-        [Display(Name = "Enter News Detail")]
+        [Display(Name = "News Detail")]
         public string NewsDetail { get; set; }
 
+        public string CreatedBy { get; set; }
+        
         [Display(Name = "Posted On")]
         [DataType(DataType.DateTime)]
         public DateTime? CreatedDate { get; set; }

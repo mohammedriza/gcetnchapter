@@ -142,32 +142,59 @@ function UpdatePersonalAndLoginInfo() {
         else if (gender == "-- Select Gender --")
             GeneralWarningsAndErrorDialog("ALERT...", "Please select a valid Gender", "red");
         else {
-            $.ajax({
-                url: "/MemberProfile/UpdatePersonalAndLoginInfo/",
-                type: "POST",
-                data: {
-                    Username: username,
-                    Password: password,
-                    FullName: fullName,
-                    Gender: gender,
-                    DateOfBirth: dOB,
-                    ProfileImage: profileImg
-                },
-                success: function (data, result) {
-                    if (data == "Success") {
-                        GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
-                    }
-                    else if (data == "Error") {
-                        GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
-                    }
-                    else if (data == "401") {
-                        ShowAccessDeniedMessage();
-                    }
-                },
-                error: function (xhr, status, error) {
-                    GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
+            var xhr = new XMLHttpRequest();
+            var fd = new FormData();
+            fd.append("Username", username);
+            fd.append("Password", password);
+            fd.append("FullName", fullName);
+            fd.append("Gender", gender);
+            fd.append("DateOfBirth", dOB);
+            fd.append("ProfileImage", document.getElementById("TxtProfileImage").files[0]);
+
+            xhr.open("POST", "/MemberProfile/UpdatePersonalAndLoginInfo/", true);
+            xhr.send(fd);
+            xhr.addEventListener("load", function (event) {
+                if (event.target.response == "Success") {
+                    GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
                 }
-            });
+                else if (event.target.response == "Error")
+                {
+                    GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
+                }
+                else if (event.target.response == "401")
+                {
+                    ShowAccessDeniedMessage();
+                }
+            },
+            false);
+
+
+            //$.ajax({
+            //    url: "/MemberProfile/UpdatePersonalAndLoginInfo/",
+            //    type: "POST",
+            //    data: {
+            //        Username: username,
+            //        Password: password,
+            //        FullName: fullName,
+            //        Gender: gender,
+            //        DateOfBirth: dOB,
+            //        ProfileImage: profileImg
+            //    },
+            //    success: function (data, result) {
+            //        if (data == "Success") {
+            //            GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
+            //        }
+            //        else if (data == "Error") {
+            //            GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
+            //        }
+            //        else if (data == "401") {
+            //            ShowAccessDeniedMessage();
+            //        }
+            //    },
+            //    error: function (xhr, status, error) {
+            //        GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
+            //    }
+            //});
         }
     }
 }

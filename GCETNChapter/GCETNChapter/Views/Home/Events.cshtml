@@ -1,0 +1,32 @@
+﻿@model List<GCETNChapter.Models.ViewModels.Events.EventsVO>
+<script src="~/JQueryScripts/PublicPages/EventsPage.js"></script>
+
+<br />
+<div id="divEventsPage" class="container hideDiv">
+    <div class="partialBodySection">        
+        <p class="headerText">GCE Events</p>
+        <hr />
+
+        @if (Model != null)
+        {
+            foreach (var item in Model)
+            {
+                <div class="row">
+                    <div class="col-md-6">
+                        <img src=@("/_ImageUploads/EventPhotos/" + item.Image) height="400" width="400" />
+                    </div>
+                    <div class="col-md-6">
+                        <div class="AdvertisementHeader well well-sm col-md-12">
+                            Event : @item.EventName
+                        </div>
+                        <div class="AdvertisementDescription col-md-12">
+                            Event took place from @item.StartDate.Value.ToShortDateString() and @item.EndDate.Value.ToShortDateString()
+                        </div> 
+                    </div>
+                </div>
+
+                <br /><br /><br />
+            }
+        }
+    </div>
+</div>

@@ -56,5 +56,17 @@ namespace GCETNChapter.Models.DataAccess
                 return response;
             }
         }
+
+
+        public int DeleteAccessRole(string AccessRole)
+        {
+            using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+            {
+                var response = db.prcDeleteAccessRole(AccessRole);
+                return response;
+            }
+        }
+
+
     }
 }

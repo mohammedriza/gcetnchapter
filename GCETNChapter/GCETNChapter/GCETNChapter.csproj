@@ -254,6 +254,9 @@
     <Compile Include="prcGetAccessLevelDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
+    <Compile Include="prcGetActiveAdvertisements_Result.cs">
+      <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
+    </Compile>
     <Compile Include="prcGetAdvertisementDetails_Result.cs">
       <DependentUpon>GCETNChapterEntity.tt</DependentUpon>
     </Compile>
@@ -552,6 +555,7 @@
     <Content Include="Images\OtherPages\NewsIcon.png" />
     <Content Include="Images\OtherPages\UnauthorizedAccess.png" />
     <Content Include="JQueryScripts\Advertisement\Advertisement.js" />
+    <Content Include="JQueryScripts\PublicPages\EventsPage.js" />
     <Content Include="JQueryScripts\Profile\AllMembers.js" />
     <Content Include="JQueryScripts\PublicPages\AboutUsPage.js" />
     <Content Include="JQueryScripts\AccessManager\AccessLevels.js" />
@@ -562,6 +566,7 @@
     <Content Include="JQueryScripts\Events\ManageEvents.js" />
     <Content Include="JQueryScripts\Events\EventsPage.js" />
     <Content Include="JQueryScripts\GeneralScripts.js" />
+    <Content Include="JQueryScripts\PublicPages\GalleryPage.js" />
     <Content Include="JQueryScripts\PublicPages\HomePage.js" />
     <Content Include="JQueryScripts\Registration\LoginPage.js" />
     <Content Include="JQueryScripts\Donations\Donations.js" />
@@ -652,6 +657,9 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.js" />
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <Content Include="_ImageUploads\Advertisements\Sample_NoImage.png" />
+    <Content Include="_ImageUploads\EventPhotos\Sample_NoImage.png" />
+    <Content Include="_ImageUploads\MemberProfile\Sample_NoImage.png" />
+    <Content Include="_ImageUploads\Temp\Sample_NoImage.png" />
     <EntityDeploy Include="GCETNChapterEntity.edmx">
       <Generator>EntityModelCodeGenerator</Generator>
       <LastGenOutput>GCETNChapterEntity.Designer.cs</LastGenOutput>
@@ -741,13 +749,14 @@
     <Content Include="Views\Advertisement\_AddEditAdvertisement.cshtml" />
     <Content Include="Views\Advertisement\_DraftAdvertisement.cshtml" />
     <Content Include="Views\Advertisement\_ViewAdvertisements.cshtml" />
+    <Content Include="Views\Home\Index\_Advertisement.cshtml" />
+    <Content Include="Views\Home\Gallery.cshtml" />
+    <Content Include="Views\Home\Events.cshtml" />
+    <Content Include="Views\News\_AddUpdateNewsFeedModal.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
     <Folder Include="JQueryScripts\News\" />
-    <Folder Include="_ImageUploads\EventPhotos\" />
-    <Folder Include="_ImageUploads\MemberProfile\" />
-    <Folder Include="_ImageUploads\Temp\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

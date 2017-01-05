@@ -53,12 +53,24 @@
         </div>
     </div>
 
-    <div class="form-group">
-        <div class="col-md-offset-2 col-md-9">
-            <input id="BtnSaveAdvertisement" type="button" value="Save" class="btn btn-primary" />
+    @if (Model != null)
+    {
+        if (Model.AdvertisementID >= 1)
+        {
+        <div id="divAdStatus" class="form-group">
+            @Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "formlabelFontRight col-md-3" })
+            <div class="col-md-9">
+                @Html.DisplayFor(model => model.Status, new { htmlAttributes = new { @class = "form-control", id = "LblStatus", maxlength = "150" } })
+                @Html.HiddenFor(model => model.Status, new { id = "LblHiddenStatus" })
+            </div>
+        </div>
+        }
+    }
 
-            <br /><br />
-            <a  href="#" id="LnkBackToAllAds"><span class="glyphicon glyphicon-hand-left"></span>  Back to Advertisement List</a>
+    <div class="form-group">
+        <div class="col-md-offset-3 col-md-9">
+            <input id="BtnCancelAddAdv" type="button" value="Cancel" class="btn btn-default" />
+            <input id="BtnSaveAdvertisement" type="button" value="Save" class="btn btn-primary" />
         </div>
     </div>
 </div>

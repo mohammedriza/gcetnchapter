@@ -64,6 +64,44 @@ function AddNewAccessRole() {
 }
 
 
+//--- Delete Advertisement - Calls DeleteAdvertisement method in Event Controller ---//
+function DeleteAccessRole() {
+    var AccessRole = $("#DDLAccessRoleList").val();
+
+    if (AccessRole == "-- Select Access Role --") {
+        GeneralWarningsAndErrorDialog("WARNING", "Please select a valid Access Role to delete.", "red");
+    }
+    else {
+        if (confirm("Are you sure you want to delete the selected Access Role?. Please confirm.")) {
+            $.ajax({
+                url: "/AccessManager/DeleteAccessRole",
+                type: "POST",
+                data: { AccessRole: AccessRole },
+                success: function (data, result) {
+                    if (data == "Success") {
+                        //window.location.replace("/AccessManager/ManageAccess/");
+                        GeneralWarningsAndErrorDialog("SUCCESS", "The selected Access Role is deleted successfully. Close the modal and refresh the page to see the updated list of Access Roles in the dropdown", "green");
+                    }
+                    else if (data == "Error") {
+                        GeneralWarningsAndErrorDialog("ERROR", "Failed to delete the selected Access Role. Please try again later.", "red");
+                    }
+                    else if(data.indexOf("Exception") >= 0)
+                    {
+                        GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", data, "red");
+                    }
+                    else if (data == "401") {
+                        ShowAccessDeniedMessage();
+                    }
+                },
+                error: function (xhr, status, error) {
+                    GeneralWarningsAndErrorDialog("UNEXPECTED ERROR...", "An unexpected error had occured. Please try again later.", "red");
+                }
+            });
+        }
+    }
+}
+
+
 function AddUpdateAccessRights(accessID, grantAccess, accessRole) {
 
     if (accessRole == "-- Select Access Role --") {
@@ -141,4 +179,9 @@ $(document).on("change", "#TxtAccessRole_Add", function () {
     var value = $("#TxtAccessRole_Add").val();
     value = value.toUpperCase();
     $("#TxtAccessRole_Add").val(value);
+});
+
+//--- Delete New Access Role ---//
+$(document).on("click", "#DeleteAccessRole", function () {
+    DeleteAccessRole();
 });

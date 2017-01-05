@@ -2,6 +2,7 @@
 //-- Update Selected Link Style to "Contact Us" link (Underline) --//
 $(function () {
     $("#divHomePage").fadeIn(1000);
+    GetActiveAdvertisements();
 
     $("#LnkHome").addClass("menuitemSelected");
     $("#LnkAboutUs").removeClass("menuitemSelected");
@@ -12,6 +13,19 @@ $(function () {
     $("#LnkContactUs").removeClass("menuitemSelected");
 })
 
+
+//--- GET ACTIVE ADVERTISEMENTS AND SCROLL IN THE MARQUEE ---//
+function GetActiveAdvertisements() {
+    $("#divShowAdvertisements").load("/Home/GetActiveAdvertisements/",
+    { },
+    function (responseTxt, statusTxt, xhr) {
+        if (statusTxt == "success") {
+        }
+        else if (statusTxt == "error") {
+            $("#divShowAdvertisements").text("Failed to load Advertisements. We're currently investigating on this issue. Thank You for your patience.")
+        }
+    });
+}
 
 
 function LnkGallerySelectedStyle() {

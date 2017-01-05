@@ -19,7 +19,7 @@ namespace GCETNChapter
         public string ImageFile { get; set; }
         public string CreatedBy { get; set; }
         public Nullable<System.DateTime> CreatedDate { get; set; }
-        public string ModifiedB { get; set; }
         public Nullable<System.DateTime> ModifiedDate { get; set; }
+        public string ModifiedBy { get; set; }
     }
 }

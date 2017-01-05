@@ -11,6 +11,7 @@
 })
 
 
+//--- GET ALL ADVERTISEMENTS TO SHOW IN VIEW TABLE --//
 function GetAllAdvertisements()
 {
     $("#divViewAdvertisements").load("/Advertisement/GetAllAdvertisements/",
@@ -26,6 +27,7 @@ function GetAllAdvertisements()
 }
 
 
+//--- GET ADVERTISEMENT BY ID TO POPULATE EDIT ADVERTISEMENT ---//
 function GetAdvertisementByID(AdID) {
     $("#divAddAdvertisement").load("/Advertisement/GetAllAdvertisements/",
     { AdID: AdID },
@@ -69,6 +71,7 @@ function DeleteAdvertisement(AdID) {
 }
 
 
+//--- ADD NEW / UPDATE EXISTIGN ADVERTISEMENTS ---//
 function AddEditAdvertisements() {
     var AdID = $.trim($("#LblHiddenAdID").val());
     var Title = $.trim($("#TxtTitle").val());
@@ -123,12 +126,20 @@ function AddEditAdvertisements() {
 
 
 function InitializeAddAdvertisement() {
-    $.trim($("#TxtTitle").val(""));
-    $.trim($("#TxtDescription").val(""));
-    $.trim($("#TxtFooter").val(""));
-    $.trim($("#ImgImageFile").val(""));
-    $.trim($("#TxtStartDate").val(""));
-    $.trim($("#TxtExpiryDate").val(""));
+    //-- Set Null values to all controls in Add section ---//
+    $("#TxtTitle").val("");
+    $("#TxtDescription").val("");
+    $("#TxtFooter").val("");
+    $("#ImgImageFile").val("");
+    $("#TxtStartDate").val("");
+    $("#TxtExpiryDate").val("");
+    $("#divAdStatus").hide();
+
+    //-- Set Null values to all controls in Preview section ---//
+    $("#LblAdvertisementFooter").text("<< Footer >>");
+    $("#LblAdvertisementTitle").text("<< Title >>");
+    $("#LblAdDescription").text("<< Description >>");
+    $("#ImgAdvertisementImage").prop("src", "/_ImageUploads/Advertisements/Sample_NoImage.png");
 }
 
 
@@ -145,13 +156,14 @@ $(document).on("input", "#TxtDescription", function () {
 });
 
 //--- Show All Advertisement Page ---//
-$(document).on("click", "#LnkBackToAllAds", function () {
+$(document).on("click", "#BtnCancelAddAdv", function () {
     GetAllAdvertisements();
 });
 
 //--- Show Add Advertisement Section ---//
 $(document).on("click", "#LnkAddNewAdvertisement", function () {
     ShowAddAdvertisementSection();
+    InitializeAddAdvertisement();
 });
 
 

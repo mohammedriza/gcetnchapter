@@ -1,5 +1,6 @@
 ﻿using GCETNChapter.Models.DataAccess;
 using GCETNChapter.Models.ViewModels;
+using GCETNChapter.Models.ViewModels.News;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -26,5 +27,69 @@ namespace GCETNChapter.Controllers
             var NewsFeed = new NewsDA().GetAllNewsFeed(0);
             return View(NewsFeed);
         }
+
+
+        public PartialViewResult GetNewsFeedByNewsID(int NewsID)
+        {
+            if(NewsID == 0)
+            {
+                var news = new List<NewsVO>();
+                news.Add(new NewsVO()
+                {
+                    NewsID = 0,
+                    HeadLine = "",
+                    NewsDetail = "",
+                    ImageFile = ""
+                });
+                return PartialView("_AddUpdateNewsFeedModal", news);
+            }
+            else
+            {
+                var result = new NewsDA().GetNewsFeedByNewsID(NewsID);
+                return PartialView("_AddUpdateNewsFeedModal", result);
+            }
+        }
+
+
+        [HttpPost]
+        public string AddUpdateNewsFeed(NewsVO news)
+        {
+            try
+            {
+                news.CreatedBy = Session["username"].ToString();
+                var rowsEffected = new NewsDA().AddUpdateNewsFeed(news);
+
+                if (rowsEffected >= 1)
+                    return "Success";
+                else
+                    return "Error";
+            }
+            catch (Exception)
+            {
+                return "Error";
+            }
+        }
+
+
+        [HttpPost]
+        public string DeleteNewsFeed(int NewsID)
+        {
+            try
+            {
+                var rowsEffected = new NewsDA().DeleteNewsFeed(NewsID);
+
+                if (rowsEffected >= 1)
+                    return "Success";
+                else
+                    return "Error";
+            }
+            catch (Exception ex)
+            {
+                return "Exception: " + ex.InnerException;
+            }
+        }
+
+
+
     }
 }

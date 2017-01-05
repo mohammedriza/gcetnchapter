@@ -1,7 +1,11 @@
 ﻿@model List<GCETNChapter.Models.ViewModels.News.NewsVO>
 
+@if (Model != null)
+{
+    if (Model.Count >= 1)
+    {
 <div class="form-horizontal">
-    @Html.HiddenFor(model => model[0].NewsID, new { id="LblNewsID" })
+    @Html.HiddenFor(model => model[0].NewsID, new { id = "LblNewsID" })
 
     <div class="form-group">
         <div class="col-md-4 formlabelFontRight">
@@ -17,7 +21,7 @@
             @Html.LabelFor(model => model[0].NewsDetail)
         </div>
         <div class="col-md-8">
-            @Html.TextAreaFor(model => model[0].NewsDetail, 10, 100, new { @class = "textareastyle", id = "TxtNewsDetail", placeholder = "Enter News Detail...", maxlength = "1000" } )
+            @Html.TextAreaFor(model => model[0].NewsDetail, 10, 100, new { @class = "textareastyle", id = "TxtNewsDetail", placeholder = "Enter News Detail...", maxlength = "1000" })
         </div>
     </div>
 
@@ -30,3 +34,5 @@
     </div>
 
 </div>
+    }
+}

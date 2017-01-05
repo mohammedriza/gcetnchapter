@@ -658,6 +658,14 @@
     <Content Include="Scripts\DataTables\responsive.semanticui.min.js" />
     <Content Include="_ImageUploads\Advertisements\Sample_NoImage.png" />
     <Content Include="_ImageUploads\EventPhotos\Sample_NoImage.png" />
+    <Content Include="_ImageUploads\Gallery\IMG-20170105-WA0000.jpg" />
+    <Content Include="_ImageUploads\Gallery\IMG-20170105-WA0001.jpg" />
+    <Content Include="_ImageUploads\Gallery\IMG-20170105-WA0002.jpg" />
+    <Content Include="_ImageUploads\Gallery\IMG-20170105-WA0003.jpg" />
+    <Content Include="_ImageUploads\Gallery\IMG-20170105-WA0004.jpg" />
+    <Content Include="_ImageUploads\Gallery\IMG-20170105-WA0005.jpg" />
+    <Content Include="_ImageUploads\Gallery\IMG-20170105-WA0006.jpg" />
+    <Content Include="_ImageUploads\Gallery\IMG-20170105-WA0007.jpg" />
     <Content Include="_ImageUploads\MemberProfile\Sample_NoImage.png" />
     <Content Include="_ImageUploads\Temp\Sample_NoImage.png" />
     <EntityDeploy Include="GCETNChapterEntity.edmx">

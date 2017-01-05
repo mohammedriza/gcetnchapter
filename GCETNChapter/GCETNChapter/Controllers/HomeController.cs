@@ -27,8 +27,9 @@ namespace GCETNChapter.Controllers
 
         public ActionResult Gallery()
         {
-            var response = new HomeDA().GetLatestEventsForPublicPage();
-            return View(response);
+            //var response = new HomeDA().GetLatestEventsForPublicPage();
+            //return View(response);
+            return View();
         }
 
         public ActionResult Events()

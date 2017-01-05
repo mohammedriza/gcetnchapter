@@ -71,8 +71,8 @@ textarea {
 .partialBodySection{
     padding-top: 0px;
     padding-bottom: 50px;
-    padding-left: 100px;
-    padding-right: 100px;
+    padding-left: 50px;
+    padding-right: 50px;
     background-color: #ffffff;
     min-height: 100%;
 }

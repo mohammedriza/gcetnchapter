@@ -461,7 +461,8 @@ namespace GCETNChapter.Controllers
                         {
                             //--- Upload File to Folder Location ---//
                             string paramDatetime = (DateTime.Now.Month + DateTime.Now.Year + DateTime.Now.Hour + DateTime.Now.Minute + DateTime.Now.Second + DateTime.Now.Millisecond).ToString();
-                            galleryVo.ImageFileName = string.Format("{0}_{1}_{2}", galleryVo.EventID, paramDatetime, Path.GetFileName(file.FileName));
+                            galleryVo.ImageFileName = string.Format("{0}_{1}_{2}", galleryVo.EventID, paramDatetime, Path.GetFileName(file.FileName.Trim()));
+                            galleryVo.ImageFileName = galleryVo.ImageFileName.Replace(" ", "");
 
                             var path = Path.Combine(Server.MapPath("~/_ImageUploads/EventPhotos/"), galleryVo.ImageFileName);
                             file.SaveAs(path);

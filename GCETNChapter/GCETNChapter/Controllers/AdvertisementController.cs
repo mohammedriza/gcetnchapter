@@ -48,6 +48,8 @@ namespace GCETNChapter.Controllers
                         var paramDatetime = (DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString());
 
                         AdsVo.ImageFileName = string.Format("{0}_{1}", paramDatetime, Path.GetFileName(file.FileName));
+                        AdsVo.ImageFileName = AdsVo.ImageFileName.Replace(" ", "");
+
                         var path = Path.Combine(Server.MapPath("~/_ImageUploads/Advertisements/"), AdsVo.ImageFileName);
                         file.SaveAs(path);
                     }

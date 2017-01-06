@@ -215,6 +215,7 @@ namespace GCETNChapter.Controllers
                         {
                             //--- Upload File to Folder Location ---//
                             profileVo.ProfileImage = string.Format("{0}_{1}", profileVo.Username, Path.GetFileName(file.FileName));
+                            profileVo.ProfileImage = profileVo.ProfileImage.Replace(" ", "");
 
                             var path = Path.Combine(Server.MapPath("~/_ImageUploads/MemberProfile/"), profileVo.ProfileImage);
                             file.SaveAs(path);

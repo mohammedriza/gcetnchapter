@@ -149,15 +149,6 @@ namespace GCETNChapter
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcRegisterNewOrUpdateMember", usernameParameter, passwordParameter, collegeRegistrationNoParameter, fullNameParameter, genderParameter, dateOfBirthParameter, branchParameter, engineeringDisciplineParameter, memberJoinedDateParameter, batchParameter, primaryContactNoParameter, contactNoIndiaParameter, whatsappNoParameter, emailParameter, permanentAddressParameter, permanentCountryParameter, currentAddressParameter, currentCountryParameter, profileImageParameter, lastModifiedByParameter);
         }
     
-        public virtual ObjectResult<string> prcCheckIfCollegeRegNoExist(string collegeRegistrationNo)
-        {
-            var collegeRegistrationNoParameter = collegeRegistrationNo != null ?
-                new ObjectParameter("CollegeRegistrationNo", collegeRegistrationNo) :
-                new ObjectParameter("CollegeRegistrationNo", typeof(string));
-    
-            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prcCheckIfCollegeRegNoExist", collegeRegistrationNoParameter);
-        }
-    
         public virtual int prcUpdatePersonalAndLoginInfo(string username, string password, string fullName, string gender, Nullable<System.DateTime> dateOfBirth, string profileImage, string lastModifiedBy)
         {
             var usernameParameter = username != null ?
@@ -908,6 +899,64 @@ namespace GCETNChapter
                 new ObjectParameter("NewsID", typeof(int));
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcDeleteNewsFeed", newsIDParameter);
+        }
+    
+        public virtual int prcAddErrorLogEntry(string controller, string actionName, string ex_Message, string ex_InnerException, string ex_Data, string ex_HelpLink, Nullable<int> ex_HResult, string ex_Source, string ex_StackRace, string ex_TargetSite, string createdBy)
+        {
+            var controllerParameter = controller != null ?
+                new ObjectParameter("Controller", controller) :
+                new ObjectParameter("Controller", typeof(string));
+    
+            var actionNameParameter = actionName != null ?
+                new ObjectParameter("ActionName", actionName) :
+                new ObjectParameter("ActionName", typeof(string));
+    
+            var ex_MessageParameter = ex_Message != null ?
+                new ObjectParameter("Ex_Message", ex_Message) :
+                new ObjectParameter("Ex_Message", typeof(string));
+    
+            var ex_InnerExceptionParameter = ex_InnerException != null ?
+                new ObjectParameter("Ex_InnerException", ex_InnerException) :
+                new ObjectParameter("Ex_InnerException", typeof(string));
+    
+            var ex_DataParameter = ex_Data != null ?
+                new ObjectParameter("Ex_Data", ex_Data) :
+                new ObjectParameter("Ex_Data", typeof(string));
+    
+            var ex_HelpLinkParameter = ex_HelpLink != null ?
+                new ObjectParameter("Ex_HelpLink", ex_HelpLink) :
+                new ObjectParameter("Ex_HelpLink", typeof(string));
+    
+            var ex_HResultParameter = ex_HResult.HasValue ?
+                new ObjectParameter("Ex_HResult", ex_HResult) :
+                new ObjectParameter("Ex_HResult", typeof(int));
+    
+            var ex_SourceParameter = ex_Source != null ?
+                new ObjectParameter("Ex_Source", ex_Source) :
+                new ObjectParameter("Ex_Source", typeof(string));
+    
+            var ex_StackRaceParameter = ex_StackRace != null ?
+                new ObjectParameter("Ex_StackRace", ex_StackRace) :
+                new ObjectParameter("Ex_StackRace", typeof(string));
+    
+            var ex_TargetSiteParameter = ex_TargetSite != null ?
+                new ObjectParameter("Ex_TargetSite", ex_TargetSite) :
+                new ObjectParameter("Ex_TargetSite", typeof(string));
+    
+            var createdByParameter = createdBy != null ?
+                new ObjectParameter("CreatedBy", createdBy) :
+                new ObjectParameter("CreatedBy", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcAddErrorLogEntry", controllerParameter, actionNameParameter, ex_MessageParameter, ex_InnerExceptionParameter, ex_DataParameter, ex_HelpLinkParameter, ex_HResultParameter, ex_SourceParameter, ex_StackRaceParameter, ex_TargetSiteParameter, createdByParameter);
+        }
+    
+        public virtual ObjectResult<string> prcCheckIfCollegeRegNoExist(string collegeRegistrationNo)
+        {
+            var collegeRegistrationNoParameter = collegeRegistrationNo != null ?
+                new ObjectParameter("CollegeRegistrationNo", collegeRegistrationNo) :
+                new ObjectParameter("CollegeRegistrationNo", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prcCheckIfCollegeRegNoExist", collegeRegistrationNoParameter);
         }
     }
 }

@@ -10,6 +10,7 @@ $(function () {
     $("#LnkDonations").removeClass("menuitemSelected");    
     $("#LnkAdvertisements").removeClass("menuitemSelected");
     $("#LnkMyProfile").removeClass("menuitemSelected");
+    $("#LnkCMA").removeClass("menuitemSelected");
 });
 
 

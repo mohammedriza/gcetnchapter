@@ -21,9 +21,17 @@ namespace GCETNChapter.Controllers
         // GET: MemberRegistration
         public ActionResult Registration()
         {
-            GetDropdownListDataForRegistrationPage();
+            try
+            {
+                GetDropdownListDataForRegistrationPage();
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return View();
+            }
         }
 
 
@@ -65,10 +73,14 @@ namespace GCETNChapter.Controllers
 
                         //--- Check if the user's College Registration Number already exist in the MemberInfo table. If so show the below message, else continue registration.
                         if (!string.IsNullOrEmpty(CollegeRegNoExist))
+                        {
                             ViewBag.Failure = string.Format("It seems like you have already registered using this College Registration No '{0}'. " +
                                 "If it wasn't you, please contact the administrator for assistance.", MemberVO.CollegeRegistrationNo);
+                        }
                         else if (!string.IsNullOrEmpty(usernameExist))
+                        {
                             ViewBag.Failure = string.Format("The username ({0}) you used already exist. Please use a different Username to complete registration.", MemberVO.Username);
+                        }
                         else
                         {
                             var result = new MemberDA().RegisterNewMemberInRegistrationPage(MemberVO);
@@ -84,22 +96,29 @@ namespace GCETNChapter.Controllers
             }
             catch (Exception ex)
             {
-                ViewBag.Failure = ex.Message;
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                ViewBag.Failure = ex.Message + " | " + ex.InnerException;
             }
 
             GetDropdownListDataForRegistrationPage();
-
-
             return View(MemberVO);
         }
 
 
         public ActionResult Login()
         {
-            if (Session["username"] != null)
-                Response.Redirect("~/MemberProfile/ManageProfile/");
+            try
+            {
+                if (Session["username"] != null)
+                    Response.Redirect("~/MemberProfile/ManageProfile/");
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return View();
+            }
         }
 
 
@@ -129,8 +148,9 @@ namespace GCETNChapter.Controllers
                     }
                 }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return null;
             }
             return null;

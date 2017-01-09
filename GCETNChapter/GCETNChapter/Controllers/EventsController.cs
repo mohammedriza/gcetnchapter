@@ -62,51 +62,67 @@ namespace GCETNChapter.Controllers
         // GET: View All Events
         public PartialViewResult ViewEvents()
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(101);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return PartialView("_UnauthorizedAccess");
-            else
+            try
             {
-                var response = new EventsDA().GetAllEvents(0);
-                return PartialView("ManageEvents/_ViewEvents", response);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(101);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
+                else
+                {
+                    var response = new EventsDA().GetAllEvents(0);
+                    return PartialView("ManageEvents/_ViewEvents", response);
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("ManageEvents/_ViewEvents");
             }
         }
 
         // GET: Events
         public PartialViewResult GetEventDetailsByEventID(int EventID = 0)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-
-            //--- ADD EVENT ---//
-            if (EventID <= 0)
+            try
             {
-                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(102);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-                if (authorize == false)
-                    return PartialView("_UnauthorizedAccess");
+                //--- ADD EVENT ---//
+                if (EventID <= 0)
+                {
+                    var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(102);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                    if (authorize == false)
+                        return PartialView("_UnauthorizedAccess");
+                    else
+                    {
+                        var eventsVo = new EventsVO()
+                        {
+                            CreatedBy = Session["username"].ToString()
+                        };
+                        return PartialView("ManageEvents/_AddEvents", eventsVo);
+                    }
+                }
+                //--- EDIT EVENT ---//
                 else
                 {
-                    var eventsVo = new EventsVO()
+                    var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(103);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                    if (authorize == false)
+                        return PartialView("_UnauthorizedAccess");
+                    else
                     {
-                        CreatedBy = Session["username"].ToString()
-                    };
-                    return PartialView("ManageEvents/_AddEvents", eventsVo);
+                        var response = new EventsDA().GetEventByEventID(EventID);
+                        return PartialView("ManageEvents/_AddEvents", response);
+                    }
                 }
             }
-            //--- EDIT EVENT ---//
-            else
+            catch (Exception ex)
             {
-                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(103);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-                if (authorize == false)
-                    return PartialView("_UnauthorizedAccess");
-                else
-                {
-                    var response = new EventsDA().GetEventByEventID(EventID);
-                    return PartialView("ManageEvents/_AddEvents", response);
-                }
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("ManageEvents/_AddEvents");
             }
         }
 
@@ -114,29 +130,37 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Add Events
         public bool AddNewEvent(EventsVO eventVo)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-
-            var DuplicateEventName = "";
-            if (eventVo.EventID <= 0)
+            try
             {
-                //--- Check this only if the Event ID is 0, which means its a Add Event and not edit event ---//
-                DuplicateEventName = EventsDA.CheckIfEventNameExist(eventVo.EventName);
-            }
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            if (!string.IsNullOrEmpty(DuplicateEventName))
-            {
-                return false;
-            }
-            else
-            {
-                eventVo.CreatedBy = Session["username"].ToString();
+                var DuplicateEventName = "";
+                if (eventVo.EventID <= 0)
+                {
+                    //--- Check this only if the Event ID is 0, which means its a Add Event and not edit event ---//
+                    DuplicateEventName = EventsDA.CheckIfEventNameExist(eventVo.EventName);
+                }
 
-                var result = new EventsDA().AddUpdateEventDetail(eventVo);
-
-                if (result >= 1)
-                    return true;
-                else
+                if (!string.IsNullOrEmpty(DuplicateEventName))
+                {
                     return false;
+                }
+                else
+                {
+                    eventVo.CreatedBy = Session["username"].ToString();
+
+                    var result = new EventsDA().AddUpdateEventDetail(eventVo);
+
+                    if (result >= 1)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return false;
             }
         }
 
@@ -161,8 +185,9 @@ namespace GCETNChapter.Controllers
                         return "Error";
                 }
             }
-            catch(Exception)
+            catch(Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }
@@ -173,15 +198,23 @@ namespace GCETNChapter.Controllers
         // GET: View All Events
         public PartialViewResult GetAllEventPaymentCollections(int PaymentCollectionID)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(105);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return PartialView("_UnauthorizedAccess");
-            else
+            try
             {
-                var response = new EventsDA().GetAllEventPaymentCollections(PaymentCollectionID);
-                return PartialView("PaymentCollections/_ViewEventPaymentCollection", response);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(105);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
+                else
+                {
+                    var response = new EventsDA().GetAllEventPaymentCollections(PaymentCollectionID);
+                    return PartialView("PaymentCollections/_ViewEventPaymentCollection", response);
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("PaymentCollections/_ViewEventPaymentCollection");
             }
         }
 
@@ -189,39 +222,47 @@ namespace GCETNChapter.Controllers
         // GET: Events
         public PartialViewResult GetEventPaymentCollectionByID(int PaymentCollectionID = 0, int EventID = 0)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-
-            //--- ADD PAYMENT COLLECTION ---//
-            if (PaymentCollectionID <= 0)
+            try
             {
-                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(106);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-                if (authorize == false)
-                    return PartialView("_UnauthorizedAccess");
+                //--- ADD PAYMENT COLLECTION ---//
+                if (PaymentCollectionID <= 0)
+                {
+                    var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(106);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                    if (authorize == false)
+                        return PartialView("_UnauthorizedAccess");
+                    else
+                    {
+                        var paymentsVo = new EventPaymentCollectionVO()
+                        {
+                            CreatedBy = Session["username"].ToString(),
+                            EventID = EventID,
+                            EventNameList = EventsDA.GetAllEventNames()
+                        };
+                        return PartialView("PaymentCollections/_AddEventPaymentCollection", paymentsVo);
+                    }
+                }
+                //--- EDIT PAYMENT COLLECTION ---//
                 else
                 {
-                    var paymentsVo = new EventPaymentCollectionVO()
+                    var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(107);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                    if (authorize == false)
+                        return PartialView("_UnauthorizedAccess");
+                    else
                     {
-                        CreatedBy = Session["username"].ToString(),
-                        EventID = EventID,
-                        EventNameList = EventsDA.GetAllEventNames()
-                    };
-                    return PartialView("PaymentCollections/_AddEventPaymentCollection", paymentsVo);
+
+                        var response = new EventsDA().GetEventPaymentCollectionByID(PaymentCollectionID);
+                        return PartialView("PaymentCollections/_AddEventPaymentCollection", response);
+                    }
                 }
             }
-            //--- EDIT PAYMENT COLLECTION ---//
-            else
+            catch (Exception ex)
             {
-                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(107);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-                if (authorize == false)
-                    return PartialView("_UnauthorizedAccess");
-                else
-                {
-
-                    var response = new EventsDA().GetEventPaymentCollectionByID(PaymentCollectionID);
-                    return PartialView("PaymentCollections/_AddEventPaymentCollection", response);
-                }
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("PaymentCollections/_AddEventPaymentCollection");
             }
         }
 
@@ -229,21 +270,29 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Event Expense Details
         public bool AddEventPaymentCollection(EventPaymentCollectionVO eventPaymentVo)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-
-            eventPaymentVo.CreatedBy = Session["username"].ToString();
-            var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(eventPaymentVo.CollegeRegistrationNo);
-
-            if (string.IsNullOrEmpty(CollegeRegNoExist))
-                return false;
-            else
+            try
             {
-                var result = new EventsDA().AddUpdateEventPaymentCollection(eventPaymentVo);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-                if (result >= 1)
-                    return true;
-                else
+                eventPaymentVo.CreatedBy = Session["username"].ToString();
+                var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(eventPaymentVo.CollegeRegistrationNo);
+
+                if (string.IsNullOrEmpty(CollegeRegNoExist))
                     return false;
+                else
+                {
+                    var result = new EventsDA().AddUpdateEventPaymentCollection(eventPaymentVo);
+
+                    if (result >= 1)
+                        return true;
+                    else
+                        return false;
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return false;
             }
         }
 
@@ -267,8 +316,9 @@ namespace GCETNChapter.Controllers
                         return "Error";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }
@@ -280,15 +330,23 @@ namespace GCETNChapter.Controllers
         // GET: View All Event Expense Details
         public PartialViewResult GetAllEventExpenseDetails(int ExpenseDetailID)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(109);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return PartialView("_UnauthorizedAccess");
-            else
+            try
             {
-                var response = new EventsDA().GetAllEventExpenseDetails(ExpenseDetailID);
-                return PartialView("ExpenseDetails/_ViewEventExpenseDetails", response);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(109);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
+                else
+                {
+                    var response = new EventsDA().GetAllEventExpenseDetails(ExpenseDetailID);
+                    return PartialView("ExpenseDetails/_ViewEventExpenseDetails", response);
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("ExpenseDetails/_ViewEventExpenseDetails");
             }
         }
 
@@ -296,38 +354,46 @@ namespace GCETNChapter.Controllers
         // GET: Expense Details By ID
         public PartialViewResult GetEventExpenseDetailByID(int ExpenseDetailID = 0, int EventID = 0)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-
-            //--- ADD EVENT EXPENSE DETAILS ---//
-            if (ExpenseDetailID <= 0)
+            try
             {
-                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(110);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-                if (authorize == false)
-                    return PartialView("_UnauthorizedAccess");
+                //--- ADD EVENT EXPENSE DETAILS ---//
+                if (ExpenseDetailID <= 0)
+                {
+                    var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(110);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                    if (authorize == false)
+                        return PartialView("_UnauthorizedAccess");
+                    else
+                    {
+                        var expenseVo = new EventExpenseDetailsVO()
+                        {
+                            CreatedBy = Session["username"].ToString(),
+                            EventID = EventID,
+                            EventNameList = EventsDA.GetAllEventNames()
+                        };
+                        return PartialView("ExpenseDetails/_AddEventExpenseDetails", expenseVo);
+                    }
+                }
+                //--- VIEW EVENT EXPENSE DETAILS ---//
                 else
                 {
-                    var expenseVo = new EventExpenseDetailsVO()
+                    var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(111);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                    if (authorize == false)
+                        return PartialView("_UnauthorizedAccess");
+                    else
                     {
-                        CreatedBy = Session["username"].ToString(),
-                        EventID = EventID,
-                        EventNameList = EventsDA.GetAllEventNames()
-                    };
-                    return PartialView("ExpenseDetails/_AddEventExpenseDetails", expenseVo);
+                        var response = new EventsDA().GetEventExpenseDetailByID(ExpenseDetailID);
+                        return PartialView("ExpenseDetails/_AddEventExpenseDetails", response);
+                    }
                 }
             }
-            //--- VIEW EVENT EXPENSE DETAILS ---//
-            else
+            catch (Exception ex)
             {
-                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(111);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-                if (authorize == false)
-                    return PartialView("_UnauthorizedAccess");
-                else
-                {
-                    var response = new EventsDA().GetEventExpenseDetailByID(ExpenseDetailID);
-                    return PartialView("ExpenseDetails/_AddEventExpenseDetails", response);
-                }
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("ExpenseDetails/_AddEventExpenseDetails");
             }
         }
 
@@ -335,16 +401,24 @@ namespace GCETNChapter.Controllers
         [HttpPost]  // POST: Event Expense Details
         public bool AddEventExpenseDetail(EventExpenseDetailsVO expenseVo)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+            try
+            {
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            expenseVo.CreatedBy = Session["username"].ToString();
+                expenseVo.CreatedBy = Session["username"].ToString();
 
-            var result = new EventsDA().AddUpdateEventExpenseDetail(expenseVo);
+                var result = new EventsDA().AddUpdateEventExpenseDetail(expenseVo);
 
-            if (result >= 1)
-                return true;
-            else
+                if (result >= 1)
+                    return true;
+                else
+                    return false;
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return false;
+            }
         }
 
         [HttpPost] // DELETE: Expense Details
@@ -367,8 +441,9 @@ namespace GCETNChapter.Controllers
                         return "Error";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }
@@ -379,42 +454,50 @@ namespace GCETNChapter.Controllers
         // GET: View All Events
         public PartialViewResult GetEventGalleryPhotosByEventID(string EventName)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(113);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return PartialView("_UnauthorizedAccess");
-            else
+            try
             {
-                var galleryVo = new List<EventGalleryVO>();
-                var EventID = EventsDA.GetEventIDByEventName(EventName);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(113);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                if (EventID <= 0)
-                {
-                    galleryVo.Add(new EventGalleryVO()
-                    {
-                        EventID = 0,
-                        EventNameList = EventsDA.GetAllEventNames()
-                    });
-                    return PartialView("Gallery/_ViewEventGallery", galleryVo);
-                }
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
                 else
                 {
-                    var response = new EventsDA().GetEventGalleryPhotosByEventID(EventID);
+                    var galleryVo = new List<EventGalleryVO>();
+                    var EventID = EventsDA.GetEventIDByEventName(EventName);
 
-                    if (response.Count <= 0)
+                    if (EventID <= 0)
                     {
                         galleryVo.Add(new EventGalleryVO()
                         {
                             EventID = 0,
-                            EventNameList = EventsDA.GetAllEventNames(),
-                            EventName = EventName
+                            EventNameList = EventsDA.GetAllEventNames()
                         });
                         return PartialView("Gallery/_ViewEventGallery", galleryVo);
                     }
+                    else
+                    {
+                        var response = new EventsDA().GetEventGalleryPhotosByEventID(EventID);
 
-                    return PartialView("Gallery/_ViewEventGallery", response);
+                        if (response.Count <= 0)
+                        {
+                            galleryVo.Add(new EventGalleryVO()
+                            {
+                                EventID = 0,
+                                EventNameList = EventsDA.GetAllEventNames(),
+                                EventName = EventName
+                            });
+                            return PartialView("Gallery/_ViewEventGallery", galleryVo);
+                        }
+
+                        return PartialView("Gallery/_ViewEventGallery", response);
+                    }
                 }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("Gallery/_ViewEventGallery");
             }
         }
 
@@ -422,21 +505,29 @@ namespace GCETNChapter.Controllers
         // GET: Events
         public PartialViewResult GetAddEventGalleryView()
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(114);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return PartialView("_UnauthorizedAccess");
-            else
+            try
             {
-                var paymentsVo = new EventGalleryVO()
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(114);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
+                else
                 {
-                    CreatedBy = Session["username"].ToString(),
-                    ImageID = 0,
-                    EventID = 0,
-                    EventNameList = EventsDA.GetAllEventNames()
-                };
-                return PartialView("Gallery/_AddEventGallery", paymentsVo);
+                    var paymentsVo = new EventGalleryVO()
+                    {
+                        CreatedBy = Session["username"].ToString(),
+                        ImageID = 0,
+                        EventID = 0,
+                        EventNameList = EventsDA.GetAllEventNames()
+                    };
+                    return PartialView("Gallery/_AddEventGallery", paymentsVo);
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("Gallery/_AddEventGallery");
             }
         }
 
@@ -482,8 +573,9 @@ namespace GCETNChapter.Controllers
                 else
                     return "Error";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }
@@ -509,8 +601,9 @@ namespace GCETNChapter.Controllers
                         return "Error";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }

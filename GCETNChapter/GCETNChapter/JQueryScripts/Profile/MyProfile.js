@@ -7,6 +7,7 @@
     $("#LnkManageAccess").removeClass("menuitemSelected");
     $("#LnkAdvertisements").removeClass("menuitemSelected");
     $("#LnkMyProfile").addClass("menuitemSelected");
+    $("#LnkCMA").removeClass("menuitemSelected");
 
     MyProfileSelectorCss();
 })

@@ -30,29 +30,45 @@ namespace GCETNChapter.Controllers
         // GET: AccessManager
         public ActionResult ManageAccess()
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+            try
+            {
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            ViewBag.AccessRoles = new MemberProfileDA().GetUserAccessRoleList();
-            //var accessLevels = new AccessManagerDA().GetUserAccessLevels("");
+                ViewBag.AccessRoles = new MemberProfileDA().GetUserAccessRoleList();
+                //var accessLevels = new AccessManagerDA().GetUserAccessLevels("");
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return View();
+            }
         }
 
 
         public PartialViewResult GetAccessLevelsByUserRole(string AccessRole)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(125);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return PartialView("_UnauthorizedAccess");
-            else
+            try
             {
-                ViewBag.Role = AccessRole;
-                ViewBag.AccessRoles = new MemberProfileDA().GetUserAccessRoleList();
-                var accessLevels = new AccessManagerDA().GetUserAccessLevels(AccessRole);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(125);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                return PartialView("AccessLevel/_ManageAccessLevel", accessLevels);
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
+                else
+                {
+                    ViewBag.Role = AccessRole;
+                    ViewBag.AccessRoles = new MemberProfileDA().GetUserAccessRoleList();
+                    var accessLevels = new AccessManagerDA().GetUserAccessLevels(AccessRole);
+
+                    return PartialView("AccessLevel/_ManageAccessLevel", accessLevels);
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("AccessLevel/_ManageAccessLevel");
             }
         }
 
@@ -60,17 +76,25 @@ namespace GCETNChapter.Controllers
         [HttpPost]
         public int AddNewAccessRole(string AccessRole)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(124);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return 401;
-            else
+            try
             {
-                var CreatedBy = Session["username"].ToString();
-                var result = new AccessManagerDA().AddNewAccessRole(AccessRole, CreatedBy);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(124);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                if (authorize == false)
+                    return 401;
+                else
+                {
+                    var CreatedBy = Session["username"].ToString();
+                    var result = new AccessManagerDA().AddNewAccessRole(AccessRole, CreatedBy);
 
                     return result;
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return 0;
             }
         }
 
@@ -78,20 +102,28 @@ namespace GCETNChapter.Controllers
         [HttpPost]
         public string AddUpdateAccessRights(AccessLevelsVO accessLevel)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(125);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return "401";
-            else
+            try
             {
-                accessLevel.CreatedBy = Session["username"].ToString();
-                var rowsEffected = new AccessManagerDA().prcAddUpdateAccessRights(accessLevel);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(125);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                if (rowsEffected >= 1)
-                    return "Success";
+                if (authorize == false)
+                    return "401";
                 else
-                    return "Error";
+                {
+                    accessLevel.CreatedBy = Session["username"].ToString();
+                    var rowsEffected = new AccessManagerDA().prcAddUpdateAccessRights(accessLevel);
+
+                    if (rowsEffected >= 1)
+                        return "Success";
+                    else
+                        return "Error";
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return "Error";
             }
         }
 
@@ -110,6 +142,7 @@ namespace GCETNChapter.Controllers
             }
             catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Exception: " + ex.InnerException;
             }
         }

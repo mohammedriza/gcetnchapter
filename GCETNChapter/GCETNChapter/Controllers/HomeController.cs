@@ -10,6 +10,16 @@ namespace GCETNChapter.Controllers
 {
     public class HomeController : Controller
     {
+        public ActionResult Test()
+        {
+            return View();
+        }
+
+        public ActionResult Error()
+        {
+            return View();
+        }
+
         public ActionResult Index()
         {
             return View();
@@ -34,20 +44,36 @@ namespace GCETNChapter.Controllers
 
         public ActionResult Events()
         {
-            var response = new HomeDA().GetLatestEventsForPublicPage();
-            return View(response);
+            try
+            {
+                var response = new HomeDA().GetLatestEventsForPublicPage();
+                return View(response);
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return View();
+            }
         }
 
         [HttpPost]
         public ActionResult ContactForm(ContactUsVO contactUs)
         {
-            var response = new HomeDA().InsertContactUsDetails(contactUs);
-
-            if (response >= 1)
-                return RedirectToAction("MessageSent");
-            else
+            try
             {
-                ViewBag.Failure = "Failed to send information to Trust group. Please try again later or contact them using the contact numbers provided in the site.";
+                var response = new HomeDA().InsertContactUsDetails(contactUs);
+
+                if (response >= 1)
+                    return RedirectToAction("MessageSent");
+                else
+                {
+                    ViewBag.Failure = "Failed to send information to Trust group. Please try again later or contact them using the contact numbers provided in the site.";
+                    return View();
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return View();
             }
         }
@@ -63,8 +89,16 @@ namespace GCETNChapter.Controllers
         //---- GET LIST OF ACTIVE ADVERTISEMENTS TO SCROLL IN MARQUEE ---//
         public PartialViewResult GetActiveAdvertisements()
         {
-            var ActiveAds = new HomeDA().GetActiveAdvertisements();
-            return PartialView("Index/_Advertisement", ActiveAds);
+            try
+            {
+                var ActiveAds = new HomeDA().GetActiveAdvertisements();
+                return PartialView("Index/_Advertisement", ActiveAds);
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("Index/_Advertisement");
+            }
         }
     }
 }

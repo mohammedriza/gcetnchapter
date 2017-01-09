@@ -27,31 +27,47 @@ namespace GCETNChapter.Controllers
 
         public PartialViewResult GetAllDonatoinDetails()
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(115);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return PartialView("_UnauthorizedAccess");
-            else
+            try
             {
-                var response = new DonationDetailsDA().GetAllDonationDetails();
-                return PartialView("_ViewDonations", response);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(115);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
+
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
+                else
+                {
+                    var response = new DonationDetailsDA().GetAllDonationDetails();
+                    return PartialView("_ViewDonations", response);
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("_ViewDonations");
             }
         }
 
         public PartialViewResult GetDonatoinDetailsByDonationID(int DonationID)
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
-            var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(117);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
-
-            if (authorize == false)
-                return PartialView("_UnauthorizedAccess");
-            else
+            try
             {
-                var response = new DonationDetailsVO();
-                response = new DonationDetailsDA().GetDonationDetailsByDonationID(DonationID);
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(117);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                return PartialView("_AddDonations", response);
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
+                else
+                {
+                    var response = new DonationDetailsVO();
+                    response = new DonationDetailsDA().GetDonationDetailsByDonationID(DonationID);
+
+                    return PartialView("_AddDonations", response);
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("_AddDonations");
             }
         }
 
@@ -100,9 +116,9 @@ namespace GCETNChapter.Controllers
             }
             catch(Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 ViewBag.Failure = "Unexpected error had occured." + Environment.NewLine + " Error Description: " + ex.Message;
             }
-
             return View("Donations");
         }
 
@@ -128,8 +144,9 @@ namespace GCETNChapter.Controllers
                         return "error";
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "error";
             }
         }
@@ -137,9 +154,18 @@ namespace GCETNChapter.Controllers
 
         public PartialViewResult GetLookupForCollegeRegNo()
         {
-            var response = new GeneralFunctionsDA().GetLookupCollegeRegNoDetails();
-
-            return PartialView("_LookupCollegeRegNoModal", response);
+            try
+            {
+                var response = new GeneralFunctionsDA().GetLookupCollegeRegNoDetails();
+                return PartialView("_LookupCollegeRegNoModal", response);
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("_LookupCollegeRegNoModal");
+            }
         }
+
+
     }
 }

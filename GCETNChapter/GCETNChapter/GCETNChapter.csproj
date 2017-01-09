@@ -199,6 +199,7 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AccessManagerController.cs" />
     <Compile Include="Controllers\AdvertisementController.cs" />
+    <Compile Include="Controllers\ContentManagementController.cs" />
     <Compile Include="Controllers\DonationsController.cs" />
     <Compile Include="Controllers\EventsController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
@@ -226,6 +227,7 @@
     <Compile Include="Models\DataAccess\AccessManagerDA.cs" />
     <Compile Include="Models\DataAccess\AdvertisementDA.cs" />
     <Compile Include="Models\DataAccess\DonationDetailsDA.cs" />
+    <Compile Include="Models\DataAccess\ErrorDA.cs" />
     <Compile Include="Models\DataAccess\EventsDA.cs" />
     <Compile Include="Models\DataAccess\GeneralFunctionsDA.cs" />
     <Compile Include="Models\DataAccess\HomeDA.cs" />
@@ -234,6 +236,7 @@
     <Compile Include="Models\DataAccess\NewsDA.cs" />
     <Compile Include="Models\ViewModels\Advertisement\AdvertisementVO.cs" />
     <Compile Include="Models\ViewModels\DonationDetailsVO.cs" />
+    <Compile Include="Models\ViewModels\Error\ErrorVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventExpenseDetailsVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventGalleryVO.cs" />
     <Compile Include="Models\ViewModels\Events\EventPaymentCollectionVO.cs" />
@@ -534,6 +537,7 @@
     <Content Include="Images\FooterIcons\facebook.png" />
     <Content Include="Images\FooterIcons\FollowUs.png" />
     <Content Include="Images\FooterIcons\googleplus.png" />
+    <Content Include="Images\FooterIcons\LinkedIn.png" />
     <Content Include="Images\FooterIcons\twitter.png" />
     <Content Include="Images\FooterIcons\Visit.png" />
     <Content Include="Images\FooterIcons\Whatsapp.png" />
@@ -555,6 +559,7 @@
     <Content Include="Images\OtherPages\NewsIcon.png" />
     <Content Include="Images\OtherPages\UnauthorizedAccess.png" />
     <Content Include="JQueryScripts\Advertisement\Advertisement.js" />
+    <Content Include="JQueryScripts\CMA\WebContentManagement.js" />
     <Content Include="JQueryScripts\PublicPages\EventsPage.js" />
     <Content Include="JQueryScripts\Profile\AllMembers.js" />
     <Content Include="JQueryScripts\PublicPages\AboutUsPage.js" />
@@ -683,6 +688,8 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\GCETNChapter_Test_FTP.pubxml" />
+    <None Include="Properties\PublishProfiles\test.gcetnchapter.org - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />
     <Content Include="Scripts\jquery-3.1.0.js" />
     <Content Include="Scripts\jquery-3.1.0.min.js" />
@@ -701,7 +708,9 @@
     <Content Include="Scripts\respond.js" />
     <Content Include="Scripts\respond.min.js" />
     <Content Include="Scripts\_references.js" />
-    <Content Include="Web.config" />
+    <Content Include="Web.config">
+      <SubType>Designer</SubType>
+    </Content>
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </Content>
@@ -761,10 +770,12 @@
     <Content Include="Views\Home\Gallery.cshtml" />
     <Content Include="Views\Home\Events.cshtml" />
     <Content Include="Views\News\_AddUpdateNewsFeedModal.cshtml" />
+    <Content Include="Views\Home\Test.cshtml" />
+    <Content Include="Views\Home\Error.cshtml" />
+    <Content Include="Views\ContentManagement\Index.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="JQueryScripts\News\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />

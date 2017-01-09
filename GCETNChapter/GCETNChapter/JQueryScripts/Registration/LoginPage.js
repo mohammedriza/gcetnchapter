@@ -14,14 +14,14 @@
 
 
 function AuthenticateMember() {
-    $("#LoginProgressModal").modal();    //--- Showe Loading spinner when user clicks on login button ---//
-
     var username = $("#txtUsername").val();
     var password = $("#txtPassword").val();
 
     if (username == "" || password == "")
         GeneralWarningsAndErrorDialog("WARNING...", "Username or Password cannot be blank.", "red");
     else {
+        $("#LoginProgressModal").modal();    //--- Showe Loading spinner when user clicks on login button ---//
+
         $.post("/MemberRegistration/Login/",
         {
             Username: username,

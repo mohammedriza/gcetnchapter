@@ -36,7 +36,7 @@ namespace GCETNChapter.Models.DataAccess
         {
             using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
             {
-                string SQL = "SELECT FullName, CollegeRegistrationNo FROM dbo.GCE_MemberInfo ORDER BY FullName;";
+                string SQL = "SELECT FullName, CollegeRegistrationNo FROM GCE_MemberInfo ORDER BY FullName;";
 
                 var result = db.Database.SqlQuery<LookupCollegeRegNoVO>(SQL).ToList();
                 return result;

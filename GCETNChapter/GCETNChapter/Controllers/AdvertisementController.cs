@@ -22,9 +22,17 @@ namespace GCETNChapter.Controllers
         // GET: Advertisement
         public ActionResult Index()
         {
-            CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+            try
+            {
+                CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
 
-            return View();
+                return View();
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return View();
+            }
         }
 
 
@@ -34,42 +42,49 @@ namespace GCETNChapter.Controllers
             try
             {
                 CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(129);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                if (AdsVo.StartDate > AdsVo.ExpiryDate)
-                    return "InvalidDate";
-                else if (Request.Files.Count > 0)
-                {
-                    //--- UPLOAD IMAGES TO SHARED LOCATION ---//
-                    var file = Request.Files[0];
-
-                    if (file != null && file.ContentLength > 0)
-                    {
-                        //--- Upload File to Folder Location ---//
-                        var paramDatetime = (DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString());
-
-                        AdsVo.ImageFileName = string.Format("{0}_{1}", paramDatetime, Path.GetFileName(file.FileName));
-                        AdsVo.ImageFileName = AdsVo.ImageFileName.Replace(" ", "");
-
-                        var path = Path.Combine(Server.MapPath("~/_ImageUploads/Advertisements/"), AdsVo.ImageFileName);
-                        file.SaveAs(path);
-                    }
-
-                    //--- INSERT DATA TO DATABASE TABLE ---//
-                    AdsVo.CreatedBy = Session["username"].ToString();
-                    var rowsEffected = new AdvertisementDA().AddUpdateAdvertisements(AdsVo);
-
-                    if (rowsEffected >= 1)
-                        return AdsVo.ImageFileName;
-                    else
-                        return "Error";
-                }
+                if (authorize == false)
+                    return "401";
                 else
                 {
-                    return "NoFiles";
+                    if (AdsVo.StartDate > AdsVo.ExpiryDate)
+                        return "InvalidDate";
+                    else if (Request.Files.Count > 0)
+                    {
+                        //--- UPLOAD IMAGES TO SHARED LOCATION ---//
+                        var file = Request.Files[0];
+
+                        if (file != null && file.ContentLength > 0)
+                        {
+                            //--- Upload File to Folder Location ---//
+                            var paramDatetime = (DateTime.Now.Month.ToString() + DateTime.Now.Day.ToString() + DateTime.Now.Year.ToString() + DateTime.Now.Hour.ToString() + DateTime.Now.Minute.ToString() + DateTime.Now.Second.ToString() + DateTime.Now.Millisecond.ToString());
+
+                            AdsVo.ImageFileName = string.Format("{0}_{1}", paramDatetime, Path.GetFileName(file.FileName));
+                            AdsVo.ImageFileName = AdsVo.ImageFileName.Replace(" ", "");
+
+                            var path = Path.Combine(Server.MapPath("~/_ImageUploads/Advertisements/"), AdsVo.ImageFileName);
+                            file.SaveAs(path);
+                        }
+
+                        //--- INSERT DATA TO DATABASE TABLE ---//
+                        AdsVo.CreatedBy = Session["username"].ToString();
+                        var rowsEffected = new AdvertisementDA().AddUpdateAdvertisements(AdsVo);
+
+                        if (rowsEffected >= 1)
+                            return AdsVo.ImageFileName;
+                        else
+                            return "Error";
+                    }
+                    else
+                    {
+                        return "NoFiles";
+                    }
                 }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }
@@ -80,20 +95,27 @@ namespace GCETNChapter.Controllers
             try
             {
                 CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(128);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                if (AdID == 0)
-                {
-                    var AdList = new AdvertisementDA().GetAllAdvertisements();
-                    return PartialView("_ViewAdvertisements", AdList);
-                }
+                if (authorize == false)
+                    return PartialView("_UnauthorizedAccess");
                 else
                 {
-                    var Ad = new AdvertisementDA().GetAdvertisementsByID(AdID);
-                    return PartialView("_AddEditAdvertisement", Ad);
+                    if (AdID == 0)
+                    {
+                        var AdList = new AdvertisementDA().GetAllAdvertisements();
+                        return PartialView("_ViewAdvertisements", AdList);
+                    }
+                    else
+                    {
+                        var Ad = new AdvertisementDA().GetAdvertisementsByID(AdID);
+                        return PartialView("_AddEditAdvertisement", Ad);
+                    }
                 }
             }
             catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return PartialView("Error", ex);
             }
         }
@@ -104,16 +126,23 @@ namespace GCETNChapter.Controllers
             try
             {
                 CheckSessionStatus();   //--- Check if sess["username"] exist. Else redirect to Home Page ---//
+                var authorize = new GeneralFunctionsDA().GetAccessLevelAuthorization(129);  //--- CHECK IF USER IS AUTHORIZED TO PERFORM THIS FUNCTION ---//
 
-                var rowsEffected = new AdvertisementDA().DeleteAdvertisements(AdID);
-
-                if (rowsEffected >= 1)
-                    return "Success";
+                if (authorize == false)
+                    return "401";
                 else
-                    return "Error";
+                {
+                    var rowsEffected = new AdvertisementDA().DeleteAdvertisements(AdID);
+
+                    if (rowsEffected >= 1)
+                        return "Success";
+                    else
+                        return "Error";
+                }
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }
@@ -139,8 +168,9 @@ namespace GCETNChapter.Controllers
                 else
                     return "NoFiles";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }

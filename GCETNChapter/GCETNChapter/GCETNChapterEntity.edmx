@@ -10,6 +10,19 @@
           <Parameter Name="ActionType" Type="varchar" Mode="In" />
           <Parameter Name="ActionBy" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcAddErrorLogEntry" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Controller" Type="varchar" Mode="In" />
+          <Parameter Name="ActionName" Type="varchar" Mode="In" />
+          <Parameter Name="Ex_Message" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Ex_InnerException" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Ex_Data" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Ex_HelpLink" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Ex_HResult" Type="int" Mode="In" />
+          <Parameter Name="Ex_Source" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Ex_StackRace" Type="varchar(max)" Mode="In" />
+          <Parameter Name="Ex_TargetSite" Type="varchar(max)" Mode="In" />
+          <Parameter Name="CreatedBy" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcAddEventPhotos" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="EventID" Type="int" Mode="In" />
           <Parameter Name="Image" Type="varchar" Mode="In" />
@@ -286,9 +299,6 @@
             <Parameter Name="ProfileImage" Mode="In" Type="String" />
             <Parameter Name="LastModifiedBy" Mode="In" Type="String" />
           </FunctionImport>
-          <FunctionImport Name="prcCheckIfCollegeRegNoExist" ReturnType="Collection(String)">
-          <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
-          </FunctionImport>
           <FunctionImport Name="prcUpdatePersonalAndLoginInfo">
             <Parameter Name="Username" Mode="In" Type="String" />
             <Parameter Name="Password" Mode="In" Type="String" />
@@ -512,6 +522,22 @@
           <FunctionImport Name="prcDeleteNewsFeed">
           <Parameter Name="NewsID" Mode="In" Type="Int32" />
           </FunctionImport>
+          <FunctionImport Name="prcAddErrorLogEntry">
+            <Parameter Name="Controller" Mode="In" Type="String" />
+            <Parameter Name="ActionName" Mode="In" Type="String" />
+            <Parameter Name="Ex_Message" Mode="In" Type="String" />
+            <Parameter Name="Ex_InnerException" Mode="In" Type="String" />
+            <Parameter Name="Ex_Data" Mode="In" Type="String" />
+            <Parameter Name="Ex_HelpLink" Mode="In" Type="String" />
+            <Parameter Name="Ex_HResult" Mode="In" Type="Int32" />
+            <Parameter Name="Ex_Source" Mode="In" Type="String" />
+            <Parameter Name="Ex_StackRace" Mode="In" Type="String" />
+            <Parameter Name="Ex_TargetSite" Mode="In" Type="String" />
+            <Parameter Name="CreatedBy" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcCheckIfCollegeRegNoExist" ReturnType="Collection(String)">
+            <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+          </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
           <Property Type="Int32" Name="ID" Nullable="false" />
@@ -732,7 +758,6 @@
           </FunctionImportMapping>
           <FunctionImportMapping FunctionImportName="prcInsertContactUsInfo" FunctionName="GCE_TN_ChapterModel.Store.prcInsertContactUsInfo" />
           <FunctionImportMapping FunctionImportName="prcRegisterNewOrUpdateMember" FunctionName="GCE_TN_ChapterModel.Store.prcRegisterNewOrUpdateMember" />
-          <FunctionImportMapping FunctionImportName="prcCheckIfCollegeRegNoExist" FunctionName="GCE_TN_ChapterModel.Store.prcCheckIfCollegeRegNoExist" />
           <FunctionImportMapping FunctionImportName="prcUpdatePersonalAndLoginInfo" FunctionName="GCE_TN_ChapterModel.Store.prcUpdatePersonalAndLoginInfo" />
           <FunctionImportMapping FunctionImportName="prcGetProfileLoginAndPersonalInfo" FunctionName="GCE_TN_ChapterModel.Store.prcGetProfileLoginAndPersonalInfo">
             <ResultMapping>
@@ -981,6 +1006,8 @@
           <FunctionImportMapping FunctionImportName="prcAddUpdateNewsFeed" FunctionName="GCE_TN_ChapterModel.Store.prcAddUpdateNewsFeed" />
           <FunctionImportMapping FunctionImportName="prcDeleteAccessRole" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteAccessRole" />
           <FunctionImportMapping FunctionImportName="prcDeleteNewsFeed" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteNewsFeed" />
+          <FunctionImportMapping FunctionImportName="prcAddErrorLogEntry" FunctionName="GCE_TN_ChapterModel.Store.prcAddErrorLogEntry" />
+          <FunctionImportMapping FunctionImportName="prcCheckIfCollegeRegNoExist" FunctionName="GCE_TN_ChapterModel.Store.prcCheckIfCollegeRegNoExist" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

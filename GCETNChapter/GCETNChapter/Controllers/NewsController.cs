@@ -14,39 +14,55 @@ namespace GCETNChapter.Controllers
         // GET: News
         public ActionResult ViewNews()
         {
-            if (Session["logininfo"] == null)
+            try
             {
-                ViewBag.AccessRole = "Guest";
-            }
-            else
-            {
-                var userInfo = (LoginDetailsVO)Session["logininfo"];
-                ViewBag.AccessRole = userInfo.AccessRole;
-            }
+                if (Session["logininfo"] == null)
+                {
+                    ViewBag.AccessRole = "Guest";
+                }
+                else
+                {
+                    var userInfo = (LoginDetailsVO)Session["logininfo"];
+                    ViewBag.AccessRole = userInfo.AccessRole;
+                }
 
-            var NewsFeed = new NewsDA().GetAllNewsFeed(0);
-            return View(NewsFeed);
+                var NewsFeed = new NewsDA().GetAllNewsFeed(0);
+                return View(NewsFeed);
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return View();
+            }
         }
 
 
         public PartialViewResult GetNewsFeedByNewsID(int NewsID)
         {
-            if(NewsID == 0)
+            try
             {
-                var news = new List<NewsVO>();
-                news.Add(new NewsVO()
+                if (NewsID == 0)
                 {
-                    NewsID = 0,
-                    HeadLine = "",
-                    NewsDetail = "",
-                    ImageFile = ""
-                });
-                return PartialView("_AddUpdateNewsFeedModal", news);
+                    var news = new List<NewsVO>();
+                    news.Add(new NewsVO()
+                    {
+                        NewsID = 0,
+                        HeadLine = "",
+                        NewsDetail = "",
+                        ImageFile = ""
+                    });
+                    return PartialView("_AddUpdateNewsFeedModal", news);
+                }
+                else
+                {
+                    var result = new NewsDA().GetNewsFeedByNewsID(NewsID);
+                    return PartialView("_AddUpdateNewsFeedModal", result);
+                }
             }
-            else
+            catch (Exception ex)
             {
-                var result = new NewsDA().GetNewsFeedByNewsID(NewsID);
-                return PartialView("_AddUpdateNewsFeedModal", result);
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return PartialView("_AddUpdateNewsFeedModal");
             }
         }
 
@@ -64,8 +80,9 @@ namespace GCETNChapter.Controllers
                 else
                     return "Error";
             }
-            catch (Exception)
+            catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Error";
             }
         }
@@ -85,6 +102,7 @@ namespace GCETNChapter.Controllers
             }
             catch (Exception ex)
             {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
                 return "Exception: " + ex.InnerException;
             }
         }

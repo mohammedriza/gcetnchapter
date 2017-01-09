@@ -8,6 +8,7 @@
     $("#LnkDonations").removeClass("menuitemSelected");
     $("#LnkManageAccess").removeClass("menuitemSelected");
     $("#LnkMyProfile").removeClass("menuitemSelected");
+    $("#LnkCMA").removeClass("menuitemSelected");
 })
 
 
@@ -103,7 +104,7 @@ function AddEditAdvertisements() {
         xhr.open("POST", "/Advertisement/AddUpdateAdvertisements/", true);
         xhr.send(fd);
         xhr.addEventListener("load", function (event) {
-            if (event.target.response != "Error" || event.target.response != "NoFiles") {
+            if (event.target.response != "Error" || event.target.response != "NoFiles" || event.target.response != "401") {
                 GeneralWarningsAndErrorDialog("SUCCESS...", "Advertisement created successfully. See the preview for the full advertisement.", "green");
                 InitializeAddAdvertisement();
 
@@ -118,6 +119,9 @@ function AddEditAdvertisements() {
             }
             else if (event.target.response == "NoFiles") {
                 GeneralWarningsAndErrorDialog("ERROR...", "Please select an Image to continue...", "red");
+            }
+            else if (event.target.response == "401") {
+                ShowAccessDeniedMessage();
             }
         },
         false);

@@ -100,6 +100,19 @@ function DatePickerAndTooltipInit() {
 
         $(".dateValue").attr("placeholder", "MM / DD / YYYY.");
         $(".dateValue").attr("maxlength", "10");
+
+        //--- GET THE DATEVALUE IN IE (YYYY-MM-DD) AND CHANGE IT TO MM/DD/YYYY AND REPLACE THE TEXTBOX ---//
+        var value = $(".dateValue").val();
+
+        if (value != "" && value != undefined) {
+            var dateSplit = value.split("-");
+            var year = dateSplit[0];
+            var month = dateSplit[1];
+            var date = dateSplit[2];
+            var formattedDate = month + "/" + date + "/" + year;
+
+            $(".dateValue").val(formattedDate);
+        }
     }
 }
 

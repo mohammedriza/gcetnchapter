@@ -104,7 +104,7 @@ function AddEditAdvertisements() {
         xhr.open("POST", "/Advertisement/AddUpdateAdvertisements/", true);
         xhr.send(fd);
         xhr.addEventListener("load", function (event) {
-            if (event.target.response != "Error" || event.target.response != "NoFiles" || event.target.response != "401") {
+            if (event.target.response != "Error" && event.target.response != "NoFiles" && event.target.response != "401") {
                 GeneralWarningsAndErrorDialog("SUCCESS...", "Advertisement created successfully. See the preview for the full advertisement.", "green");
                 InitializeAddAdvertisement();
 

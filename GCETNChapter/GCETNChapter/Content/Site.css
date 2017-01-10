@@ -1,7 +1,7 @@
 ﻿body {
     padding-top: 10px;
     padding-bottom: 0px;
-    background-color: #f5f5f5;
+    background-color: #f9f9f9;
 }
 
 /* Set padding to keep content from hitting the edges */
@@ -71,8 +71,8 @@ textarea {
 .partialBodySection{
     padding-top: 0px;
     padding-bottom: 50px;
-    padding-left: 50px;
-    padding-right: 50px;
+    padding-left: 30px;
+    padding-right: 30px;
     background-color: #ffffff;
     min-height: 100%;
 }

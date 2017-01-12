@@ -217,6 +217,10 @@
           <Parameter Name="ProfileImage" Type="varchar" Mode="In" />
           <Parameter Name="LastModifiedBy" Type="varchar" Mode="In" />
         </Function>
+        <Function Name="prcResetPassword" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
+          <Parameter Name="Username" Type="varchar" Mode="In" />
+          <Parameter Name="Password" Type="varchar" Mode="In" />
+        </Function>
         <Function Name="prcUpdatePersonalAndLoginInfo" Aggregate="false" BuiltIn="false" NiladicFunction="false" IsComposable="false" ParameterTypeSemantics="AllowImplicitConversion" Schema="dbo">
           <Parameter Name="Username" Type="varchar" Mode="In" />
           <Parameter Name="Password" Type="varchar" Mode="In" />
@@ -536,7 +540,11 @@
             <Parameter Name="CreatedBy" Mode="In" Type="String" />
           </FunctionImport>
           <FunctionImport Name="prcCheckIfCollegeRegNoExist" ReturnType="Collection(String)">
-            <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+          <Parameter Name="CollegeRegistrationNo" Mode="In" Type="String" />
+          </FunctionImport>
+          <FunctionImport Name="prcResetPassword">
+            <Parameter Name="Username" Mode="In" Type="String" />
+            <Parameter Name="Password" Mode="In" Type="String" />
           </FunctionImport>
         </EntityContainer>
         <ComplexType Name="prcGetCountryList_Result">
@@ -1008,6 +1016,7 @@
           <FunctionImportMapping FunctionImportName="prcDeleteNewsFeed" FunctionName="GCE_TN_ChapterModel.Store.prcDeleteNewsFeed" />
           <FunctionImportMapping FunctionImportName="prcAddErrorLogEntry" FunctionName="GCE_TN_ChapterModel.Store.prcAddErrorLogEntry" />
           <FunctionImportMapping FunctionImportName="prcCheckIfCollegeRegNoExist" FunctionName="GCE_TN_ChapterModel.Store.prcCheckIfCollegeRegNoExist" />
+          <FunctionImportMapping FunctionImportName="prcResetPassword" FunctionName="GCE_TN_ChapterModel.Store.prcResetPassword" />
         </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>

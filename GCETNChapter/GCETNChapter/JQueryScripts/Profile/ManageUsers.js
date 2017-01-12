@@ -135,8 +135,7 @@ function DeleteUserAccount(username) {
 }
 
 //--- Modify User Profile Details ---//
-function ModifyUserProfile(username)
-{
+function ModifyUserProfile(username) {
     $.get("/MemberProfile/ManageProfile/", { RequestUser: username },
         function (data, status) {
             if (status == "success") {
@@ -148,11 +147,34 @@ function ModifyUserProfile(username)
                 GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
             }
         });
-    
 }
 
 
+//--- Reset Password by Admin ---//
+function ResetPasswordByAdmin()
+{
+    var username = $("#TxtUsername_Add").val();
 
+    $.ajax({
+        url: "/MemberProfile/ResetPassword/",
+        data: { Username: username },
+        success: function (data) {
+            if (data == "Success") {
+                GeneralWarningsAndErrorDialog("SUCCESS", "Password reset to 'password123'. Please request the user to reset the password through the Member page at his/her first login.", "green");
+                $("#TxtPassword_Add").val("password123");
+                $("#TxtConfirmPassword_Add").val("password123");
+            }
+            else if (data == "NoUsername") {
+                GeneralWarningsAndErrorDialog("WARNING", "Please enter a valid Username.", "red");
+            }
+            else
+                GeneralWarningsAndErrorDialog("ERROR", "Failed to reset password at this moment. Please try again later.", "red");
+        },
+        error: function () {
+            GeneralWarningsAndErrorDialog("UNEXPECTED ERROR", "An Expected Error had occured. Please try again later.", "red");
+        }
+    });
+}
 
 
 
@@ -185,6 +207,11 @@ $(document).on("click", "#BtnCancel_Add", function () {
 //--- Add/UpdateUser ---//
 $(document).on("click", "#BtnAddNewuser", function () {
     CreateUpdateUserDetails();
+});
+
+//--- Reset Password by Admin  ---//
+$(document).on("click", "#BtnResetPassword_Add", function () {
+    ResetPasswordByAdmin();
 });
 
 

@@ -612,5 +612,40 @@ namespace GCETNChapter.Controllers
                 return PartialView("Members/_AllMembers", ex.Message);
             }
         }
+
+
+        //--- RESET PASSWORD ---//
+        public string ResetPassword(string Username)
+        {
+            try
+            {
+                using (GCE_TN_ChapterEntities db = new GCE_TN_ChapterEntities())
+                {
+                    if (string.IsNullOrEmpty(Username))
+                    {
+                        return "NoUsername";
+                    }
+                    else
+                    {
+                        var response = db.prcResetPassword(Username, "password123");
+
+                        if (response >= 1)
+                        {
+                            return "Success";
+                        }
+                        else
+                        {
+                            return "Error";
+                        }
+                    }
+                }
+            }
+            catch (Exception ex)
+            {
+                new ErrorDA().BuildErrorDetails(ex, this.ControllerContext.RouteData.Values["controller"].ToString(), this.ControllerContext.RouteData.Values["action"].ToString());
+                return "Error";
+            }
+        }
+
     }
 }

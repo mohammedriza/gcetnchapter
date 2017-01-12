@@ -958,5 +958,18 @@ namespace GCETNChapter
     
             return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction<string>("prcCheckIfCollegeRegNoExist", collegeRegistrationNoParameter);
         }
+    
+        public virtual int prcResetPassword(string username, string password)
+        {
+            var usernameParameter = username != null ?
+                new ObjectParameter("Username", username) :
+                new ObjectParameter("Username", typeof(string));
+    
+            var passwordParameter = password != null ?
+                new ObjectParameter("Password", password) :
+                new ObjectParameter("Password", typeof(string));
+    
+            return ((IObjectContextAdapter)this).ObjectContext.ExecuteFunction("prcResetPassword", usernameParameter, passwordParameter);
+        }
     }
 }

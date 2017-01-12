@@ -42,7 +42,14 @@
                         <input type="file" name="ProfileImage" id = "TxtProfileImage" style="display: inline;" />
                         @if(Model!= null)
                         {
-                            <img src=@("/_ImageUploads/MemberProfile/"+ Model.ProfileImage) height="40" width="40" style="border-radius: 5px;" />
+                            if (Model.ProfileImage != null)
+                            {
+                                <img src=@("/_ImageUploads/MemberProfile/" + Model.ProfileImage) height="40" width="40" style="border-radius: 5px;" />
+                            }
+                            else
+                            {
+                                <img src="~/_ImageUploads/MemberProfile/Sample_NoImage.png" height="40" width="40" style="border-radius: 5px;" />
+                            }
                         }
                         else
                         {

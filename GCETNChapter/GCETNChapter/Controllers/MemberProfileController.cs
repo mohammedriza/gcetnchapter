@@ -269,6 +269,18 @@ namespace GCETNChapter.Controllers
                 {
                     return "401";
                 }
+                else if (profileVo.Password.Length < 6 || profileVo.Password.Length > 25)
+                {
+                    return "PasswordLengthFailed";
+                }
+                else if (profileVo.Username.Length < 6 || profileVo.Username.Length > 25)
+                {
+                    return "UsernameLengthFailed";
+                }
+                else if ((!profileVo.Password.Any(char.IsUpper)) || (!profileVo.Password.Any(char.IsLower) || (!profileVo.Password.Any(char.IsNumber))))
+                {
+                    return "PasswordRuleFailed";
+                }
                 else
                 {
                     if (Request.Files.Count > 0)

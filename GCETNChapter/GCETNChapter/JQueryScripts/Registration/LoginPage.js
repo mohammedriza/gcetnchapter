@@ -40,7 +40,7 @@ function AuthenticateMember() {
             }
             else if (data == "Fail" || status == "error") {
                 $("#LoginProgressModal").modal("hide");
-                GeneralWarningsAndErrorDialog("ERROR...", "Failed to authenticate. Please try make sure your username and password are correct.", "red");
+                GeneralWarningsAndErrorDialog("ERROR...", "Failed to authenticate. Please make sure your username and password are correct. Reminder: Your password is case sensitive.", "red");
             }
             else {
                 $("#LoginProgressModal").modal("hide");

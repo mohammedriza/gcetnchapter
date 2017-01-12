@@ -44,6 +44,17 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <PublishDatabaseSettings>
+      <Objects>
+        <ObjectGroup Name="GCE_TN_ChapterEntities-Deployment" Order="2" Description="SQL Database for GCE TN CHAPTER QA Environment">
+          <Destination Path="Data Source=184.168.194.78%3bInitial Catalog=gcetnchapter_QA%3bPersist Security Info=True%3bUser ID=gceadmin%3bPassword=gcetnchapter%40123" />
+          <Object Type="DbFullSql" Enabled="True">
+            <PreSource Path="Data Source=184.168.194.78%3bInitial Catalog=gcetnchapter_QA%3bIntegrated Security=False%3bUser ID=gceadmin%3bPassword=gcetnchapter%40123%3bConnect Timeout=15%3bEncrypt=False%3bPacket Size=4096%3bApplication Name=EntityFramework" ScriptSchema="True" ScriptData="False" CopyAllFullTextCatalogs="False" DriDefaults="True" />
+            <Source Path="obj\Release\AutoScripts\GCE_TN_ChapterEntities-Deployment_SchemaOnly.sql" Transacted="True" />
+          </Object>
+        </ObjectGroup>
+      </Objects>
+    </PublishDatabaseSettings>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="Microsoft.AI.Agent.Intercept, Version=1.2.1.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL">
@@ -688,6 +699,7 @@
     <Content Include="Content\bootstrap.css.map" />
     <Content Include="Content\bootstrap-theme.min.css.map" />
     <Content Include="Content\bootstrap-theme.css.map" />
+    <None Include="Properties\PublishProfiles\gcetnchapter.org - Web Deploy.pubxml" />
     <None Include="Properties\PublishProfiles\GCETNChapter_Test_FTP.pubxml" />
     <None Include="Properties\PublishProfiles\test.gcetnchapter.org - Web Deploy.pubxml" />
     <None Include="Scripts\jquery-3.1.0.intellisense.js" />

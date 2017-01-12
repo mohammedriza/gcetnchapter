@@ -66,6 +66,18 @@ namespace GCETNChapter.Controllers
                     {
                         this.ModelState.AddModelError("CollegeRegistrationNo", "College Registration No should contain 9 or less characters.");
                     }
+                    else if (MemberVO.Password.Length < 6 || MemberVO.Password.Length > 25)
+                    {
+                        this.ModelState.AddModelError("Password", "Password should contain atleast 1 Uppercase, 1 Lowercase and 1 Number. Password should be between 6 and 25 characters.");
+                    }
+                    else if (MemberVO.Username.Length < 6 || MemberVO.Username.Length > 25)
+                    {
+                        this.ModelState.AddModelError("Username", "Username should be between 6 and 25 characters.");
+                    }
+                    else if ((!MemberVO.Password.Any(char.IsUpper)) || (!MemberVO.Password.Any(char.IsLower) || (!MemberVO.Password.Any(char.IsNumber))))
+                    {
+                        this.ModelState.AddModelError("Password", "Password should contain atleast 1 Uppercase, 1 Lowercase and 1 Number. Password should be between 6 and 25 characters.");
+                    }
                     else
                     {
                         var CollegeRegNoExist = MemberDA.CheckIfCollegeRegNoExist(MemberVO.CollegeRegistrationNo);
@@ -79,7 +91,7 @@ namespace GCETNChapter.Controllers
                         }
                         else if (!string.IsNullOrEmpty(usernameExist))
                         {
-                            ViewBag.Failure = string.Format("The username ({0}) you used already exist. Please use a different Username to complete registration.", MemberVO.Username);
+                            ViewBag.Failure = string.Format("The username ({0}) you entered already exist. Please choose different Username to complete registration.", MemberVO.Username);
                         }
                         else
                         {

@@ -25,6 +25,7 @@ namespace GCETNChapter.Controllers
             return View();
         }
 
+
         public ActionResult AboutUs()
         {
             return View();

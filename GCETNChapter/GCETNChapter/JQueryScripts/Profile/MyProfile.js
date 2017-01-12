@@ -158,44 +158,23 @@ function UpdatePersonalAndLoginInfo() {
                 if (event.target.response == "Success") {
                     GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
                 }
-                else if (event.target.response == "Error")
-                {
+                else if (event.target.response == "Error") {
                     GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
                 }
-                else if (event.target.response == "401")
-                {
+                else if (event.target.response == "PasswordLengthFailed") {
+                    GeneralWarningsAndErrorDialog("WARNING", "Password should contain atleast 1 Uppercase, 1 Lowercase and 1 Number. Password should be between 6 and 25 characters..", "red");
+                }
+                else if (event.target.response == "UsernameLengthFailed") {
+                    GeneralWarningsAndErrorDialog("WARNING", "Username should be between 6 and 25 characters.", "red");
+                }
+                else if (event.target.response == "PasswordRuleFailed") {
+                    GeneralWarningsAndErrorDialog("WARNING", "Password should contain atleast 1 Uppercase, 1 Lowercase and 1 Number. Password should be between 6 and 25 characters.", "red");
+                }
+                else if (event.target.response == "401") {
                     ShowAccessDeniedMessage();
                 }
             },
             false);
-
-
-            //$.ajax({
-            //    url: "/MemberProfile/UpdatePersonalAndLoginInfo/",
-            //    type: "POST",
-            //    data: {
-            //        Username: username,
-            //        Password: password,
-            //        FullName: fullName,
-            //        Gender: gender,
-            //        DateOfBirth: dOB,
-            //        ProfileImage: profileImg
-            //    },
-            //    success: function (data, result) {
-            //        if (data == "Success") {
-            //            GeneralWarningsAndErrorDialog("SUCCESS", "Changes successfully saved.", "green");
-            //        }
-            //        else if (data == "Error") {
-            //            GeneralWarningsAndErrorDialog("ERROR", "Failed to save Changes. Please try again later.", "red");
-            //        }
-            //        else if (data == "401") {
-            //            ShowAccessDeniedMessage();
-            //        }
-            //    },
-            //    error: function (xhr, status, error) {
-            //        GeneralWarningsAndErrorDialog("ERROR", "Error Description: " + error + "\n" + xhr.responseText, "red");
-            //    }
-            //});
         }
     }
 }

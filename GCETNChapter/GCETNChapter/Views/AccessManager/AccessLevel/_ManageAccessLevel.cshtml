@@ -25,66 +25,68 @@
 
 @if (Model != null)
 {
-<table id="TblAccessLevels" class="table table-hover table-responsive">
-    <tr class="tableHeaderFont">
-        <th>
-            @Html.DisplayNameFor(model => model.AccessID)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.Page)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.AccessLevel)
-        </th>
-        <th class="text-center">
-            @Html.DisplayNameFor(model => model.GrantAccess)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.CreatedDate)
-            <span class="dateFormatText">(MM/DD/YYYY)</span>
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedBy)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.ModifiedDate)
-            <span class="dateFormatText">(MM/DD/YYYY)</span>
-        </th>
-        <th></th>
-    </tr>
+    <div class="table-responsive">
+        <table id="TblAccessLevels" class="table table-hover">
+            <tr class="tableHeaderFont">
+                <th>
+                    @Html.DisplayNameFor(model => model.AccessID)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.Page)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.AccessLevel)
+                </th>
+                <th class="text-center">
+                    @Html.DisplayNameFor(model => model.GrantAccess)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.CreatedDate)
+                    <span class="dateFormatText">(MM/DD/YYYY)</span>
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedBy)
+                </th>
+                <th>
+                    @Html.DisplayNameFor(model => model.ModifiedDate)
+                    <span class="dateFormatText">(MM/DD/YYYY)</span>
+                </th>
+                <th></th>
+            </tr>
 
-@foreach (var item in Model)
-{
-    <tr class="tableBodyFont">
-        <td id="LblAccessID">
-            @Html.DisplayFor(modelItem => item.AccessID)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.Page)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.AccessLevel)
-        </td>
-        <td class="text-center">
-            @Html.CheckBoxFor(modelItem => item.GrantAccess, new { id = "ChboxGrantAccess", onclick = "GetSelectedRowAccessLevel();" })
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.CreatedDate)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedBy)
-        </td>
-        <td>
-            @Html.DisplayFor(modelItem => item.ModifiedDate)
-        </td>
-    </tr>
-}
+            @foreach (var item in Model)
+            {
+                <tr class="tableBodyFont">
+                    <td id="LblAccessID">
+                        @Html.DisplayFor(modelItem => item.AccessID)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.Page)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.AccessLevel)
+                    </td>
+                    <td class="text-center">
+                        @Html.CheckBoxFor(modelItem => item.GrantAccess, new { id = "ChboxGrantAccess", onclick = "GetSelectedRowAccessLevel();" })
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.CreatedDate)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedBy)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.ModifiedDate)
+                    </td>
+                </tr>
+            }
 
-</table>
+        </table>
+    </div>
 }

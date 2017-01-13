@@ -782,7 +782,6 @@
     <Content Include="Views\Home\Gallery.cshtml" />
     <Content Include="Views\Home\Events.cshtml" />
     <Content Include="Views\News\_AddUpdateNewsFeedModal.cshtml" />
-    <Content Include="Views\Home\Test.cshtml" />
     <Content Include="Views\Home\Error.cshtml" />
     <Content Include="Views\ContentManagement\Index.cshtml" />
   </ItemGroup>

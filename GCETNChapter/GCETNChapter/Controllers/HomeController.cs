@@ -10,11 +10,6 @@ namespace GCETNChapter.Controllers
 {
     public class HomeController : Controller
     {
-        public ActionResult Test()
-        {
-            return View();
-        }
-
         public ActionResult Error()
         {
             return View();

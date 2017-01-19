@@ -5,42 +5,35 @@
     <div class="panel-body">
 
         <div class="form-horizontal">
-            <div class="row rowPadding">
+
+            <div class="form-group">
                 <div>
-                    <div class="col-md-2 formlabelFontRight">
-                        @Html.LabelFor(model => model.FullName)
-                    </div>
+                    @Html.LabelFor(model => model.FullName, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
                     <div class="col-md-4">
                         @Html.EditorFor(model => model.FullName, new { htmlAttributes = new { @class = "form-control", id = "TxtFullName", maxlength = "100" } })
                     </div>
                 </div>
                 <div>
-                    <div class="col-md-2 formlabelFontRight">
-                        @Html.LabelFor(model => model.Gender)
-                    </div>
+                    @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
                     <div class="col-md-4">
                         @Html.DropDownListFor(model => model.Gender, new SelectList(ViewBag.GenderList), new { @class = "form-control", id = "DDLGender" })
                     </div>
                 </div>
             </div>
 
-            <div class="row rowPadding">
+            <div class="form-group">
                 <div>
-                    <div class="col-md-2 formlabelFontRight">
-                        @Html.LabelFor(model => model.DateOfBirth)
-                    </div>
+                    @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
                     <div class="col-md-4">
                         @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control dateValue", id = "TxtDOB", style = "display: inline;" } })
                         <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Date of Birth should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
                     </div>
                 </div>
                 <div>
-                    <div class="col-md-2 formlabelFontRight">
-                        @Html.LabelFor(model => model.ProfileImage)
-                    </div>
+                    @Html.LabelFor(model => model.ProfileImage, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
                     <div class="col-md-4">
-                        <input type="file" name="ProfileImage" id = "TxtProfileImage" style="display: inline;" />
-                        @if(Model!= null)
+                        <input type="file" name="ProfileImage" id="TxtProfileImage" style="display: inline;" />
+                        @if (Model != null)
                         {
                             if (Model.ProfileImage != null)
                             {
@@ -59,34 +52,24 @@
                 </div>
             </div>
 
-            <br />
-
-            <div class="row rowPadding">
-                <div>
-                    <div class="col-md-2 formlabelFontRight">
-                        @Html.LabelFor(model => model.Username)
-                    </div>
-                    <div class="col-md-4">
-                        @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", disabled = "true", id = "TxtUsername", maxlength = "50", style = "display: inline;" } })
-                        <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Username should be between 6 and 25 characters." style="font-size: 16px;"></span>
-                    </div>
+            <div class="form-group">
+                @Html.LabelFor(model => model.Username, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
+                <div class="col-md-4">
+                    @Html.EditorFor(model => model.Username, new { htmlAttributes = new { @class = "form-control", disabled = "true", id = "TxtUsername", maxlength = "50", style = "display: inline;" } })
+                    <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Username should be between 6 and 25 characters." style="font-size: 16px;"></span>
                 </div>
             </div>
 
-            <div class="row rowPadding">
+            <div class="form-group">
                 <div>
-                    <div class="col-md-2 formlabelFontRight">
-                        @Html.LabelFor(model => model.Password)
-                    </div>
+                    @Html.LabelFor(model => model.Password, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
                     <div class="col-md-4">
                         @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", id = "TxtPassword", maxlength = "50", style = "display: inline;" } })
                         <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Password should have atleast 1 upper case, 1 lower case and 1 number. Password should be between 6 and 25 characters." style="font-size: 16px;"></span>
                     </div>
                 </div>
                 <div>
-                    <div class="col-md-2 formlabelFontRight">
-                        @Html.LabelFor(model => model.ConfirmPassword)
-                    </div>
+                    @Html.LabelFor(model => model.ConfirmPassword, htmlAttributes: new { @class = "formlabelFontRight col-md-2" })
                     <div class="col-md-4">
                         @Html.EditorFor(model => model.ConfirmPassword, new { htmlAttributes = new { @class = "form-control", id = "TxtConfirmPassword", maxlength = "50" } })
                     </div>

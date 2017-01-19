@@ -51,7 +51,7 @@
                         </div>
                         <div class="col-md-4">
                             @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control dateValue", style = "display: inline;", maxlength="10" } })
-                            <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Date of Birth should be in DD/MM/YYYY date format." style="font-size: 16px;"></span>
+                            <span class="glyphicon glyphicon-info-sign editIcon" data-toggle="tooltip" title="Date of Birth should be in MM/DD/YYYY date format." style="font-size: 16px;"></span>
                             <br />
                             @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "textboxerror" })
                         </div>
